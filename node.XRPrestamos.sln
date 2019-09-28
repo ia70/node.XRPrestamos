@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "node.XRPrestamos", "node.XRPrestamos.njsproj", "{7C8F64CA-D2D7-4461-B90A-EA2E237BB6DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C8F64CA-D2D7-4461-B90A-EA2E237BB6DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C8F64CA-D2D7-4461-B90A-EA2E237BB6DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C8F64CA-D2D7-4461-B90A-EA2E237BB6DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C8F64CA-D2D7-4461-B90A-EA2E237BB6DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4287D07D-0DDC-4CFB-83D5-9AD7483A985E}
+	EndGlobalSection
+EndGlobal
