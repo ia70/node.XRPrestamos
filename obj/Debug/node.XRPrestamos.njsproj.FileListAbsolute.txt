@@ -1,0 +1,3 @@
+C:\Users\XCORU\Documents\Visual Studio 2019\Proyectos\node.XRPrestamos\obj\Debug\node.XRPrestamos.njsprojAssemblyReference.cache
+C:\Users\XCORU\Documents\Visual Studio 2019\Proyectos\node.XRPrestamos\obj\Debug\node.XRPrestamos.njsproj.CoreCompileInputs.cache
+C:\Users\XCORU\Documents\Visual Studio 2019\Proyectos\node.XRPrestamos\bin\Microsoft.NodejsTools.WebRole.dll
