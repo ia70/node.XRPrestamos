@@ -12,6 +12,6 @@ const app = express();
 // Static files
 
 
-app.listen(300, ()=> {
+app.listen(3000, ()=> {
     console.log('server on port 3000');
 })
