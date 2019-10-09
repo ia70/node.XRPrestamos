@@ -1,0 +1,9 @@
+{
+  "name": "xrprestamos",
+  "version": "0.0.0",
+  "description": "XRPrestamos",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  }
+}
