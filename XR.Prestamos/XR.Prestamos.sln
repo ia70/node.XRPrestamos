@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "node.XRPrestamos", "node.XRPrestamos.njsproj", "{7C8F64CA-D2D7-4461-B90A-EA2E237BB6DA}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "XR.Prestamos", "XR.Prestamos\XR.Prestamos.njsproj", "{5F036630-C4A2-49F8-A209-4966AFB936CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7C8F64CA-D2D7-4461-B90A-EA2E237BB6DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C8F64CA-D2D7-4461-B90A-EA2E237BB6DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C8F64CA-D2D7-4461-B90A-EA2E237BB6DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C8F64CA-D2D7-4461-B90A-EA2E237BB6DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F036630-C4A2-49F8-A209-4966AFB936CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F036630-C4A2-49F8-A209-4966AFB936CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F036630-C4A2-49F8-A209-4966AFB936CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F036630-C4A2-49F8-A209-4966AFB936CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4287D07D-0DDC-4CFB-83D5-9AD7483A985E}
+		SolutionGuid = {EB1580EF-B9BA-40C6-A358-456FF0D46885}
 	EndGlobalSection
 EndGlobal
