@@ -1,17 +1,26 @@
 'use strict';
-
+// Initialitations -----------------------------------------------
+const debug = require('debug');
 const express = require('express');
+const morgan = require('morgan');
+const path = require('path');
 const app = express();
 
-// Settings
+// Settings ------------------------------------------------------
+app.set('port', process.env.PORT || 3000);
 
-// Middlewares
+// Middlewares ---------------------------------------------------
+app.use(morgan('dev'));
+app.use(express.json());
 
-// Routes
+// Routes --------------------------------------------------------
+app.use('/api/tasks', require('./routes/task.routes'));
 
-// Static files
+// Static files --------------------------------------------------
+app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.listen(3000, ()=> {
-    console.log('server on port 3000');
+// Server Start --------------------------------------------------
+app.listen(app.get('port'), ()    => {
+    console.log(`Server on port ${app.get('port')}`);
 })
