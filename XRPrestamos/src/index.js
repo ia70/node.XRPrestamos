@@ -1,6 +1,5 @@
 'use strict';
-// Initialitations -----------------------------------------------
-const debug = require('debug');
+// Initialization ------------------------------------------------                                         
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
@@ -13,14 +12,16 @@ app.set('port', process.env.PORT || 3000);
 app.use(morgan('dev'));
 app.use(express.json());
 
-// Routes --------------------------------------------------------
+// Routes --------------------------------------------------------                            
 app.use('/api/tasks', require('./routes/task.routes'));
 
 // Static files --------------------------------------------------
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Global variables ----------------------------------------------
 
-// Server Start --------------------------------------------------
-app.listen(app.get('port'), ()    => {
-    console.log(`Server on port ${app.get('port')}`);
-})
+
+// Starting the server -------------------------------------------
+app.listen(app.get('port'), () => {
+    console.log('Server on port ', app.get('port'));
+});
