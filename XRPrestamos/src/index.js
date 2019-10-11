@@ -1,9 +1,6 @@
-import express from 'express';
-import webpack from 'webpack';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackConfig from '../webpack.config';
-import morgan from 'morgan';
-import path from 'path';
+const express = require('express');
+const morgan = require('morgan');
+const path = require('path');
 
 // Initialization ------------------------------------------------ 
 const app = express();
@@ -12,7 +9,6 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 
 // Middlewares ---------------------------------------------------
-app.use(webpackDevMiddleware(webpack(webpackConfig)));
 app.use(morgan('dev'));
 app.use(express.json());
 
