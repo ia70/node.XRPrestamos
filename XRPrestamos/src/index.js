@@ -1,14 +1,18 @@
-'use strict';
-// Initialization ------------------------------------------------                                         
-const express = require('express');
-const morgan = require('morgan');
-const path = require('path');
+import express from 'express';
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackConfig from '../webpack.config';
+import morgan from 'morgan';
+import path from 'path';
+
+// Initialization ------------------------------------------------ 
 const app = express();
 
 // Settings ------------------------------------------------------
 app.set('port', process.env.PORT || 3000);
 
 // Middlewares ---------------------------------------------------
+app.use(webpackDevMiddleware(webpack(webpackConfig)));
 app.use(morgan('dev'));
 app.use(express.json());
 
