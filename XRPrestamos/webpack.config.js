@@ -1,5 +1,6 @@
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
+//const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = {
@@ -56,7 +57,10 @@ module.exports = {
     new htmlWebpackPlugin({
       template: './src/public/index.html',
       filename: "./index.html"
-    }),
+    }),/*
+    new MiniCSSExtractPlugin({
+      filename: "./src/public/estilos.css",
+    }),*/
     new LiveReloadPlugin()
   ]
 }
