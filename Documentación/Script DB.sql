@@ -157,7 +157,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`usuario` (
   `id_usuario` VARCHAR(20) NOT NULL,
-  `id_sucursal` INT NOT NULL,
+  `id_sucursal` INT NULL DEFAULT 0,
   `password` VARCHAR(100) NULL,
   `empleado_rfc` VARCHAR(13) NOT NULL,
   `id_estado` INT NOT NULL,
@@ -290,17 +290,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `XRPrestamos`.`cliente_ruta`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `XRPrestamos`.`cliente_ruta` (
-  `id_cliente_ruta` INT NOT NULL AUTO_INCREMENT,
-  `id_ruta` INT NOT NULL,
-  `id_cliente` INT NOT NULL,
-  PRIMARY KEY (`id_cliente_ruta`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `XRPrestamos`.`actividad_economica`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`actividad_economica` (
@@ -318,10 +307,12 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`cliente_establecimiento` (
   `id_cliente` INT NOT NULL,
   `nombre` VARCHAR(100) NULL,
   `direccion` VARCHAR(300) NULL,
+  `alias_establecimiento` VARCHAR(50) NULL,
   `id_ciudad` INT NOT NULL,
   `id_actividad_economica` INT NOT NULL,
   `id_tipo_inmueble` INT NOT NULL,
   `id_estado` INT NOT NULL,
+  `rutas_id_ruta` INT NOT NULL,
   PRIMARY KEY (`id_cliente_establecimiento`))
 ENGINE = InnoDB;
 
