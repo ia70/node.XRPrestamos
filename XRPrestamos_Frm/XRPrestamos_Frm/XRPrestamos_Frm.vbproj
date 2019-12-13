@@ -73,10 +73,22 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cobrador\C_Cartera.Designer.vb">
+    <Compile Include="Cobrador\Cartera de clientes\C_Cartera.Designer.vb">
       <DependentUpon>C_Cartera.vb</DependentUpon>
     </Compile>
-    <Compile Include="Cobrador\C_Cartera.vb">
+    <Compile Include="Cobrador\Cartera de clientes\C_Cartera.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cobrador\Cobrar\C_Cobrar.Designer.vb">
+      <DependentUpon>C_Cobrar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Cobrador\Cobrar\C_Cobrar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cobrador\Cobrar\C_Pago.Designer.vb">
+      <DependentUpon>C_Pago.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Cobrador\Cobrar\C_Pago.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Cobrador\C_Dashboard.vb">
@@ -84,6 +96,12 @@
     </Compile>
     <Compile Include="Cobrador\C_Dashboard.Designer.vb">
       <DependentUpon>C_Dashboard.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cobrador\Solicitar dinero\C_Solicitar.Designer.vb">
+      <DependentUpon>C_Solicitar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Cobrador\Solicitar dinero\C_Solicitar.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.Designer.vb">
@@ -109,11 +127,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Cobrador\C_Cartera.resx">
+    <EmbeddedResource Include="Cobrador\Cartera de clientes\C_Cartera.resx">
       <DependentUpon>C_Cartera.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cobrador\Cobrar\C_Cobrar.resx">
+      <DependentUpon>C_Cobrar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cobrador\Cobrar\C_Pago.resx">
+      <DependentUpon>C_Pago.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cobrador\C_Dashboard.resx">
       <DependentUpon>C_Dashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cobrador\Solicitar dinero\C_Solicitar.resx">
+      <DependentUpon>C_Solicitar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>

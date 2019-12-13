@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class C_Cartera
+Partial Class C_Cobrar
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -23,15 +23,17 @@ Partial Class C_Cartera
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.Label36 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -68,8 +70,8 @@ Partial Class C_Cartera
         Me.Label33 = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
-        Me.Label36 = New System.Windows.Forms.Label()
-        Me.Label37 = New System.Windows.Forms.Label()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
@@ -85,6 +87,9 @@ Partial Class C_Cartera
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.Button3)
+        Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.Label37)
         Me.Panel1.Controls.Add(Me.Label36)
         Me.Panel1.Controls.Add(Me.Button1)
@@ -92,17 +97,41 @@ Partial Class C_Cartera
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(484, 58)
-        Me.Panel1.TabIndex = 0
+        Me.Panel1.TabIndex = 1
+        '
+        'Label37
+        '
+        Me.Label37.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.Label37.Font = New System.Drawing.Font("Arial", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label37.ForeColor = System.Drawing.SystemColors.Highlight
+        Me.Label37.Location = New System.Drawing.Point(9, 29)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(182, 30)
+        Me.Label37.TabIndex = 2
+        Me.Label37.Text = "$39,800.00"
+        Me.Label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label36
+        '
+        Me.Label36.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label36.ForeColor = System.Drawing.Color.White
+        Me.Label36.Location = New System.Drawing.Point(3, 1)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(188, 28)
+        Me.Label36.TabIndex = 1
+        Me.Label36.Text = "A Recaudar:"
+        Me.Label36.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Button1
         '
+        Me.Button1.BackColor = System.Drawing.Color.DodgerBlue
         Me.Button1.Font = New System.Drawing.Font("Arial", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(254, 1)
+        Me.Button1.Location = New System.Drawing.Point(418, 1)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(230, 58)
+        Me.Button1.Size = New System.Drawing.Size(66, 58)
         Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Regresar"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Text = "<"
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Panel2
         '
@@ -112,7 +141,7 @@ Partial Class C_Cartera
         Me.Panel2.Location = New System.Drawing.Point(0, 58)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(484, 733)
-        Me.Panel2.TabIndex = 1
+        Me.Panel2.TabIndex = 2
         '
         'FlowLayoutPanel1
         '
@@ -145,6 +174,30 @@ Partial Class C_Cartera
         Me.Panel3.Size = New System.Drawing.Size(460, 111)
         Me.Panel3.TabIndex = 0
         '
+        'Label5
+        '
+        Me.Label5.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label5.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.Color.ForestGreen
+        Me.Label5.Location = New System.Drawing.Point(257, 78)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(198, 31)
+        Me.Label5.TabIndex = 4
+        Me.Label5.Text = "$450.00"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label4.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label4.Location = New System.Drawing.Point(57, 78)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(203, 31)
+        Me.Label4.TabIndex = 3
+        Me.Label4.Text = "Por pagar:"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -167,7 +220,7 @@ Partial Class C_Cartera
         '
         'Label1
         '
-        Me.Label1.BackColor = System.Drawing.Color.Honeydew
+        Me.Label1.BackColor = System.Drawing.Color.PaleTurquoise
         Me.Label1.Font = New System.Drawing.Font("Arial", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(3, 0)
         Me.Label1.Name = "Label1"
@@ -175,28 +228,6 @@ Partial Class C_Cartera
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "1"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label4
-        '
-        Me.Label4.Font = New System.Drawing.Font("Arial Narrow", 20.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label4.Location = New System.Drawing.Point(193, 78)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(132, 31)
-        Me.Label4.TabIndex = 3
-        Me.Label4.Text = "Por pagar:"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label5
-        '
-        Me.Label5.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.Color.ForestGreen
-        Me.Label5.Location = New System.Drawing.Point(323, 78)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(132, 31)
-        Me.Label5.TabIndex = 4
-        Me.Label5.Text = "$1596.00"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Panel4
         '
@@ -215,25 +246,27 @@ Partial Class C_Cartera
         '
         'Label6
         '
+        Me.Label6.BackColor = System.Drawing.Color.WhiteSmoke
         Me.Label6.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.ForestGreen
-        Me.Label6.Location = New System.Drawing.Point(323, 78)
+        Me.Label6.Location = New System.Drawing.Point(251, 78)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(132, 31)
+        Me.Label6.Size = New System.Drawing.Size(204, 31)
         Me.Label6.TabIndex = 4
-        Me.Label6.Text = "$1596.00"
+        Me.Label6.Text = "$300.00"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label7
         '
-        Me.Label7.Font = New System.Drawing.Font("Arial Narrow", 20.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label7.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label7.Location = New System.Drawing.Point(193, 78)
+        Me.Label7.Location = New System.Drawing.Point(57, 78)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(132, 31)
+        Me.Label7.Size = New System.Drawing.Size(203, 31)
         Me.Label7.TabIndex = 3
         Me.Label7.Text = "Por pagar:"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label8
         '
@@ -242,7 +275,7 @@ Partial Class C_Cartera
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(392, 31)
         Me.Label8.TabIndex = 2
-        Me.Label8.Text = "Maria Pérez Castellanos"
+        Me.Label8.Text = "Ever Cordova López"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label9
@@ -252,7 +285,7 @@ Partial Class C_Cartera
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(392, 28)
         Me.Label9.TabIndex = 1
-        Me.Label9.Text = "Pozolera Parke"
+        Me.Label9.Text = "Taqueria El Rey"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label10
@@ -283,25 +316,27 @@ Partial Class C_Cartera
         '
         'Label11
         '
+        Me.Label11.BackColor = System.Drawing.Color.WhiteSmoke
         Me.Label11.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.ForestGreen
-        Me.Label11.Location = New System.Drawing.Point(323, 78)
+        Me.Label11.Location = New System.Drawing.Point(251, 78)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(132, 31)
+        Me.Label11.Size = New System.Drawing.Size(204, 31)
         Me.Label11.TabIndex = 4
-        Me.Label11.Text = "$1596.00"
+        Me.Label11.Text = "$1,200.00"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label12
         '
-        Me.Label12.Font = New System.Drawing.Font("Arial Narrow", 20.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label12.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label12.Location = New System.Drawing.Point(193, 78)
+        Me.Label12.Location = New System.Drawing.Point(57, 78)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(132, 31)
+        Me.Label12.Size = New System.Drawing.Size(194, 31)
         Me.Label12.TabIndex = 3
         Me.Label12.Text = "Por pagar:"
-        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label13
         '
@@ -320,12 +355,12 @@ Partial Class C_Cartera
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(392, 28)
         Me.Label14.TabIndex = 1
-        Me.Label14.Text = "Pozolera Parke"
+        Me.Label14.Text = "Lavanderia La Gota"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label15
         '
-        Me.Label15.BackColor = System.Drawing.Color.Honeydew
+        Me.Label15.BackColor = System.Drawing.Color.PaleTurquoise
         Me.Label15.Font = New System.Drawing.Font("Arial", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.Location = New System.Drawing.Point(3, 0)
         Me.Label15.Name = "Label15"
@@ -351,25 +386,27 @@ Partial Class C_Cartera
         '
         'Label16
         '
+        Me.Label16.BackColor = System.Drawing.Color.WhiteSmoke
         Me.Label16.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label16.ForeColor = System.Drawing.Color.ForestGreen
-        Me.Label16.Location = New System.Drawing.Point(323, 78)
+        Me.Label16.Location = New System.Drawing.Point(251, 78)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(132, 31)
+        Me.Label16.Size = New System.Drawing.Size(204, 31)
         Me.Label16.TabIndex = 4
-        Me.Label16.Text = "$1596.00"
+        Me.Label16.Text = "$200.00"
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label17
         '
-        Me.Label17.Font = New System.Drawing.Font("Arial Narrow", 20.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label17.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label17.Location = New System.Drawing.Point(193, 78)
+        Me.Label17.Location = New System.Drawing.Point(57, 78)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(132, 31)
+        Me.Label17.Size = New System.Drawing.Size(197, 31)
         Me.Label17.TabIndex = 3
         Me.Label17.Text = "Por pagar:"
-        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label18
         '
@@ -419,25 +456,27 @@ Partial Class C_Cartera
         '
         'Label21
         '
+        Me.Label21.BackColor = System.Drawing.Color.WhiteSmoke
         Me.Label21.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label21.ForeColor = System.Drawing.Color.ForestGreen
-        Me.Label21.Location = New System.Drawing.Point(323, 78)
+        Me.Label21.Location = New System.Drawing.Point(251, 78)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(132, 31)
+        Me.Label21.Size = New System.Drawing.Size(204, 31)
         Me.Label21.TabIndex = 4
-        Me.Label21.Text = "$1596.00"
+        Me.Label21.Text = "$400.00"
         Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label22
         '
-        Me.Label22.Font = New System.Drawing.Font("Arial Narrow", 20.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label22.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label22.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label22.Location = New System.Drawing.Point(193, 78)
+        Me.Label22.Location = New System.Drawing.Point(57, 78)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(132, 31)
+        Me.Label22.Size = New System.Drawing.Size(197, 31)
         Me.Label22.TabIndex = 3
         Me.Label22.Text = "Por pagar:"
-        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label23
         '
@@ -461,7 +500,7 @@ Partial Class C_Cartera
         '
         'Label25
         '
-        Me.Label25.BackColor = System.Drawing.Color.Honeydew
+        Me.Label25.BackColor = System.Drawing.Color.PaleTurquoise
         Me.Label25.Font = New System.Drawing.Font("Arial", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label25.Location = New System.Drawing.Point(3, 0)
         Me.Label25.Name = "Label25"
@@ -487,25 +526,27 @@ Partial Class C_Cartera
         '
         'Label26
         '
+        Me.Label26.BackColor = System.Drawing.Color.WhiteSmoke
         Me.Label26.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label26.ForeColor = System.Drawing.Color.ForestGreen
-        Me.Label26.Location = New System.Drawing.Point(323, 78)
+        Me.Label26.Location = New System.Drawing.Point(251, 78)
         Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(132, 31)
+        Me.Label26.Size = New System.Drawing.Size(204, 31)
         Me.Label26.TabIndex = 4
-        Me.Label26.Text = "$1596.00"
+        Me.Label26.Text = "$1100.00"
         Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label27
         '
-        Me.Label27.Font = New System.Drawing.Font("Arial Narrow", 20.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label27.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label27.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label27.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label27.Location = New System.Drawing.Point(193, 78)
+        Me.Label27.Location = New System.Drawing.Point(57, 78)
         Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(132, 31)
+        Me.Label27.Size = New System.Drawing.Size(197, 31)
         Me.Label27.TabIndex = 3
         Me.Label27.Text = "Por pagar:"
-        Me.Label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label27.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label28
         '
@@ -555,25 +596,27 @@ Partial Class C_Cartera
         '
         'Label31
         '
+        Me.Label31.BackColor = System.Drawing.Color.WhiteSmoke
         Me.Label31.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label31.ForeColor = System.Drawing.Color.ForestGreen
-        Me.Label31.Location = New System.Drawing.Point(323, 78)
+        Me.Label31.Location = New System.Drawing.Point(251, 78)
         Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(132, 31)
+        Me.Label31.Size = New System.Drawing.Size(204, 31)
         Me.Label31.TabIndex = 4
-        Me.Label31.Text = "$1596.00"
+        Me.Label31.Text = "$550.00"
         Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label32
         '
-        Me.Label32.Font = New System.Drawing.Font("Arial Narrow", 20.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label32.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label32.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label32.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label32.Location = New System.Drawing.Point(193, 78)
+        Me.Label32.Location = New System.Drawing.Point(57, 78)
         Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(132, 31)
+        Me.Label32.Size = New System.Drawing.Size(197, 31)
         Me.Label32.TabIndex = 3
         Me.Label32.Text = "Por pagar:"
-        Me.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label33
         '
@@ -597,7 +640,7 @@ Partial Class C_Cartera
         '
         'Label35
         '
-        Me.Label35.BackColor = System.Drawing.Color.Honeydew
+        Me.Label35.BackColor = System.Drawing.Color.PaleTurquoise
         Me.Label35.Font = New System.Drawing.Font("Arial", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label35.Location = New System.Drawing.Point(3, 0)
         Me.Label35.Name = "Label35"
@@ -606,30 +649,29 @@ Partial Class C_Cartera
         Me.Label35.Text = "7"
         Me.Label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label36
+        'Button2
         '
-        Me.Label36.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label36.ForeColor = System.Drawing.Color.White
-        Me.Label36.Location = New System.Drawing.Point(3, 1)
-        Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(245, 28)
-        Me.Label36.TabIndex = 1
-        Me.Label36.Text = "Monto de cartera:"
-        Me.Label36.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.Button2.BackColor = System.Drawing.Color.Yellow
+        Me.Button2.Font = New System.Drawing.Font("Arial", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(346, 1)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(66, 58)
+        Me.Button2.TabIndex = 3
+        Me.Button2.Text = "Vis"
+        Me.Button2.UseVisualStyleBackColor = False
         '
-        'Label37
+        'Button3
         '
-        Me.Label37.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.Label37.Font = New System.Drawing.Font("Arial", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.Label37.Location = New System.Drawing.Point(9, 29)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(239, 30)
-        Me.Label37.TabIndex = 2
-        Me.Label37.Text = "$132,450.00"
-        Me.Label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Button3.BackColor = System.Drawing.Color.PaleGreen
+        Me.Button3.Font = New System.Drawing.Font("Arial", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(274, 1)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(66, 58)
+        Me.Button3.TabIndex = 4
+        Me.Button3.Text = "Ok"
+        Me.Button3.UseVisualStyleBackColor = False
         '
-        'C_Cartera
+        'C_Cobrar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 22.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -637,9 +679,10 @@ Partial Class C_Cartera
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Margin = New System.Windows.Forms.Padding(6, 5, 6, 5)
-        Me.Name = "C_Cartera"
-        Me.Text = "C_Cartera"
+        Me.Name = "C_Cobrar"
+        Me.Text = "C_Cobrar"
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.FlowLayoutPanel1.ResumeLayout(False)
@@ -655,15 +698,17 @@ Partial Class C_Cartera
     End Sub
 
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents Label37 As Label
+    Friend WithEvents Label36 As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents Panel2 As Panel
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
@@ -700,6 +745,6 @@ Partial Class C_Cartera
     Friend WithEvents Label33 As Label
     Friend WithEvents Label34 As Label
     Friend WithEvents Label35 As Label
-    Friend WithEvents Label37 As Label
-    Friend WithEvents Label36 As Label
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button2 As Button
 End Class
