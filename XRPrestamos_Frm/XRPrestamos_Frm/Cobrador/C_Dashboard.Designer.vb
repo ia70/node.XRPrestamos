@@ -26,6 +26,7 @@ Partial Class C_Dashboard
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Button1
@@ -76,11 +77,24 @@ Partial Class C_Dashboard
         Me.Button4.Text = "Estado de solicitudes"
         Me.Button4.UseVisualStyleBackColor = False
         '
+        'Button5
+        '
+        Me.Button5.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button5.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button5.Location = New System.Drawing.Point(25, 494)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(204, 201)
+        Me.Button5.TabIndex = 4
+        Me.Button5.Text = "Nuevo cliente"
+        Me.Button5.UseVisualStyleBackColor = False
+        '
         'C_Dashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(484, 791)
+        Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
@@ -95,4 +109,5 @@ Partial Class C_Dashboard
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
+    Friend WithEvents Button5 As Button
 End Class

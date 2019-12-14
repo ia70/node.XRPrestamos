@@ -98,6 +98,18 @@
       <DependentUpon>C_Dashboard.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Cobrador\Estado de solicitudes\C_EstadoSolicitudes.Designer.vb">
+      <DependentUpon>C_EstadoSolicitudes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Cobrador\Estado de solicitudes\C_EstadoSolicitudes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cobrador\Nuevo cliente\C_NuevoCliente.Designer.vb">
+      <DependentUpon>C_NuevoCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Cobrador\Nuevo cliente\C_NuevoCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Cobrador\Solicitar dinero\C_Solicitar.Designer.vb">
       <DependentUpon>C_Solicitar.vb</DependentUpon>
     </Compile>
@@ -138,6 +150,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cobrador\C_Dashboard.resx">
       <DependentUpon>C_Dashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cobrador\Estado de solicitudes\C_EstadoSolicitudes.resx">
+      <DependentUpon>C_EstadoSolicitudes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cobrador\Nuevo cliente\C_NuevoCliente.resx">
+      <DependentUpon>C_NuevoCliente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cobrador\Solicitar dinero\C_Solicitar.resx">
       <DependentUpon>C_Solicitar.vb</DependentUpon>
