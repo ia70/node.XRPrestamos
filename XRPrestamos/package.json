@@ -1,15 +1,15 @@
 {
   "name": "xrprestamos",
   "version": "1.0.0",
-  "description": "",
+  "description": "Aplicación para la gestión de prestamos",
   "main": "webpack.config.js",
   "scripts": {
     "start": "node src/",
     "dev": "webpack-dev-server --open --hot --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production --progress"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["Prestamos", "Cobranza"],
+  "author": "xcoru.com",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
@@ -23,7 +23,6 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "babel-loader": "^8.0.6",
-    "bootstrap": "^4.3.1",
     "css-loader": "^3.2.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
