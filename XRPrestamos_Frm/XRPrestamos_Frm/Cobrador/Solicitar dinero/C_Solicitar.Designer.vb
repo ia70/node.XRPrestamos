@@ -33,6 +33,8 @@ Partial Class C_Solicitar
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -143,18 +145,39 @@ Partial Class C_Solicitar
         '
         Me.Button2.BackColor = System.Drawing.Color.LightGreen
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Location = New System.Drawing.Point(7, 318)
+        Me.Button2.Location = New System.Drawing.Point(9, 393)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(465, 47)
         Me.Button2.TabIndex = 7
         Me.Button2.Text = "Solicitar"
         Me.Button2.UseVisualStyleBackColor = False
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(12, 277)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(296, 32)
+        Me.Label3.TabIndex = 8
+        Me.Label3.Text = "Fecha que se requiere:"
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Font = New System.Drawing.Font("Arial", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DateTimePicker1.Location = New System.Drawing.Point(10, 312)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(462, 35)
+        Me.DateTimePicker1.TabIndex = 9
+        '
         'C_Solicitar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 22.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(484, 791)
+        Me.Controls.Add(Me.DateTimePicker1)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
@@ -171,6 +194,7 @@ Partial Class C_Solicitar
         Me.Panel3.PerformLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -185,4 +209,6 @@ Partial Class C_Solicitar
     Friend WithEvents NumericUpDown1 As NumericUpDown
     Friend WithEvents Label2 As Label
     Friend WithEvents Button2 As Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents DateTimePicker1 As DateTimePicker
 End Class
