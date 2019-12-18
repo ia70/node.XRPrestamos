@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-class App extends Component {
-    render() {
-        return (
-            <h1>Hola Mundo</h1>
-        )
-    }
-}
+import App from "./component/App.jsx";
 
 let container = document.getElementById('root');
-let component = <App/>;
+let component = <App name="Hola Mundo! Propiedad"/>;
 
 ReactDOM.render(component, container);
 
