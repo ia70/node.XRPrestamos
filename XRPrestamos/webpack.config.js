@@ -4,6 +4,9 @@ const LiveReloadPlugin = require('webpack-livereload-plugin');
 const path = require('path');
 
 module.exports = {
+  devServer: {
+    host: '192.168.184.82'
+  },
   entry: './src/app/index.js',
   output: {
     path: path.resolve(__dirname, 'src/public'),

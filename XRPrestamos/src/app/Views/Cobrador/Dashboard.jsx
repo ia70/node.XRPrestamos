@@ -4,8 +4,7 @@ import { Image } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
-import CarteraClientes from '../../Components/img/CarteraClientes.png';
-import './css/Dashboar.css';
+import CarteraClientes from '../../Views/img/CarteraClientes.png';
 
 
 class Dashboard extends Component {
@@ -19,19 +18,17 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <Container>
-                <Row>
-                    <Col xs={6} md={4}>
-                        <Image src={CarteraClientes} rounded />
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <Image src={CarteraClientes} roundedCircle />
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <Image src={CarteraClientes} thumbnail />
-                    </Col>
-                </Row>
-            </Container>
+            <Row>
+                <Col xs={6} md={4} className="m-1">
+                    <Image src={CarteraClientes} rounded />
+                </Col>
+                <Col xs={6} md={4} className="m-1">
+                    <Image src={CarteraClientes} roundedCircle />
+                </Col>
+                <Col xs={6} md={4} className="m-1">
+                    <Image src={CarteraClientes} thumbnail />
+                </Col>
+            </Row>
         )
     }
 }
