@@ -11,7 +11,7 @@ class Nuevo_Cliente extends Component {
 
     render() {
         return (
-        <h1>{ this.props.name }</h1>
+        <h1>Nuevo Cliente</h1>
         )
     }
 }
