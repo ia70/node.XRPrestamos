@@ -5,6 +5,7 @@ import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import CarteraClientes from '../../Components/img/CarteraClientes.png';
+import './css/Dashboar.css';
 
 
 class Dashboard extends Component {
