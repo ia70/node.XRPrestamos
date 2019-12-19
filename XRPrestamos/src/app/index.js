@@ -9,3 +9,8 @@ let container = document.getElementById('root');
 
 let component = <Dashboard userName="Daniel Pérez"/>;
 ReactDOM.render(component, container);
+
+/*
+    NO OLVIDAR CAMBIAR DEL WEBPACK DONDE SE SERVIRA EL SERVICIO. SI NO ES CORRECTA NO SE EJECUTARA!
+                    *************************************************************
+*/
