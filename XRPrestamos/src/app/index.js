@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import App from "./Components/App.jsx.js";
+import Nuevo_Cliente from "./Views/Nuevo_Cliente.jsx";
 
 let container = document.getElementById('root');
-let component = <App name="Hola Mundo! Propiedad"/>;
 
+
+let component = <Nuevo_Cliente name="Hola Mundo! Propiedad"/>;
 ReactDOM.render(component, container);
-
