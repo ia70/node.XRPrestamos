@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
-import './Views/css/Main.css'
-import Dashboard from "./Views/Cobrador/Dashboard.jsx";
+import App from "./App,jsx";
 
 let container = document.getElementById('root');
 
 
-let component = <Dashboard userName="Daniel Pérez"/>;
+let component = <App />;
 ReactDOM.render(component, container);
 
 /*
