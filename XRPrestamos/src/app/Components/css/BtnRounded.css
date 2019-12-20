@@ -5,3 +5,9 @@
 .Cont{
     display: inline-block;
 }
+
+.noBorder{
+    border: 0em;
+    margin: 0em;
+    padding: 0em;
+}

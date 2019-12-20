@@ -20,29 +20,38 @@ import { Button } from 'react-bootstrap';
 import '../css/Dashboard.css';
 
 class Dashboard extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            tareas: 0
-        }
+            loggedIn: true,             //Especifica si el usuario está logeado.
+            userId: '001',              //Id de usuario
+            userType: 0,                //Tipo de usuario 0- cobrador; 1- Administrador
+            userName: 'Daniel Pérez',   //Nombre del usuario
+            userActive: false,          //Especifica si el usuario está activo
+            guiOption: 0,               //Especifica la interfaz donde se encuentra
+            shortDate: '',               //Fecha corta
+        };
+
+        //Recuperando estado de Componente padre
+        this.setState = this.props.state;
 
         // Este enlace es necesario para hacer que `this` funcione en el callback
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(e) {
-        this.setState({tareas: 1});
-        console.log(this.state);
-        alert("Entro");
-        e.preventDefault();       
+    handleClick(id){
+        //this.setState({guiOption: 1});
+        console.log('CONSOLA: ' + id + "-> " + this.state.guiOption);
     }
 
     render() {
-        if(this.state.tareas == 0){
+
+        if (this.state.guiOption == 0) {
             return (
 
-                <div>
-                    <Navbar bg="dark" variant="dark" sticky="top">
+                <div className="noBorder">
+                    <Navbar bg="dark" variant="dark" sticky="top" >
                         <Navbar.Brand href="#home">
                             <img
                                 alt=""
@@ -51,7 +60,7 @@ class Dashboard extends Component {
                                 height="30"
                                 className="d-inline-block align-top"
                             />{' '}
-                            {this.props.userName}
+                            {this.state.userName}
                         </Navbar.Brand>
                         <Navbar.Toggle />
                         <Navbar.Collapse className="justify-content-end">
@@ -61,18 +70,14 @@ class Dashboard extends Component {
                             <Button type="submit">Salir</Button>
                         </Navbar.Collapse>
                     </Navbar>
-                    <BtnRounded src={imgCarteraClientes} texto="Cartera de clientes" />
-                    <BtnRounded src={imgCobrar} texto="Cobrar" />
-                    <BtnRounded src={imgSolicitarDinero} texto="Solicitar dinero" />
-                    <BtnRounded src={imgEstadoSolicitud} texto="Estado de solicitudes" />
-                    <BtnRounded src={imgNuevoCliente} texto="Nuevo cliente" onClick={(e) => this.handleClick(e)} />
-                    <form onSubmit={(e) => this.handleClick(e)} >
-                        <button type="submit">Enviar</button>
-                    </form>
-    
+                    <BtnRounded id='1' src={imgCarteraClientes} event={this.handleClick} texto="Cartera de clientes" />
+                    <BtnRounded id='2' src={imgCobrar} event={this.handleClick} texto="Cobrar" />
+                    <BtnRounded id='3' src={imgSolicitarDinero} event={this.handleClick} texto="Solicitar dinero" />
+                    <BtnRounded id='4' src={imgEstadoSolicitud} event={this.handleClick} texto="Estado de solicitudes" />
+                    <BtnRounded id='5' src={imgNuevoCliente} event={this.handleClick} texto="Nuevo cliente" />
                 </div>
             );
-        }else{
+        } else {
             return (
                 <NuevoCliente>hOLA mUNDO</NuevoCliente>
             );

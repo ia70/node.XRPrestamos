@@ -1,22 +1,39 @@
 import React, { Component } from 'react';
+import DashboardAdmin from './Views/Admin/Dashboard.jsx';
+import DashboardCobrador from './Views/Cobrador/Dashboard.jsx';
+import Login from './Views/Login.jsx';
 
 class App extends Component {
     constructor(props){
         super(props);
         this.state = {
-            loggedIn: false,        //Especifica si el usuario está logeado.
-            userId: '',
-            userName: '',           //Nombre del usuario
-            userActive: false,      //Especifica si el usuario está activo
-            selectedOption: 0,      //Especifica la interfaz donde se encuentra
-            shortDate: ''           //Fecha corta
+            loggedIn: true,             //Especifica si el usuario está logeado.
+            userId: '001',              //Id de usuario
+            userType: 0,                //Tipo de usuario 0- cobrador; 1- Administrador
+            userName: 'Daniel Pérez',   //Nombre del usuario
+            userActive: false,          //Especifica si el usuario está activo
+            guiOption: 0,               //Especifica la interfaz donde se encuentra
+            shortDate: ''               //Fecha corta
         };
+
+        this.handleSetState = this.handleSetState.bind(this);
+    }
+
+    handleSetState(e){
+        alert('Conexion');
     }
 
     render() {
-        return (
-        <h1>{ this.props.name }</h1>
-        )
+
+        if(this.state.loggedIn){
+            if(this.state.userType == 1){
+                return( <DashboardAdmin state={this.state} /> );
+            }else{
+                return( <DashboardCobrador state={this.state} /> );
+            }
+        }else{
+            return( <Login /> );
+        }
     }
 }
 
