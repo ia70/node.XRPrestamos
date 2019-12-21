@@ -15,13 +15,8 @@ class App extends Component {
             guiOption: 0,               //Especifica la interfaz donde se encuentra
             shortDate: ''               //Fecha corta
         };
-
-        this.handleSetState = this.handleSetState.bind(this);
     }
 
-    handleSetState(e){
-        alert('Conexion');
-    }
 
     render() {
 
