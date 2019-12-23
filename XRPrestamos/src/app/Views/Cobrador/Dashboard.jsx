@@ -14,7 +14,7 @@ import imgSolicitarDinero from '../img/SolicitarDinero.png';
 import Logo from '../img/Logo.png';
 
 // BOOTSTRAP
-import { Navbar } from 'react-bootstrap';
+import NavBar1  from '../../Components/Layout/Navbar.jsx';
 import { Button } from 'react-bootstrap';
 
 // CSS
@@ -50,25 +50,9 @@ class Dashboard extends Component {
             case 0:
                 return (
                     <div className="noBorder">
-                        <Navbar bg="dark" variant="dark" sticky="top" >
-                            <Navbar.Brand href="#home">
-                                <img
-                                    alt=""
-                                    src={Logo}
-                                    width="30"
-                                    height="30"
-                                    className="d-inline-block align-top"
-                                />{' '}
-                                {this.state.userName}
-                            </Navbar.Brand>
-                            <Navbar.Toggle />
-                            <Navbar.Collapse className="justify-content-end">
-                                <Navbar.Text className="Dashboard" >
-                                    <GetDate />
-                                </Navbar.Text>
-                                <Button type="submit">Salir</Button>
-                            </Navbar.Collapse>
-                        </Navbar>
+                        <NavBar1 Logo={Logo} Date={GetDate}>
+
+                        </NavBar1>
                         <BtnRounded id='1' src={imgCarteraClientes} event={this.handleClick} texto="Cartera de clientes" />
                         <BtnRounded id='2' src={imgCobrar} event={this.handleClick} texto="Cobrar" />
                         <BtnRounded id='3' src={imgSolicitarDinero} event={this.handleClick} texto="Solicitar dinero" />
