@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class Nuevo_Cliente extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             personal: {
@@ -25,12 +25,12 @@ class Nuevo_Cliente extends Component {
                 local_ambulante: false,
                 tipo_local: '',
             }
-        }; 
+        };
     }
 
     render() {
         return (
-        <h1>Nuevo Cliente</h1>
+            <h1>Nuevo Cliente</h1>
         )
     }
 }

@@ -14,8 +14,7 @@ import imgSolicitarDinero from '../img/SolicitarDinero.png';
 import Logo from '../img/Logo.png';
 
 // BOOTSTRAP
-import NavBar1  from '../../Components/Layout/Navbar.jsx';
-import { Button } from 'react-bootstrap';
+import Navbar  from '../../Components/Layout/Navbar.jsx';
 
 // CSS
 import '../css/Dashboard.css';
@@ -40,9 +39,9 @@ class Dashboard extends Component {
 
     handleClick(id) {
         console.log('CONSOLA: ' + id + "-> " + this.state.guiOption);
-        this.setState(state =>({
+        /*this.setState(state =>({
             guiOption: id
-        }));
+        }));*/
     }
 
     render() {
@@ -50,9 +49,8 @@ class Dashboard extends Component {
             case 0:
                 return (
                     <div className="noBorder">
-                        <NavBar1 Logo={Logo} Date={GetDate}>
+                        
 
-                        </NavBar1>
                         <BtnRounded id='1' src={imgCarteraClientes} event={this.handleClick} texto="Cartera de clientes" />
                         <BtnRounded id='2' src={imgCobrar} event={this.handleClick} texto="Cobrar" />
                         <BtnRounded id='3' src={imgSolicitarDinero} event={this.handleClick} texto="Solicitar dinero" />
@@ -70,7 +68,7 @@ class Dashboard extends Component {
                 return(null);
             case 5:
                 return (
-                    <NuevoCliente/>
+                    <NuevoCliente />
                 );
         }
     }
