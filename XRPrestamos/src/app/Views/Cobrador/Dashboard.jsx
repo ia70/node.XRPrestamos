@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 //COMPONENTES
 import BtnRounded from '../../Components/Content/BtnRounded.jsx';
 import NuevoCliente from '../../Views/Nuevo_Cliente.jsx';
-import GetDate from '../../Components/utils/GetDate.jsx';
 
 // IMAGENES
 import imgCarteraClientes from '../img/CarteraClientes.png';
@@ -14,7 +13,7 @@ import imgSolicitarDinero from '../img/SolicitarDinero.png';
 import Logo from '../img/Logo.png';
 
 // BOOTSTRAP
-import Navbar  from '../../Components/Layout/Navbar.jsx';
+import Navbar from '../../Components/Layout/Navbar.jsx';
 
 // CSS
 import '../css/Dashboard.css';
@@ -27,9 +26,9 @@ class Dashboard extends Component {
             loggedIn: false,            //Especifica si el usuario está logeado.
             userId: '',                 //Id de usuario
             userType: 0,                //Tipo de usuario 0- cobrador; 1- Administrador
-            userName: '',               //Nombre del usuario
+            userName: 'Daniel',               //Nombre del usuario
             userActive: false,          //Especifica si el usuario está activo
-            guiOption: 0,               //Especifica la interfaz donde se encuentra
+            guiOption: 5,               //Especifica la interfaz donde se encuentra
             shortDate: '',              //Fecha corta
         };
 
@@ -38,18 +37,19 @@ class Dashboard extends Component {
     }
 
     handleClick(id) {
+
+        this.setState({
+            guiOpcion: 5
+        });
         console.log('CONSOLA: ' + id + "-> " + this.state.guiOption);
-        /*this.setState(state =>({
-            guiOption: id
-        }));*/
     }
 
     render() {
         switch (this.state.guiOption) {
             case 0:
                 return (
-                    <div className="noBorder">
-                        
+                    <div>
+                        <Navbar setLogo={Logo} setTitle={this.state.userName} setDate={true} />
 
                         <BtnRounded id='1' src={imgCarteraClientes} event={this.handleClick} texto="Cartera de clientes" />
                         <BtnRounded id='2' src={imgCobrar} event={this.handleClick} texto="Cobrar" />
@@ -59,13 +59,13 @@ class Dashboard extends Component {
                     </div>
                 );
             case 1:
-                return(null);
+                return (null);
             case 2:
-                return(null);
+                return (null);
             case 3:
-                return(null);
+                return (null);
             case 4:
-                return(null);
+                return (null);
             case 5:
                 return (
                     <NuevoCliente />

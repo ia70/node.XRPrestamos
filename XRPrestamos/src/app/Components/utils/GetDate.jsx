@@ -1,23 +1,18 @@
-import React from 'react';
+export function GetDate(){
+    
+    let date = new Date();
 
-function GetDate(){
-    let date = new Date()
-
-    let day = date.getDate()
-    let month = date.getMonth() + 1
-    let year = date.getFullYear()
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
 
     let fecha = "";
     
     if(month < 10){
-        fecha = day + '0\/' + month + '\/' + year
+        fecha = day + '0\/' + month + '\/' + year;
     }else{
-        fecha = day + '\/' + month + '\/' + year
+        fecha = day + '\/' + month + '\/' + year;
     }
 
-    return(
-        fecha
-    );
+    return fecha;
 }
-
-export default GetDate;
