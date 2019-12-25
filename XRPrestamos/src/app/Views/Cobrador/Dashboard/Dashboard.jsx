@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 //COMPONENTES
-import BtnRounded from '../../../Components/Content/BtnRounded/index.jsx';
-import NuevoCliente from '../../NuevoCliente/index.jsx';
-import SolicitarDinero from '../SolicitarDinero/index.jsx';
-import Navbar from '../../../Components/Content/Navbar/index.jsx';
+import BtnRounded from '../../../Components/Content/BtnRounded/BtnRounded.jsx';
+import NuevoCliente from '../../NuevoCliente/NuevoCliente.jsx';
+import SolicitarDinero from '../SolicitarDinero/SolicitarDinero.jsx';
+import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
 
 // IMAGENES
 import imgCarteraClientes from '../../../img/CarteraClientes.png';
@@ -15,7 +15,7 @@ import imgSolicitarDinero from '../../../img/SolicitarDinero.png';
 import Logo from '../../../img/Logo.png';
 
 // CSS
-import './desing.css';
+import './Dashboard.css';
 
 class Dashboard extends Component {
     constructor(props) {

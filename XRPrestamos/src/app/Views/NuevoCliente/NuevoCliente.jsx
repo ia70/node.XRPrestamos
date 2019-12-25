@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Navbar from '../../Components/Content/Navbar/index.jsx';
+import Navbar from '../../Components/Content/Navbar/Navbar.jsx';
 import { Title } from '../../Components/Content/Title/Title.jsx';
-import { TextBox } from '../../Components/Form/TextBox/index.jsx';
-import { TextPhoneNumber } from '../../Components/Form/TextPhoneNumber/index.jsx';
-import { Option } from '../../Components/Form/Option/index.jsx';
-import { TextEmail } from '../../Components/Form/TextEmail/index.jsx';
+import { TextBox } from '../../Components/Form/TextBox/TextBox.jsx';
+import { TextPhoneNumber } from '../../Components/Form/TextPhoneNumber/TextPhoneNumber.jsx';
+import { Option } from '../../Components/Form/Option/Option.jsx';
+import { TextEmail } from '../../Components/Form/TextEmail/TextEmail.jsx';
 
 import Logo from '../../img/Logo.png';
-import './desing.css';
+import './NuevoCliente.css';
 
 class NuevoCliente extends Component {
     constructor(props) {

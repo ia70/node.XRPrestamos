@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 //CONMPONENTS --------------------------------------------------
-import Navbar from '../../../Components/Content/Navbar/index.jsx';
-import { TextSearch } from '../../../Components/Form/TextSearch/index.jsx';
+import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
+import { TextSearch } from '../../../Components/Form/TextSearch/TextSearch.jsx';
 import { Title } from '../../../Components/Content/Title/Title.jsx';
-import { TextMoney } from '../../../Components/Form/TextMoney/index.jsx';
+import { TextMoney } from '../../../Components/Form/TextMoney/TextMoney.jsx';
 
-import './desing.css';
+import './SolicitarDinero.css';
 import Logo from '../../../img/Logo.png';
 
 class SolicitarDinero extends Component {
