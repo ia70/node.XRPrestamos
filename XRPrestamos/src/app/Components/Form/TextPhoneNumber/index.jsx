@@ -2,7 +2,7 @@ import React from 'react';
 //PROPIEDADES -----------------------
 // required | id | label | holder | help
 
-export function TextTelefono(props) {
+export function TextPhoneNumber(props) {
     if(props.required){
         return (
             <div className="form-group col-xs-12 col-sm-4 col-lg-3">

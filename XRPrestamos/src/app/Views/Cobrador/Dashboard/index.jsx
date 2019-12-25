@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 //COMPONENTES
 import BtnRounded from '../../Components/Content/BtnRounded.jsx';
-import NuevoCliente from '../../Views/Nuevo_Cliente.jsx';
+import NuevoCliente from '../../NuevoCliente/index.jsx/index.js';
 import SolicitarDinero from './SolicitarDinero.jsx';
 
 // IMAGENES

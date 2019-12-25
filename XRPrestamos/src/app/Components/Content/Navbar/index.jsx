@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {GetDate} from '../utils/GetDate.jsx';
+import {GetDate} from '../../utils/GetDate.jsx';
 
 import '../css/Navbar.css';
 

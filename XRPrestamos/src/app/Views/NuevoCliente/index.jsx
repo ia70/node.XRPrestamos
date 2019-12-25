@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Navbar from '../Components/Layout/Navbar.jsx';
 import { Title } from '../Components/Content/Title.jsx';
 import { TextBox } from '../Components/Form/TextBox.jsx';
-import { TextTelefono } from '../Components/Form/TextTelefono.jsx';
+import { TextPhoneNumber } from '../Components/Form/TextPhoneNumber.jsx';
 import { Option } from '../Components/Form/Option.jsx';
 import { TextEmail } from '../Components/Form/TextEmail.jsx';
 
 import Logo from '../Views/img/Logo.png';
 import './css/NuevoCliente.css';
 
-class Nuevo_Cliente extends Component {
+class NuevoCliente extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -53,7 +53,7 @@ class Nuevo_Cliente extends Component {
                         <TextBox id="p_direccion" label="Dirección" holder="Dirección" help="" required={true} />
                         <TextBox id="p_referencia" label="Referencia" holder="Referencia" help="" required={true} />
 
-                        <TextTelefono id="p_telefono" label="Telefono" holder="Telefono" help="" required={false} />
+                        <TextPhoneNumber id="p_telefono" label="Telefono" holder="Telefono" help="" required={false} />
                         <TextEmail id="p_email" label="Correo electrónico" holder="Correo electrónico" help="" required={false} />
                         <div className="btn-group form-group col-xs-12 col-sm-4 col-lg-3" data-toggle="buttons">
                             <Option id="p_casarentada" label="Casa rentada" checked={true} name="p_casa" />
@@ -68,7 +68,7 @@ class Nuevo_Cliente extends Component {
                         <TextBox id="n_direccion" label="Dirección" holder="Dirección" help="" required={true} />
                         <TextBox id="n_referencia" label="Referencia" holder="Referencia" help="" required={true} />
 
-                        <TextTelefono id="n_telefono" label="Telefono" holder="Telefono" help="" required={false} />
+                        <TextPhoneNumber id="n_telefono" label="Telefono" holder="Telefono" help="" required={false} />
                         <TextEmail id="n_email" label="Correo electrónico" holder="Correo electrónico" help="" required={false} />
                         <div className="btn-group form-group col-xs-12 col-sm-4 col-lg-3" data-toggle="buttons">
                             <Option id="n_localfijo" label="Local Fijo" checked={true} name="p_tipolocal" />
@@ -91,4 +91,4 @@ class Nuevo_Cliente extends Component {
     }
 }
 
-export default Nuevo_Cliente;
+export default NuevoCliente;
