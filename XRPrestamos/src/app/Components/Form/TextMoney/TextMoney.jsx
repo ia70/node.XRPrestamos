@@ -7,7 +7,7 @@ export function TextMoney(props) {
         return (
             <div className="form-group col-xs-12 col-sm-4 col-lg-3">
                 <label htmlFor={props.id}>{props.label}</label>
-                <div className="input-group mb-3">
+                <div className="input-group">
                     <div className="input-group-prepend">
                         <span className="input-group-text">$</span>
                     </div>
@@ -21,7 +21,7 @@ export function TextMoney(props) {
     } else {
         return (
             <div className="form-group col-xs-12 col-sm-4 col-lg-3">
-                <div className="input-group mb-3">
+                <div className="input-group">
                     <div className="input-group-prepend">
                         <span className="input-group-text">$</span>
                     </div>
