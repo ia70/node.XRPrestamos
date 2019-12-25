@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 //COMPONENTES
 import BtnRounded from '../../Components/Content/BtnRounded.jsx';
 import NuevoCliente from '../../Views/Nuevo_Cliente.jsx';
+import SolicitarDinero from './SolicitarDinero.jsx';
 
 // IMAGENES
 import imgCarteraClientes from '../img/CarteraClientes.png';
@@ -28,7 +29,7 @@ class Dashboard extends Component {
             userType: 0,                //Tipo de usuario 0- cobrador; 1- Administrador
             userName: 'Daniel',               //Nombre del usuario
             userActive: false,          //Especifica si el usuario está activo
-            guiOption: 5,               //Especifica la interfaz donde se encuentra
+            guiOption: 3,               //Especifica la interfaz donde se encuentra
             shortDate: '',              //Fecha corta
         };
 
@@ -63,7 +64,9 @@ class Dashboard extends Component {
             case 2:
                 return (null);
             case 3:
-                return (null);
+                return (
+                    <SolicitarDinero />
+                );
             case 4:
                 return (null);
             case 5:
