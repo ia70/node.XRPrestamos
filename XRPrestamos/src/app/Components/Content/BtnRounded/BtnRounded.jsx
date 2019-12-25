@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import '../css/BtnRounded.css';
+import './BtnRounded.css';
 
 class BtnRounded extends Component {
     render() {

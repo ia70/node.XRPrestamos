@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/Title.css';
+import './Title.css';
 //PROPIEDADES
 // title
 export function Title(props) {

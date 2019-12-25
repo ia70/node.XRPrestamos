@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 
 //COMPONENTES
-import BtnRounded from '../../Components/Content/BtnRounded.jsx';
-import NuevoCliente from '../../NuevoCliente/index.jsx/index.js';
-import SolicitarDinero from './SolicitarDinero.jsx';
+import BtnRounded from '../../../Components/Content/BtnRounded/index.jsx';
+import NuevoCliente from '../../NuevoCliente/index.jsx';
+import SolicitarDinero from '../SolicitarDinero/index.jsx';
+import Navbar from '../../../Components/Content/Navbar/index.jsx';
 
 // IMAGENES
-import imgCarteraClientes from '../img/CarteraClientes.png';
-import imgCobrar from '../img/Cobrar.png';
-import imgEstadoSolicitud from '../img/EstadoSolicitud.png';
-import imgNuevoCliente from '../img/NuevoUsuario.png';
-import imgSolicitarDinero from '../img/SolicitarDinero.png';
-import Logo from '../img/Logo.png';
-
-// BOOTSTRAP
-import Navbar from '../../Components/Layout/Navbar.jsx';
+import imgCarteraClientes from '../../../img/CarteraClientes.png';
+import imgCobrar from '../../../img/Cobrar.png';
+import imgEstadoSolicitud from '../../../img/EstadoSolicitud.png';
+import imgNuevoCliente from '../../../img/NuevoUsuario.png';
+import imgSolicitarDinero from '../../../img/SolicitarDinero.png';
+import Logo from '../../../img/Logo.png';
 
 // CSS
-import '../css/Dashboard.css';
+import './desing.css';
 
 class Dashboard extends Component {
     constructor(props) {

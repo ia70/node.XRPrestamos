@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import {GetDate} from '../../utils/GetDate.jsx';
+import {GetDate} from '../../utils/GetDate/index.jsx';
 
-import '../css/Navbar.css';
+import './Navbar.css';
 
 //PROPIEDADES ------------------------------
 //setLogo | setTitle | setDate

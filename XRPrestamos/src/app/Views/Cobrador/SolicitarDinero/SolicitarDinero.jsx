@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import Navbar from '../../Components/Layout/Navbar.jsx';
-import { TextSearch } from '../../Components/Form/TextSearch.jsx';
-import { Title } from '../../Components/Content/Title.jsx';
-import { TextNumber } from '../../Components/Form/TextNumber.jsx';
-import {TextMoney} from '../../Components/Form/TextMoney.jsx';
 
-import '../css/SolicitarDinero.css';
-import Logo from '../img/Logo.png';
+//CONMPONENTS --------------------------------------------------
+import Navbar from '../../../Components/Content/Navbar/index.jsx';
+import { TextSearch } from '../../../Components/Form/TextSearch/index.jsx';
+import { Title } from '../../../Components/Content/Title/Title.jsx';
+import { TextMoney } from '../../../Components/Form/TextMoney/index.jsx';
+
+import './desing.css';
+import Logo from '../../../img/Logo.png';
 
 class SolicitarDinero extends Component {
     constructor(props) {
@@ -44,8 +45,8 @@ class SolicitarDinero extends Component {
                     <div className="row" >
                         <Title title="" />
                         <TextSearch />
-                        <TextMoney id="dinero" label="Cantidad" holder="Cantidad" help="" required={true}/>
-                        <TextNumber id="dias" label="Días" holder="Dias" help="" required={true} />
+                        <TextMoney id="dinero" label="Cantidad" holder="Cantidad" help="" required={true} />
+
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import DashboardAdmin from './Views/Admin/Dashboard.jsx';
-import DashboardCobrador from './Views/Cobrador/Dashboard.jsx';
-import Login from './Views/Login.jsx';
+import DashboardAdmin from './Views/Admin/Dashboard/index.jsx';
+import DashboardCobrador from './Views/Cobrador/Dashboard/index.jsx';
+import Login from './Views/Login/index.jsx';
 
 class App extends Component {
     constructor(props){
