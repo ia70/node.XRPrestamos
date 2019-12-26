@@ -1,0 +1,21 @@
+.navextends {
+    color: white;
+}
+
+.navextends_noborder{
+    padding: 0.3em;
+}
+
+.navextends_margin{
+    margin-right: 0.2em;
+}
+
+.navextends_color{
+    color: white;
+    font-size: 1.1em;
+    font-family: Tahoma, Geneva, sans-serif;
+}
+
+.navextends_flex {
+    display: flex;
+}

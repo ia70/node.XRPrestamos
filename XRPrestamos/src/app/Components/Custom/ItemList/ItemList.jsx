@@ -1,11 +1,11 @@
 import React from 'react';
 import { BtnClose } from '../../Form/BtnClose/BtnClose.jsx';
 
-import './StateItem.css';
+import './ItemList.css';
 //PROPIEDADES -----------------------
 // number | stateItem("1","2","3") | alias | name | amountDescription | amount 
 
-export function StateItem(props) {
+export function ItemList(props) {
     let texto = "Sin Asignar";
     switch (props.stateItem) {
         case 1 || "1":

@@ -121,9 +121,9 @@ Partial Class C_Cartera
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Arial", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(254, 1)
+        Me.Button1.Location = New System.Drawing.Point(417, 1)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(230, 58)
+        Me.Button1.Size = New System.Drawing.Size(67, 58)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "Regresar"
         Me.Button1.UseVisualStyleBackColor = True

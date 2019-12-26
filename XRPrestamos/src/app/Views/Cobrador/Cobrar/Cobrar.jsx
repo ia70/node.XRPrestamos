@@ -1,59 +1,37 @@
 import React, { Component } from 'react';
 
 //CONMPONENTS --------------------------------------------------
-import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
-import { TextSearch } from '../../../Components/Form/TextSearch/TextSearch.jsx';
+import NavbarExtends from '../../../Components/Content/NavbarExtends/NavbarExtends.jsx';
+import { ItemList } from '../../../Components/Custom/StateItem/StateItem.jsx';
 import { Title } from '../../../Components/Content/Title/Title.jsx';
-import { TextMoney } from '../../../Components/Form/TextMoney/TextMoney.jsx';
-import { TextNumber } from '../../../Components/Form/TextNumber/TextNumber.jsx';
-import { DateTimePicker } from '../../../Components/Form/DateTimePicker/DateTimePicker.jsx';
-import {BtnSubmit} from '../../../Components/Form/BtnSubmit/BtnSubmit.jsx';
 
-import './SolicitarDinero.css';
 import Logo from '../../../img/Logo.png';
 
 
 class Cobrar extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            personal: {
-                nombre: '',
-                apaterno: '',
-                amaterno: '',
-                curp: '',
-                direccion: '',
-                referencias: '',
-                celular: '',
-                email: '',
-                tipo_casa: '',
-            },
-            negocio: {
-                nombre: '',
-                tipo: '',
-                direccion: '',
-                referencias: '',
-                celular: '',
-                email: '',
-                local_ambulante: false,
-                tipo_local: '',
-            }
-        };
     }
 
     render() {
         return (
             <div>
-                <Navbar setLogo={Logo} setTitle="Solicitar Dinero" />
+                <NavbarExtends setLogo={Logo} setTitle="A recaudar:" />
                 <div className="container">
                     <div className="row" >
-                        <Title title="" />
-                        <TextSearch />
-                        <TextMoney id="dinero" label="Cantidad" holder="Cantidad" help="" required={true} />
-                        <TextNumber id="dias" label="Plazo en dias" holder="Plazo en dias" help="" required={true} />
-                        <DateTimePicker id="fecha" label="Fecha requerida" holder="Plazo en dias" help="" required={true} />
+                        <Title />
+
+                        <ItemList number="1"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="2"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="3"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="4"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="5"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="6"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="7"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="8"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="9"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="10" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
                     </div>
-                    <BtnSubmit label="Guardar" />
                 </div>
             </div>
         );
