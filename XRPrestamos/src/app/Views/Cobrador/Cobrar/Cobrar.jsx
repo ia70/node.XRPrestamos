@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 //CONMPONENTS --------------------------------------------------
 import NavbarExtends from '../../../Components/Content/NavbarExtends/NavbarExtends.jsx';
-import { ItemList } from '../../../Components/Custom/StateItem/StateItem.jsx';
+import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx';
 import { Title } from '../../../Components/Content/Title/Title.jsx';
 
 import Logo from '../../../img/Logo.png';
@@ -27,10 +27,6 @@ class Cobrar extends Component {
                         <ItemList number="4"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
                         <ItemList number="5"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
                         <ItemList number="6"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <ItemList number="7"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <ItemList number="8"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <ItemList number="9"  alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <ItemList number="10" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
                     </div>
                 </div>
             </div>
