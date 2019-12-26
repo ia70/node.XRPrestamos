@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 //CONMPONENTS --------------------------------------------------
 import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
-import { StateItem } from '../../../Components/Custom/StateItem/StateItem.jsx';
+import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx';
 import { Title } from '../../../Components/Content/Title/Title.jsx';
 
 import './EstadoSolicitud.css';
@@ -22,16 +22,16 @@ class EstadoSolicitud extends Component {
                     <div className="row">
 
                         <Title />
-                        <StateItem number="1" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <StateItem number="2" stateItem={3} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <StateItem number="3" stateItem={2} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <StateItem number="4" stateItem={2} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <StateItem number="5" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <StateItem number="6" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <StateItem number="7" stateItem={3} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <StateItem number="8" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <StateItem number="9" stateItem={2} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <StateItem number="10" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="1" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="2" stateItem={3} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="3" stateItem={2} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="4" stateItem={2} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="5" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="6" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="7" stateItem={3} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="8" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="9" stateItem={2} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="10" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
 
                     </div>
                 </div>

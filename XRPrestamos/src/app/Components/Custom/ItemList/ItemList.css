@@ -52,6 +52,19 @@
     background-color: rgb(201, 45, 45);
 }
 
+
+.stateitem_state_amount_description {
+    display: flex;
+    justify-content: right;
+}
+
+.stateitem_state_amount {
+    display: flex;
+    justify-content: left;
+    color: white;
+    background-color: rgb(46, 97, 131);
+}
+
 .stateitem_center {
     display: flex;
     justify-content: center;

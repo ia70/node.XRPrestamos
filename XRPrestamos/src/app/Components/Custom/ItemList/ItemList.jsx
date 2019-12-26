@@ -6,7 +6,9 @@ import './ItemList.css';
 // number | stateItem("1","2","3") | alias | name | amountDescription | amount 
 
 export function ItemList(props) {
-    let texto = "Sin Asignar";
+    let class_br = "";
+    let class_bl = "";
+    let texto = "";
     switch (props.stateItem) {
         case 1 || "1":
             texto = "Aprobado";
@@ -19,11 +21,16 @@ export function ItemList(props) {
             break;
     }
 
+    if (texto == "") {
+        class_br = "stateitem_border_br";
+        class_bl = "stateitem_border_bl";
+    }
+
     return (
         <div className="col-xs-12 col-sm-6 col-lg-6 mb-3 stateitem">
             <div className={"container stateitem_border_br stateitem_border_bl stateitem_border_tr stateitem_border_tl stateitem_state_" + props.stateItem}>
                 <div className="row">
-                    <div className="col-1 stateitem_num stateitem_center stateitem_border_tl">
+                    <div className={"col-1 stateitem_num stateitem_center stateitem_border_tl " + class_bl}>
                         <h1>{props.number}</h1>
                     </div>
                     <div className="col">
@@ -36,18 +43,18 @@ export function ItemList(props) {
                         <div className="row stateitem_name stateitem_center">
                             {props.name}
                         </div>
-                        <div className="row stateitem_amount stateitem_center">
-                            <div className="col">
+                        <div className={"row stateitem_amount stateitem_center " + class_br}>
+                            <div className="col stateitem_state_amount_description">
                                 {props.amountDescription}
                             </div>
-                            <div className="col-3">
+                            <div className={"col-5 stateitem_state_amount "  + class_br}>
                                 {"$" + props.amount}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="row stateitem_center stateitem_border_br stateitem_border_bl">
-                     {texto}
+                    {texto}
                 </div>
             </div>
         </div>
