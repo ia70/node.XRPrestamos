@@ -5,9 +5,9 @@ import { TextBox } from '../../Components/Form/TextBox/TextBox.jsx';
 import { TextPhoneNumber } from '../../Components/Form/TextPhoneNumber/TextPhoneNumber.jsx';
 import { Option } from '../../Components/Form/Option/Option.jsx';
 import { TextEmail } from '../../Components/Form/TextEmail/TextEmail.jsx';
+import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
 
 import Logo from '../../img/Logo.png';
-import './NuevoCliente.css';
 
 class NuevoCliente extends Component {
     constructor(props) {
@@ -81,9 +81,10 @@ class NuevoCliente extends Component {
                         </div>
 
                     </div>
-                    <div className="row nuevocliente_guardar">
-                        <button className="btn btn-success col-xs-12 col-sm-12 col-lg-3" >Guardar</button>
+                    <div className="row">
+                        <BtnSubmit label="Guardar" />
                     </div>
+
 
                 </div>
             </div>
