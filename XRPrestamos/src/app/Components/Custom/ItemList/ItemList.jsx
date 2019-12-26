@@ -2,13 +2,25 @@ import React from 'react';
 import { BtnClose } from '../../Form/BtnClose/BtnClose.jsx';
 
 import './ItemList.css';
-//PROPIEDADES -----------------------
-// number | stateItem("1","2","3") | alias | name | amountDescription | amount 
-
+/*PROPIEDADES -----------------------------------------------------
+    1- numbre               Número de lista
+    2- stateItem            Estado (1 Aprobado, 2 En espera, 3 Rechazado )
+    3- alias                Alias del cliente
+    4- name                 Nombre completo del cliente
+    5- amountDescription    Descripción del monto
+    6- amount               Monto $
+    7- close                Mostrar boton cerrar (true, false)
+*/
 export function ItemList(props) {
+    let btncerrar = <BtnClose label="X" />;
     let class_br = "";
     let class_bl = "";
     let texto = "";
+
+    if(!props.close){
+        btncerrar = "";
+    }
+
     switch (props.stateItem) {
         case 1 || "1":
             texto = "Aprobado";
@@ -30,24 +42,24 @@ export function ItemList(props) {
         <div className="col-xs-12 col-sm-6 col-lg-6 mb-3 stateitem">
             <div className={"container stateitem_border_br stateitem_border_bl stateitem_border_tr stateitem_border_tl stateitem_state_" + props.stateItem}>
                 <div className="row">
-                    <div className={"col-1 stateitem_num stateitem_center stateitem_border_tl " + class_bl}>
-                        <h1>{props.number}</h1>
+                    <div className={"col-auto stateitem_num stateitem_center stateitem_border_tl " + class_bl}>
+                        <h2>{props.number}</h2>
                     </div>
                     <div className="col">
                         <div className="row stateitem_alias stateitem_center stateitem_border_tr">
                             <div className="col stateitem_center">
                                 {props.alias}
                             </div>
-                            <BtnClose label="X" />
+                            {btncerrar}
                         </div>
                         <div className="row stateitem_name stateitem_center">
                             {props.name}
                         </div>
-                        <div className={"row stateitem_amount stateitem_center " + class_br}>
+                        <div className={"row stateitem_center " + class_br}>
                             <div className="col stateitem_state_amount_description">
                                 {props.amountDescription}
                             </div>
-                            <div className={"col-5 stateitem_state_amount "  + class_br}>
+                            <div className={"col-auto stateitem_state_amount "  + class_br}>
                                 {"$" + props.amount}
                             </div>
                         </div>

@@ -22,16 +22,16 @@ class EstadoSolicitud extends Component {
                     <div className="row">
 
                         <Title />
-                        <ItemList number="1" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <ItemList number="2" stateItem={3} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <ItemList number="3" stateItem={2} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <ItemList number="4" stateItem={2} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <ItemList number="5" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <ItemList number="6" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <ItemList number="7" stateItem={3} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <ItemList number="8" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <ItemList number="9" stateItem={2} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
-                        <ItemList number="10" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" />
+                        <ItemList number="1" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:"  close={true}/>
+                        <ItemList number="2" stateItem={3} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:"  close={true}/>
+                        <ItemList number="3" stateItem={2} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:"  close={true}/>
+                        <ItemList number="4" stateItem={2} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:"  close={true}/>
+                        <ItemList number="5" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:"  close={true}/>
+                        <ItemList number="6" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:"  close={true}/>
+                        <ItemList number="7" stateItem={3} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:"  close={true}/>
+                        <ItemList number="8" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:"  close={true}/>
+                        <ItemList number="9" stateItem={2} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:"  close={true}/>
+                        <ItemList number="10" stateItem={1} alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" close={true} />
 
                     </div>
                 </div>
