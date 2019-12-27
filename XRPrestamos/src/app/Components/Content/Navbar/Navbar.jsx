@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import {Btn} from '../../Form/Btn/Btn.jsx';
 import {GetDate} from '../../utils/GetDate/GetDate.jsx';
 
 import './Navbar.css';
@@ -29,7 +30,7 @@ class Navbar extends Component {
                 </div>
                 <div className="nav_color align-middle">
                         {Fecha}
-                        <button className="btn btn-warning" >X</button>
+                        <Btn />
                 </div>
             </nav>
         );

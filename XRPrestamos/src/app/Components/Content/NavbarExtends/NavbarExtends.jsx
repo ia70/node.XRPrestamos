@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { GetDate } from '../../utils/GetDate/GetDate.jsx';
+import {Btn} from '../../Form/Btn/Btn.jsx';
 
 import './NavbarExtends.css';
 
@@ -15,28 +15,22 @@ class NavbarExtends extends Component {
     }
 
     render() {
-        let Fecha = "";
-
-        if (this.props.setDate) {
-            Fecha = GetDate();
-        }
-
         return (
-            <nav className="navbar navbar-dark bg-dark navextends_noborder navextends" >
-                <div className="container-fluid">
-                        <div className="col">
-                            <div className="row">
-                                A
-                            </div>
-                            <div className="row">
-                                B
-                            </div>
-                        </div>
-                        <div className="col-1">
+            <div className="container-fluid bg-dark text-white">
+                <div className="row">
+                    <div className="col">
+                        <div className="col-12">
                             A
                         </div>
+                        <div className="col-12">
+                            B
+                        </div>
+                    </div>
+                    <div className="col-auto navbarextends_button p-0 m-1">
+                        <Btn />
+                    </div>
                 </div>
-            </nav>
+            </div>
         );
     }
 }
