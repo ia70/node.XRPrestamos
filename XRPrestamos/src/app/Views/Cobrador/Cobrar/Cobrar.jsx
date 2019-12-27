@@ -19,7 +19,7 @@ class Cobrar extends Component {
     render() {
         return (
             <div>
-                <NavbarExtends setLogo={Logo} setTitle="A recaudar:" />
+                <NavbarExtends title="Cobrar" label1="A recaudar" label2="$90,350" />
                 <div className="container-fluid">
                     <div className="row Cobrar">
                         <Title />
