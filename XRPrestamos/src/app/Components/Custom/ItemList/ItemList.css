@@ -40,12 +40,17 @@
 }
 
 .stateitem_state_2 {
-    background-color: rgb(252, 164, 0);
+    background-color:  #e39800 ;
 }
 
 .stateitem_state_3 {
     background-color: rgb(201, 45, 45);
 }
+
+.stateitem_state_4 {
+    background-color:   #0071c5 ;
+}
+
 
 
 .stateitem_state_amount_description {

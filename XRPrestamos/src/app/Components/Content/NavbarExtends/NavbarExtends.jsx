@@ -18,7 +18,7 @@ class NavbarExtends extends Component {
         return (
             <div className="container-fluid bg-dark text-white">
                 <div className="row">
-                    <div className="col">
+                    <div className="col ml-n3">
                         <div className="col-12">
                             A
                         </div>

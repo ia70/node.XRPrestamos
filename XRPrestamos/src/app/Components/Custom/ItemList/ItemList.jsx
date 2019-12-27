@@ -5,11 +5,12 @@ import './ItemList.css';
 /*PROPIEDADES -----------------------------------------------------
     1- numbre               Número de lista
     2- stateItem            Estado (1 Aprobado, 2 En espera, 3 Rechazado )
-    3- alias                Alias del cliente
-    4- name                 Nombre completo del cliente
-    5- amountDescription    Descripción del monto
-    6- amount               Monto $
-    7- close                Mostrar boton cerrar (true, false)
+    3- stateDescription     Texto de descripcion
+    4- alias                Alias del cliente
+    5- name                 Nombre completo del cliente
+    6- amountDescription    Descripción del monto
+    7- amount               Monto $
+    8- close                Mostrar boton cerrar (true, false)
 */
 export function ItemList(props) {
     let btncerrar = <BtnClose label="X" />;
@@ -17,20 +18,27 @@ export function ItemList(props) {
     let class_bl = "";
     let texto = "";
 
-    if(!props.close){
+    if (!props.close) {
         btncerrar = "";
     }
 
-    switch (props.stateItem) {
-        case 1 || "1":
-            texto = "Aprobado";
-            break;
-        case 2 || "2":
-            texto = "En espera";
-            break;
-        case 3 || "3":
-            texto = "Rechazado";
-            break;
+    if (props.stateDescription == "") {
+        switch (props.stateItem) {
+            case 1 || "1":
+                texto = "Aprobado";
+                break;
+            case 2 || "2":
+                texto = "En espera";
+                break;
+            case 3 || "3":
+                texto = "Rechazado";
+                break;
+            case 4 || "4":
+                texto = "Pendiente";
+                break;
+        }
+    } else {
+        texto = props.stateDescription;
     }
 
     if (texto == "") {
@@ -39,8 +47,8 @@ export function ItemList(props) {
     }
 
     return (
-        <div className="col-xs-12 col-sm-6 col-lg-6 mb-3 stateitem">
-            <div className={"container stateitem_border_br stateitem_border_bl stateitem_border_tr stateitem_border_tl stateitem_state_" + props.stateItem}>
+        <div className="col-xs-12 col-sm-6 col-lg-4 col-xl-3 mb-3 stateitem">
+            <div className={"container-fluid stateitem_border_br stateitem_border_bl stateitem_border_tr stateitem_border_tl stateitem_state_" + props.stateItem}>
                 <div className="row">
                     <div className={"col-auto stateitem_num stateitem_center stateitem_border_tl " + class_bl}>
                         <h2>{props.number}</h2>
@@ -59,7 +67,7 @@ export function ItemList(props) {
                             <div className="col stateitem_state_amount_description">
                                 {props.amountDescription}
                             </div>
-                            <div className={"col-auto stateitem_state_amount "  + class_br}>
+                            <div className={"col-auto stateitem_state_amount " + class_br}>
                                 {"$" + props.amount}
                             </div>
                         </div>
