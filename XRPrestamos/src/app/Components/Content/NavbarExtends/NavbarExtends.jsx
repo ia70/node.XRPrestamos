@@ -5,7 +5,7 @@ import { Btn } from '../../Form/Btn/Btn.jsx';
 import './NavbarExtends.css';
 
 //PROPIEDADES ------------------------------
-//setLogo | setTitle | setDate
+// label1, label2, title
 
 class NavbarExtends extends Component {
 

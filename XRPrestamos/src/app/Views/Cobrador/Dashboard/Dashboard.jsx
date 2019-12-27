@@ -7,6 +7,7 @@ import SolicitarDinero from '../SolicitarDinero/SolicitarDinero.jsx';
 import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
 import EstadoSolicitud from '../EstadoSolicitud/EstadoSolicitud.jsx';
 import Cobrar from '../Cobrar/Cobrar.jsx';
+import CarteraClientes from '../CarteraClientes/CarteraClientes.jsx';
 
 // IMAGENES
 import imgCarteraClientes from '../../../img/CarteraClientes.png';
@@ -29,7 +30,7 @@ class Dashboard extends Component {
             userType: 0,                //Tipo de usuario 0- cobrador; 1- Administrador
             userName: 'Daniel',               //Nombre del usuario
             userActive: false,          //Especifica si el usuario está activo
-            guiOption: 2,               //Especifica la interfaz donde se encuentra
+            guiOption: 1,               //Especifica la interfaz donde se encuentra
             shortDate: '',              //Fecha corta
         };
 
@@ -60,7 +61,9 @@ class Dashboard extends Component {
                     </div>
                 );
             case 1:
-                return (null);
+                return (
+                    <CarteraClientes />
+                );
             case 2:
                 return (
                     <Cobrar />
