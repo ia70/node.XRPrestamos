@@ -17,6 +17,11 @@ class Navbar extends Component {
 
     render() {
         let Fecha = "";
+        let Boton = <Btn />;
+
+        if(this.props.setButton != null){
+            Boton="";
+        }
 
         if(this.props.setDate){
             Fecha = GetDate();
@@ -30,7 +35,7 @@ class Navbar extends Component {
                 </div>
                 <div className="nav_color align-middle">
                         {Fecha}
-                        <Btn />
+                        {Boton}
                 </div>
             </nav>
         );

@@ -28,7 +28,7 @@ class Dashboard extends Component {
             loggedIn: false,            //Especifica si el usuario está logeado.
             userId: '',                 //Id de usuario
             userType: 0,                //Tipo de usuario 0- cobrador; 1- Administrador
-            userName: 'Daniel',               //Nombre del usuario
+            userName: 'Chaparro',               //Nombre del usuario
             userActive: false,          //Especifica si el usuario está activo
             guiOption: 0,               //Especifica la interfaz donde se encuentra
             shortDate: '',              //Fecha corta
@@ -51,7 +51,7 @@ class Dashboard extends Component {
             case 0:
                 return (
                     <div>
-                        <Navbar setLogo={Logo} setTitle={this.state.userName} setDate={true} />
+                        <Navbar setLogo={Logo} setTitle={this.state.userName} setDate={true} setButton="false" />
 
                         <div className="container-fluid">
                             <div className="row">
