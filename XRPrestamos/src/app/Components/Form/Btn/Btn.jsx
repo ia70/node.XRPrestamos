@@ -5,6 +5,6 @@ import './Btn.css';
 // label
 export function Btn(props) {
     return (
-        <button className="btn btn-warning" >{props.label || "A"} </button>
+        <button className="btn btn-warning" >{props.label || "<"} </button>
     );
 }
