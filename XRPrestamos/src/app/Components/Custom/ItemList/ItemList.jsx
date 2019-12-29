@@ -22,7 +22,7 @@ export function ItemList(props) {
         btncerrar = "";
     }
 
-    if (props.stateDescription == "") {
+    if (props.stateDescription == "" || props.stateDescription == null) {
         switch (props.stateItem) {
             case 1 || "1":
                 texto = "Aprobado";

@@ -30,7 +30,7 @@ class Dashboard extends Component {
             userType: 0,                //Tipo de usuario 0- cobrador; 1- Administrador
             userName: 'Daniel',               //Nombre del usuario
             userActive: false,          //Especifica si el usuario está activo
-            guiOption: 1,               //Especifica la interfaz donde se encuentra
+            guiOption: 0,               //Especifica la interfaz donde se encuentra
             shortDate: '',              //Fecha corta
         };
 
@@ -53,11 +53,18 @@ class Dashboard extends Component {
                     <div>
                         <Navbar setLogo={Logo} setTitle={this.state.userName} setDate={true} />
 
-                        <BtnRounded id='1' src={imgCarteraClientes} event={this.handleClick} texto="Cartera de clientes" />
-                        <BtnRounded id='2' src={imgCobrar} event={this.handleClick} texto="Cobrar" />
-                        <BtnRounded id='3' src={imgSolicitarDinero} event={this.handleClick} texto="Solicitar dinero" />
-                        <BtnRounded id='4' src={imgEstadoSolicitud} event={this.handleClick} texto="Estado de solicitudes" />
-                        <BtnRounded id='5' src={imgNuevoCliente} event={this.handleClick} texto="Nuevo cliente" />
+                        <div className="container-fluid">
+                            <div className="row">
+                                <BtnRounded id='1' src={imgCarteraClientes} event={this.handleClick} texto="Cartera de clientes" />
+                                <BtnRounded id='2' src={imgCobrar} event={this.handleClick} texto="Cobrar" />
+                                <BtnRounded id='3' src={imgSolicitarDinero} event={this.handleClick} texto="Solicitar dinero" />
+                                <BtnRounded id='4' src={imgEstadoSolicitud} event={this.handleClick} texto="Estado de solicitudes" />
+                                <BtnRounded id='5' src={imgNuevoCliente} event={this.handleClick} texto="Nuevo cliente" />
+                            </div>
+
+                        </div>
+
+
                     </div>
                 );
             case 1:
