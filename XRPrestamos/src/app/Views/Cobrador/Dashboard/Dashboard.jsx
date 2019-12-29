@@ -30,7 +30,7 @@ class Dashboard extends Component {
             userType: 0,                //Tipo de usuario 0- cobrador; 1- Administrador
             userName: 'Chaparro',               //Nombre del usuario
             userActive: false,          //Especifica si el usuario está activo
-            guiOption: 0,               //Especifica la interfaz donde se encuentra
+            guiOption: 1,               //Especifica la interfaz donde se encuentra
             shortDate: '',              //Fecha corta
         };
 
