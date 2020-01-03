@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
   devServer: {
-    host: '192.168.1.50'
+    host: '192.168.184.82'
   },
   entry: './src/app/index.js',
   output: {

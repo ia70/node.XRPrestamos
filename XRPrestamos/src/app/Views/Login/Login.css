@@ -1,0 +1,17 @@
+
+
+.login {
+    background-color: darkgray;
+
+    justify-content: center;
+    align-items: center;
+    width: 20em;
+}
+
+.login_title {
+    background-color: burlywood;
+}
+
+.login_content {
+    background-color: cadetblue;
+}
