@@ -1,22 +1,38 @@
 import React from 'react';
-//PROPIEDADES -----------------------
-// required | id | label | holder | help
+import './TextPassword.css';
+/* -->  PROPIEDADES  VERIFICADO --------------------------------------------
+
+    1- id           > Identificador único del campo
+    2- label        > Etiqueta que aparecerá sobre el campo
+    3- holder       > Texto que aparecerá dentro del campo
+    4- help         > Texto de ayuda que aparecerá debajo del campo
+    5- required     > Especifica si el campo es requerido (true | false)
+    6- col          > Especifica el tamaño del campo estilo Bootstrap (1 - 12)
+    7- cls          > Agregar clases Bootstrap ("clas1 class2 etc")
+    8- minlength    > Indica el número minimo de caracteres del campo (número)
+    9- maxlength    > Indica el número maximo de caracteres del campo (número)
+ 
+    ==>  id="" label="" holder="" help="" required={true} col={null} cls=""
+
+    ------------------------------------------------------------------------
+    NOTAS: Preferentemente el campo ó conjunto de campos debe ser contenido dentro de un "div" con className: "row"
+*/
 
 export function TextBox(props) {
-    if(props.required){
+    if (props.required) {
         return (
-            <div className="form-group col-xs-12 col-sm-4 col-lg-3">
-                <label htmlFor={props.id}>{props.label}</label>
-                <input type="text" className="form-control" id={props.id} aria-describedby="textHelp" placeholder={props.holder} required />
-                    <small id="textHelp" className="form-text text-muted">{props.help}</small>
+            <div className={"form-group" + (" col-" + props.col || " col-xs-12 col-sm-4 col-lg-3") + (" " + props.cls || "")}>
+                <label htmlFor={props.id || "01"}>{props.label || ""}</label>
+                <input type="text" className="form-control" id={props.id || "01"} aria-describedby="textHelp" placeholder={props.holder || ""} minLength={props.minlength || 1} maxLength={props.maxlength || 20} required />
+                <small id="textHelp" className="form-text text-muted">{props.help || ""}</small>
             </div>
         );
-    }else{
+    } else {
         return (
-            <div className="form-group col-xs-12 col-sm-4 col-lg-3">
-                <label htmlFor={props.id}>{props.label}</label>
-                <input type="text" className="form-control" id={props.id} aria-describedby="textHelp" placeholder={props.holder} />
-                    <small id="textHelp" className="form-text text-muted">{props.help}</small>
+            <div className={"form-group" + (" col-" + props.col || " col-xs-12 col-sm-4 col-lg-3") + (" " + props.cls || "")}>
+                <label htmlFor={props.id || "01"}>{props.label || ""}</label>
+                <input type="text" className="form-control" id={props.id || "01"} aria-describedby="textHelp" placeholder={props.holder || ""} minLength={props.minlength || 1} maxLength={props.maxlength || 20} />
+                <small id="textHelp" className="form-text text-muted">{props.help || ""}</small>
             </div>
         );
     }
