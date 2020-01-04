@@ -22,7 +22,7 @@ class NavbarExtends extends Component {
                         <div className="col align-items-center p-0">
                             <h6 className="navbarextends_label1 m-0 col-10 col-sm-4 col-md-3 col-lg-2">{this.props.label1}</h6>
                         </div>
-                        <div class="w-100"></div>
+                        <div className="w-100"></div>
                         <div className="col align-items-center p-0">
                             <h6 className="navbarextends_label2 m-0 col-10 col-sm-4 col-md-3 col-lg-2">{this.props.label2}</h6>
                         </div>
