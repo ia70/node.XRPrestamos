@@ -4,6 +4,7 @@ import React from 'react';
 import { Btn } from '../../Form/Btn/Btn.jsx';
 import { ItemPago } from '../ItemPago/ItemPago.jsx';
 import { ItemPagoTitulo } from '../ItemPago/ItemPagoTitulo.jsx';
+import { TextMoney } from '../../Form/TextMoney/TextMoney.jsx';
 
 
 import './ModalCollect.css';
@@ -19,12 +20,20 @@ export function ModalCollect(props) {
                     <div className="modal-body p-0 d-flex flex-column">
 
 
+                        <div className="d-flex row modalcollect_alias m-0">
+                            <div className="col">
+                                <h2 className="tm1" >{props.alias || ""}</h2>
+                            </div>
 
-                        <div className="row modalcollect_alias m-0 align-items-center">
-                            <h3>{props.alias || ""}</h3>
+                            <div className="col-auto">
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                         </div>
+
                         <div className="row modalcollect_name m-0 align-items-center">
-                            <h4>{props.name}</h4>
+                            <h4 className="tm2">{props.name}</h4>
                         </div>
 
                         <ItemPagoTitulo />
@@ -35,13 +44,24 @@ export function ModalCollect(props) {
                         <ItemPago concepto="Prestamo 24.05.2019" monto="$4,815.00" />
 
                         <div className="row modalcollect_monto m-0 py-0 my-2">
-                            <h3>Pago del día: ${props.amount}</h3>
+                            Pago del día: ${props.amount}
                         </div>
 
                         <div className="row modalcollect_body m-0 p-1">
 
-                            <div className="col">
-                                <div className="form-check bg-success text-white py-1 redondear">
+                            <div class="input-group bg-warning mx-3 my-1 p-1">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <input id="d1" type="radio" name="exampleRadios" aria-label="Radio button for following text input" defaultChecked={true} />
+                                    </div>
+                                </div>
+                                <input type="number" class="form-control" min={0} placeholder="Abono" aria-label="Text input with radio button" />
+                            </div>
+
+                            <div className="w-100"></div>
+
+                            <div className="col my-3">
+                                <div className="form-check bg-success text-white py-2 redondear">
                                     <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
                                     <label className="form-check-label" htmlFor="exampleRadios2">
                                         Pagó completo
@@ -49,27 +69,17 @@ export function ModalCollect(props) {
                                 </div>
                             </div>
                             <div className="col">
-                                <div className="form-check bg-danger text-white py-1 redondear">
-                                    <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
-                                    <label className="form-check-label" htmlFor="exampleRadios1">
+                                <div className="form-check bg-danger text-white py-2 redondear">
+                                    <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option1" />
+                                    <label className="form-check-label" htmlFor="exampleRadios3">
                                         No pagó
                                     </label>
                                 </div>
                             </div>
-
-
-                            <div className="w-100"></div>
-                            <div className="col">
-                                d
-                            </div>
                         </div>
-
-
-
                     </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary " data-dismiss="modal">Cerrar</button>
-                        <button type="button" className="btn btn-primary ">Guardar</button>
+                    <div className="modal-footer px-3 mx-0">
+                        <button type="button" className="btn btn-success col-12 text-white">Guardar</button>
                     </div>
                 </div>
             </div>
