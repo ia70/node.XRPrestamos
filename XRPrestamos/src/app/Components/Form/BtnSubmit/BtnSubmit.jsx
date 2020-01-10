@@ -8,6 +8,6 @@ import './BtnSubmit.css';
 */
 export function BtnSubmit(props) {
     return (
-            <button id={props.id || "c01"} type="submit" className="btn btn-success col-xs-12 col-sm-12 col-lg-3" >{props.label || "Guardar"}</button>
+            <button type="button" id={props.id || "c01"} type="submit" className="btn btn-success col-xs-12 col-sm-12 col-lg-3" >{props.label || "Guardar"}</button>
     );
 }

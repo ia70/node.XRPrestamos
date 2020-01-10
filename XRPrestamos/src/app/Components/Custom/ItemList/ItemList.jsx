@@ -1,5 +1,6 @@
 import React from 'react';
 import { BtnClose } from '../../Form/BtnClose/BtnClose.jsx';
+import { ModalCollect } from '../ModalCollect/ModalCollect.jsx';
 
 import './ItemList.css';
 /*PROPIEDADES -----------------------------------------------------
@@ -47,36 +48,41 @@ export function ItemList(props) {
     }
 
     return (
-        <div className="col-xs-12 col-sm-6 col-lg-4 col-xl-3 mb-3 stateitem">
-            <div className={"container-fluid stateitem_border_br stateitem_border_bl stateitem_border_tr stateitem_border_tl stateitem_state_" + props.stateItem}>
-                <div className="row">
-                    <div className={"col-xs-12 col-auto stateitem_num stateitem_center stateitem_border_tl " + class_bl}>
-                        <h2>{props.number}</h2>
+        <div className="col-xs-12 col-sm-6 col-lg-4 col-xl-3 mb-1">
+            <button type="button" className="btn col-12" data-toggle="modal" data-target={"#item" + props.number}>
+                <div className={"container-fluid stateitem_border_br stateitem_border_bl stateitem_border_tr stateitem_border_tl stateitem_state_" + props.stateItem}>
+                    <div className="row">
+                        <div className={"col-xs-12 col-auto stateitem_num stateitem_center stateitem_border_tl " + class_bl}>
+                            <h2>{props.number}</h2>
+                        </div>
+                        <div className="col col-xs-12">
+                            <div className="row stateitem_alias stateitem_center stateitem_border_tr">
+                                <div className="col col-xs-12 stateitem_center">
+                                    {props.alias}
+                                </div>
+                                {btncerrar}
+                            </div>
+                            <div className="row stateitem stateitem_name stateitem_center">
+                                {props.name}
+                            </div>
+                            <div className={"row align-self-stretch stateitem_center " + class_br}>
+                                <div className="col col-xs-12 stateitem_state_amount_description">
+                                    {props.amountDescription}
+                                </div>
+                                <div className={"col-auto col-xs-12 align-self-stretch align-items-center stateitem_state_amount " + class_br}>
+                                    {"$" + props.amount}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col col-xs-12">
-                        <div className="row stateitem_alias stateitem_center stateitem_border_tr">
-                            <div className="col col-xs-12 stateitem_center">
-                                {props.alias}
-                            </div>
-                            {btncerrar}
-                        </div>
-                        <div className="row stateitem_name stateitem_center">
-                            {props.name}
-                        </div>
-                        <div className={"row align-self-stretch stateitem_center " + class_br}>
-                            <div className="col col-xs-12 stateitem_state_amount_description">
-                                {props.amountDescription}
-                            </div>
-                            <div className={"col-auto col-xs-12 align-self-stretch align-items-center stateitem_state_amount " + class_br}>
-                                {"$" + props.amount}
-                            </div>
-                        </div>
+                    <div className="row stateitem stateitem_center stateitem_border_br stateitem_border_bl">
+                        {texto}
                     </div>
                 </div>
-                <div className="row stateitem_center stateitem_border_br stateitem_border_bl">
-                    {texto}
-                </div>
-            </div>
+            </button>
+
+            <ModalCollect id={"item" + props.number} alias={props.alias} name={props.name} amount={props.amount} />
+
         </div>
     );
 }

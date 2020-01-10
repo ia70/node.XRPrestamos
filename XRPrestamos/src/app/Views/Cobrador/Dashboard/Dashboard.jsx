@@ -10,7 +10,7 @@ import Cobrar from '../Cobrar/Cobrar.jsx';
 import CarteraClientes from '../CarteraClientes/CarteraClientes.jsx';
 
 
-import Login from '../../Login/Login.jsx';
+import ModalCollect from '../../../Components/Custom/ModalCollect/ModalCollect.jsx';
 
 
 // IMAGENES
@@ -32,9 +32,9 @@ class Dashboard extends Component {
             loggedIn: false,            //Especifica si el usuario está logeado.
             userId: '',                 //Id de usuario
             userType: 0,                //Tipo de usuario 0- cobrador; 1- Administrador
-            userName: 'Chaparro',               //Nombre del usuario
+            userName: 'Chaparro',       //Nombre del usuario
             userActive: false,          //Especifica si el usuario está activo
-            guiOption: 5,               //Especifica la interfaz donde se encuentra
+            guiOption: 2,               //Especifica la interfaz donde se encuentra
             shortDate: '',              //Fecha corta
         };
 
@@ -93,7 +93,7 @@ class Dashboard extends Component {
                 );
             default:
                 return (
-                    <Login/>
+                    <ModalCollect/>
                 );
         }
     }

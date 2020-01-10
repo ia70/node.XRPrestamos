@@ -7,6 +7,8 @@ import { Title } from '../../../Components/Content/Title/Title.jsx';
 import { TextSearch } from '../../../Components/Form/TextSearch/TextSearch.jsx';
 import { ComboBox } from '../../../Components/Form/ComboBox/ComboBox.jsx';
 
+import ModalCollect from '../../../Components/Custom/ModalCollect/ModalCollect.jsx';
+
 import Logo from '../../../img/Logo.png';
 import './Cobrar.css';
 
@@ -32,7 +34,7 @@ class Cobrar extends Component {
                     <div className="row" >
 
                         <ItemList number="1" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Monto solicitado:" stateItem={1} stateDescription="Pagó completo" />
-                        <ItemList number="2" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={2} stateDescription="Abonó"/>
+                        <ItemList number="2" alias="Fruteria El Eden" name="Marcos Jimenez Lopez" amount="1,500" amountDescription="Monto solicitado:" stateItem={2} stateDescription="Abonó"/>
                         <ItemList number="3" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={3} stateDescription="No pagó"/>
                         <ItemList number="4" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={4} stateDescription="Por visitar"/>
                         <ItemList number="5" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={1} stateDescription="Pagó completo"/>
