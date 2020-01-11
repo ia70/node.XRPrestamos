@@ -18,7 +18,7 @@ class EstadoSolicitud extends Component {
         return (
             <div>
                 <Navbar setLogo={Logo} setTitle="Estado de solicitudes" />
-                <div className="container">
+                <div className="container-fluid">
                     <div className="row">
 
                         <Title />

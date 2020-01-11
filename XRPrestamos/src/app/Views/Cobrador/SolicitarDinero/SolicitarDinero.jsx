@@ -43,9 +43,9 @@ class SolicitarDinero extends Component {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <Navbar setLogo={Logo} setTitle="Solicitar Dinero" />
-                <div className="container">
+                <div className="container-fluid">
                     <div className="row" >
                         <Title title="" />
                         <TextSearch />
@@ -55,7 +55,7 @@ class SolicitarDinero extends Component {
                     </div>
                     <BtnSubmit label="Guardar" />
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

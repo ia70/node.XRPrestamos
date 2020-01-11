@@ -41,7 +41,7 @@ class NuevoCliente extends Component {
         return (
             <div>
                 <Navbar setLogo={Logo} setTitle="Nuevo Cliente" />
-                <div className="container">
+                <div className="container-fluid">
                     <div className="row" >
                         <Title title="DATOS PERSONALES" />
 
@@ -82,7 +82,9 @@ class NuevoCliente extends Component {
 
                     </div>
                     <div className="row">
-                        <BtnSubmit label="Guardar" />
+                        <div className="btn-group form-group col-12">
+                            <BtnSubmit label="Guardar" />
+                        </div>
                     </div>
 
 

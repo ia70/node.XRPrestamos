@@ -1,35 +1,36 @@
-import React, { Component } from 'react';
-import DashboardAdmin from './Views/Admin/Dashboard/Dashboard_a.jsx';
-import DashboardCobrador from './Views/Cobrador/Dashboard/Dashboard.jsx';
+// DEPENDENCIES -------------------------------------------------------
+import React from "react";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+
+// COMPONENTS ---------------------------------------------------------
+import Dashboard from './Views/Cobrador/Dashboard/Dashboard.jsx';
+import CarteraClientes from './Views/Cobrador/CarteraClientes/CarteraClientes.jsx';
+import Cobrar from './Views/Cobrador/Cobrar/Cobrar.jsx';
+import EstadoSolicitud from './Views/Cobrador/EstadoSolicitud/EstadoSolicitud.jsx';
+import SolicitarDinero from './Views/Cobrador/SolicitarDinero/SolicitarDinero.jsx';
+import NuevoCliente from './Views/NuevoCliente/NuevoCliente.jsx';
 import Login from './Views/Login/Login.jsx';
 
-class App extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            loggedIn: true,             //Especifica si el usuario está logeado.
-            userId: '001',              //Id de usuario
-            userType: 0,                //Tipo de usuario 0- cobrador; 1- Administrador
-            userName: 'Daniel Pérez',   //Nombre del usuario
-            userActive: false,          //Especifica si el usuario está activo
-            guiOption: 0,               //Especifica la interfaz donde se encuentra
-            shortDate: ''               //Fecha corta
-        };
-    }
 
 
-    render() {
 
-        if(this.state.loggedIn){
-            if(this.state.userType == 1){
-                return( <DashboardAdmin state={this.state} /> );
-            }else{
-                return( <DashboardCobrador state={this.state} /> );
-            }
-        }else{
-            return( <Login /> );
-        }
-    }
+
+export default function App() {
+    return (
+        <Router>
+                <Switch>
+                    <Route path="/carteraclientes" component={CarteraClientes} />
+                    <Route path="/cobrar" component={Cobrar} />
+                    <Route path="/estadosolicitud" component={EstadoSolicitud} />
+                    <Route path="/solicitardinero" component={SolicitarDinero} />
+                    <Route path="/nuevocliente" component={NuevoCliente} />
+                    <Route path={["/", "/Dashboard"]} component={Dashboard} />
+                </Switch>
+        </Router>
+    );
 }
-
-export default App;

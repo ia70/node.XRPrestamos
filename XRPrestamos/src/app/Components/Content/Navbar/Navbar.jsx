@@ -17,7 +17,7 @@ class Navbar extends Component {
 
     render() {
         let Fecha = "";
-        let Boton = <Btn />;
+        let Boton = <Btn url="/"/>;
 
         if(this.props.setButton != null){
             Boton="";

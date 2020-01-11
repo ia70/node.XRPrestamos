@@ -49,20 +49,20 @@ export function ModalCollect(props) {
 
                         <div className="row modalcollect_body m-0 p-1">
 
-                            <div class="input-group bg-warning mx-3 my-1 p-1">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <input id="d1" type="radio" name="exampleRadios" aria-label="Radio button for following text input" defaultChecked={true} />
+                            <div className="input-group bg-warning mx-3 my-1 p-1">
+                                <div className="input-group-prepend">
+                                    <div className="input-group-text">
+                                        <input id="d1" type="radio" name="exampleRadios" aria-label="Radio button for following text input"/>
                                     </div>
                                 </div>
-                                <input type="number" class="form-control" min={0} placeholder="Abono" aria-label="Text input with radio button" />
+                                <input type="number" className="form-control" min={0} placeholder="Abono" aria-label="Text input with radio button" />
                             </div>
 
                             <div className="w-100"></div>
 
                             <div className="col my-3">
                                 <div className="form-check bg-success text-white py-2 redondear">
-                                    <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
+                                    <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="1" />
                                     <label className="form-check-label" htmlFor="exampleRadios2">
                                         Pagó completo
                                     </label>
@@ -70,7 +70,7 @@ export function ModalCollect(props) {
                             </div>
                             <div className="col">
                                 <div className="form-check bg-danger text-white py-2 redondear">
-                                    <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option1" />
+                                    <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="2" />
                                     <label className="form-check-label" htmlFor="exampleRadios3">
                                         No pagó
                                     </label>
@@ -86,27 +86,3 @@ export function ModalCollect(props) {
         </div>
     );
 }
-
-/*export function ModalCollect(props) {
-    return (
-        <div className="modal fade" id={props.id} data-backdrop="static" tabIndex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div className="modal-dialog" role="document">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title modalcollect" id="staticBackdropLabel">Alias</h5>
-                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div className="modal-body">
-                        <p>Contenido 2</p>
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary modalcollect" data-dismiss="modal">Cerrar</button>
-                        <button type="button" className="btn btn-primary modalcollect">Guardar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}*/

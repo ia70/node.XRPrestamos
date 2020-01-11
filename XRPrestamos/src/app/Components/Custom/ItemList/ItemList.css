@@ -77,3 +77,8 @@
 .color {
     background-color: black;
 }
+
+.main:hover{
+    border-color: rgb(0, 225, 255);
+    border-style: groove;
+}

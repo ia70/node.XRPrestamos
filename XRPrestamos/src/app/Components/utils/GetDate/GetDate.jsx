@@ -7,12 +7,20 @@ export function GetDate(){
     let year = date.getFullYear();
 
     let fecha = "";
-    
-    if(month < 10){
-        fecha = day + '0\/' + month + '\/' + year;
+
+    if(day < 10){
+        fecha = "0" + day + "\/";
     }else{
-        fecha = day + '\/' + month + '\/' + year;
+        fecha = day + "\/";
     }
 
+    if(month <10){
+        fecha += "0" + month + "\/";
+    }else{
+        fecha += month + "\/";
+    }
+
+    fecha += year
+    
     return fecha;
 }

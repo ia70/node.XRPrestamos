@@ -12,12 +12,22 @@ import './ItemList.css';
     6- amountDescription    Descripción del monto
     7- amount               Monto $
     8- close                Mostrar boton cerrar (true, false)
+    9- modal               (true | false) Especifica si debe mostrar ventana modal
 */
 export function ItemList(props) {
     let btncerrar = <BtnClose label="X" />;
     let class_br = "";
     let class_bl = "";
     let texto = "";
+    let mtarget = "";
+    let mtoggle = "";
+
+    if (props.modal != null) {
+        if (props.modal) {
+            mtarget = "#item" + props.number;
+            mtoggle = "modal";
+        }
+    }
 
     if (!props.close) {
         btncerrar = "";
@@ -49,8 +59,8 @@ export function ItemList(props) {
 
     return (
         <div className="col-xs-12 col-sm-6 col-lg-4 col-xl-3 mb-1">
-            <button type="button" className="btn col-12" data-toggle="modal" data-target={"#item" + props.number}>
-                <div className={"container-fluid stateitem_border_br stateitem_border_bl stateitem_border_tr stateitem_border_tl stateitem_state_" + props.stateItem}>
+            <div className="col-12 mb-2" data-toggle={mtoggle} data-target={mtarget}>
+                <div className={"main container-fluid stateitem_border_br stateitem_border_bl stateitem_border_tr stateitem_border_tl stateitem_state_" + props.stateItem}>
                     <div className="row">
                         <div className={"col-xs-12 col-auto stateitem_num stateitem_center stateitem_border_tl " + class_bl}>
                             <h2>{props.number}</h2>
@@ -79,10 +89,9 @@ export function ItemList(props) {
                         {texto}
                     </div>
                 </div>
-            </button>
+            </div>
 
             <ModalCollect id={"item" + props.number} alias={props.alias} name={props.name} amount={props.amount} />
-
         </div>
     );
 }

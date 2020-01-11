@@ -17,7 +17,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "morgan": "^1.9.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",

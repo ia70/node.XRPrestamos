@@ -33,18 +33,18 @@ class Cobrar extends Component {
                     </div>
                     <div className="row" >
 
-                        <ItemList number="1" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Monto solicitado:" stateItem={1} stateDescription="Pagó completo" />
-                        <ItemList number="2" alias="Fruteria El Eden" name="Marcos Jimenez Lopez" amount="1,500" amountDescription="Monto solicitado:" stateItem={2} stateDescription="Abonó"/>
-                        <ItemList number="3" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={3} stateDescription="No pagó"/>
-                        <ItemList number="4" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={4} stateDescription="Por visitar"/>
-                        <ItemList number="5" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={1} stateDescription="Pagó completo"/>
-                        <ItemList number="6" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={2} stateDescription="Abonó"/>
-                        <ItemList number="7" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Monto solicitado:" stateItem={3} stateDescription="No pagó"/>
-                        <ItemList number="8" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={4} stateDescription="Por visitar"/>
-                        <ItemList number="9" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={1} stateDescription="Pagó completo"/>
-                        <ItemList number="4" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={2} stateDescription="Abonó"/>
-                        <ItemList number="10" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={3} stateDescription="No pagó"/>
-                        <ItemList number="120" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={4} stateDescription="Por visitar"/>
+                        <ItemList modal={true} number="1" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Monto solicitado:" stateItem={1} stateDescription="Pagó completo" />
+                        <ItemList modal={true} number="2" alias="Fruteria El Eden" name="Marcos Jimenez Lopez" amount="1,500" amountDescription="Monto solicitado:" stateItem={2} stateDescription="Abonó" />
+                        <ItemList modal={true} number="3" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={3} stateDescription="No pagó" />
+                        <ItemList modal={true} number="4" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={4} stateDescription="Por visitar" />
+                        <ItemList modal={true} number="5" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={1} stateDescription="Pagó completo" />
+                        <ItemList modal={true} number="6" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={2} stateDescription="Abonó" />
+                        <ItemList modal={true} number="7" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Monto solicitado:" stateItem={3} stateDescription="No pagó" />
+                        <ItemList modal={true} number="8" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={4} stateDescription="Por visitar" />
+                        <ItemList modal={true} number="9" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={1} stateDescription="Pagó completo" />
+                        <ItemList modal={true} number="4" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={2} stateDescription="Abonó" />
+                        <ItemList modal={true} number="10" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={3} stateDescription="No pagó" />
+                        <ItemList modal={true} number="120" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Monto solicitado:" stateItem={4} stateDescription="Por visitar" />
 
                     </div>
                 </div>
