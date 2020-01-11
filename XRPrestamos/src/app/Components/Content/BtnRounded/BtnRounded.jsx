@@ -23,7 +23,7 @@ class BtnRounded extends Component {
                             <img src={this.props.src} className="border border-warning rounded-circle" />
                         </div>
                         <div className="col-12">
-                            <strong className="text-center" >{this.props.label}</strong>
+                            <strong className="text-center text-dark" >{this.props.label}</strong>
                         </div>
                     </div>
                 </Link>
