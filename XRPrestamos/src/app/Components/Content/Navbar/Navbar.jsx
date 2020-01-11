@@ -6,7 +6,7 @@ import {GetDate} from '../../utils/GetDate/GetDate.jsx';
 import './Navbar.css';
 
 //PROPIEDADES ------------------------------
-//setLogo | setTitle | setDate
+//setLogo | setTitle | setDate | url
 
 class Navbar extends Component {
 
@@ -17,7 +17,7 @@ class Navbar extends Component {
 
     render() {
         let Fecha = "";
-        let Boton = <Btn url="/"/>;
+        let Boton = <Btn url={this.props.url || "/dashboard"}/>;
 
         if(this.props.setButton != null){
             Boton="";

@@ -33,7 +33,7 @@ class NavbarExtends extends Component {
                                 <h3>{this.props.title}</h3>
                             </div>
                             <div className="col-auto navbarextends_button p-0 m-1">
-                                <Btn />
+                                <Btn url={this.props.url || "/dashboard"}/>
                             </div>
                         </div>
                     </div>

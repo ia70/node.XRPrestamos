@@ -29,7 +29,8 @@ export default function App() {
                     <Route path="/estadosolicitud" component={EstadoSolicitud} />
                     <Route path="/solicitardinero" component={SolicitarDinero} />
                     <Route path="/nuevocliente" component={NuevoCliente} />
-                    <Route path={["/", "/Dashboard"]} component={Dashboard} />
+                    <Route path="/dashboard" component={Dashboard} />
+                    <Route path="/" component={Login} />
                 </Switch>
         </Router>
     );
