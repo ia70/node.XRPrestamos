@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 //CONMPONENTS --------------------------------------------------
-import NavbarExtends from '../../../Components/Content/NavbarExtends/NavbarExtends.jsx.js.js.js';
-import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx.js.js.js';
-import { Title } from '../../../Components/Content/Title/Title.jsx.js.js.js';
-import { TextSearch } from '../../../Components/Form/TextSearch/TextSearch.jsx.js.js.js';
-import { ComboBox } from '../../../Components/Form/ComboBox/ComboBox.jsx.js.js.js';
+import NavbarExtends from '../../../Components/Content/NavbarExtends/NavbarExtends.jsx.js.js';
+import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx.js.js';
+import { Title } from '../../../Components/Content/Title/Title.jsx.js.js';
+import { TextSearch } from '../../../Components/Form/TextSearch/TextSearch.jsx.js.js';
+import { ComboBox } from '../../../Components/Form/ComboBox/ComboBox.jsx.js.js';
 
-import ModalCollect from '../../../Components/Custom/ModalCollect/ModalCollect.jsx.js.js.js';
+import ModalCollect from '../../../Components/Custom/ModalCollect/ModalCollect.jsx.js.js';
 
 import Logo from '../../../img/Logo.png';
 import './Cobrar.css';

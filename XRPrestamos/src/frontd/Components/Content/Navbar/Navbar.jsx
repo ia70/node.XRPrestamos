@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import {Btn} from '../../Form/Btn/Btn.jsx.js.js.js';
-import {GetDate} from '../../utils/GetDate/GetDate.jsx.js.js.js';
+import {Btn} from '../../Form/Btn/Btn.jsx.js.js';
+import {GetDate} from '../../utils/GetDate/GetDate.jsx.js.js';
 
 import './Navbar.css';
 

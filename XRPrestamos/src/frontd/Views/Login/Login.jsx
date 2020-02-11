@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 
 //COMPONENTS -------------------------------------------------------------------------
-import { TextBox } from '../../Components/Form/TextBox/TextBox.jsx.js.js.js';
-import { TextPassword } from '../../Components/Form/TextPassword/TextPassword.jsx.js.js.js';
-import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx.js.js.js';
+import { TextBox } from '../../Components/Form/TextBox/TextBox.jsx.js.js';
+import { TextPassword } from '../../Components/Form/TextPassword/TextPassword.jsx.js.js';
+import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx.js.js';
 
 
 

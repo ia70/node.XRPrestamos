@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 //CONMPONENTS --------------------------------------------------
-import Navbar from '../../../Components/Content/Navbar/Navbar.jsx.js.js.js';
-import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx.js.js.js';
-import { Title } from '../../../Components/Content/Title/Title.jsx.js.js.js';
+import Navbar from '../../../Components/Content/Navbar/Navbar.jsx.js.js';
+import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx.js.js';
+import { Title } from '../../../Components/Content/Title/Title.jsx.js.js';
 
 import './EstadoSolicitud.css';
 import Logo from '../../../img/Logo.png';

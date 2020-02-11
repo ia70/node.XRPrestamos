@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Navbar from '../../Components/Content/Navbar/Navbar.jsx.js.js.js';
-import { Title } from '../../Components/Content/Title/Title.jsx.js.js.js';
-import { TextBox } from '../../Components/Form/TextBox/TextBox.jsx.js.js.js';
-import { TextPhoneNumber } from '../../Components/Form/TextPhoneNumber/TextPhoneNumber.jsx.js.js.js';
-import { Option } from '../../Components/Form/Option/Option.jsx.js.js.js';
-import { TextEmail } from '../../Components/Form/TextEmail/TextEmail.jsx.js.js.js';
-import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx.js.js.js';
+import Navbar from '../../Components/Content/Navbar/Navbar.jsx.js.js';
+import { Title } from '../../Components/Content/Title/Title.jsx.js.js';
+import { TextBox } from '../../Components/Form/TextBox/TextBox.jsx.js.js';
+import { TextPhoneNumber } from '../../Components/Form/TextPhoneNumber/TextPhoneNumber.jsx.js.js';
+import { Option } from '../../Components/Form/Option/Option.jsx.js.js';
+import { TextEmail } from '../../Components/Form/TextEmail/TextEmail.jsx.js.js';
+import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx.js.js';
 
 import Logo from '../../img/Logo.png';
 

@@ -1,10 +1,10 @@
 import React from 'react';
 
 // COMPONENTES ----------------------------------------------------
-import { Btn } from '../../Form/Btn/Btn.jsx.js.js.js';
-import { ItemPago } from '../ItemPago/ItemPago.jsx.js.js.js';
-import { ItemPagoTitulo } from '../ItemPago/ItemPagoTitulo.jsx.js.js.js';
-import { TextMoney } from '../../Form/TextMoney/TextMoney.jsx.js.js.js';
+import { Btn } from '../../Form/Btn/Btn.jsx.js.js';
+import { ItemPago } from '../ItemPago/ItemPago.jsx.js.js';
+import { ItemPagoTitulo } from '../ItemPago/ItemPagoTitulo.jsx.js.js';
+import { TextMoney } from '../../Form/TextMoney/TextMoney.jsx.js.js';
 
 
 import './ModalCollect.css';
