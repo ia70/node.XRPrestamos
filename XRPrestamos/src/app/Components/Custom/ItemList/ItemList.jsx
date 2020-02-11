@@ -1,6 +1,6 @@
 import React from 'react';
-import { BtnClose } from '../../Form/BtnClose/BtnClose.jsx.js.js.js';
-import { ModalCollect } from '../ModalCollect/ModalCollect.jsx.js.js.js';
+import { BtnClose } from '../../Form/BtnClose/BtnClose.jsx';
+import { ModalCollect } from '../ModalCollect/ModalCollect.jsx';
 
 import './ItemList.css';
 /*PROPIEDADES -----------------------------------------------------

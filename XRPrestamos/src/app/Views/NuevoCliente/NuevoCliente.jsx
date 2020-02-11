@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Navbar from '../../Components/Content/Navbar/Navbar.jsx.js.js.js';
-import { Title } from '../../Components/Content/Title/Title.jsx.js.js.js';
-import { TextBox } from '../../Components/Form/TextBox/TextBox.jsx.js.js.js';
-import { TextPhoneNumber } from '../../Components/Form/TextPhoneNumber/TextPhoneNumber.jsx.js.js.js';
-import { Option } from '../../Components/Form/Option/Option.jsx.js.js.js';
-import { TextEmail } from '../../Components/Form/TextEmail/TextEmail.jsx.js.js.js';
-import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx.js.js.js';
+import Navbar from '../../Components/Content/Navbar/Navbar.jsx';
+import { Title } from '../../Components/Content/Title/Title.jsx';
+import { TextBox } from '../../Components/Form/TextBox/TextBox.jsx';
+import { TextPhoneNumber } from '../../Components/Form/TextPhoneNumber/TextPhoneNumber.jsx';
+import { Option } from '../../Components/Form/Option/Option.jsx';
+import { TextEmail } from '../../Components/Form/TextEmail/TextEmail.jsx';
+import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
 
 import Logo from '../../img/Logo.png';
 

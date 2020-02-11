@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 //CONMPONENTS --------------------------------------------------
-import Navbar from '../../../Components/Content/Navbar/Navbar.jsx.js.js.js';
-import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx.js.js.js';
-import { Title } from '../../../Components/Content/Title/Title.jsx.js.js.js';
-import { TextSearch } from '../../../Components/Form/TextSearch/TextSearch.jsx.js.js.js';
-import { ComboBox } from '../../../Components/Form/ComboBox/ComboBox.jsx.js.js.js';
+import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
+import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx';
+import { Title } from '../../../Components/Content/Title/Title.jsx';
+import { TextSearch } from '../../../Components/Form/TextSearch/TextSearch.jsx';
+import { ComboBox } from '../../../Components/Form/ComboBox/ComboBox.jsx';
 
 import Logo from '../../../img/Logo.png';
 import './CarteraClientes.css';

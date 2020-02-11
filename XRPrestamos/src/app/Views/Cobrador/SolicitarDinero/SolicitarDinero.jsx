@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 //CONMPONENTS --------------------------------------------------
-import Navbar from '../../../Components/Content/Navbar/Navbar.jsx.js.js.js';
-import { TextSearch } from '../../../Components/Form/TextSearch/TextSearch.jsx.js.js.js';
-import { Title } from '../../../Components/Content/Title/Title.jsx.js.js.js';
-import { TextMoney } from '../../../Components/Form/TextMoney/TextMoney.jsx.js.js.js';
-import { TextNumber } from '../../../Components/Form/TextNumber/TextNumber.jsx.js.js.js';
-import { DateTimePicker } from '../../../Components/Form/DateTimePicker/DateTimePicker.jsx.js.js.js';
-import {BtnSubmit} from '../../../Components/Form/BtnSubmit/BtnSubmit.jsx.js.js.js';
+import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
+import { TextSearch } from '../../../Components/Form/TextSearch/TextSearch.jsx';
+import { Title } from '../../../Components/Content/Title/Title.jsx';
+import { TextMoney } from '../../../Components/Form/TextMoney/TextMoney.jsx';
+import { TextNumber } from '../../../Components/Form/TextNumber/TextNumber.jsx';
+import { DateTimePicker } from '../../../Components/Form/DateTimePicker/DateTimePicker.jsx';
+import {BtnSubmit} from '../../../Components/Form/BtnSubmit/BtnSubmit.jsx';
 
 import './SolicitarDinero.css';
 import Logo from '../../../img/Logo.png';

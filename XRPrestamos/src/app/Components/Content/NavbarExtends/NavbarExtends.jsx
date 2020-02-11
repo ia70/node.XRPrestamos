@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Btn } from '../../Form/Btn/Btn.jsx.js.js.js';
+import { Btn } from '../../Form/Btn/Btn.jsx';
 
 import './NavbarExtends.css';
 

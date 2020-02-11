@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
 //COMPONENTES
-import BtnRounded from '../../../Components/Content/BtnRounded/BtnRounded.jsx.js.js.js';
-import NuevoCliente from '../../NuevoCliente/NuevoCliente.jsx.js.js.js';
-import SolicitarDinero from '../SolicitarDinero/SolicitarDinero.jsx.js.js.js';
-import Navbar from '../../../Components/Content/Navbar/Navbar.jsx.js.js.js';
-import EstadoSolicitud from '../EstadoSolicitud/EstadoSolicitud.jsx.js.js.js';
-import Cobrar from '../Cobrar/Cobrar.jsx.js.js.js';
-import CarteraClientes from '../CarteraClientes/CarteraClientes.jsx.js.js.js';
+import BtnRounded from '../../../Components/Content/BtnRounded/BtnRounded.jsx';
+import NuevoCliente from '../../NuevoCliente/NuevoCliente.jsx';
+import SolicitarDinero from '../SolicitarDinero/SolicitarDinero.jsx';
+import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
+import EstadoSolicitud from '../EstadoSolicitud/EstadoSolicitud.jsx';
+import Cobrar from '../Cobrar/Cobrar.jsx';
+import CarteraClientes from '../CarteraClientes/CarteraClientes.jsx';
 
 
-import ModalCollect from '../../../Components/Custom/ModalCollect/ModalCollect.jsx.js.js.js';
+import ModalCollect from '../../../Components/Custom/ModalCollect/ModalCollect.jsx';
 
 
 // IMAGENES
