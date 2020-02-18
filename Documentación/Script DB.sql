@@ -231,12 +231,20 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`prestamos` (
   `id_cliente` INT NOT NULL,
   `id_periodo` INT NOT NULL,
   `id_prestamos_plazo` INT NOT NULL,
-  `monto` DECIMAL(10,2) NULL,
+  `monto_prestado` DECIMAL(10,2) NULL,
+  `monto_pago` DECIMAL(10,2) NULL,
+  `monto_total` DECIMAL(10,2) NULL,
+  `fecha_prestamo` DATE NOT NULL,
   `fecha_inicio_cobro` DATE NULL,
   `fecha_fin_cobro` DATE NULL,
-  `fecha_prestamo` DATE NOT NULL,
+  `fecha_pago_ultimo` DATE NULL,
+  `fecha_siguiente_pago` DATE NULL,
+  `pagos_total` INT NULL,
+  `pagos_pagados` DECIMAL(10,2) NULL,
+  `pagos_atrasados` DECIMAL(10,2) NULL,
   `id_estado_prestamo` INT NOT NULL,
   `id_estado` INT NOT NULL,
+  `fecha` DATE NULL,
   PRIMARY KEY (`id_prestamo`))
 ENGINE = InnoDB;
 
@@ -325,6 +333,37 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`empleado_ruta` (
   `rutas_id_ruta` INT NOT NULL,
   `empleado_rfc` VARCHAR(13) NOT NULL,
   PRIMARY KEY (`id_empleado_ruta`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `XRPrestamos`.`conceptos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `XRPrestamos`.`conceptos` (
+  `id_concepto` INT NOT NULL,
+  `area` VARCHAR(250) NULL,
+  `descripcion` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_concepto`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `XRPrestamos`.`egresos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `XRPrestamos`.`egresos` (
+  `id_egresos` INT NOT NULL,
+  `id_sucursal` INT NULL,
+  `id_periodo` INT NULL,
+  `empleado_rfc` VARCHAR(13) NULL,
+  `id_concepto` INT NULL,
+  `emisor` VARCHAR(45) NULL,
+  `concepto` VARCHAR(500) NULL,
+  `empresa` VARCHAR(120) NULL,
+  `monto` DECIMAL(10,2) NULL,
+  `hora` VARCHAR(20) NULL,
+  `folio_ticket` VARCHAR(50) NULL,
+  `fecha` DATE NULL,
+  PRIMARY KEY (`id_egresos`))
 ENGINE = InnoDB;
 
 
