@@ -13,7 +13,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // Routes --------------------------------------------------------                            
-app.use('/api/tasks', require('./routes/task.routes'));
+app.use(require('./routes/index.routes'));
+app.use('/users', require('./routes/user.routes'));
+
+//app.use(require('/user', './routes/index.routes'));
 
 // Static files --------------------------------------------------
 app.use(express.static(path.join(__dirname, 'public')));
@@ -25,7 +28,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(app.get('port'), () => {
     console.log('Server on port ', app.get('port'));
 });
-
 /*
     NO OLVIDAR CAMBIAR DEL WEBPACK DONDE SE SERVIRA EL SERVICIO. SI NO ES CORRECTA NO SE EJECUTARA!
                     *************************************************************
