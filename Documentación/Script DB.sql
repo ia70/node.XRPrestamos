@@ -244,6 +244,7 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`prestamos` (
   `pagos_atrasados` DECIMAL(10,2) NULL,
   `id_estado_prestamo` INT NOT NULL,
   `id_estado` INT NOT NULL,
+  `tipo` INT NULL COMMENT 'Tipo de operqación:\n1- Nuevo prestamo, cliente nuevo\n2- Renovación tarjeta\n3- Nueva tarjeta a cliente Con prestamo activo\n4- Moroso',
   `fecha` DATE NULL,
   PRIMARY KEY (`id_prestamo`))
 ENGINE = InnoDB;
@@ -269,6 +270,8 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`abonos` (
   `id_prestamo` INT NOT NULL,
   `id_periodo` INT NOT NULL,
   `monto` DECIMAL(10,2) NULL,
+  `tipo_pago` INT NULL COMMENT 'Tipo de pago:\n1- Pago normal completo\n2- No pagó\n3- Abono almenos un pago completo y más\n4- Abono menos del pago completo',
+  `no_pago_adelantado` DECIMAL(10,2) NULL,
   `fecha_abono` DATE NOT NULL,
   PRIMARY KEY (`id_abono`))
 ENGINE = InnoDB;
@@ -417,7 +420,6 @@ COMMIT;
 START TRANSACTION;
 USE `XRPrestamos`;
 INSERT INTO `XRPrestamos`.`ciudad` (`id_ciudad`, `id_provinvia`, `nombre`) VALUES (1, 1, 'Comalcalco');
-INSERT INTO `XRPrestamos`.`ciudad` (`id_ciudad`, `id_provinvia`, `nombre`) VALUES (2, 1, 'Jalpa de Méndez');
 
 COMMIT;
 
@@ -427,7 +429,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`personas` (`id_persona`, `nombre`, `apellido_paterno`, `apellido_materno`, `direccion`, `id_ciudad`, `id_tipo_inmueble`, `telefono`, `correo`, `id_estado`) VALUES (1, 'Daniel', 'Pérez', 'Cortéz', 'Colonia Centro', 2, 1, '9141198098', 'pcd510@hotmail.com', 1);
+INSERT INTO `XRPrestamos`.`personas` (`id_persona`, `nombre`, `apellido_paterno`, `apellido_materno`, `direccion`, `id_ciudad`, `id_tipo_inmueble`, `telefono`, `correo`, `id_estado`) VALUES (1, 'Daniel', 'Pérez', 'Cortéz', 'Colonia Centro', 1, 1, '9141198098', 'pcd510@hotmail.com', 1);
+INSERT INTO `XRPrestamos`.`personas` (`id_persona`, `nombre`, `apellido_paterno`, `apellido_materno`, `direccion`, `id_ciudad`, `id_tipo_inmueble`, `telefono`, `correo`, `id_estado`) VALUES (2, 'Angel', 'Castillo', 'López', 'Colonia Centro', 1, 1, '9331036538', 'ejemplo@hotmail.com', 1);
+INSERT INTO `XRPrestamos`.`personas` (`id_persona`, `nombre`, `apellido_paterno`, `apellido_materno`, `direccion`, `id_ciudad`, `id_tipo_inmueble`, `telefono`, `correo`, `id_estado`) VALUES (3, 'Maria Elena', 'Gonzalez', 'Ovando', 'Colonia Centro', 1, 1, '9332514561', 'marielena@hotmail.com', 1);
 
 COMMIT;
 
@@ -437,7 +441,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`empresa` (`empresa_rfc`, `razon_social`, `direccion`, `id_ciudad`, `cp`, `telefono`, `id_estado`) VALUES ('RFC45GENERICO', 'Cobranza S.A De C.V', 'Colonia Centro', 1, 86300, '9331452145', 1);
+INSERT INTO `XRPrestamos`.`empresa` (`empresa_rfc`, `razon_social`, `direccion`, `id_ciudad`, `cp`, `telefono`, `id_estado`) VALUES ('RFC45GENERICO', 'CDJ COP Asociados', 'Colonia Centro', 1, 86300, '9331452145', 1);
 
 COMMIT;
 
@@ -447,7 +451,17 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`sucursal` (`id_sucursal`, `empresa_rfc`, `nombre`, `direccion`, `id_ciudad`, `cp`, `telefono`, `id_estado`) VALUES (1, 'RFC45GENERICO', 'Principal', 'Colonia Centro', 1, '86300', '9334512512', 1);
+INSERT INTO `XRPrestamos`.`sucursal` (`id_sucursal`, `empresa_rfc`, `nombre`, `direccion`, `id_ciudad`, `cp`, `telefono`, `id_estado`) VALUES (1, 'RFC45GENERICO', 'Comalcalco', 'Colonia Centro', 1, '86300', '9331490521', 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `XRPrestamos`.`clientes`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `XRPrestamos`;
+INSERT INTO `XRPrestamos`.`clientes` (`id_cliente`, `id_sucursal`, `id_persona`, `alias`, `id_estado`) VALUES (1, 1, 3, 'Mari Pollo', 1);
 
 COMMIT;
 
@@ -458,6 +472,7 @@ COMMIT;
 START TRANSACTION;
 USE `XRPrestamos`;
 INSERT INTO `XRPrestamos`.`roles` (`id_rol`, `descripcion`, `id_estado`) VALUES (1, 'Administrador', 1);
+INSERT INTO `XRPrestamos`.`roles` (`id_rol`, `descripcion`, `id_estado`) VALUES (2, 'Cobrador', 1);
 
 COMMIT;
 
@@ -468,6 +483,7 @@ COMMIT;
 START TRANSACTION;
 USE `XRPrestamos`;
 INSERT INTO `XRPrestamos`.`empleados` (`empleado_rfc`, `id_persona`, `id_rol`, `empleado_padre`, `id_estado`) VALUES ('PECD910112QN9', 1, 1, NULL, 1);
+INSERT INTO `XRPrestamos`.`empleados` (`empleado_rfc`, `id_persona`, `id_rol`, `empleado_padre`, `id_estado`) VALUES ('SDFSDFSDFSDFF', 2, 2, '1', 1);
 
 COMMIT;
 
@@ -487,18 +503,34 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (1, 2019, 'Enero');
-INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (2, 2019, 'Febrero');
-INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (3, 2019, 'Marzo');
-INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (4, 2019, 'Abril');
-INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (5, 2019, 'Mayo');
-INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (6, 2019, 'Junio');
-INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (7, 2019, 'Julio');
-INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (8, 2019, 'Agosto');
-INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (9, 2019, 'Septiembre');
-INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (10, 2019, 'Octubre');
-INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (11, 2019, 'Noviembre');
-INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (12, 2019, 'Diciembre');
+INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (1, 2020, 'Enero');
+INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (2, 2020, 'Febrero');
+INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (3, 2020, 'Marzo');
+INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (4, 2020, 'Abril');
+INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (5, 2020, 'Mayo');
+INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (6, 2020, 'Junio');
+INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (7, 2020, 'Julio');
+INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (8, 2020, 'Agosto');
+INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (9, 2020, 'Septiembre');
+INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (10, 2020, 'Octubre');
+INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (11, 2020, 'Noviembre');
+INSERT INTO `XRPrestamos`.`periodo` (`id_periodo`, `anio`, `mes`) VALUES (12, 2020, 'Diciembre');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `XRPrestamos`.`estado_prestamo`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `XRPrestamos`;
+INSERT INTO `XRPrestamos`.`estado_prestamo` (`id_estado_prestamo`, `descripcion`) VALUES (1, 'Activo');
+INSERT INTO `XRPrestamos`.`estado_prestamo` (`id_estado_prestamo`, `descripcion`) VALUES (2, 'Inactivo');
+INSERT INTO `XRPrestamos`.`estado_prestamo` (`id_estado_prestamo`, `descripcion`) VALUES (3, 'Renovado');
+INSERT INTO `XRPrestamos`.`estado_prestamo` (`id_estado_prestamo`, `descripcion`) VALUES (4, 'Condonado');
+INSERT INTO `XRPrestamos`.`estado_prestamo` (`id_estado_prestamo`, `descripcion`) VALUES (5, 'Congelado');
+INSERT INTO `XRPrestamos`.`estado_prestamo` (`id_estado_prestamo`, `descripcion`) VALUES (6, 'Moroso');
+INSERT INTO `XRPrestamos`.`estado_prestamo` (`id_estado_prestamo`, `descripcion`) VALUES (7, 'Recuperación');
 
 COMMIT;
 
@@ -527,6 +559,16 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `XRPrestamos`.`rutas`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `XRPrestamos`;
+INSERT INTO `XRPrestamos`.`rutas` (`id_ruta`, `id_sucursal`, `descripcion`, `id_estado`) VALUES (1, 1, 'R2-Motorizada', 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `XRPrestamos`.`colonia`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -544,6 +586,27 @@ USE `XRPrestamos`;
 INSERT INTO `XRPrestamos`.`actividad_economica` (`id_actividad_economica`, `descripcion`) VALUES (1, 'Taqueria');
 INSERT INTO `XRPrestamos`.`actividad_economica` (`id_actividad_economica`, `descripcion`) VALUES (2, 'Carniceria');
 INSERT INTO `XRPrestamos`.`actividad_economica` (`id_actividad_economica`, `descripcion`) VALUES (3, 'Reparación de Celulares');
+INSERT INTO `XRPrestamos`.`actividad_economica` (`id_actividad_economica`, `descripcion`) VALUES (4, 'Pollos aliñados');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `XRPrestamos`.`cliente_establecimiento`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `XRPrestamos`;
+INSERT INTO `XRPrestamos`.`cliente_establecimiento` (`id_cliente_establecimiento`, `id_cliente`, `nombre`, `direccion`, `alias_establecimiento`, `id_ciudad`, `id_actividad_economica`, `id_tipo_inmueble`, `id_estado`, `rutas_id_ruta`) VALUES (1, 1, 'Polleria Mercado', 'Mercado', 'Mari Pollo Mercado', 1, 4, 1, 1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `XRPrestamos`.`empleado_ruta`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `XRPrestamos`;
+INSERT INTO `XRPrestamos`.`empleado_ruta` (`id_empleado_ruta`, `rutas_id_ruta`, `empleado_rfc`) VALUES (2, 1, 'SDFSDFSDFFD');
 
 COMMIT;
 
