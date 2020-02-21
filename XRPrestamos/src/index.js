@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+//const bodyParser = require('body-parser');
 
 // Initialization ------------------------------------------------ 
 const app = express();
@@ -10,11 +11,13 @@ app.set('port', process.env.PORT || 80);
 
 // Middlewares ---------------------------------------------------
 app.use(morgan('dev'));
+//app.use(bodyParser);
+//app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 
 // Routes --------------------------------------------------------                            
-app.use(require('./routes/index.routes'));
-app.use('/users', require('./routes/user.routes'));
+app.use('/api', require('./routes/index.routes'));
+app.use('/api/user', require('./routes/user.routes'));
 
 //app.use(require('/user', './routes/index.routes'));
 
