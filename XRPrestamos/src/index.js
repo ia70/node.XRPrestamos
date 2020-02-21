@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 // Initialization ------------------------------------------------ 
 const app = express();
@@ -11,8 +11,7 @@ app.set('port', process.env.PORT || 80);
 
 // Middlewares ---------------------------------------------------
 app.use(morgan('dev'));
-//app.use(bodyParser);
-//app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 
 // Routes --------------------------------------------------------                            
