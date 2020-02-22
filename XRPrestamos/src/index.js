@@ -12,7 +12,7 @@ app.set('port', process.env.PORT || 80);
 // Middlewares ---------------------------------------------------
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.json());
+app.use(bodyParser.json());
 
 // Routes --------------------------------------------------------                            
 app.use('/api', require('./routes/index.routes'));

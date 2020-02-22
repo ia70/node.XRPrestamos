@@ -6,12 +6,17 @@ const pool = require('../database');
 
 //->>>>>    LISTA         ------------------------------------------------------------------
 router.get('/', async (req, res) => {
-    const usuarios = await pool.query('SELECT * FROM usuario');
-    res.json({ usuarios });
+    try {
+        const usuarios = await pool.query('SELECT * FROM usuario');
+        res.status(200).send({"usuarios": usuarios});
+    } catch (e) {
+        res.status(400).send(e);
+    }
 });
 
 //->>>>>    AGREGAR     --------------------------------------------------------------------
 router.post('/', async (req, res) => {
+    const error = false;
     const { id_usuario, id_sucursal, password, empleado_rfc, id_estado } = req.body;
     const newReg = {
         id_usuario,
@@ -20,14 +25,17 @@ router.post('/', async (req, res) => {
         empleado_rfc,
         id_estado
     };
-    await pool.query('INSERT INTO usuario SET ?', [newReg]);
-    res.send(200, {
-        renponse: [
+
+    try {
+        await pool.query('INSERT INTO usuario SET ?', [newReg]);
+        res.status(200).send(
             {
                 response: "¡Registro agregado!"
             }
-        ]
-    });
+        );
+    } catch (e) {
+        res.status(400).send(e);
+    }
 });
 
 //->>>>>    EDITAR      --------------------------------------------------------------------
@@ -39,27 +47,34 @@ router.put('/', async (req, res) => {
         empleado_rfc,
         id_estado
     };
-    await pool.query('UPDATE usuario SET ? WHERE id_usuario = ?', [ediReg, id_usuario]);
-    res.send(200, {
-        renponse: [
-            {
-                response: "¡Registro editado!"
-            }
-        ]
-    });
+    try {
+        await pool.query('UPDATE usuario SET ? WHERE id_usuario = ?', [ediReg, id_usuario]);
+        res.send(200, {
+            renponse: [
+                {
+                    response: "¡Registro editado!"
+                }
+            ]
+        });
+    } catch (e) {
+        res.status(400).send(e);
+    }
 });
 
 //->>>>>    ELIMINAR    --------------------------------------------------------------------
 router.delete('/', async (req, res) => {
-    const { id_usuario } = req.body;
-    await pool.query('DELETE FROM usuario WHERE id_usuario = ?', [id_usuario]);
-    res.send(200, {
-        renponse: [
-            {
-                response: "¡Registro eliminado!"
-            }
-        ]
-    });
+    try {
+        await pool.query('DELETE FROM usuario WHERE id_usuario = ?', [req.body.id_usuario]);
+        res.send(200, {
+            renponse: [
+                {
+                    response: "¡Registro eliminado!"
+                }
+            ]
+        });
+    } catch (e) {
+        res.status(400).send(e);
+    }
 });
 
 module.exports = router;
