@@ -16,7 +16,10 @@ app.use(bodyParser.json());
 
 // Routes --------------------------------------------------------                            
 app.use('/api', require('./routes/index.routes'));
-app.use('/api/user', require('./routes/user.routes'));
+app.use('/api/usuario', require('./routes/usuario.routes'));
+app.use('/api/ruta', require('./routes/rutas.routes'));
+app.use('/api/persona', require('./routes/personas.routes'));
+app.use('/api/abono', require('./routes/abonos.routes'));
 
 //app.use(require('/user', './routes/index.routes'));
 
