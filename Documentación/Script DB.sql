@@ -523,9 +523,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('admin', 'Daniel', 'Pérez', 'Cortéz', Colonia Centro, NULL, NULL, NULL, '9141198098', 'pcd510@hotmail.com', NULL, NULL, NULL, 1, 1);
-INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cobrador_1', 'Angel', 'Castillo', 'López', Colonia Centro, NULL, NULL, NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, NULL, 1, 1);
-INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cliente_1', 'Maria Elena', 'Gonzalez', 'Ovando', Colonia Centro, NULL, NULL, NULL, '9332514561', 'marielena@hotmail.com', NULL, NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('admin', 'Daniel', 'Pérez', 'Cortéz', 1, NULL, NULL, NULL, '9141198098', 'pcd510@hotmail.com', NULL, NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cobrador_1', 'Angel', 'Castillo', 'López', 1, NULL, NULL, NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cliente_1', 'Maria Elena', 'Gonzalez', 'Ovando', 1, NULL, NULL, NULL, '9332514561', 'marielena@hotmail.com', NULL, NULL, NULL, 1, 1);
 
 COMMIT;
 
