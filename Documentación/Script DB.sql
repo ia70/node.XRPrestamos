@@ -151,7 +151,7 @@ ENGINE = InnoDB;
 -- Table `XRPrestamos`.`ciudad`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`ciudad` (
-  `id_ciudad` INT NOT NULL,
+  `id_ciudad` INT NOT NULL AUTO_INCREMENT,
   `id_provinvia` INT NULL,
   `nombre` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id_ciudad`))
@@ -173,7 +173,7 @@ ENGINE = InnoDB;
 -- Table `XRPrestamos`.`calle`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`calle` (
-  `id_calle` INT NOT NULL,
+  `id_calle` INT NOT NULL AUTO_INCREMENT,
   `id_colonia` INT NULL,
   `nombre` VARCHAR(150) NULL,
   PRIMARY KEY (`id_calle`))
@@ -204,6 +204,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `XRPrestamos`.`tipo_credito`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `XRPrestamos`.`tipo_credito` (
+  `id_tipo_credito` INT NOT NULL AUTO_INCREMENT COMMENT 'Tipo de operqación:\n1- Nuevo cliente\n2- Renovación credito\n3- Nuevo credito a cliente Con credito activo\n4- Moroso',
+  `descripcion` VARCHAR(50) NULL,
+  PRIMARY KEY (`id_tipo_credito`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `XRPrestamos`.`credito`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`credito` (
@@ -227,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`credito` (
   `pagos_atrasados` DECIMAL(10,2) NULL,
   `id_estado_credito` INT NOT NULL,
   `id_estado` INT NOT NULL,
-  `tipo` INT NULL COMMENT 'Tipo de operqación:\n1- Nuevo cliente\n2- Renovación credito\n3- Nuevo credito a cliente Con credito activo\n4- Moroso',
+  `id_tipo_credito` INT NULL COMMENT 'Tipo de operqación:\n1- Nuevo cliente\n2- Renovación credito\n3- Nuevo credito a cliente Con credito activo\n4- Moroso',
   `fecha` DATE NULL,
   PRIMARY KEY (`id_credito`))
 ENGINE = InnoDB;
@@ -249,7 +259,7 @@ ENGINE = InnoDB;
 -- Table `XRPrestamos`.`abono`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`abono` (
-  `id_abono` INT NOT NULL,
+  `id_abono` INT NOT NULL AUTO_INCREMENT,
   `id_credito` INT NOT NULL,
   `monto` DECIMAL(10,2) NULL,
   `tipo_pago` INT NULL COMMENT 'Tipo de pago:\n1- Pago normal completo\n2- Pago exedente\n3- Pago parcial\n4- Sin pago',
@@ -331,10 +341,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`capital` (
   `id_capital` INT NOT NULL AUTO_INCREMENT,
-  `id_sucursal` INT NULL,
-  `id_periodo` INT NULL,
-  `id_usuario` VARCHAR(20) NULL,
-  `id_concepto` INT NULL,
+  `id_sucursal` INT NOT NULL,
+  `id_periodo` INT NOT NULL,
+  `id_usuario` VARCHAR(20) NOT NULL,
   `tipo` VARCHAR(10) NULL COMMENT '- Ingreso\n- Egreso',
   `emisor` VARCHAR(45) NULL,
   `concepto` VARCHAR(500) NULL,
@@ -526,6 +535,29 @@ USE `XRPrestamos`;
 INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('admin', 'Daniel', 'Pérez', 'Cortéz', 1, NULL, NULL, NULL, '9141198098', 'pcd510@hotmail.com', NULL, NULL, NULL, 1, 1);
 INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cobrador_1', 'Angel', 'Castillo', 'López', 1, NULL, NULL, NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, NULL, 1, 1);
 INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cliente_1', 'Maria Elena', 'Gonzalez', 'Ovando', 1, NULL, NULL, NULL, '9332514561', 'marielena@hotmail.com', NULL, NULL, NULL, 1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `XRPrestamos`.`tipo_credito`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `XRPrestamos`;
+INSERT INTO `XRPrestamos`.`tipo_credito` (`id_tipo_credito`, `descripcion`) VALUES (1, 'Nuevo Cliente');
+INSERT INTO `XRPrestamos`.`tipo_credito` (`id_tipo_credito`, `descripcion`) VALUES (2, 'Renovación de credito');
+INSERT INTO `XRPrestamos`.`tipo_credito` (`id_tipo_credito`, `descripcion`) VALUES (3, 'Nuevo credito');
+INSERT INTO `XRPrestamos`.`tipo_credito` (`id_tipo_credito`, `descripcion`) VALUES (4, 'Recuperación');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `XRPrestamos`.`credito`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `XRPrestamos`;
+INSERT INTO `XRPrestamos`.`credito` (`id_credito`, `id_usuario`, `id_usuario_cliente`, `id_periodo`, `id_plazo`, `monto_credito`, `monto_pago`, `monto_total`, `fecha_credito`, `fecha_inicio_cobro`, `fecha_fin_cobro`, `fecha_ultimo_pago`, `fecha_siguiente_pago`, `pagos_total`, `pagos_pagados`, `pagos_adelantados`, `pagos_parciales`, `pagos_atrasados`, `id_estado_credito`, `id_estado`, `id_tipo_credito`, `fecha`) VALUES (1, 'admin', 'cliente1', 3, 1, 5000, 250, 6000, '2020/02/15', '2020/02/16', '2020/03/08', '2020/02/20', '2020/02/21', 24, 10, 5, 2, 1, 1, 1, 1, '2020/02/15');
 
 COMMIT;
 
