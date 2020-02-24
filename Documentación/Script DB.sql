@@ -59,7 +59,7 @@ ENGINE = InnoDB;
 -- Table `XRPrestamos`.`usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`usuario` (
-  `id_usuario` VARCHAR(20) NOT NULL,
+  `id_usuario` VARCHAR(30) NOT NULL,
   `id_sucursal` INT NULL DEFAULT 0,
   `password` VARCHAR(100) NULL,
   `id_rol` INT NULL,
@@ -184,7 +184,8 @@ ENGINE = InnoDB;
 -- Table `XRPrestamos`.`persona`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`persona` (
-  `id_usuario` VARCHAR(20) NOT NULL,
+  `id_usuario` VARCHAR(30) NOT NULL,
+  `id_usuario_referido` VARCHAR(30) NULL,
   `nombre` VARCHAR(50) NULL,
   `apellido_paterno` VARCHAR(20) NULL,
   `apellido_materno` VARCHAR(20) NULL,
@@ -218,8 +219,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`credito` (
   `id_credito` INT NOT NULL AUTO_INCREMENT,
-  `id_usuario` VARCHAR(20) NOT NULL COMMENT 'Usuario quien registra el credito',
-  `id_usuario_cliente` VARCHAR(20) NOT NULL COMMENT 'Usuario a quien se le otorga el credito',
+  `id_usuario` VARCHAR(30) NOT NULL COMMENT 'Usuario quien registra el credito',
+  `id_usuario_cliente` VARCHAR(30) NOT NULL COMMENT 'Usuario a quien se le otorga el credito',
   `id_periodo` INT NOT NULL,
   `id_plazo` INT NOT NULL,
   `monto_credito` DECIMAL(10,2) NULL,
@@ -307,7 +308,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`usuario_establecimiento` (
   `id_usuario_establecimiento` INT NOT NULL AUTO_INCREMENT,
-  `id_usuario` VARCHAR(20) NOT NULL,
+  `id_usuario` VARCHAR(30) NOT NULL,
   `nombre` VARCHAR(100) NULL,
   `id_calle` INT NULL,
   `numero_ext` VARCHAR(10) NULL,
@@ -331,7 +332,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`usuario_ruta` (
   `id_usuario_ruta` INT NOT NULL AUTO_INCREMENT,
   `id_ruta` INT NOT NULL,
-  `id_usuario` VARCHAR(20) NOT NULL,
+  `id_usuario` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id_usuario_ruta`))
 ENGINE = InnoDB;
 
@@ -343,7 +344,7 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`capital` (
   `id_capital` INT NOT NULL AUTO_INCREMENT,
   `id_sucursal` INT NOT NULL,
   `id_periodo` INT NOT NULL,
-  `id_usuario` VARCHAR(20) NOT NULL,
+  `id_usuario` VARCHAR(30) NOT NULL,
   `tipo` VARCHAR(10) NULL COMMENT '- Ingreso\n- Egreso',
   `emisor` VARCHAR(45) NULL,
   `concepto` VARCHAR(500) NULL,
@@ -355,6 +356,22 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`capital` (
   `fecha` DATE NULL COMMENT 'Fecha del Ingreso/Egreso',
   `fecha_reg` DATE NULL COMMENT 'Fecha en que se registro',
   PRIMARY KEY (`id_capital`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `XRPrestamos`.`aval`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `XRPrestamos`.`aval` (
+  `id_aval` INT NOT NULL AUTO_INCREMENT,
+  `id_usuario` VARCHAR(30) NOT NULL,
+  `nombre` VARCHAR(50) NULL,
+  `apellido_paterno` VARCHAR(20) NULL,
+  `apellido_materno` VARCHAR(20) NULL,
+  `direccion` VARCHAR(250) NULL,
+  `telefono` VARCHAR(12) NULL,
+  `parentesco` VARCHAR(50) NULL,
+  PRIMARY KEY (`id_aval`))
 ENGINE = InnoDB;
 
 
@@ -532,9 +549,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('admin', 'Daniel', 'Pérez', 'Cortéz', 1, NULL, NULL, NULL, '9141198098', 'pcd510@hotmail.com', NULL, NULL, NULL, 1, 1);
-INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cobrador_1', 'Angel', 'Castillo', 'López', 1, NULL, NULL, NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, NULL, 1, 1);
-INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cliente_1', 'Maria Elena', 'Gonzalez', 'Ovando', 1, NULL, NULL, NULL, '9332514561', 'marielena@hotmail.com', NULL, NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `id_usuario_referido`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('admin', NULL, 'Daniel', 'Pérez', 'Cortéz', 1, NULL, NULL, NULL, '9141198098', 'pcd510@hotmail.com', NULL, NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `id_usuario_referido`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cobrador_1', NULL, 'Angel', 'Castillo', 'López', 1, NULL, NULL, NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `id_usuario_referido`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cliente_1', NULL, 'Maria Elena', 'Gonzalez', 'Ovando', 1, NULL, NULL, NULL, '9332514561', 'marielena@hotmail.com', NULL, NULL, NULL, 1, 1);
 
 COMMIT;
 
