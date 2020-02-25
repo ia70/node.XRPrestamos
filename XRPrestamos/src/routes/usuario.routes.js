@@ -9,8 +9,8 @@ const primary_key = "id_usuario";
 //->>>>>    LISTA         ------------------------------------------------------------------
 router.get('/', async (req, res) => {
     try {
-        const lista = await pool.query('SELECT * FROM ' + tabla);
-        res.status(200).send({ [tabla]: lista });
+        const data = await pool.query('SELECT * FROM ' + tabla);
+        res.status(200).send({ [tabla]: data });
     } catch (e) {
         res.status(400).send(e);
     }
@@ -19,12 +19,8 @@ router.get('/', async (req, res) => {
 //->>>>>    AGREGAR     --------------------------------------------------------------------
 router.post('/', async (req, res) => {
     try {
-        await pool.query('INSERT INTO ' + tabla + ' SET ?', [req.body]);
-        res.status(200).send(
-            {
-                response: "¡Registro agregado!"
-            }
-        );
+        const data = await pool.query('INSERT INTO ' + tabla + ' SET ?', [req.body]);
+        res.status(200).send({ [tabla]: data });
     } catch (e) {
         res.status(400).send(e);
     }
@@ -33,14 +29,8 @@ router.post('/', async (req, res) => {
 //->>>>>    EDITAR      --------------------------------------------------------------------
 router.put('/', async (req, res) => {
     try {
-        await pool.query('UPDATE ' + tabla + ' SET ? WHERE ' + primary_key + ' = ?', [req.body, req.body[primary_key]]);
-        res.send(200, {
-            renponse: [
-                {
-                    response: "¡Registro editado!"
-                }
-            ]
-        });
+        const data = await pool.query('UPDATE ' + tabla + ' SET ? WHERE ' + primary_key + ' = ?', [req.body, req.body[primary_key]]);
+        res.status(200).send({ [tabla]: data });
     } catch (e) {
         res.status(400).send(e);
     }
@@ -49,14 +39,8 @@ router.put('/', async (req, res) => {
 //->>>>>    ELIMINAR    --------------------------------------------------------------------
 router.delete('/', async (req, res) => {
     try {
-        await pool.query('DELETE FROM ' + tabla + ' WHERE ' + primary_key + ' = ?', [req.body[primary_key]]);
-        res.send(200, {
-            renponse: [
-                {
-                    response: "¡Registro eliminado!"
-                }
-            ]
-        });
+        const data = await pool.query('DELETE FROM ' + tabla + ' WHERE ' + primary_key + ' = ?', [req.body[primary_key]]);
+        res.status(200).send({ [tabla]: data });
     } catch (e) {
         res.status(400).send(e);
     }
