@@ -15,18 +15,37 @@ class CarteraClientes extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            usuarios: [],
-            isloading: true
+            usuarios: []
         }
     }
 
     componentDidMount() {
-        fetch('http://192.168.2.80:8080/api/usuario')
-            .then(response => response.json())
-            .then(usuario => this.setState({ usuarios: usuario.result, isloading: false }))
+        var peticion = new Request('http://192.168.2.50/api/usuario', {
+            method: 'GET',
+            mode: 'cors',
+            redirect: 'follow',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        });
+
+        fetch(peticion)
+            .then((response) => {
+                return response.json();
+            })
+            .then((usuarios) => {
+                this.setState({ usuarios: usuarios['usuario'] });
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
     render() {
+        const listItems = this.state.usuarios.map((i,i2) =>
+            <ItemList number={i2} alias={i.id_usuario} name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Restante:" />
+        );
+
         return (
             <div>
                 <Navbar setTitle="Cartera de clientes" setLogo={Logo} />
@@ -39,7 +58,7 @@ class CarteraClientes extends Component {
                         <Title />
                     </div>
                     <div className="row" >
-                        <ItemList number="1" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Restante:" />
+                        {listItems}
                     </div>
                 </div>
             </div>

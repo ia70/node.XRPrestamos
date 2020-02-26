@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Settings ------------------------------------------------------
-app.set('port', process.env.PORT || 80);
+app.set('port', process.env.PORT || 8080);
 
 // Middlewares ---------------------------------------------------
 app.use(morgan('dev'));
