@@ -2,19 +2,16 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
-const cors = require('cors');
-const { server } = require('./keys');
 
 // Initialization ------------------------------------------------ 
 const app = express();
-app.use(cors());
 
 // Settings ------------------------------------------------------
 app.set('port', process.env.PORT || 8080);
 
 // Middlewares ---------------------------------------------------
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // Routes --------------------------------------------------------                            
@@ -45,11 +42,6 @@ app.use('/api/tipo_plazo', require('./routes/tipo_plazo.routes'));
 app.use('/api/usuario_establecimiento', require('./routes/usuario_establecimiento.routes'));
 app.use('/api/usuario_ruta', require('./routes/usuario_ruta.routes'));
 
-// Control de errores
-app.use(function (err, req, res, next) {
-    console.error(err.stack);
-    res.redirect(301, server.host + ':' + server.port);
-});
 
 //app.use(require('/user', './routes/index.routes'));
 

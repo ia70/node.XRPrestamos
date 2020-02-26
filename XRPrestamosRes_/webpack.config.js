@@ -11,7 +11,6 @@ module.exports = {
   },
   entry: './src/app/index.js',
   output: {
-    crossOriginLoading: 'anonymous',
     path: path.resolve(__dirname, 'src/public'),
     filename: 'bundle.js'
   },
