@@ -26,17 +26,17 @@ class Login extends Component {
     }
 
     login() {
-        var peticion = new Request('http://' + server.host + ':' + server.port + '/api/login', {
+        var peticion = new Request('http://192.168.2.50/api/login', {
             method: 'GET',
             mode: 'cors',
             redirect: 'follow',
             headers: new Headers({
                 'Content-Type': 'application/json'
             }),
-            body: [{
+            body: {
                 id_usuario: 'admin',
                 password: 'admin'
-            }]
+            }
         });
 
         fetch(peticion)

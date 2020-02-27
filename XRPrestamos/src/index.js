@@ -44,6 +44,7 @@ app.use('/api/tipo_inmueble', require('./routes/tipo_inmueble.routes'));
 app.use('/api/tipo_plazo', require('./routes/tipo_plazo.routes'));
 app.use('/api/usuario_establecimiento', require('./routes/usuario_establecimiento.routes'));
 app.use('/api/usuario_ruta', require('./routes/usuario_ruta.routes'));
+app.use('/api/login', require('./routes/login.routes'));
 
 // Static files --------------------------------------------------
 app.use(express.static(path.join(__dirname, 'public')));
