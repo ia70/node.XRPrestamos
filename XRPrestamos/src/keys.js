@@ -3,8 +3,8 @@ module.exports = {
     database: {
         host: '127.0.0.1',
         user: 'xcoru',
-        password: 'xcoru12345',
-        database: 'xrprestamos'
+        password: 'root',
+        database: ''
     },
     server: {
         host: '192.168.2.80',

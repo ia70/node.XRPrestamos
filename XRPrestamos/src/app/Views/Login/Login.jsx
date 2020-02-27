@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { TextBox } from '../../Components/Form/TextBox/TextBox.jsx';
 import { TextPassword } from '../../Components/Form/TextPassword/TextPassword.jsx';
 import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
-
+const { server } = require('../../../keys.js');
 
 
 
@@ -19,7 +19,36 @@ class Login extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            login: false
+        };
+        this.login = this.login.bind(this);
+    }
 
+    login() {
+        var peticion = new Request('http://' + server.host + ':' + server.port + '/api/login', {
+            method: 'GET',
+            mode: 'cors',
+            redirect: 'follow',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: [{
+                id_usuario: 'admin',
+                password: 'admin'
+            }]
+        });
+
+        fetch(peticion)
+            .then((response) => {
+                return response.json();
+            })
+            .then((respuesta) => {
+                this.setState({ login: respuesta.login });
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
     render() {
@@ -33,7 +62,8 @@ class Login extends Component {
                     <div className="row justify-content-center m-0 my-3 login_body">
                         <TextBox id="txtuser" label="Usuario" holder="Nombre del usuario" required={true} col={12} />
                         <TextPassword id="txtpassword" label="Contraseña" holder="Contraseña" required={true} col={12} />
-                        <BtnSubmit id="btnenviar" url="/dashboard" label="Entrar" />
+
+                        <div onClick={this.login} className="col d-flex justify-content-center"><BtnSubmit id="btnenviar" url="/dashboard" label="Entrar" /></div>
                     </div>
                 </div>
             </div>

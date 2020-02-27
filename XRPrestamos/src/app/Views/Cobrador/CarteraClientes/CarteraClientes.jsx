@@ -42,15 +42,10 @@ class CarteraClientes extends Component {
     }
 
     render() {
-        const listItems = [];
-        try {
-            listItems = this.state.usuarios.map((i) =>
-                <ItemList number="1" alias={i.id_usuario} name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Restante:" />
-            );
-        } catch (e) {
 
-        }
-
+        const listItems = this.state.usuarios.map((i) =>
+            <ItemList number="1" alias={i.id_usuario} name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Restante:" />
+        );
 
         return (
             <div>

@@ -1,47 +1,23 @@
+'use strict';
 const express = require('express');
 const router = express.Router();
 
-const passport = require('passport');
-const { isLoggedIn } = require('../lib/auth');
+const pool = require('../database');
+const tabla = "usuario";
+const primary_key = "id_usuario";
 
-// SIGNUP
-router.get('/signup', (req, res) => {
-  res.render('auth/signup');
-});
-
-router.post('/signup', passport.authenticate('local.signup', {
-  successRedirect: '/profile',
-  failureRedirect: '/signup',
-  failureFlash: true
-}));
-
-// SINGIN
-router.get('/signin', (req, res) => {
-  res.render('auth/signin');
-});
-
-router.post('/signin', (req, res, next) => {
-  req.check('username', 'Username is Required').notEmpty();
-  req.check('password', 'Password is Required').notEmpty();
-  const errors = req.validationErrors();
-  if (errors.length > 0) {
-    req.flash('message', errors[0].msg);
-    res.redirect('/signin');
-  }
-  passport.authenticate('local.signin', {
-    successRedirect: '/profile',
-    failureRedirect: '/signin',
-    failureFlash: true
-  })(req, res, next);
-});
-
-router.get('/logout', (req, res) => {
-  req.logOut();
-  res.redirect('/');
-});
-
-router.get('/profile', isLoggedIn, (req, res) => {
-  res.render('profile');
+//->>>>>    LISTA         ------------------------------------------------------------------
+router.get('/', async (req, res) => {
+    try {
+        const data = await pool.query('SELECT * FROM ' + tabla + 'WHERE id_usuario=' + req.body.id_usuario + ' AND password=' + req.body.password);
+        console.log(data);
+        res.status(200).send({
+          login: true,
+          datos: data
+        });
+    } catch (e) {
+        res.status(400).send(e);
+    }
 });
 
 module.exports = router;
