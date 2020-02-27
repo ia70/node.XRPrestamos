@@ -27,31 +27,37 @@ class Login extends Component {
     }
 
     login() {
-        var peticion = new Request('http://192.168.2.50/api/login', {
-            method: 'GET',
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            }),
-        });
-
-        fetch(peticion, {
+        var url = 'http://192.168.2.50/api/login';
+        var data = {
             id_usuario: 'admin',
             password: 'admin'
-        })
-            .then((response) => {
-                return response.json();
+        };
+
+        fetch(url, {
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(data), // data can be `string` or {object}!
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .catch(error => {
+                console.error('Error:', error)
             })
-            .then((respuesta) => {
-                this.setState({ login: respuesta.login });
-            })
-            .catch((err) => {
-                console.error(err);
+            .then(response => {
+                console.log('Success:', response)
             });
+            
+        return ({});
     }
 
     render() {
+
+        if (this.state.login == true) {
+            window.location = "/dashboard";
+        }
+
         return (
-            <div className="contenedor">
+            <div className="contenedor" >
                 <div className="column p-0 justify-content-center login login_body">
                     <div className="row justify-content-center m-0 login_title">
                         <h3>Login</h3>
@@ -60,7 +66,7 @@ class Login extends Component {
                         <TextBox id="txtuser" label="Usuario" holder="Nombre del usuario" required={true} col={12} />
                         <TextPassword id="txtpassword" label="Contraseña" holder="Contraseña" required={true} col={12} />
 
-                        <div onClick={this.login} className="col d-flex justify-content-center"><BtnSubmit id="btnenviar" url={(this.state.login) ? "/dashboard" : ""} label="Entrar" /></div>
+                        <BtnSubmit id="btnenviar" url="#" label="Entrar" evento={this.login} />
                     </div>
                 </div>
             </div>

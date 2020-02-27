@@ -7,7 +7,7 @@ const tabla = "usuario";
 const primary_key = "id_usuario";
 
 //->>>>>    LISTA         ------------------------------------------------------------------
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const data = await pool.query('SELECT * FROM ' + tabla + ' WHERE id_usuario="' + req.body.id_usuario + '" AND password="' + req.body.password + '"');
 
