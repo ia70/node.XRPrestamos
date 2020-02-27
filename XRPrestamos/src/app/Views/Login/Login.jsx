@@ -1,5 +1,6 @@
 // DEPENDENCIES ----------------------------------------------------------------------
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 //COMPONENTS -------------------------------------------------------------------------
 import { TextBox } from '../../Components/Form/TextBox/TextBox.jsx';
@@ -28,18 +29,15 @@ class Login extends Component {
     login() {
         var peticion = new Request('http://192.168.2.50/api/login', {
             method: 'GET',
-            mode: 'cors',
-            redirect: 'follow',
             headers: new Headers({
                 'Content-Type': 'application/json'
             }),
-            body: {
-                id_usuario: 'admin',
-                password: 'admin'
-            }
         });
 
-        fetch(peticion)
+        fetch(peticion, {
+            id_usuario: 'admin',
+            password: 'admin'
+        })
             .then((response) => {
                 return response.json();
             })
@@ -52,7 +50,6 @@ class Login extends Component {
     }
 
     render() {
-
         return (
             <div className="contenedor">
                 <div className="column p-0 justify-content-center login login_body">
@@ -63,7 +60,7 @@ class Login extends Component {
                         <TextBox id="txtuser" label="Usuario" holder="Nombre del usuario" required={true} col={12} />
                         <TextPassword id="txtpassword" label="Contraseña" holder="Contraseña" required={true} col={12} />
 
-                        <div onClick={this.login} className="col d-flex justify-content-center"><BtnSubmit id="btnenviar" url="/dashboard" label="Entrar" /></div>
+                        <div onClick={this.login} className="col d-flex justify-content-center"><BtnSubmit id="btnenviar" url={(this.state.login) ? "/dashboard" : ""} label="Entrar" /></div>
                     </div>
                 </div>
             </div>
