@@ -27,7 +27,7 @@ class Login extends Component {
     }
 
     login() {
-        var url = 'http://192.168.2.50/api/login';
+        var url = 'http://192.168.2.80/api/login';
         var data = {
             id_usuario: 'admin',
             password: 'admin'

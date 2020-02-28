@@ -51,7 +51,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Control de errores
 app.use(function (req, res) {
-    //res.redirect(301, 'http://' + server.host + ':' + server.port);
     res.redirect(301, '../');
 });
 
