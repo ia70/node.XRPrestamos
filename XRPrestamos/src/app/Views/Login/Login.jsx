@@ -1,6 +1,6 @@
 // DEPENDENCIES ----------------------------------------------------------------------
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 //COMPONENTS -------------------------------------------------------------------------
 import { TextBox } from '../../Components/Form/TextBox/TextBox.jsx';
@@ -21,7 +21,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            login: false
+            login: null
         };
         this.login = this.login.bind(this);
     }
@@ -34,26 +34,33 @@ class Login extends Component {
         };
 
         fetch(url, {
-            method: 'POST', // or 'PUT'
-            body: JSON.stringify(data), // data can be `string` or {object}!
+            method: 'POST',
+            body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(res => res.json())
             .catch(error => {
-                console.error('Error:', error)
+                this.setState({ login: error });
             })
             .then(response => {
-                console.log('Success:', response)
+                console.log(response);
+                this.setState({ login: response.login });
             });
-            
-        return ({});
+
     }
 
     render() {
-
+        const cadena = "";
         if (this.state.login == true) {
-            window.location = "/dashboard";
+            return (
+                <Redirect
+                    from="/"
+                    to="/dashboard" />
+            );
+        } else if (this.state.login == false) {
+            this.setState({ login: null })
+            alert("Datos incorrectos!");
         }
 
         return (
@@ -67,6 +74,7 @@ class Login extends Component {
                         <TextPassword id="txtpassword" label="Contraseña" holder="Contraseña" required={true} col={12} />
 
                         <BtnSubmit id="btnenviar" url="#" label="Entrar" evento={this.login} />
+                        {cadena}
                     </div>
                 </div>
             </div>

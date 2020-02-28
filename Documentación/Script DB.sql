@@ -40,6 +40,29 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `XRPrestamos`.`moneda`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `XRPrestamos`.`moneda` (
+  `id_moneda` INT NOT NULL AUTO_INCREMENT,
+  `abreviatura` VARCHAR(5) NULL,
+  `descripcion` VARCHAR(50) NULL,
+  PRIMARY KEY (`id_moneda`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `XRPrestamos`.`zona_horaria`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `XRPrestamos`.`zona_horaria` (
+  `id_zona_horaria` INT NOT NULL AUTO_INCREMENT,
+  `utc` VARCHAR(10) NULL,
+  `zona` VARCHAR(50) NULL,
+  `descripcion` VARCHAR(100) NULL,
+  PRIMARY KEY (`id_zona_horaria`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `XRPrestamos`.`sucursal`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`sucursal` (
@@ -50,6 +73,8 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`sucursal` (
   `id_ciudad` INT NULL,
   `cp` VARCHAR(45) NULL,
   `telefono` VARCHAR(45) NULL,
+  `id_moneda` INT NULL,
+  `id_zona_horaria` INT NULL,
   `id_estado` INT NOT NULL,
   PRIMARY KEY (`id_sucursal`))
 ENGINE = InnoDB;
@@ -376,6 +401,20 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `XRPrestamos`.`sesion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `XRPrestamos`.`sesion` (
+  `id_sesion` INT NOT NULL AUTO_INCREMENT,
+  `id_usuario` VARCHAR(30) NULL,
+  `inicio_sesion` DATETIME NULL,
+  `ultima_conexion` DATETIME NULL,
+  `fin_sesion` DATETIME NULL,
+  `id_estado` INT NULL,
+  PRIMARY KEY (`id_sesion`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Data for table `XRPrestamos`.`estado`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -399,11 +438,33 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `XRPrestamos`.`moneda`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `XRPrestamos`;
+INSERT INTO `XRPrestamos`.`moneda` (`id_moneda`, `abreviatura`, `descripcion`) VALUES (1, 'MXN', 'Pesos Mexicanos');
+INSERT INTO `XRPrestamos`.`moneda` (`id_moneda`, `abreviatura`, `descripcion`) VALUES (2, 'USD', 'Dolar Estadonidense');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `XRPrestamos`.`zona_horaria`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `XRPrestamos`;
+INSERT INTO `XRPrestamos`.`zona_horaria` (`id_zona_horaria`, `utc`, `zona`, `descripcion`) VALUES (1, 'UTC-6', 'America/Mexico_City', 'México');
+INSERT INTO `XRPrestamos`.`zona_horaria` (`id_zona_horaria`, `utc`, `zona`, `descripcion`) VALUES (2, 'UTC-7', 'America/Phoenix', 'United States');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `XRPrestamos`.`sucursal`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`sucursal` (`id_sucursal`, `id_empresa`, `nombre`, `direccion`, `id_ciudad`, `cp`, `telefono`, `id_estado`) VALUES (1, 'RFC45GENERICO', 'Comalcalco', 'Calle Reforma', 1, '86300', '9331490521', 1);
+INSERT INTO `XRPrestamos`.`sucursal` (`id_sucursal`, `id_empresa`, `nombre`, `direccion`, `id_ciudad`, `cp`, `telefono`, `id_moneda`, `id_zona_horaria`, `id_estado`) VALUES (1, 'RFC45GENERICO', 'Comalcalco', 'Calle Reforma', 1, '86300', '9331490521', NULL, NULL, 1);
 
 COMMIT;
 
