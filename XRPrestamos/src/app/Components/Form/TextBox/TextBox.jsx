@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './TextBox.css';
 /* -->  PROPIEDADES  VERIFICADO --------------------------------------------
 
@@ -11,6 +11,7 @@ import './TextBox.css';
     7- cls          > Agregar clases Bootstrap ("clas1 class2 etc")
     8- minlength    > Indica el número minimo de caracteres del campo (número)
     9- maxlength    > Indica el número maximo de caracteres del campo (número)
+    10- event       >Evento del campo o función
  
     ==>  id="" label="" holder="" help="" required={true} col={null} cls=""
 
@@ -18,33 +19,63 @@ import './TextBox.css';
     NOTAS: Preferentemente el campo ó conjunto de campos debe ser contenido dentro de un "div" con className: "row"
 */
 
-export function TextBox(props) {
-    let columna = " col-xs-12 col-sm-4 col-lg-3";
-    let addclass = "";
+class TextBox extends Component {
 
-    if (props.col != null) {
-        columna = " col-" + props.col;
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            [props.id]: '',
+            value: ''
+        };
+        this.handleChange = this.handleChange.bind(this)
     }
 
-    if (props.cls != null) {
-        addclass = " " + props.cls;
-    }
+    handleChange(e) {
+        const name = e.target.name;
+        const value = e.target.value;
 
-    if (props.required) {
-        return (
-            <div className={"form-group" + columna + addclass}>
-                <label htmlFor={props.id || "01"}>{props.label || ""}</label>
-                <input type="text" className="form-control" id={props.id || "01"} aria-describedby="textHelp" placeholder={props.holder || ""} minLength={props.minlength || 1} maxLength={props.maxlength || 20} required />
-                <small id="textHelp" className="form-text text-muted">{props.help || ""}</small>
-            </div>
-        );
-    } else {
-        return (
-            <div className={"form-group" + columna + addclass}>
-                <label htmlFor={props.id || "01"}>{props.label || ""}</label>
-                <input type="text" className="form-control" id={props.id || "01"} aria-describedby="textHelp" placeholder={props.holder || ""} minLength={props.minlength || 1} maxLength={props.maxlength || 20} />
-                <small id="textHelp" className="form-text text-muted">{props.help || ""}</small>
-            </div>
-        );
+        this.props.evento(e);
+        /*
+        this.setState({
+            [name]: value
+        })*/
+    };
+
+    render() {
+        let columna = " col-xs-12 col-sm-4 col-lg-3";
+        let addclass = "";
+
+        if (props.col != null) {
+            columna = " col-" + props.col;
+        }
+
+        if (props.cls != null) {
+            addclass = " " + props.cls;
+        }
+
+        if (props.required) {
+            return (
+                <div className={"form-group" + columna + addclass}>
+                    <label htmlFor={props.id || "01"}>{props.label || ""}</label>
+                    <input type="text" className="form-control" id={props.id || "01"} aria-describedby="textHelp"
+                        onChange={this.handleChange} placeholder={props.holder || ""} minLength={props.minlength || 1}
+                        maxLength={props.maxlength || 20} required />
+                    <small id="textHelp" className="form-text text-muted">{props.help || ""}</small>
+                </div>
+            );
+        } else {
+            return (
+                <div className={"form-group" + columna + addclass}>
+                    <label htmlFor={props.id || "01"}>{props.label || ""}</label>
+                    <input type="text" className="form-control" id={props.id || "01"} aria-describedby="textHelp"
+                        onChange={this.handleChange} placeholder={props.holder || ""} minLength={props.minlength || 1}
+                        maxLength={props.maxlength || 20} />
+                    <small id="textHelp" className="form-text text-muted">{props.help || ""}</small>
+                </div>
+            );
+        }
     }
 }
+
+export default TextBox;

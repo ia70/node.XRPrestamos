@@ -1,6 +1,7 @@
 // DEPENDENCIES ----------------------------------------------------------------------
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 //COMPONENTS -------------------------------------------------------------------------
 import { TextBox } from '../../Components/Form/TextBox/TextBox.jsx';
@@ -21,33 +22,40 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            login: null
+            login: null,
+            txtusuario: null,
+            txtpassword: null
         };
         this.login = this.login.bind(this);
+        this.leer = this.leer.bind(this);
     }
+
+    
+    leer(e) {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({
+            [name]: value
+        })
+    };
 
     login() {
         var url = 'http://192.168.2.80/api/login';
-        var data = {
-            id_usuario: 'admin',
-            password: 'admin'
-        };
-
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
+        axios.get(url, {
+            params: {
+                id_usuario: 'admin',
+                password: 'admin2'
             }
-        }).then(res => res.json())
-            .catch(error => {
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
                 this.setState({ login: error });
             })
-            .then(response => {
-                console.log(response);
-                this.setState({ login: response.login });
+            .then(function () {
+                this.setState({ login: response.login })
             });
-
     }
 
     render() {
@@ -70,8 +78,8 @@ class Login extends Component {
                         <h3>Login</h3>
                     </div>
                     <div className="row justify-content-center m-0 my-3 login_body">
-                        <TextBox id="txtuser" label="Usuario" holder="Nombre del usuario" required={true} col={12} />
-                        <TextPassword id="txtpassword" label="Contraseña" holder="Contraseña" required={true} col={12} />
+                        <TextBox evento={this.leer} id="txtusuario" label="Usuario" holder="Nombre del usuario" required={true} col={12} />
+                        <TextPassword evento={this.leer} id="txtpassword" label="Contraseña" holder="Contraseña" required={true} col={12} />
 
                         <BtnSubmit id="btnenviar" url="#" label="Entrar" evento={this.login} />
                         {cadena}
