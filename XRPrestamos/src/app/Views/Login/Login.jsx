@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 //COMPONENTS -------------------------------------------------------------------------
-import { TextBox } from '../../Components/Form/TextBox/TextBox.jsx';
+import TextBox  from '../../Components/Form/TextBox/TextBox.jsx';
 import { TextPassword } from '../../Components/Form/TextPassword/TextPassword.jsx';
 import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
 const { server } = require('../../../keys.js');
@@ -34,10 +34,12 @@ class Login extends Component {
     leer(e) {
         const name = e.target.name;
         const value = e.target.value;
+        console.log(name);
+        console.log(value);
         this.setState({
             [name]: value
         })
-    };
+    }
 
     login() {
         var url = 'http://192.168.2.80/api/login';
@@ -78,8 +80,8 @@ class Login extends Component {
                         <h3>Login</h3>
                     </div>
                     <div className="row justify-content-center m-0 my-3 login_body">
-                        <TextBox evento={this.leer} id="txtusuario" label="Usuario" holder="Nombre del usuario" required={true} col={12} />
-                        <TextPassword evento={this.leer} id="txtpassword" label="Contraseña" holder="Contraseña" required={true} col={12} />
+                        <TextBox id="txtusuario" label="Usuario" holder="Nombre del usuario" required={true} col={12} />
+                        <TextPassword id="txtpassword" label="Contraseña" holder="Contraseña" required={true} col={12} />
 
                         <BtnSubmit id="btnenviar" url="#" label="Entrar" evento={this.login} />
                         {cadena}

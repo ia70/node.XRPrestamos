@@ -23,19 +23,14 @@ class TextBox extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            [props.id]: '',
-            value: ''
-        };
-        this.handleChange = this.handleChange.bind(this)
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(e) {
         const name = e.target.name;
         const value = e.target.value;
 
-        this.props.evento(e);
+        //props.evento(e);
         /*
         this.setState({
             [name]: value
@@ -46,32 +41,32 @@ class TextBox extends Component {
         let columna = " col-xs-12 col-sm-4 col-lg-3";
         let addclass = "";
 
-        if (props.col != null) {
-            columna = " col-" + props.col;
+        if (this.props.col != null) {
+            columna = " col-" + this.props.col;
         }
 
-        if (props.cls != null) {
-            addclass = " " + props.cls;
+        if (this.props.cls != null) {
+            addclass = " " + this.props.cls;
         }
 
-        if (props.required) {
+        if (this.props.required) {
             return (
                 <div className={"form-group" + columna + addclass}>
-                    <label htmlFor={props.id || "01"}>{props.label || ""}</label>
-                    <input type="text" className="form-control" id={props.id || "01"} aria-describedby="textHelp"
-                        onChange={this.handleChange} placeholder={props.holder || ""} minLength={props.minlength || 1}
-                        maxLength={props.maxlength || 20} required />
-                    <small id="textHelp" className="form-text text-muted">{props.help || ""}</small>
+                    <label htmlFor={this.props.id || "01"}>{this.props.label || ""}</label>
+                    <input type="text" className="form-control" id={this.props.id || "01"} aria-describedby="textHelp"
+                        onChange={this.handleChange} placeholder={this.props.holder || ""} minLength={this.props.minlength || 1}
+                        maxLength={this.props.maxlength || 20} required />
+                    <small id="textHelp" className="form-text text-muted">{this.props.help || ""}</small>
                 </div>
             );
         } else {
             return (
                 <div className={"form-group" + columna + addclass}>
-                    <label htmlFor={props.id || "01"}>{props.label || ""}</label>
-                    <input type="text" className="form-control" id={props.id || "01"} aria-describedby="textHelp"
-                        onChange={this.handleChange} placeholder={props.holder || ""} minLength={props.minlength || 1}
-                        maxLength={props.maxlength || 20} />
-                    <small id="textHelp" className="form-text text-muted">{props.help || ""}</small>
+                    <label htmlFor={this.props.id || "01"}>{this.props.label || ""}</label>
+                    <input type="text" className="form-control" id={this.props.id || "01"} aria-describedby="textHelp"
+                        onChange={this.handleChange} placeholder={this.props.holder || ""} minLength={this.props.minlength || 1}
+                        maxLength={this.props.maxlength || 20} />
+                    <small id="textHelp" className="form-text text-muted">{this.props.help || ""}</small>
                 </div>
             );
         }

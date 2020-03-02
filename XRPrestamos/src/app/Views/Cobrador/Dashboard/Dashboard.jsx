@@ -2,16 +2,7 @@ import React, { Component } from 'react';
 
 //COMPONENTES
 import BtnRounded from '../../../Components/Content/BtnRounded/BtnRounded.jsx';
-import NuevoCliente from '../../NuevoCliente/NuevoCliente.jsx';
-import SolicitarDinero from '../SolicitarDinero/SolicitarDinero.jsx';
 import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
-import EstadoSolicitud from '../EstadoSolicitud/EstadoSolicitud.jsx';
-import Cobrar from '../Cobrar/Cobrar.jsx';
-import CarteraClientes from '../CarteraClientes/CarteraClientes.jsx';
-
-
-import ModalCollect from '../../../Components/Custom/ModalCollect/ModalCollect.jsx';
-
 
 // IMAGENES
 import imgCarteraClientes from '../../../img/CarteraClientes.png';
