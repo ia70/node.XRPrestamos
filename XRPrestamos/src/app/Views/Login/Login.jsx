@@ -25,8 +25,7 @@ class Login extends Component {
             txtpassword: null
         };
 
-        this.login = this.login.bind(this);
-        this.leer = this.leer.bind(this);
+        this.enviar = this.enviar.bind(this);
     }
 
     enviar() {
