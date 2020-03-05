@@ -44,7 +44,7 @@ class SolicitarDinero extends Component {
     render() {
         return (
             <React.Fragment>
-                <Navbar setLogo={Logo} setTitle="Solicitar Dinero" />
+                <Navbar setLogo={Logo} setTitle="Solicitar Dinero" setButton={true}/>
                 <div className="container-fluid">
                     <div className="row" >
                         <Title title="" />

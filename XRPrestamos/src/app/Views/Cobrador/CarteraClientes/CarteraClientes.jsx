@@ -5,7 +5,7 @@ import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
 import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx';
 import { Title } from '../../../Components/Content/Title/Title.jsx';
 import { TextSearch } from '../../../Components/Form/TextSearch/TextSearch.jsx';
-const { server } = require('../../../../../src/keys');
+const { database } = require('../../../../../src/keys');
 
 import Logo from '../../../img/Logo.png';
 import './CarteraClientes.css';
@@ -20,16 +20,14 @@ class CarteraClientes extends Component {
     }
 
     componentDidMount() {
-        var peticion = new Request('http://192.168.2.50/api/usuario', {
-            method: 'GET',
-            mode: 'cors',
-            redirect: 'follow',
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            })
-        });
+        var url = 'http://' + database.host + '/api/usuario';
 
-        fetch(peticion)
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then((response) => {
                 return response.json();
             })
@@ -42,14 +40,14 @@ class CarteraClientes extends Component {
     }
 
     render() {
-
+        var indice = 0;
         const listItems = this.state.usuarios.map((i) =>
-            <ItemList number="1" alias={i.id_usuario} name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Restante:" />
+            <ItemList key={i.id_usuario} alias={i.id_usuario} number={++indice} name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Restante:" />
         );
 
         return (
             <div>
-                <Navbar setTitle="Cartera de clientes" setLogo={Logo} />
+                <Navbar setTitle="Cartera de clientes" setLogo={Logo} setButton={true}/>
                 <div className="container-fluid">
                     <div className="row Cobrar">
                         <Title />

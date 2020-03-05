@@ -91,7 +91,7 @@ export function ItemList(props) {
                 </div>
             </div>
 
-            <ModalCollect id={"item" + props.number} alias={props.alias} name={props.name} amount={props.amount} />
+            <ModalCollect id={"item" + props.number} alias={props.alias} name={props.name} amount={props.amount} number={props.number}/>
         </div>
     );
 }

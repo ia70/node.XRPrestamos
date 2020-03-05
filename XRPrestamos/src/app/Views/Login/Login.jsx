@@ -1,14 +1,12 @@
 // DEPENDENCIES ----------------------------------------------------------------------
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
 
 //COMPONENTS -------------------------------------------------------------------------
-import TextBox  from '../../Components/Form/TextBox/TextBox.jsx';
+import TextBox from '../../Components/Form/TextBox/TextBox.jsx';
 import { TextPassword } from '../../Components/Form/TextPassword/TextPassword.jsx';
 import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
-const { server } = require('../../../keys.js');
-
+const keys = require('../../../keys.js');
 
 
 import './Login.css';
@@ -26,42 +24,30 @@ class Login extends Component {
             txtusuario: null,
             txtpassword: null
         };
+
         this.login = this.login.bind(this);
         this.leer = this.leer.bind(this);
     }
 
-    
-    leer(e) {
-        const name = e.target.name;
-        const value = e.target.value;
-        console.log(name);
-        console.log(value);
-        this.setState({
-            [name]: value
-        })
-    }
+    enviar() {
+        var usuario = document.getElementById('txtusuario').value;
+        var password = document.getElementById('txtpassword').value;
 
-    login() {
-        var url = 'http://192.168.2.80/api/login';
-        axios.get(url, {
-            params: {
-                id_usuario: 'admin',
-                password: 'admin2'
+        var url = 'http://' + keys.database.host + '/api/login?id_usuario=' + usuario + '&password=' + password;
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
             }
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                this.setState({ login: error });
-            })
-            .then(function () {
-                this.setState({ login: response.login })
-            });
+        }).then(res => res.json())
+            .catch(error => console.error(error))
+            .then(response => this.setState(response));
+
+        
     }
 
     render() {
-        const cadena = "";
         if (this.state.login == true) {
             return (
                 <Redirect
@@ -83,8 +69,7 @@ class Login extends Component {
                         <TextBox id="txtusuario" label="Usuario" holder="Nombre del usuario" required={true} col={12} />
                         <TextPassword id="txtpassword" label="Contraseña" holder="Contraseña" required={true} col={12} />
 
-                        <BtnSubmit id="btnenviar" url="#" label="Entrar" evento={this.login} />
-                        {cadena}
+                        <BtnSubmit id="btnenviar" url="#" label="Entrar" evento={this.enviar} />
                     </div>
                 </div>
             </div>

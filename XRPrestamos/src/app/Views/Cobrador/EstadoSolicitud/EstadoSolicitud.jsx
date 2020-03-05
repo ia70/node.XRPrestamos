@@ -17,7 +17,7 @@ class EstadoSolicitud extends Component {
     render() {
         return (
             <div>
-                <Navbar setLogo={Logo} setTitle="Estado de solicitudes" />
+                <Navbar setLogo={Logo} setTitle="Estado de solicitudes" setButton={true}/>
                 <div className="container-fluid">
                     <div className="row">
 

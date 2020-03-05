@@ -31,9 +31,10 @@ class Dashboard extends Component {
     }
 
     render() {
+       //sessionStorage.
         return (
             <div>
-                <Navbar setLogo={Logo} setTitle={this.state.userName} setDate={true} setButton="false" />
+                <Navbar setLogo={Logo} setTitle={this.state.userName} setDate={true} setButton={true} />
 
                 <div className="container-fluid">
                     <div className="row">
