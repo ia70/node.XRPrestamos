@@ -6,61 +6,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
+    <link rel="icon" type="icon" href="favicon.ico" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 
     <style type="text/css">
-        .loader-page {
-            position: fixed;
-            z-index: 25000;
-            background: rgb(255, 255, 255);
-            left: 0px;
-            top: 0px;
-            height: 100%;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all .3s ease;
-        }
-
-        .loader-page::before {
-            content: "";
+        .centrar {
             position: absolute;
-            border: 2px solid rgb(50, 150, 176);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            box-sizing: border-box;
-            border-left: 2px solid rgba(50, 150, 176, 0);
-            border-top: 2px solid rgba(50, 150, 176, 0);
-            animation: rotarload 1s linear infinite;
-            transform: rotate(0deg);
-        }
-
-        @keyframes rotarload {
-            0% {
-                transform: rotate(0deg)
-            }
-
-            100% {
-                transform: rotate(360deg)
-            }
-        }
-
-        .loader-page::after {
-            content: "";
-            position: absolute;
-            border: 2px solid rgba(50, 150, 176, .5);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            box-sizing: border-box;
-            border-left: 2px solid rgba(50, 150, 176, 0);
-            border-top: 2px solid rgba(50, 150, 176, 0);
-            animation: rotarload 1s ease-out infinite;
-            transform: rotate(0deg);
+            /*nos posicionamos en el centro del navegador*/
+            top: 50%;
+            left: 50%;
+            /*determinamos una anchura*/
+            width: 260px;
+            /*indicamos que el margen izquierdo, es la mitad de la anchura*/
+            margin-left: -130px;
+            /*determinamos una altura*/
+            height: 130px;
+            /*indicamos que el margen superior, es la mitad de la altura*/
+            margin-top: -150px;
+            padding: 5px;
         }
     </style>
 
@@ -72,7 +36,9 @@
         ¡Se necesita tener JavaScript habilitado para ejecutar esta aplicación!
     </noscript>
     <div id="root">
-        <div class="loader-page"></div>
+        <div class="centrar">
+            <img src="loading.gif" alt="Loading...">
+        </div>
     </div>
 
     <!-- Scripts ------------------------------------------------------------------------------------ -->
@@ -86,15 +52,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Scripts FIN -------------------------------------------------------------------------------- -->
 
+
     <script type="text/javascript" src="bundle.js"></script>
-    <script type="text/javascript">
-        $(window).on('load', function () {
-            $(".loader-page").css({ visibility: "hidden", opacity: "0" });
-        });
-    </script>
 </body>
 
 </html>
