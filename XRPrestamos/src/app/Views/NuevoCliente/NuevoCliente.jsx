@@ -70,14 +70,8 @@ class NuevoCliente extends Component {
                         <TextBox id="p_nombre" label="Nombre" holder="Nombre del cliente" help="" required={true} />
                         <TextBox id="p_apaterno" label="A. Paterno" holder="Apellido paterno" help="" required={true} />
                         <TextBox id="p_amaterno" label="A. Materno" holder="Apellido materno" help="" required={true} />
-
-                        <ComboBox id="p_pais" label="Pais" items=""></ComboBox>
-                        <ComboBox id="p_estado" label="Estado" items=""></ComboBox>
-                        <ComboBox id="p_municipio" label="Municipio" items={[]}></ComboBox>
-                        <TextBox id="p_colonia" label="Colonia" holder="Colonia" help="" required={true} />
-                        <TextBox id="p_calle" label="Calle" holder="Calle" help="" required={true} />
                         <TextBox id="p_no_casa" label="Número exterior" holder="Número exterior" help="" required={true} />
-
+                        <TextBox id="p_direccion" label="Dirección" holder="Dirección" help="" required={true} />
 
 
                         <TextBox id="p_referencia" label="Referencia" holder="Referencia" help="" required={true} />

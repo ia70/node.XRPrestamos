@@ -215,6 +215,7 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`persona` (
   `apellido_paterno` VARCHAR(20) NULL,
   `apellido_materno` VARCHAR(20) NULL,
   `id_calle` INT NULL,
+  `direccion` VARCHAR(250) NULL,
   `no_casa` VARCHAR(10) NULL,
   `referencias` VARCHAR(250) NULL,
   `foto_casa` LONGBLOB NULL,
@@ -223,8 +224,8 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`persona` (
   `foto` LONGBLOB NULL,
   `ine_clave` VARCHAR(150) NULL,
   `ine_img` LONGBLOB NULL,
-  `id_tipo_inmueble` INT NOT NULL,
-  `id_estado` INT NOT NULL,
+  `id_tipo_inmueble` INT NULL,
+  `id_estado` INT NULL,
   PRIMARY KEY (`id_usuario`))
 ENGINE = InnoDB;
 
@@ -338,14 +339,15 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`usuario_establecimiento` (
   `id_calle` INT NULL,
   `numero_ext` VARCHAR(10) NULL,
   `referencias` VARCHAR(250) NULL,
-  `id_actividad_economica` INT NOT NULL,
-  `id_tipo_inmueble` INT NOT NULL,
-  `id_ruta` INT NOT NULL,
+  `id_actividad_economica` INT NULL,
+  `id_tipo_inmueble` INT NULL,
+  `documento_adicional` LONGBLOB NULL,
   `disponibilidad_hr_inicio` VARCHAR(30) NULL COMMENT 'Hora de paertura de local | Hora de inicio de disponibilidad',
   `disponibilidad_hr_fin` VARCHAR(30) NULL COMMENT 'Hora de cierre de local | Hora de fin de disponibilidad',
   `coordenadas` VARCHAR(100) NULL,
   `foto` LONGBLOB NULL,
-  `id_estado` INT NOT NULL,
+  `id_ruta` INT NULL,
+  `id_estado` INT NULL,
   PRIMARY KEY (`id_usuario_establecimiento`))
 ENGINE = InnoDB;
 
@@ -403,7 +405,7 @@ ENGINE = InnoDB;
 -- Table `XRPrestamos`.`sesion`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`sesion` (
-  `id_sesion` INT NOT NULL AUTO_INCREMENT,
+  `id_sesion` VARCHAR(60) NOT NULL,
   `id_usuario` VARCHAR(30) NULL,
   `inicio_sesion` DATETIME NULL,
   `ultima_conexion` DATETIME NULL,
@@ -610,9 +612,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('admin', NULL, NULL, 'Daniel', 'Pérez', 'Cortéz', 1, NULL, NULL, NULL, '9141198098', 'pcd510@hotmail.com', NULL, NULL, NULL, 1, 1);
-INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cobrador_1', NULL, NULL, 'Angel', 'Castillo', 'López', 1, NULL, NULL, NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, NULL, 1, 1);
-INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cliente_1', NULL, NULL, 'Maria Elena', 'Gonzalez', 'Ovando', 1, NULL, NULL, NULL, '9332514561', 'marielena@hotmail.com', NULL, NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('admin', NULL, NULL, 'Daniel', 'Pérez', 'Cortéz', 1, NULL, NULL, NULL, NULL, '9141198098', 'pcd510@hotmail.com', NULL, NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cobrador_1', NULL, NULL, 'Angel', 'Castillo', 'López', 1, NULL, NULL, NULL, NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cliente_1', NULL, NULL, 'Maria Elena', 'Gonzalez', 'Ovando', 1, NULL, NULL, NULL, NULL, '9332514561', 'marielena@hotmail.com', NULL, NULL, NULL, 1, 1);
 
 COMMIT;
 
@@ -697,7 +699,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `id_ruta`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_estado`) VALUES (1, '1', 'Polleria Mercado', 1, 'Mercado', NULL, 4, 1, 1, '8:00', '18:00', NULL, NULL, 1);
+INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (1, '1', 'Polleria Mercado', 1, 'Mercado', NULL, 4, 1, NULL, '8:00', '18:00', NULL, NULL, 1, 1);
 
 COMMIT;
 
