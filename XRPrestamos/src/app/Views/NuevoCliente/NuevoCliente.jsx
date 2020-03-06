@@ -8,6 +8,7 @@ import { TextEmail } from '../../Components/Form/TextEmail/TextEmail.jsx';
 import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
 import { ComboBox } from '../../Components/Form/ComboBox/ComboBox.jsx';
 import { FileInput } from '../../Components/Form/FileInput/FileInput.jsx';
+import { TextTime } from '../../Components/Form/TextTime/TextTime.jsx';
 
 import Logo from '../../img/Logo.png';
 
@@ -94,6 +95,8 @@ class NuevoCliente extends Component {
                         </div>
 
 
+
+
                         <Title title="DATOS DEL NEGOCIO" />
 
                         <TextBox id="n_nombre" label="Nombre del Negocio" holder="Nombre del Negocio" help="" required={true} />
@@ -102,8 +105,8 @@ class NuevoCliente extends Component {
 
                         <TextPhoneNumber id="n_telefono" label="Telefono" holder="Telefono" help="" required={false} />
                         <TextEmail id="n_email" label="Correo electrónico" holder="Correo electrónico" help="" required={false} />
-                        <TextBox id="n_dispo_inicio" label="Hr. Ini. Disponibilidad" holder="Hr. Ini. Disponibilidad" help="" required={true} />
-                        <TextBox id="n_dispo_fin" label="Hr. Fin. Disponibilidad" holder="Hr. Fin. Disponibilidad" help="" required={true} />
+                        <TextTime id="n_hora_inicio" label="Inicio de disponibilidad" holder="Inicio de disponibilidad" help="" required={false} />
+                        <TextTime id="n_hora_fin" label="Fin disponibilidad" holder="Fin disponibilidad" help="" required={false} />
                         <TextBox id="n_coordenadas" label="Coordenadas" holder="Coordenadas" help="" required={true} />
                         <FileInput id="n_foto" label="Foto Negocio" holder=""  ></FileInput>
                         <div className="btn-group form-group col-xs-12 col-sm-4 col-lg-3" data-toggle="buttons">
@@ -115,6 +118,9 @@ class NuevoCliente extends Component {
                             <Option id="n_localrentado" label="Local rentado" checked={false} name="p_tipolocal2" />
                             <Option id="n_empleado" label="Empleado" checked={false} name="p_tipolocal2" />
                         </div>
+
+
+
 
 
                         <Title title="DATOS DEL AVAL" />
