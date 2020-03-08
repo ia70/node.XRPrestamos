@@ -6,7 +6,8 @@ import { Redirect } from 'react-router-dom';
 import TextBox from '../../Components/Form/TextBox/TextBox.jsx';
 import { TextPassword } from '../../Components/Form/TextPassword/TextPassword.jsx';
 import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
-const keys = require('../../../keys.js');
+const keys = require('../../../keys');
+const data = require('../../../cipher');
 
 
 import './Login.css';

@@ -2,12 +2,12 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
-//const cors = require('cors');
+const cors = require('cors');
 const { server } = require('./keys');
 
 // Initialization ------------------------------------------------ 
 const app = express();
-//app.use(cors());
+app.use(cors());
 
 // Settings ------------------------------------------------------
 app.set('port', process.env.PORT || server.port);
