@@ -6,11 +6,10 @@ import { Redirect } from 'react-router-dom';
 import TextBox from '../../Components/Form/TextBox/TextBox.jsx';
 import { TextPassword } from '../../Components/Form/TextPassword/TextPassword.jsx';
 import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
-const keys = require('../../../keys');
-const data = require('../../../cipher');
-
-
 import './Login.css';
+
+const keys = require('../../../keys');
+var data = require('../../../cipher');
 
 
 //PROPIEDADES ------------------------------
@@ -33,7 +32,10 @@ class Login extends Component {
         var usuario = document.getElementById('txtusuario').value;
         var password = document.getElementById('txtpassword').value;
 
-        var url = 'http://' + keys.database.host + '/api/login?id_usuario=' + usuario + '&password=' + password;
+        var e_user = data.encode(keys.security.client_password.toString, usuario);
+        var e_pass = data.encode(keys.security.client_password.toString, password);
+
+        var url = 'http://' + keys.database.host + '/api/login?id_usuario=' + e_user + '&password=' + e_pass;
 
         fetch(url, {
             method: 'GET',
@@ -43,8 +45,6 @@ class Login extends Component {
         }).then(res => res.json())
             .catch(error => console.error(error))
             .then(response => this.setState(response));
-
-        
     }
 
     render() {
