@@ -6,10 +6,24 @@ const pool = require('../database');
 const tabla = "usuario";
 const primary_key = "id_usuario";
 
+const keys = require('../keys');
+const data = require('../cipher');
+
 //->>>>>    LISTA         ------------------------------------------------------------------
 router.get('/', async (req, res) => {
+    let usr = "";
+    let pwd = "";
+
     try {
-        const data = await pool.query('SELECT * FROM ' + tabla + ' WHERE id_usuario="' + req.query.id_usuario + '" AND password="' + req.query.password + '"');
+        urs = data.decode(keys.security.client_password, req.query.urs);
+        pwd = data.decode(keys.security.client_password, req.query.pwd);
+    } catch (e) {
+        console.error(e);
+    }
+
+
+    try {
+        const data = await pool.query('SELECT * FROM ' + tabla + ' WHERE id_usuario="' + usr + '" AND password="' + pwd + '"');
 
         if (JSON.stringify(data) == '[]') {
             res.status(400).send({
@@ -21,7 +35,7 @@ router.get('/', async (req, res) => {
             });
         }
     } catch (e) {
-        res.status(400).send({login: false});
+        res.status(400).send({ login: false });
     }
 });
 

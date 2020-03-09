@@ -9,7 +9,7 @@ import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
 import './Login.css';
 
 const keys = require('../../../keys');
-var data = require('../../../cipher');
+const data = require('../../../cipher');
 
 
 //PROPIEDADES ------------------------------
@@ -35,7 +35,7 @@ class Login extends Component {
         var e_user = data.encode(keys.security.client_password.toString, usuario);
         var e_pass = data.encode(keys.security.client_password.toString, password);
 
-        var url = 'http://' + keys.database.host + '/api/login?id_usuario=' + e_user + '&password=' + e_pass;
+        var url = 'http://' + keys.database.host + '/api/login?usr=' + e_user + '&pwd=' + e_pass;
 
         fetch(url, {
             method: 'GET',
