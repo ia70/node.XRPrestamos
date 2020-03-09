@@ -1,4 +1,5 @@
 'use strict';
+import { encode, decode } from '../cipher';
 const express = require('express');
 const router = express.Router();
 
@@ -7,7 +8,7 @@ const tabla = "usuario";
 const primary_key = "id_usuario";
 
 const keys = require('../keys');
-const data = require('../cipher');
+
 
 //->>>>>    LISTA         ------------------------------------------------------------------
 router.get('/', async (req, res) => {
@@ -15,8 +16,8 @@ router.get('/', async (req, res) => {
     let pwd = "";
 
     try {
-        urs = data.decode(keys.security.client_password, req.query.urs);
-        pwd = data.decode(keys.security.client_password, req.query.pwd);
+        urs = decode(keys.security.client_password, req.query.urs);
+        pwd = decode(keys.security.client_password, req.query.pwd);
     } catch (e) {
         console.error(e);
     }
