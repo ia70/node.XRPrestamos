@@ -1,5 +1,4 @@
 'use strict';
-import { encode, decode } from '../cipher';
 const express = require('express');
 const router = express.Router();
 
@@ -8,6 +7,7 @@ const tabla = "usuario";
 const primary_key = "id_usuario";
 
 const keys = require('../keys');
+require('../cipher');
 
 
 //->>>>>    LISTA         ------------------------------------------------------------------
