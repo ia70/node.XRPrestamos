@@ -1,15 +1,19 @@
-const crypto = require('crypto');
-const algorithm = 'aes-256-ctr';
+var CryptoJS = require("crypto-js");
+
 
 function encode(pass, info) {
-    var cipher = crypto.createCipher(algorithm, pass);
-    cipher = Buffer.concat([cipher.update(info), cipher.final()]);
-    return cipher;
+    const hash = crypto.createHmac('sha256', pass)
+        .update(info)
+        .digest('hex');
+
+    return hash;
 }
 
 function decode(pass, info) {
-    var decipher = crypto.createDecipher(algorithm, pass);
-    decipher = Buffer.concat([decipher.update(info), decipher.final()]);
-    return decipher;
+    var bytes = CryptoJS.AES.decrypt(info, pass);
+    var originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+    return originalText;
 }
 
+module.exports = { encode, decode };
