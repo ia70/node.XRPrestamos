@@ -19,19 +19,16 @@ router.get('/', async (req, res) => {
 
         if (JSON.stringify(data) == '[]') {
             res.status(400).send({
-                login: false,
-                usr: usr
+                login: false
             });
         } else {
             res.status(200).send({
-                login: true,
-                usr: usr
+                login: true
             });
         }
     } catch (e) {
         res.status(400).send({ 
-            login: false,
-            usr: usr
+            login: false
          });
     }
 });
