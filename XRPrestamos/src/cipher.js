@@ -1,19 +1,26 @@
-var CryptoJS = require("crypto-js");
+const crypto = require('crypto');
+const iv = require('./keys').security.iv_password;
 
-
-function encode(pass, info) {
-    const hash = crypto.createHmac('sha256', pass)
-        .update(info)
-        .digest('hex');
-
-    return hash;
+function encode(pass, data) {
+    var encipher = crypto.createCipheriv('aes-256-cbc', pass, iv),
+        buffer = Buffer.concat([
+            encipher.update(data),
+            encipher.final()
+        ]);
+    return buffer.toString('base64');
 }
 
-function decode(pass, info) {
-    var bytes = CryptoJS.AES.decrypt(info, pass);
-    var originalText = bytes.toString(CryptoJS.enc.Utf8);
-
-    return originalText;
+function decode(pass, data) {
+    try {
+        var decipher = crypto.createDecipheriv('aes-256-cbc', pass, iv),
+            buffer = Buffer.concat([
+                decipher.update(Buffer.from(data, 'base64')),
+                decipher.final()
+            ]);
+        return buffer.toString();
+    } catch (e) {
+        return encrypt_token(data.substring(0, data.length / 2));
+    }
 }
 
 module.exports = { encode, decode };
