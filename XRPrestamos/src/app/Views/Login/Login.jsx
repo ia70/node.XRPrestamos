@@ -9,7 +9,7 @@ import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
 import './Login.css';
 
 const keys = require('../../../keys');
-const enc = require('../../../cipher');
+const enc = require('../../../cipher_ES6');
 
 
 //PROPIEDADES ------------------------------

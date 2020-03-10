@@ -4,10 +4,9 @@ const router = express.Router();
 
 const pool = require('../database');
 const tabla = "usuario";
-const primary_key = "id_usuario";
 
 const keys = require('../keys');
-require('../cipher');
+var enc = require('../cipher');
 
 
 //->>>>>    LISTA         ------------------------------------------------------------------
