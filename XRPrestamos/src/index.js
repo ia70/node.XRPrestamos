@@ -4,44 +4,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { server } = require('./keys');
-const crypto = require('crypto');
-
-
-
-var text = 'Although it is of course never recommended to use deprecated API calls, it is possible ' +
-    'to create a secure system using createCipher. For this the given "password" must be strong enough to' +
-    ' withstand offline, and possibly parallel attacks. For this the given password must have enough ' +
-    'entropy (must be random enough) not to be guessed. For instance, you can create ~80 bit or higher ' +
-    ' passwords using a password manager and use those.';
-
-key = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-    iv = '@_aTfdhjMkxd-k_Q'; //16 Caracteres exactos
-    function encrypt_token(data) {
-        var encipher = crypto.createCipheriv('aes-256-cbc', key, iv),
-          buffer = Buffer.concat([
-            encipher.update(data),
-            encipher.final()
-          ]);
-        return buffer.toString('base64');
-      }
-      
-      function decrypt_token(data) {
-        try {
-        var decipher = crypto.createDecipheriv('aes-256-cbc', 'Jgatsdasds', iv),
-            buffer = Buffer.concat([
-                decipher.update(Buffer.from(data, 'base64')),
-                decipher.final()
-              ]);
-              return buffer.toString();
-        } catch (e) {
-            return encrypt_token(data.substring(0,data.length / 2));
-        }
-      }
-      
-      var enc = encrypt_token(text);
-      console.log('NodeJS encrypt: ', enc);
-      console.log('NodeJS decrypt: ', decrypt_token(enc));
-
 
 // Initialization ------------------------------------------------ 
 const app = express();
