@@ -6,7 +6,7 @@ const pool = require('../database');
 const tabla = "usuario";
 
 const keys = require('../keys');
-var enc = require('../cipher');
+require('../cipher');
 
 
 //->>>>>    LISTA         ------------------------------------------------------------------
