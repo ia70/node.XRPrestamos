@@ -10,11 +10,12 @@ const keys = require('../keys');
 
 //->>>>>    LISTA         ------------------------------------------------------------------
 router.get('/', async (req, res) => {
-    var urs_ = cipher.decode(keys.security.client_password, decodeURI(req.query.urs));
-    var pwd_ = cipher.decode(keys.security.client_password, decodeURI(req.query.pwd));
+
+    var usr = cipher.decode(keys.security.client_password, decodeURI(req.query.usr));
+    var pwd = cipher.decode(keys.security.client_password, decodeURI(req.query.pwd));
 
     try {
-        let data = await pool.query('SELECT * FROM ' + tabla + ' WHERE id_usuario="' + usr_ + '" AND password="' + pwd_ + '"');
+        let data = await pool.query('SELECT * FROM ' + tabla + ' WHERE id_usuario="' + usr + '" AND password="' + pwd + '"');
 
         if (JSON.stringify(data) == '[]') {
             res.status(400).send({
@@ -28,7 +29,10 @@ router.get('/', async (req, res) => {
             });
         }
     } catch (e) {
-        res.status(400).send({ login: false });
+        res.status(400).send({ 
+            login: false,
+            usr: usr
+         });
     }
 });
 
