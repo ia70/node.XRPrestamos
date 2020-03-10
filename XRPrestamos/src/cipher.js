@@ -19,7 +19,7 @@ function decode(pass, data) {
             ]);
         return buffer.toString();
     } catch (e) {
-        return encrypt_token(data.substring(0, data.length / 2));
+        return encode(pass, data.substring(0, data.length / 2));
     }
 }
 
