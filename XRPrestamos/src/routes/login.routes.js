@@ -19,18 +19,31 @@ router.get('/', async (req, res) => {
 
         if (JSON.stringify(data) == '[]') {
             res.status(400).send({
-                login: false
+                login: false,
+                user: null,
+                hash: null
             });
         } else {
+            var d = new Date();
+            var id = d.getFullYear() + '.' + d.getDate + '.' + d.getDay + '_' + d.getHours + ':' + d.getMinutes + ':' + d.getSeconds + '_' + usr;
+            var hash = encodeURI(cipher.encode(id));
             res.status(200).send({
-                login: true
+                login: true,
+                user: usr,
+                hash: hash
             });
         }
     } catch (e) {
-        res.status(400).send({ 
-            login: false
-         });
+        res.status(400).send({
+            login: false,
+            user: null,
+            hash: null
+        });
     }
 });
+
+function login(){
+    
+}
 
 module.exports = router;
