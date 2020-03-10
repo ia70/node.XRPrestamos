@@ -1,13 +1,13 @@
 'use strict';
 module.exports = {
     database: {
-        host: 'http://192.168.2.50',
+        host: '192.168.2.50',
         user: 'xcoru',
         password: 'xcoru12345',
         database: 'xrprestamos'
     },
     server: {
-        host: 'http://192.168.2.80',
+        host: '192.168.2.80',
         port: 80
     },
     security:{

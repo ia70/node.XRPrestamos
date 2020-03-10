@@ -35,7 +35,7 @@ class Login extends Component {
         var e_user = encodeURI(enc.encode(keys.security.client_password, usuario));
         var e_pass = encodeURI(enc.encode(keys.security.client_password, password));
 
-        var url = keys.database.host + '/api/login?usr=' + e_user + '&pwd=' + e_pass;
+        var url = 'http://' + keys.database.host + '/api/login?usr=' + e_user + '&pwd=' + e_pass;
 
         fetch(url, {
             method: 'GET',
