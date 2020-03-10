@@ -9,7 +9,7 @@ import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
 import './Login.css';
 
 const keys = require('../../../keys');
-require('../../../cipher');
+const enc = require('../../../cipher');
 
 
 //PROPIEDADES ------------------------------
@@ -32,8 +32,8 @@ class Login extends Component {
         var usuario = document.getElementById('txtusuario').value;
         var password = document.getElementById('txtpassword').value;
 
-        var e_user = encode(keys.security.client_password.toString, usuario);
-        var e_pass = encode(keys.security.client_password.toString, password);
+        var e_user = enc.encode(keys.security.client_password.toString, usuario);
+        var e_pass = enc.encode(keys.security.client_password.toString, password);
 
         var url = 'http://' + keys.database.host + '/api/login?usr=' + e_user + '&pwd=' + e_pass;
 
