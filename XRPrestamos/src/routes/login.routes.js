@@ -26,13 +26,13 @@ router.get('/', async (req, res) => {
             });
         } else {
             var id = fecha + '_' + usr;
-            var hash = encodeURI(cipher.encode(id));
+            var hash = encodeURI(cipher.encode(keys.security.main_password, id));
             try {
-                login(hash, user);
+                login(hash, usr);
             } catch (e) {
                 console.log(e);
             }
-            
+
             res.status(200).send({
                 login: true,
                 user: usr,
