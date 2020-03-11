@@ -27,6 +27,7 @@ router.get('/', async (req, res) => {
         } else {
             var id = fecha + '_' + usr;
             var hash = encodeURI(cipher.encode(keys.security.main_password, id));
+
             try {
                 login(hash, usr);
             } catch (e) {
@@ -54,7 +55,7 @@ async function login(hash, user) {
     if (JSON.stringify(data) != '[]') {
         data = await pool.query('UPDATE sesion SET id_estado=2 WHERE id_usuario="' + user + '"');
     }
-
+    console.log(fecha);
     data = await pool.query('INSERT INTO sesion VALUES(' + hash + ', ' + user + ', ' + fecha + ', null, null,' + 1 + ')');
 
 }
