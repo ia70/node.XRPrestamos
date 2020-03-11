@@ -44,13 +44,20 @@ class Login extends Component {
             }
         }).then(res => res.json())
             .catch(error => console.error(error))
-            .then(response => this.setState(response));
+            .then(response =>{ 
+                if (this.state.hash != null) {
+                    sessionStorage.setItem('login', this.state.login);
+                    sessionStorage.setItem('user', this.state.user);
+                    sessionStorage.setItem('hash', this.state.hash);
+                }
+                this.setState(response);
+            });
 
-        if (this.state.hash != null) {
+        /*if (this.state.hash != null) {
             sessionStorage.setItem('login', this.state.login);
             sessionStorage.setItem('user', this.state.user);
             sessionStorage.setItem('hash', this.state.hash);
-        }
+        }*/
     }
 
     render() {
