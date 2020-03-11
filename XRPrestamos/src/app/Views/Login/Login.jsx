@@ -44,11 +44,11 @@ class Login extends Component {
             }
         }).then(res => res.json())
             .catch(error => console.error(error))
-            .then(response =>{ 
-                if (this.state.hash != null) {
-                    sessionStorage.setItem('login', this.state.login);
-                    sessionStorage.setItem('user', this.state.user);
-                    sessionStorage.setItem('hash', this.state.hash);
+            .then(response => {
+                if (response.hash != null) {
+                    sessionStorage.setItem('login', response.login);
+                    sessionStorage.setItem('user', response.user);
+                    sessionStorage.setItem('hash', response.hash);
                 }
                 this.setState(response);
             });
@@ -60,27 +60,25 @@ class Login extends Component {
         }*/
     }
 
-    render() {
-
-        if (sessionStorage.getItem('login') == true && (this.state.login == false || this.state.login == null)) {
-            this.setState({
-                'login': true,
-                'user': sessionStorage.getItem('user'),
-                'hash': sessionStorage.getItem('hash')
-            });
+    componentWillMount() {
+        if (sessionStorage.getItem('login') == 'null' || sessionStorage.getItem('login') == null) {
+            sessionStorage.setItem('login', "");
+            sessionStorage.setItem('user', "");
+            sessionStorage.setItem('hash', "");
+            sessionStorage.setItem('route', "dashboard");
         }
+    }
 
-        if (this.state.login == true) {
+    render() {
+        if (this.state.login == true || this.state.login == 'true' || sessionStorage.getItem('login') == 'true') {
+            var ruta = "/" + sessionStorage.getItem('route');
             return (
                 <Redirect
                     from="/"
-                    to="/dashboard" />
+                    to={ruta} />
             );
-        } else if (this.state.login == false) {
-            this.setState({ login: null })
+        } else if (this.login == false || this.login == 'false')
             alert("Datos incorrectos!");
-        }
-
         return (
             <div className="contenedor" >
                 <div className="column p-0 justify-content-center login login_body">
