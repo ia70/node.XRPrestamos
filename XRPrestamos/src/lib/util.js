@@ -1,10 +1,8 @@
-import { moment } from 'moment';
+const moment = require('moment');
 
 function getDateTime() {
-    var d = new Date();
-    var fecha = d.getFullYear() + '-' + d.getDate() + '-' + d.getDay() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-    var fe = moment(fecha, 'YYYY-MM-DD hh:mm:ss a');
-    return fe;
+    var d = moment();
+    return moment().format('YYYY-MM-DD hh:mm:ss');
 }
 
 module.exports = { getDateTime };
