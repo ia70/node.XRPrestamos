@@ -57,7 +57,7 @@ async function login(hash, user) {
     }
     console.log(fecha());
     try {
-        data = await pool.query('INSERT INTO sesion VALUES('+hash + ', ' + user + ', ' + fecha() + ', null, null,' + 1 + ')');
+        data = await pool.query('INSERT INTO sesion VALUES("'+hash + '", "' + user + '", "' + fecha() + '", null, null,' + 1 + ')');
     } catch (e) {
         console.log(e);
         return false;
