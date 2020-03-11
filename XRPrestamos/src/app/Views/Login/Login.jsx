@@ -46,7 +46,7 @@ class Login extends Component {
             .catch(error => console.error(error))
             .then(response => this.setState(response));
 
-        if(this.state.hash != null){
+        if (this.state.hash != null) {
             sessionStorage.setItem('login', this.state.login);
             sessionStorage.setItem('user', this.state.user);
             sessionStorage.setItem('hash', this.state.hash);
@@ -54,6 +54,15 @@ class Login extends Component {
     }
 
     render() {
+
+        if (sessionStorage.getItem('login') == true && (this.state.login == false || this.state.login == null)) {
+            this.setState({
+                'login': true,
+                'user': sessionStorage.getItem('user'),
+                'hash': sessionStorage.getItem('hash')
+            });
+        }
+
         if (this.state.login == true) {
             return (
                 <Redirect

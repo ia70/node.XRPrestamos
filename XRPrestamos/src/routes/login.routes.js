@@ -51,13 +51,12 @@ router.get('/', async (req, res) => {
 });
 
 async function login(hash, user) {
-    let data = await pool.query('SELECT * FROM sesion WHERE id_usuario="' + user + '"');
+    let data = await pool.query('SELECT * FROM sesion WHERE id_usuario="' + user + '" AND id_estado=1');
     if (JSON.stringify(data) != '[]') {
-        data = await pool.query('UPDATE sesion SET id_estado=2 WHERE id_usuario="' + user + '"');
+        data = await pool.query('UPDATE sesion SET id_estado=2 fin_sesion="' + fecha() + '" WHERE id_usuario="' + user + '" AND id_estado=1');
     }
-    console.log(fecha());
     try {
-        data = await pool.query('INSERT INTO sesion VALUES("'+hash + '", "' + user + '", "' + fecha() + '", null, null,' + 1 + ')');
+        data = await pool.query('INSERT INTO sesion VALUES("' + hash + '", "' + user + '", "' + fecha() + '", "' + fecha() + '", null,' + 1 + ')');
     } catch (e) {
         console.log(e);
         return false;
