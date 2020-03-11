@@ -1,3 +1,4 @@
+import { moment } from 'moment';
 
 function getDateTime() {
     var d = new Date();
