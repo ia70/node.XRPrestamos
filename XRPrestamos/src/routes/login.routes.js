@@ -7,6 +7,7 @@ const tabla = "usuario";
 
 const cipher = require('../cipher.js');
 const keys = require('../keys');
+const fecha = require('../lib/util').getDateTime;
 
 //->>>>>    LISTA         ------------------------------------------------------------------
 router.get('/', async (req, res) => {
@@ -24,9 +25,9 @@ router.get('/', async (req, res) => {
                 hash: null
             });
         } else {
-            var d = new Date();
-            var id = d.getFullYear() + '.' + d.getDate + '.' + d.getDay + '_' + d.getHours + ':' + d.getMinutes + ':' + d.getSeconds + '_' + usr;
+            var id = fecha + '_' + usr;
             var hash = encodeURI(cipher.encode(id));
+            await login(hash, user);
             res.status(200).send({
                 login: true,
                 user: usr,
@@ -42,8 +43,14 @@ router.get('/', async (req, res) => {
     }
 });
 
-function login(){
-    
+function login(hash, user) {
+    let data = await pool.query('SELECT * FROM sesion WHERE id_usuario="' + user + '"');
+    if (JSON.stringify(data) != '[]') {
+        data = await pool.query('UPDATE sesion SET id_estado=2 WHERE id_usuario="' + user + '"');
+    }
+
+    data = await pool.query('INSERT INTO sesion VALUES(' + hash + ', ' + user + ', ' + fecha + ', null, null,' + 1 + ')');
+
 }
 
 module.exports = router;
