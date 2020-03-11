@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
                 hash: null
             });
         } else {
-            var id = fecha + '_' + usr;
+            var id = fecha() + '_' + usr;
             var hash = encodeURI(cipher.encode(keys.security.main_password, id));
 
             try {
@@ -55,9 +55,14 @@ async function login(hash, user) {
     if (JSON.stringify(data) != '[]') {
         data = await pool.query('UPDATE sesion SET id_estado=2 WHERE id_usuario="' + user + '"');
     }
-    console.log(fecha);
-    data = await pool.query('INSERT INTO sesion VALUES(' + hash + ', ' + user + ', ' + fecha + ', null, null,' + 1 + ')');
-
+    console.log(fecha());
+    try {
+        data = await pool.query('INSERT INTO sesion VALUES('+hash + ', ' + user + ', ' + fecha() + ', null, null,' + 1 + ')');
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
+    return true;
 }
 
 module.exports = router;
