@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import Navbar from '../../Components/Content/Navbar/Navbar.jsx';
 import { Title } from '../../Components/Content/Title/Title.jsx';
 import TextBox from '../../Components/Form/TextBox/TextBox.jsx';
@@ -16,28 +17,34 @@ class NuevoCliente extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            personal: {
-                nombre: '',
-                apaterno: '',
-                amaterno: '',
-                curp: '',
-                direccion: '',
-                referencias: '',
-                celular: '',
-                email: '',
-                tipo_casa: '',
-            },
-            negocio: {
-                nombre: '',
-                tipo: '',
-                direccion: '',
-                referencias: '',
-                celular: '',
-                email: '',
-                local_ambulante: false,
-                tipo_local: '',
-            }
+            login: sessionStorage.getItem('login'),
+            user: sessionStorage.getItem('user'),
+            hash: sessionStorage.getItem('hash'),
+            ruta: []
         };
+
+        this.consulta_ruta = this.consulta_ruta.bind(this);
+    }
+
+    consulta_ruta(){
+        var url = 'http://' + keys.database.host + '/api/ruta';
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .catch(error => console.error(error))
+            .then(response => {
+                if (response.hash != null) {
+                    sessionStorage.setItem('login', response.login);
+                    sessionStorage.setItem('user', response.user);
+                    sessionStorage.setItem('hash', response.hash);
+                }
+                this.setState(response);
+            });
+
     }
 
     enviar() {
@@ -59,6 +66,8 @@ class NuevoCliente extends Component {
     }
 
     render() {
+
+        sessionStorage.setItem('route', 'nuevocliente');
         return (
             <div>
                 <Navbar setLogo={Logo} setTitle="Nuevo Cliente" setButton={true} />
