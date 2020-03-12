@@ -10,6 +10,7 @@ import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
 import { ComboBox } from '../../Components/Form/ComboBox/ComboBox.jsx';
 import { FileInput } from '../../Components/Form/FileInput/FileInput.jsx';
 import { TextTime } from '../../Components/Form/TextTime/TextTime.jsx';
+import keys from '../../../keys';
 
 import Logo from '../../img/Logo.png';
 
@@ -22,52 +23,41 @@ class NuevoCliente extends Component {
             hash: sessionStorage.getItem('hash'),
             ruta: []
         };
-
-        this.consulta_ruta = this.consulta_ruta.bind(this);
     }
 
-    consulta_ruta(){
+    componentDidMount() {
         var url = 'http://' + keys.database.host + '/api/ruta';
-
+        
+        var res =[];
         fetch(url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => res.json())
-            .catch(error => console.error(error))
-            .then(response => {
-                if (response.hash != null) {
-                    sessionStorage.setItem('login', response.login);
-                    sessionStorage.setItem('user', response.user);
-                    sessionStorage.setItem('hash', response.hash);
-                }
-                this.setState(response);
+        })
+            .then((response) => {
+                //return response.json();
+            })
+            .then((rutas) => {
+                sessionStorage.setItem('route', 'nuevocliente');
+                res = rutas.ruta;
+               //return rutas.ruta;
+            })
+            .catch((err) => {
+                console.error(err);
+                //return {ruta: []};
             });
 
-    }
-
-    enviar() {
-        var usuario = document.getElementById('txtusuario').value;
-        var password = document.getElementById('txtpassword').value;
-
-        console.log(usuario + " -- " + password);
-
-        var url = 'http://' + database.host + '/api/login?id_usuario=' + usuario + '&password=' + password;
-
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
-            .catch(error => console.error(error))
-            .then(response => this.setState(response));
+            console.log(res);
+            this.setState({ruta: res});
     }
 
     render() {
 
-        sessionStorage.setItem('route', 'nuevocliente');
+        let indice = 0;
+        let listItems = <option key='1' value='Valor'>Seleccionar</option>;
+
+
         return (
             <div>
                 <Navbar setLogo={Logo} setTitle="Nuevo Cliente" setButton={true} />
@@ -135,7 +125,7 @@ class NuevoCliente extends Component {
                         <TextBox id="a_parentesco" label="Parentesco" holder="Parentesco" help="" required={true} />
 
                         <Title title="COBRANZA" />
-                        <ComboBox id="c_ruta" label="Asignar a ruta" items=""></ComboBox>
+                        <ComboBox id="c_ruta" label="Asignar a ruta" items={listItems}></ComboBox>
 
                     </div>
                     <div className="row">
