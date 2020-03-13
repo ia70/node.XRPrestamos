@@ -7,7 +7,7 @@ import { TextPhoneNumber } from '../../Components/Form/TextPhoneNumber/TextPhone
 import { Option } from '../../Components/Form/Option/Option.jsx';
 import { TextEmail } from '../../Components/Form/TextEmail/TextEmail.jsx';
 import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
-import { ComboBox } from '../../Components/Form/ComboBox/ComboBox.jsx';
+import ComboBox from '../../Components/Form/ComboBox/ComboBox.jsx';
 import { FileInput } from '../../Components/Form/FileInput/FileInput.jsx';
 import { TextTime } from '../../Components/Form/TextTime/TextTime.jsx';
 import keys from '../../../keys';
@@ -15,49 +15,17 @@ import keys from '../../../keys';
 import Logo from '../../img/Logo.png';
 
 class NuevoCliente extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             login: sessionStorage.getItem('login'),
             user: sessionStorage.getItem('user'),
             hash: sessionStorage.getItem('hash'),
-            ruta: []
         };
     }
 
-    componentDidMount() {
-        var url = 'http://' + keys.database.host + '/api/ruta';
-        
-        var res =[];
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((response) => {
-                //return response.json();
-            })
-            .then((rutas) => {
-                sessionStorage.setItem('route', 'nuevocliente');
-                res = rutas.ruta;
-               //return rutas.ruta;
-            })
-            .catch((err) => {
-                console.error(err);
-                //return {ruta: []};
-            });
-
-            console.log(res);
-            this.setState({ruta: res});
-    }
-
     render() {
-
-        let indice = 0;
-        let listItems = <option key='1' value='Valor'>Seleccionar</option>;
-
-
         return (
             <div>
                 <Navbar setLogo={Logo} setTitle="Nuevo Cliente" setButton={true} />
@@ -125,12 +93,12 @@ class NuevoCliente extends Component {
                         <TextBox id="a_parentesco" label="Parentesco" holder="Parentesco" help="" required={true} />
 
                         <Title title="COBRANZA" />
-                        <ComboBox id="c_ruta" label="Asignar a ruta" items={listItems}></ComboBox>
+                        <ComboBox id="c_ruta" label="Asignar a ruta" url={'http://' + keys.database.host + '/api/ruta'} ></ComboBox>
 
                     </div>
                     <div className="row">
                         <div className="btn-group form-group col-12">
-                            <BtnSubmit id="btnenviar" url="#" label="Entrar" evento={this.enviar} />
+                            <BtnSubmit id="btnenviar" url="#" label="Guardar" evento={this.enviar} />
                         </div>
                     </div>
                 </div>
