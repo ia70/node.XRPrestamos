@@ -330,6 +330,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `XRPrestamos`.`tipo_local`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `XRPrestamos`.`tipo_local` (
+  `id_tipo_local` INT NOT NULL AUTO_INCREMENT,
+  `descripcion` VARCHAR(20) NULL,
+  PRIMARY KEY (`id_tipo_local`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `XRPrestamos`.`usuario_establecimiento`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`usuario_establecimiento` (
@@ -341,6 +351,7 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`usuario_establecimiento` (
   `referencias` VARCHAR(250) NULL,
   `id_actividad_economica` INT NULL,
   `id_tipo_inmueble` INT NULL,
+  `id_tipo_local` INT NULL COMMENT 'Fijo\nAmbulante\nEmpleado',
   `documento_adicional` LONGBLOB NULL,
   `disponibilidad_hr_inicio` VARCHAR(30) NULL COMMENT 'Hora de paertura de local | Hora de inicio de disponibilidad',
   `disponibilidad_hr_fin` VARCHAR(30) NULL COMMENT 'Hora de cierre de local | Hora de fin de disponibilidad',
@@ -405,7 +416,7 @@ ENGINE = InnoDB;
 -- Table `XRPrestamos`.`sesion`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`sesion` (
-  `id_sesion` VARCHAR(60) NOT NULL,
+  `id_sesion` VARCHAR(150) NOT NULL,
   `id_usuario` VARCHAR(30) NULL,
   `inicio_sesion` DATETIME NULL,
   `ultima_conexion` DATETIME NULL,
@@ -695,11 +706,23 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `XRPrestamos`.`tipo_local`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `XRPrestamos`;
+INSERT INTO `XRPrestamos`.`tipo_local` (`id_tipo_local`, `descripcion`) VALUES (1, 'Fijo');
+INSERT INTO `XRPrestamos`.`tipo_local` (`id_tipo_local`, `descripcion`) VALUES (2, 'Ambulante');
+INSERT INTO `XRPrestamos`.`tipo_local` (`id_tipo_local`, `descripcion`) VALUES (3, 'Empleado');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `XRPrestamos`.`usuario_establecimiento`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (1, '1', 'Polleria Mercado', 1, 'Mercado', NULL, 4, 1, NULL, '8:00', '18:00', NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `id_tipo_local`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (1, '1', 'Polleria Mercado', 1, 'Mercado', NULL, 4, 1, NULL, NULL, '8:00', '18:00', NULL, NULL, 1, 1);
 
 COMMIT;
 
