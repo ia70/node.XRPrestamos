@@ -16,6 +16,9 @@ class NuevoCliente extends Component {
 
     constructor(props) {
         super(props);
+
+        sessionStorage.setItem('route','nuevocliente');
+
         this.state = {
             login: sessionStorage.getItem('login'),
             user: sessionStorage.getItem('user'),
@@ -29,7 +32,7 @@ class NuevoCliente extends Component {
         var url = keys.api.url + 'nuevo_cliente';
 
         var data_text = {
-            persona: [{
+            persona: {
                 ine: document.getElementById('p_ine').value,
                 id_usuario_referido: null,
                 alias: null,
@@ -48,15 +51,15 @@ class NuevoCliente extends Component {
                 ine_img: null,
                 id_tipo_inmueble: document.getElementById('p_tipo_inmueble').value,
                 id_tipo_estado: 1
-            }],
-            establecimiento: [{
+            },
+            establecimiento: {
                 id_usuario: document.getElementById('p_ine').value,
                 nombre: document.getElementById('n_nombre').value,
                 id_calle: null,
                 numero_ext: null,
                 referencias: document.getElementById('n_referencia').value,
                 id_actividad_economica: document.getElementById('n_tipoactividad').value,
-                tipo_inmueble: document.getElementById('n-tipo_inmueble').value,
+                tipo_inmueble: document.getElementById('n_tipo_inmueble').value,
                 tipo_local: document.getElementById('n_tipo_local').value,
                 documento_adicional: null,
                 disponibilidad_hr_inicio: document.getElementById('n_hora_inicio').value,
@@ -65,8 +68,8 @@ class NuevoCliente extends Component {
                 foto: null,
                 id_ruta: document.getElementById('c_ruta').value,
                 id_estado: 1
-            }],
-            aval: [{
+            },
+            aval: {
                 id_usuario: document.getElementById('p_ine').value,
                 nombre: document.getElementById('a_nombre').value,
                 apellido_paterno: document.getElementById('a_apaterno').value,
@@ -74,9 +77,10 @@ class NuevoCliente extends Component {
                 direccion: null,
                 telefono: document.getElementById('a_telefono').value,
                 parentesco: document.getElementById('a_parentesco').value
-            }]
+            }
         };
 
+        console.log(data_text['persona']);
         fetch(url, {
             method: 'POST', // or 'PUT'
             body: JSON.stringify(data_text), // data can be `string` or {object}!
