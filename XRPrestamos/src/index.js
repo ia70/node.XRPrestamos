@@ -49,6 +49,7 @@ app.use('/api/moneda', require('./routes/moneda.routes'));
 app.use('/api/zona_horaria', require('./routes/zona_horaria.routes'));
 app.use('/api/sesion', require('./routes/sesion.routes'));
 app.use('/api/tipo_local', require('./routes/tipo_local.routes'));
+app.use('/api/nuevo_cliente', require('./routes/lib/nuevo_cliente.routes'));
 
 // Static files --------------------------------------------------
 app.use(express.static(path.join(__dirname, 'public')));
