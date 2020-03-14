@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import Navbar from '../../Components/Content/Navbar/Navbar.jsx';
 import { Title } from '../../Components/Content/Title/Title.jsx';
 import TextBox from '../../Components/Form/TextBox/TextBox.jsx';
 import { TextPhoneNumber } from '../../Components/Form/TextPhoneNumber/TextPhoneNumber.jsx';
-import { Option } from '../../Components/Form/Option/Option.jsx';
 import { TextEmail } from '../../Components/Form/TextEmail/TextEmail.jsx';
 import { BtnSubmit } from '../../Components/Form/BtnSubmit/BtnSubmit.jsx';
 import ComboBox from '../../Components/Form/ComboBox/ComboBox.jsx';
@@ -23,6 +21,77 @@ class NuevoCliente extends Component {
             user: sessionStorage.getItem('user'),
             hash: sessionStorage.getItem('hash'),
         };
+
+        this.enviar = this.enviar.bind(this);
+    }
+
+    enviar() {
+        var url = keys.api.url + 'nuevo_cliente';
+
+        var data_text = {
+            persona: [{
+                ine: document.getElementById('p_ine').value,
+                id_usuario_referido: null,
+                alias: null,
+                nombre: document.getElementById('p_nombre').value,
+                apellido_paterno: document.getElementById('p_apaterno').value,
+                apellido_materno: document.getElementById('p_amaterno').value,
+                id_calle: 1,
+                direccion: document.getElementById('p_direccion').value,
+                no_casa: document.getElementById('p_no_casa').value,
+                referencias: document.getElementById('p_referencia').value,
+                foto_casa: null,
+                telefono: document.getElementById('p_telefono').value,
+                correo: document.getElementById('p_email').value,
+                foto: null,
+                ine_clave: document.getElementById('p_ine').value,
+                ine_img: null,
+                id_tipo_inmueble: document.getElementById('p_tipo_inmueble').value,
+                id_tipo_estado: 1
+            }],
+            establecimiento: [{
+                id_usuario: document.getElementById('p_ine').value,
+                nombre: document.getElementById('n_nombre').value,
+                id_calle: null,
+                numero_ext: null,
+                referencias: document.getElementById('n_referencia').value,
+                id_actividad_economica: document.getElementById('n_tipoactividad').value,
+                tipo_inmueble: document.getElementById('n-tipo_inmueble').value,
+                tipo_local: document.getElementById('n_tipo_local').value,
+                documento_adicional: null,
+                disponibilidad_hr_inicio: document.getElementById('n_hora_inicio').value,
+                disponibilidad_hr_fin: document.getElementById('n_hora_fin').value,
+                coordenadas: document.getElementById('n_coordenadas').value,
+                foto: null,
+                id_ruta: document.getElementById('c_ruta').value,
+                id_estado: 1
+            }],
+            aval: [{
+                id_usuario: document.getElementById('p_ine').value,
+                nombre: document.getElementById('a_nombre').value,
+                apellido_paterno: document.getElementById('a_apaterno').value,
+                apellido_materno: document.getElementById('a_amaterno').value,
+                direccion: null,
+                telefono: document.getElementById('a_telefono').value,
+                parentesco: document.getElementById('a_parentesco').value
+            }]
+        };
+
+        fetch(url, {
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(data_text), // data can be `string` or {object}!
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .catch(error => {
+                console.error('Error:', error)
+            })
+            .then(response => {
+                console.log('Success:', response);
+                alert('¡Registro guardado!');
+            });
+
     }
 
     render() {
@@ -50,10 +119,7 @@ class NuevoCliente extends Component {
 
 
                         <TextEmail id="p_email" label="Correo electrónico" holder="Correo electrónico" help="" required={false} />
-                        <div className="btn-group form-group col-xs-12 col-sm-4 col-lg-3" data-toggle="buttons">
-                            <Option id="p_casarentada" label="Casa rentada" checked={true} name="p_casa" />
-                            <Option id="p_casapropia" label="Casa propia" checked={false} name="p_casa" />
-                        </div>
+                        <ComboBox id="p_tipo_inmueble" label="Tipo Inmueble" tabla='tipo_inmueble' ></ComboBox>
 
 
 
@@ -70,15 +136,8 @@ class NuevoCliente extends Component {
                         <TextTime id="n_hora_fin" label="Fin disponibilidad" holder="Fin disponibilidad" help="" required={false} />
                         <TextBox id="n_coordenadas" label="Coordenadas" holder="Coordenadas" help="" required={true} />
                         <FileInput id="n_foto" label="Foto Negocio" holder=""  ></FileInput>
-                        <div className="btn-group form-group col-xs-12 col-sm-4 col-lg-3" data-toggle="buttons">
-                            <Option id="n_localfijo" label="Local Fijo" checked={true} name="p_tipolocal" />
-                            <Option id="n_localambulante" label="Local Ambulante" checked={false} name="p_tipolocal" />
-                        </div>
-                        <div className="btn-group form-group col-xs-12 col-sm-4 col-lg-3" data-toggle="buttons">
-                            <Option id="n_localpropio" label="Local propio" checked={true} name="p_tipolocal2" />
-                            <Option id="n_localrentado" label="Local rentado" checked={false} name="p_tipolocal2" />
-                            <Option id="n_empleado" label="Empleado" checked={false} name="p_tipolocal2" />
-                        </div>
+                        <ComboBox id="n_tipo_inmueble" label="Tipo Inmueble" tabla='tipo_inmueble' ></ComboBox>
+                        <ComboBox id="n_tipo_local" label="Tipo Local" tabla='tipo_local' ></ComboBox>
 
 
 
@@ -93,7 +152,7 @@ class NuevoCliente extends Component {
                         <TextBox id="a_parentesco" label="Parentesco" holder="Parentesco" help="" required={true} />
 
                         <Title title="COBRANZA" />
-                        <ComboBox id="c_ruta" label="Asignar a ruta" url={'http://' + keys.database.host + '/api/ruta'} ></ComboBox>
+                        <ComboBox id="c_ruta" label="Asignar a ruta" tabla='ruta' ></ComboBox>
 
                     </div>
                     <div className="row">

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import keys from '../../../../keys';
 //PROPIEDADES -----------------------
 // items , label, id
-
 class ComboBox extends Component {
+
 
     constructor(props) {
         super(props);
@@ -13,9 +14,9 @@ class ComboBox extends Component {
 
     componentWillMount() {
         try {
-            var url="";
-            if (this.props.url != null) {
-                url = this.props.url;
+            var url = keys.api.url;
+            if (this.props.tabla != null) {
+                url += this.props.tabla;
                 fetch(url, {
                     method: 'GET',
                     headers: {
@@ -24,9 +25,9 @@ class ComboBox extends Component {
                 }).then(res => res.json())
                     .catch(error => console.error(error))
                     .then(response => {
-                        this.setState({ 'elementos': response.ruta });
+                        this.setState({ 'elementos': response[this.props.tabla] });
                     });
-            }else if(this,this.props.items != null){
+            } else if (this.props.items != null) {
                 url = this.props.items;
                 this.setState({ 'elementos': url });
             }
@@ -37,7 +38,7 @@ class ComboBox extends Component {
 
     render() {
         var lista = null;
-        if (this.state.elementos.length > 0) {
+        if (this.state.elementos) {
             lista = this.state.elementos.map(i => <option key={i.id_ruta}>{i.descripcion}</option>);
         } else
             lista = "";

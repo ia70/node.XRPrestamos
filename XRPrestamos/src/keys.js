@@ -14,5 +14,8 @@ module.exports = {
         main_password: '@as_T69?1pq-XoAsqlfpZ_@rgsfdlwoX',
         client_password: 'dO_@-tpA59z-klwquf02_gofldj_2-3R',
         iv_password: '@_aTfdh%Mkxd-k_Q'     //Exactamente 16 caracteres
+    },
+    api:{
+        url: 'http://192.168.2.50/api/'
     }
 };
