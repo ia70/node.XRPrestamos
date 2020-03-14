@@ -2,7 +2,6 @@
 const express = require('express');
 const router = express.Router();
 
-const d_persona = require('../data/d_persona');
 
 
 //->>>>>    LISTA         ------------------------------------------------------------------
@@ -18,7 +17,21 @@ router.get('/', async (req, res) => {
 //->>>>>    AGREGAR     --------------------------------------------------------------------
 router.post('/', async (req, res) => {
     try {
-        const data = await pool.query('INSERT INTO ' + tabla + ' SET ?', [req.body]);
+        const persona = req.body.persona;
+        const aval = req.body.aval;
+        const establecimiento = req.body.establecimiento;
+
+        tabla = 'persona';
+        let data = await pool.query('INSERT INTO ' + tabla + ' SET ?', [persona]);
+        console.log(data);
+        tabla= 'aval';
+        data = await pool.query('INSERT INTO ' + tabla + ' SET ?', [aval]);
+        console.log(data);
+        tabla = 'usuario_establecimiento';
+        data = await pool.query('INSERT INTO ' + tabla + ' SET ?', [establecimiento]);
+        console.log(data);
+
+
         res.status(200).send({ [tabla]: data });
     } catch (e) {
         res.status(400).send(e);

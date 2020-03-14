@@ -61,9 +61,9 @@ async function filtro(objeto) {
     }
 }
 
-async function lista() {
+function lista() {
     try {
-        const data = await pool.query('SELECT * FROM ' + tabla);
+        const data = pool.query('SELECT * FROM ' + tabla);
         return data;
     } catch (e) {
         if (error.mostrar)
