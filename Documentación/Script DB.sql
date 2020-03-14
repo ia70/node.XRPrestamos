@@ -560,8 +560,6 @@ START TRANSACTION;
 USE `XRPrestamos`;
 INSERT INTO `XRPrestamos`.`tipo_inmueble` (`id_tipo_inmueble`, `descripcion`) VALUES (1, 'Propio');
 INSERT INTO `XRPrestamos`.`tipo_inmueble` (`id_tipo_inmueble`, `descripcion`) VALUES (2, 'Renta');
-INSERT INTO `XRPrestamos`.`tipo_inmueble` (`id_tipo_inmueble`, `descripcion`) VALUES (3, 'Fijo');
-INSERT INTO `XRPrestamos`.`tipo_inmueble` (`id_tipo_inmueble`, `descripcion`) VALUES (4, 'Ambulante');
 
 COMMIT;
 

@@ -33,7 +33,7 @@ class NuevoCliente extends Component {
 
         var data_text = {
             persona: {
-                ine: document.getElementById('p_ine').value,
+                id_usuario: document.getElementById('p_ine').value,
                 id_usuario_referido: null,
                 alias: null,
                 nombre: document.getElementById('p_nombre').value,
@@ -50,7 +50,7 @@ class NuevoCliente extends Component {
                 ine_clave: document.getElementById('p_ine').value,
                 ine_img: null,
                 id_tipo_inmueble: document.getElementById('p_tipo_inmueble').value,
-                id_tipo_estado: 1
+                id_estado: 1
             },
             establecimiento: {
                 id_usuario: document.getElementById('p_ine').value,
@@ -59,8 +59,8 @@ class NuevoCliente extends Component {
                 numero_ext: null,
                 referencias: document.getElementById('n_referencia').value,
                 id_actividad_economica: document.getElementById('n_tipoactividad').value,
-                tipo_inmueble: document.getElementById('n_tipo_inmueble').value,
-                tipo_local: document.getElementById('n_tipo_local').value,
+                id_tipo_inmueble: document.getElementById('n_tipo_inmueble').value,
+                id_tipo_local: document.getElementById('n_tipo_local').value,
                 documento_adicional: null,
                 disponibilidad_hr_inicio: document.getElementById('n_hora_inicio').value,
                 disponibilidad_hr_fin: document.getElementById('n_hora_fin').value,
