@@ -17,9 +17,14 @@ router.get('/', async (req, res) => {
 //->>>>>    AGREGAR     --------------------------------------------------------------------
 router.post('/', async (req, res) => {
     try {
-        const persona = req.body.persona;
-        const aval = req.body.aval;
-        const establecimiento = req.body.establecimiento;
+        const persona = req.body['persona'];
+        const aval = req.body['aval'];
+        const establecimiento = req.body['establecimiento'];
+
+        console.log(persona);
+        console.log(aval);
+        console.log(establecimiento);
+
 
         tabla = 'persona';
         let data = await pool.query('INSERT INTO ' + tabla + ' SET ?', [persona]);
