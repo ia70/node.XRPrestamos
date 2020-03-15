@@ -35,7 +35,7 @@ class NuevoCliente extends Component {
             persona: {
                 id_usuario: document.getElementById('p_ine').value,
                 id_usuario_referido: null,
-                alias: null,
+                alias: document.getElementById('p_alias').value,
                 nombre: document.getElementById('p_nombre').value,
                 apellido_paterno: document.getElementById('p_apaterno').value,
                 apellido_materno: document.getElementById('p_amaterno').value,
@@ -49,7 +49,7 @@ class NuevoCliente extends Component {
                 foto: null,
                 ine_clave: document.getElementById('p_ine').value,
                 ine_img: null,
-                id_tipo_inmueble: document.getElementById('p_tipo_inmueble').value,
+                id_tipo_inmueble: 1,
                 id_estado: 1
             },
             establecimiento: {
@@ -106,15 +106,16 @@ class NuevoCliente extends Component {
                     <div className="row" >
                         <Title title="DATOS PERSONALES" />
 
-                        <TextBox id="p_ine" label="INE" holder="Clave de Credencial" help="" required={true} />
-                        <TextBox id="p_nombre" label="Nombre" holder="Nombre del cliente" help="" required={true} />
-                        <TextBox id="p_apaterno" label="A. Paterno" holder="Apellido paterno" help="" required={true} />
-                        <TextBox id="p_amaterno" label="A. Materno" holder="Apellido materno" help="" required={true} />
-                        <TextBox id="p_no_casa" label="Número exterior" holder="Número exterior" help="" required={true} />
-                        <TextBox id="p_direccion" label="Dirección" holder="Dirección" help="" required={true} />
+                        <TextBox id="p_ine" label="INE" holder="Clave de Credencial" help="" required={true} maxlength={30} />
+                        <TextBox id="p_alias" label="Alias" holder="Alias Cliente" help="" required={true} maxlength={60} />
+                        <TextBox id="p_nombre" label="Nombre" holder="Nombre del cliente" help="" required={true} maxlength={50} />
+                        <TextBox id="p_apaterno" label="A. Paterno" holder="Apellido paterno" help="" required={true} maxlength={20} />
+                        <TextBox id="p_amaterno" label="A. Materno" holder="Apellido materno" help="" required={true}  maxlength={20} />
+                        <TextBox id="p_no_casa" label="Número exterior" holder="Número exterior" help="" required={true} maxlength={10} />
+                        <TextBox id="p_direccion" label="Dirección" holder="Dirección" help="" required={true} maxlength={250} />
 
 
-                        <TextBox id="p_referencia" label="Referencia" holder="Referencia" help="" required={true} />
+                        <TextBox id="p_referencia" label="Referencia" holder="Referencia" help="" required={true} maxlength={250}/>
                         <TextPhoneNumber id="p_telefono" label="Telefono" holder="Telefono" help="" required={false} />
 
                         <FileInput id="p_foto_ine" label="Foto INE" holder="Foto INE"  ></FileInput>
@@ -130,15 +131,15 @@ class NuevoCliente extends Component {
 
                         <Title title="DATOS DEL NEGOCIO" />
 
-                        <TextBox id="n_nombre" label="Nombre del Negocio" holder="Nombre del Negocio" help="" required={true} />
-                        <TextBox id="n_tipoactividad" label="Tipo Negocio (Pozoleria...)" holder="Tipo Negocio (Pozoleria...)" help="" required={true} />
-                        <TextBox id="n_referencia" label="Referencia" holder="Referencia" help="" required={true} />
+                        <TextBox id="n_nombre" label="Nombre del Negocio" holder="Nombre del Negocio" help="" required={true} maxlength={100} />
+                        <TextBox id="n_tipoactividad" label="Tipo Negocio (Pozoleria...)" holder="Tipo Negocio (Pozoleria...)" help="" required={true} maxlength={3} />
+                        <TextBox id="n_referencia" label="Referencia" holder="Referencia" help="" required={true} maxlength={250} />
 
                         <TextPhoneNumber id="n_telefono" label="Telefono" holder="Telefono" help="" required={false} />
                         <TextEmail id="n_email" label="Correo electrónico" holder="Correo electrónico" help="" required={false} />
                         <TextTime id="n_hora_inicio" label="Inicio de disponibilidad" holder="Inicio de disponibilidad" help="" required={false} />
                         <TextTime id="n_hora_fin" label="Fin disponibilidad" holder="Fin disponibilidad" help="" required={false} />
-                        <TextBox id="n_coordenadas" label="Coordenadas" holder="Coordenadas" help="" required={true} />
+                        <TextBox id="n_coordenadas" label="Coordenadas" holder="Coordenadas" help="" required={true} maxlength={100}/>
                         <FileInput id="n_foto" label="Foto Negocio" holder=""  ></FileInput>
                         <ComboBox id="n_tipo_inmueble" label="Tipo Inmueble" tabla='tipo_inmueble' ></ComboBox>
                         <ComboBox id="n_tipo_local" label="Tipo Local" tabla='tipo_local' ></ComboBox>
@@ -149,11 +150,11 @@ class NuevoCliente extends Component {
 
                         <Title title="DATOS DEL AVAL" />
 
-                        <TextBox id="a_nombre" label="Nombre" holder="Nombre del cliente" help="" required={true} />
-                        <TextBox id="a_apaterno" label="A. Paterno" holder="Apellido paterno" help="" required={true} />
-                        <TextBox id="a_amaterno" label="A. Materno" holder="Apellido materno" help="" required={true} />
+                        <TextBox id="a_nombre" label="Nombre" holder="Nombre del cliente" help="" required={true} maxlength={50} />
+                        <TextBox id="a_apaterno" label="A. Paterno" holder="Apellido paterno" help="" required={true} maxlength={20} />
+                        <TextBox id="a_amaterno" label="A. Materno" holder="Apellido materno" help="" required={true} maxlength={20} />
                         <TextPhoneNumber id="a_telefono" label="Telefono" holder="Telefono" help="" required={false} />
-                        <TextBox id="a_parentesco" label="Parentesco" holder="Parentesco" help="" required={true} />
+                        <TextBox id="a_parentesco" label="Parentesco" holder="Parentesco" help="" required={true} maxlength={50} />
 
                         <Title title="COBRANZA" />
                         <ComboBox id="c_ruta" label="Asignar a ruta" tabla='ruta' ></ComboBox>

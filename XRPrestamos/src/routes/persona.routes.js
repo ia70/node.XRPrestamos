@@ -5,12 +5,13 @@ const router = express.Router();
 const pool = require('../database');
 const tabla = "persona";
 const primary_key = "id_persona";
-const lista  = require('../data/d_persona');
+
 
 //->>>>>    LISTA         ------------------------------------------------------------------
 router.get('/', async (req, res) => {
     try {
-        res.status(200).send({ [tabla]: lista });
+        const data = await pool.query('SELECT * FROM ' + tabla);
+        res.status(200).send({ [tabla]: data });
     } catch (e) {
         res.status(400).send(e);
     }
