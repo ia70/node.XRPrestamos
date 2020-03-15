@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 //->>>>>    AGREGAR     --------------------------------------------------------------------
 router.post('/', async (req, res) => {
     try {
-        const persona = req.body['persona'];
+        const persona = req.body.persona;
         const aval = req.body['aval'];
         const establecimiento = req.body['establecimiento'];
 
