@@ -22,8 +22,20 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         var persona = req.body.persona;
-        const data = await pool.query('INSERT INTO ' + tabla + ' SET ?', [persona]);;
-        res.status(200).send({ [tabla]: data });
+        var aval = req.body.aval;
+        var establecimiento = req.body.establecimiento;
+
+        const d_per = await pool.query('INSERT INTO persona SET ?', [persona]);
+        const d_aval = await pool.query('INSERT INTO aval SET ?', [aval]);
+        const d_est = await pool.query('INSERT INTO usuario_establecimiento SET ?', [establecimiento]);
+
+        var respuesta = {
+            persona: [d_per],
+            aval: [d_aval],
+            establecimiento: [d_est]
+        };
+
+        res.status(200).send(respuesta);
     } catch (e) {
         res.status(400).send(e);
     }
