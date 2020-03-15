@@ -2,13 +2,17 @@
 const express = require('express');
 const router = express.Router();
 
+const pool = require('../../database');
+const tabla = "persona";
+const primary_key = "id_usuario";
+
 
 
 //->>>>>    LISTA         ------------------------------------------------------------------
 router.get('/', async (req, res) => {
-    let db = new d_persona();
     try {
-        res.status(200).send({ [tabla]: db.lista() });
+        const data = await pool.query('SELECT * FROM ' + tabla);
+        res.status(200).send({ [tabla]: data });
     } catch (e) {
         res.status(400).send(e);
     }
@@ -17,26 +21,8 @@ router.get('/', async (req, res) => {
 //->>>>>    AGREGAR     --------------------------------------------------------------------
 router.post('/', async (req, res) => {
     try {
-        const persona = req.body['persona'];
-        const aval = req.body['aval'];
-        const establecimiento = req.body['establecimiento'];
-
-        console.log(persona);
-        console.log(aval);
-        console.log(establecimiento);
-
-
-        tabla = 'persona';
-        let data = await pool.query('INSERT INTO ' + tabla + ' SET ?', [persona]);
-        console.log(data);
-        tabla= 'aval';
-        data = await pool.query('INSERT INTO ' + tabla + ' SET ?', [aval]);
-        console.log(data);
-        tabla = 'usuario_establecimiento';
-        data = await pool.query('INSERT INTO ' + tabla + ' SET ?', [establecimiento]);
-        console.log(data);
-
-
+        var persona = req.body.persona;
+        const data = await pool.query('INSERT INTO ' + tabla + ' SET ?', [persona]);;
         res.status(200).send({ [tabla]: data });
     } catch (e) {
         res.status(400).send(e);
