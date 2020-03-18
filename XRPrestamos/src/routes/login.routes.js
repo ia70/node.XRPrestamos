@@ -16,12 +16,14 @@ router.get('/', async (req, res) => {
     var pwd = cipher.decode(keys.security.client_password, decodeURI(req.query.pwd));
 
     try {
-        let data = await pool.query('SELECT * FROM ' + tabla + ' WHERE id_usuario="' + usr + '" AND password="' + pwd + '"');
+        let data = await pool.query('SELECT * FROM ' + tabla + ' WHERE id_usuario="' + usr + '" AND password="' + pwd + '" AND id_estado=1');
 
         if (JSON.stringify(data) == '[]') {
             res.status(400).send({
                 login: false,
                 user: null,
+                rol: null,
+                sucursal: null,
                 hash: null
             });
         } else {
@@ -34,9 +36,13 @@ router.get('/', async (req, res) => {
                 console.log(e);
             }
 
+            console.log(data);
+
             res.status(200).send({
                 login: true,
                 user: usr,
+                sucursal: data[0].id_sucursal,
+                rol: data[0].id_rol,
                 hash: hash
             });
         }

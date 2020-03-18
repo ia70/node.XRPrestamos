@@ -24,10 +24,20 @@ router.post('/', async (req, res) => {
         var persona = req.body.persona;
         var aval = req.body.aval;
         var establecimiento = req.body.establecimiento;
+        var user = req.body.user;
+        var data_user = {
+            id_usuario: persona.id_usuario,
+            id_sucursal:user.sucursal,
+            password: '12345',
+            id_rol: 3,
+            usuario_padre: user.user,
+            id_estado: 5
+        };
 
         const d_per = await pool.query('INSERT INTO persona SET ?', [persona]);
         const d_aval = await pool.query('INSERT INTO aval SET ?', [aval]);
         const d_est = await pool.query('INSERT INTO usuario_establecimiento SET ?', [establecimiento]);
+        const d_user = await pool.query('INSERT INTO usuario SET ?', [data_user]);
 
         var respuesta = {
             persona: [d_per],
