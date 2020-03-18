@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-const { getShortDate } = require('../../lib/util');
+const { access } = require('../../lib/security');
 
 const pool = require('../../database');
 const tabla = "persona";
@@ -35,18 +35,23 @@ router.post('/', async (req, res) => {
             id_estado: 5
         };
 
-        const d_per = await pool.query('INSERT INTO persona SET ?', [persona]);
-        const d_aval = await pool.query('INSERT INTO aval SET ?', [aval]);
-        const d_est = await pool.query('INSERT INTO usuario_establecimiento SET ?', [establecimiento]);
-        const d_user = await pool.query('INSERT INTO usuario SET ?', [data_user]);
+        if (await !access(user.hash, user.user)) {
+            res.status(400).send("Sesión inválida!");
+        } else {
 
-        var respuesta = {
-            persona: [d_per],
-            aval: [d_aval],
-            establecimiento: [d_est]
-        };
+            const d_per = await pool.query('INSERT INTO persona SET ?', [persona]);
+            const d_aval = await pool.query('INSERT INTO aval SET ?', [aval]);
+            const d_est = await pool.query('INSERT INTO usuario_establecimiento SET ?', [establecimiento]);
+            const d_user = await pool.query('INSERT INTO usuario SET ?', [data_user]);
 
-        res.status(200).send(respuesta);
+            var respuesta = {
+                persona: [d_per],
+                aval: [d_aval],
+                establecimiento: [d_est]
+            };
+
+            res.status(200).send(respuesta);
+        }
     } catch (e) {
         res.status(400).send(e);
     }
