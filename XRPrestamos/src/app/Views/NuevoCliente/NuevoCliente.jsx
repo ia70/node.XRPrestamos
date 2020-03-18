@@ -100,8 +100,15 @@ class NuevoCliente extends Component {
                 console.error('Error:', error)
             })
             .then(response => {
-                console.log('Success:', response);
-                alert('¡Registro guardado!');
+                if (response.response) {
+                    alert('¡Registro guardado!');
+                } else {
+                    if (response.session == false) {
+                        sessionStorage.clear;
+                        alert('¡Sesion bloqueada!');
+                    } else
+                        alert('¡Error al insertar!');
+                }
             });
     }
 
