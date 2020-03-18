@@ -208,7 +208,8 @@ ENGINE = InnoDB;
 -- Table `XRPrestamos`.`persona`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`persona` (
-  `id_usuario` VARCHAR(30) NOT NULL,
+  `ine_clave` VARCHAR(50) NOT NULL,
+  `id_usuario` VARCHAR(30) NULL,
   `id_usuario_referido` VARCHAR(30) NULL,
   `alias` VARCHAR(60) NULL,
   `nombre` VARCHAR(50) NULL,
@@ -222,11 +223,10 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`persona` (
   `telefono` VARCHAR(12) NULL,
   `correo` VARCHAR(100) NULL,
   `foto` LONGBLOB NULL,
-  `ine_clave` VARCHAR(150) NULL,
   `ine_img` LONGBLOB NULL,
   `id_tipo_inmueble` INT NULL,
   `id_estado` INT NULL,
-  PRIMARY KEY (`id_usuario`))
+  PRIMARY KEY (`ine_clave`))
 ENGINE = InnoDB;
 
 
@@ -245,14 +245,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`credito` (
   `id_credito` INT NOT NULL AUTO_INCREMENT,
-  `id_usuario` VARCHAR(30) NOT NULL COMMENT 'Usuario quien registra el credito',
-  `id_usuario_cliente` VARCHAR(30) NOT NULL COMMENT 'Usuario a quien se le otorga el credito',
-  `id_periodo` INT NOT NULL,
-  `id_plazo` INT NOT NULL,
+  `id_usuario` VARCHAR(30) NULL COMMENT 'Usuario quien registra el credito',
+  `id_usuario_cliente` VARCHAR(30) NULL COMMENT 'Usuario a quien se le otorga el credito',
+  `id_periodo` INT NULL,
+  `id_plazo` INT NULL,
   `monto_credito` DECIMAL(10,2) NULL,
   `monto_pago` DECIMAL(10,2) NULL,
   `monto_total` DECIMAL(10,2) NULL,
-  `fecha_credito` DATE NOT NULL,
+  `fecha_credito` DATE NULL,
   `fecha_inicio_cobro` DATE NULL,
   `fecha_fin_cobro` DATE NULL,
   `fecha_ultimo_pago` DATE NULL,
@@ -262,8 +262,8 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`credito` (
   `pagos_adelantados` DECIMAL(10,2) NULL,
   `pagos_parciales` INT NULL,
   `pagos_atrasados` DECIMAL(10,2) NULL,
-  `id_estado_credito` INT NOT NULL,
-  `id_estado` INT NOT NULL,
+  `id_estado_credito` INT NULL,
+  `id_estado` INT NULL,
   `id_tipo_credito` INT NULL COMMENT 'Tipo de operqación:\n1- Nuevo cliente\n2- Renovación credito\n3- Nuevo credito a cliente Con credito activo\n4- Moroso',
   `fecha` DATE NULL,
   PRIMARY KEY (`id_credito`))
@@ -287,11 +287,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`abono` (
   `id_abono` INT NOT NULL AUTO_INCREMENT,
-  `id_credito` INT NOT NULL,
+  `id_credito` INT NULL,
   `monto` DECIMAL(10,2) NULL,
   `tipo_pago` INT NULL COMMENT 'Tipo de pago:\n1- Pago normal completo\n2- Pago exedente\n3- Pago parcial\n4- Sin pago',
-  `no_pago_adelantado` DECIMAL(10,2) NULL COMMENT 'Cantidad de pagos adelantados',
-  `fecha_abono` DATE NOT NULL,
+  `no_pagos` DECIMAL(10,2) NULL COMMENT 'Cantidad de pagos (adelantado - atrasado)',
+  `fecha_abono` DATE NULL,
   PRIMARY KEY (`id_abono`))
 ENGINE = InnoDB;
 
@@ -477,7 +477,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`sucursal` (`id_sucursal`, `id_empresa`, `nombre`, `direccion`, `id_ciudad`, `cp`, `telefono`, `id_moneda`, `id_zona_horaria`, `id_estado`) VALUES (1, 'RFC45GENERICO', 'Comalcalco', 'Calle Reforma', 1, '86300', '9331490521', NULL, NULL, 1);
+INSERT INTO `XRPrestamos`.`sucursal` (`id_sucursal`, `id_empresa`, `nombre`, `direccion`, `id_ciudad`, `cp`, `telefono`, `id_moneda`, `id_zona_horaria`, `id_estado`) VALUES (1, 'RFC45GENERICO', 'Comalcalco', 'Calle Reforma', 1, '86300', '9331490521', 1, 1, 1);
 
 COMMIT;
 
@@ -487,7 +487,19 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('admin', 1, 'admin', 1, NULL, 1);
+INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('admin', 1, '12345', 1, NULL, 1);
+INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('jc', 1, '12345', 2, 'admin', 1);
+INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('angel', 1, '12345', 2, 'admin', 1);
+INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('oficina', 1, '12345', 2, 'admin', 1);
+INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('cliente1', 1, '12345', 3, 'admin', 1);
+INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('cliente2', 1, '12345', 3, 'admin', 1);
+INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('cliente3', 1, '12345', 3, 'admin', 1);
+INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('cliente4', 1, '12345', 3, 'admin', 1);
+INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('cliente5', 1, '12345', 3, 'admin', 1);
+INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('cliente7', 1, '12345', 3, 'admin', 1);
+INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('cliente8', 1, '12345', 3, 'admin', 1);
+INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('cliente9', 1, '12345', 3, 'admin', 1);
+INSERT INTO `XRPrestamos`.`usuario` (`id_usuario`, `id_sucursal`, `password`, `id_rol`, `usuario_padre`, `id_estado`) VALUES ('cliente10', 1, '12345', 3, 'admin', 1);
 
 COMMIT;
 
@@ -621,9 +633,20 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('admin', NULL, NULL, 'Daniel', 'Pérez', 'Cortéz', 1, NULL, NULL, NULL, NULL, '9141198098', 'pcd510@hotmail.com', NULL, NULL, NULL, 1, 1);
-INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cobrador_1', NULL, NULL, 'Angel', 'Castillo', 'López', 1, NULL, NULL, NULL, NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, NULL, 1, 1);
-INSERT INTO `XRPrestamos`.`persona` (`id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_clave`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('cliente_1', NULL, NULL, 'Maria Elena', 'Gonzalez', 'Ovando', 1, NULL, NULL, NULL, NULL, '9332514561', 'marielena@hotmail.com', NULL, NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_ADMIN', 'admin', NULL, 'Ingeniero', 'Daniel', 'Pérez', 'Cortéz', 1, 'Jalpa de Méndez', '10', 'Centro', NULL, '9141198098', 'pcd510@hotmail.com', NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_JC', 'jc', NULL, 'JC', 'Angel', 'Castillo', 'López', 1, 'Comalcalco', '65', 'Centro', NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_ANGEL', 'angel', NULL, 'Angel', 'Maria Elena', 'Gonzalez', 'Ovando', 1, 'Comalcalco', '85', 'Centro', NULL, '9332514561', 'ejemplo@hotmail.com', NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_OFICINA', 'oficina', NULL, 'Oficina', 'Oficina', NULL, NULL, NULL, 'Comalcalco', '2', 'Centro', NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, 2, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_1', 'cliente1', NULL, 'Efren Torres Taxi #294', 'Efren', 'Torrez', 'Pérez', NULL, 'Comalcalco', '123', 'Centro', NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_2', 'cliente2', NULL, 'Tortilleria San Judas Tadeo', 'Susana', 'Jimenez', 'Oliva', NULL, 'Comalcalco', '987', 'Centro', NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_3', 'cliente3', NULL, 'Uñas Arreglos', 'Alejandro', 'Ricardez', 'Garcia', NULL, 'Comalcalco', '12', 'Centro', NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, 2, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_4', 'cliente4', NULL, 'Amiga Jannet Pollo', 'Maria del Rosario', 'Rivera', 'Salinas', NULL, 'Comalcalco', '654', 'Centro', NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, 2, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_5', 'cliente5', NULL, 'Raul Joyero', 'Raul', 'Ramirez', 'Falconi', NULL, 'Comalcalco', '589', 'Centro', NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, 2, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_6', 'cliente6', NULL, 'Peluqueria', 'Fabiola', 'Hernandez', 'Martinez', NULL, 'Comalcalco', '35', 'Centro', NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_7', 'cliente7', NULL, 'Joel Pochi', 'Joel', 'Piña', 'Juarez', NULL, 'Comalcalco', '14', 'Centro', NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, 2, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_8', 'cliente8', NULL, 'Pochi Tomas Garrido', 'Juan Carlos', 'Méndez', 'Valenzuela', NULL, 'Comalcalco', '65', 'Centro', NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_9', 'cliente9', NULL, 'Ignacio Alfredo Pochi', 'Ignacio', 'Alfredo', NULL, NULL, 'Comalcalco', '81', 'Centro', NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`persona` (`ine_clave`, `id_usuario`, `id_usuario_referido`, `alias`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_calle`, `direccion`, `no_casa`, `referencias`, `foto_casa`, `telefono`, `correo`, `foto`, `ine_img`, `id_tipo_inmueble`, `id_estado`) VALUES ('INE_10', 'cliente10', NULL, 'Mateo Dominguez Pochi', 'Mateo', 'Dominguez', 'Chable', NULL, 'Comalcalco', '21', 'Centro', NULL, '9331036538', 'ejemplo@hotmail.com', NULL, NULL, 1, 1);
 
 COMMIT;
 
@@ -647,6 +670,15 @@ COMMIT;
 START TRANSACTION;
 USE `XRPrestamos`;
 INSERT INTO `XRPrestamos`.`credito` (`id_credito`, `id_usuario`, `id_usuario_cliente`, `id_periodo`, `id_plazo`, `monto_credito`, `monto_pago`, `monto_total`, `fecha_credito`, `fecha_inicio_cobro`, `fecha_fin_cobro`, `fecha_ultimo_pago`, `fecha_siguiente_pago`, `pagos_total`, `pagos_pagados`, `pagos_adelantados`, `pagos_parciales`, `pagos_atrasados`, `id_estado_credito`, `id_estado`, `id_tipo_credito`, `fecha`) VALUES (1, 'admin', 'cliente1', 3, 1, 5000, 250, 6000, '2020/02/15', '2020/02/16', '2020/03/08', '2020/02/20', '2020/02/21', 24, 10, 5, 2, 1, 1, 1, 1, '2020/02/15');
+INSERT INTO `XRPrestamos`.`credito` (`id_credito`, `id_usuario`, `id_usuario_cliente`, `id_periodo`, `id_plazo`, `monto_credito`, `monto_pago`, `monto_total`, `fecha_credito`, `fecha_inicio_cobro`, `fecha_fin_cobro`, `fecha_ultimo_pago`, `fecha_siguiente_pago`, `pagos_total`, `pagos_pagados`, `pagos_adelantados`, `pagos_parciales`, `pagos_atrasados`, `id_estado_credito`, `id_estado`, `id_tipo_credito`, `fecha`) VALUES (2, 'admin', 'cliente2', 3, 1, 3000, 150, 3600, '2020/02/15', '2020/02/16', '2020/03/08', '2020/02/20', '2020/02/21', 24, 3, 0, 0, 0, 1, 1, 1, '2020/02/15');
+INSERT INTO `XRPrestamos`.`credito` (`id_credito`, `id_usuario`, `id_usuario_cliente`, `id_periodo`, `id_plazo`, `monto_credito`, `monto_pago`, `monto_total`, `fecha_credito`, `fecha_inicio_cobro`, `fecha_fin_cobro`, `fecha_ultimo_pago`, `fecha_siguiente_pago`, `pagos_total`, `pagos_pagados`, `pagos_adelantados`, `pagos_parciales`, `pagos_atrasados`, `id_estado_credito`, `id_estado`, `id_tipo_credito`, `fecha`) VALUES (3, 'admin', 'cliente3', 3, 1, 2000, 100, 2400, '2020/02/15', '2020/02/16', '2020/03/08', '2020/02/20', '2020/02/21', 24, 11, 2, 0, 1, 1, 1, 1, '2020/02/15');
+INSERT INTO `XRPrestamos`.`credito` (`id_credito`, `id_usuario`, `id_usuario_cliente`, `id_periodo`, `id_plazo`, `monto_credito`, `monto_pago`, `monto_total`, `fecha_credito`, `fecha_inicio_cobro`, `fecha_fin_cobro`, `fecha_ultimo_pago`, `fecha_siguiente_pago`, `pagos_total`, `pagos_pagados`, `pagos_adelantados`, `pagos_parciales`, `pagos_atrasados`, `id_estado_credito`, `id_estado`, `id_tipo_credito`, `fecha`) VALUES (4, 'admin', 'cliente4', 3, 1, 1000, 50, 1200, '2020/02/15', '2020/02/16', '2020/03/08', '2020/02/20', '2020/02/21', 24, 1, 0, 0, 3, 1, 1, 1, '2020/02/15');
+INSERT INTO `XRPrestamos`.`credito` (`id_credito`, `id_usuario`, `id_usuario_cliente`, `id_periodo`, `id_plazo`, `monto_credito`, `monto_pago`, `monto_total`, `fecha_credito`, `fecha_inicio_cobro`, `fecha_fin_cobro`, `fecha_ultimo_pago`, `fecha_siguiente_pago`, `pagos_total`, `pagos_pagados`, `pagos_adelantados`, `pagos_parciales`, `pagos_atrasados`, `id_estado_credito`, `id_estado`, `id_tipo_credito`, `fecha`) VALUES (5, 'admin', 'cliente5', 3, 1, 3000, 150, 3600, '2020/02/15', '2020/02/16', '2020/03/08', '2020/02/20', '2020/02/21', 24, 9, 0, 3, 1, 1, 1, 1, '2020/02/15');
+INSERT INTO `XRPrestamos`.`credito` (`id_credito`, `id_usuario`, `id_usuario_cliente`, `id_periodo`, `id_plazo`, `monto_credito`, `monto_pago`, `monto_total`, `fecha_credito`, `fecha_inicio_cobro`, `fecha_fin_cobro`, `fecha_ultimo_pago`, `fecha_siguiente_pago`, `pagos_total`, `pagos_pagados`, `pagos_adelantados`, `pagos_parciales`, `pagos_atrasados`, `id_estado_credito`, `id_estado`, `id_tipo_credito`, `fecha`) VALUES (6, 'admin', 'cliente6', 3, 1, 2000, 100, 2400, '2020/02/15', '2020/02/16', '2020/03/08', '2020/02/20', '2020/02/21', 24, 18, 1, 0, 0, 1, 1, 1, '2020/02/15');
+INSERT INTO `XRPrestamos`.`credito` (`id_credito`, `id_usuario`, `id_usuario_cliente`, `id_periodo`, `id_plazo`, `monto_credito`, `monto_pago`, `monto_total`, `fecha_credito`, `fecha_inicio_cobro`, `fecha_fin_cobro`, `fecha_ultimo_pago`, `fecha_siguiente_pago`, `pagos_total`, `pagos_pagados`, `pagos_adelantados`, `pagos_parciales`, `pagos_atrasados`, `id_estado_credito`, `id_estado`, `id_tipo_credito`, `fecha`) VALUES (7, 'admin', 'cliente7', 3, 1, 1000, 50, 1200, '2020/02/15', '2020/02/16', '2020/03/08', '2020/02/20', '2020/02/21', 24, 12, 6, 1, 0, 1, 1, 1, '2020/02/15');
+INSERT INTO `XRPrestamos`.`credito` (`id_credito`, `id_usuario`, `id_usuario_cliente`, `id_periodo`, `id_plazo`, `monto_credito`, `monto_pago`, `monto_total`, `fecha_credito`, `fecha_inicio_cobro`, `fecha_fin_cobro`, `fecha_ultimo_pago`, `fecha_siguiente_pago`, `pagos_total`, `pagos_pagados`, `pagos_adelantados`, `pagos_parciales`, `pagos_atrasados`, `id_estado_credito`, `id_estado`, `id_tipo_credito`, `fecha`) VALUES (8, 'admin', 'cliente8', 3, 1, 2000, 100, 2400, '2020/02/15', '2020/02/16', '2020/03/08', '2020/02/20', '2020/02/21', 24, 6, 1, 3, 0, 1, 1, 1, '2020/02/15');
+INSERT INTO `XRPrestamos`.`credito` (`id_credito`, `id_usuario`, `id_usuario_cliente`, `id_periodo`, `id_plazo`, `monto_credito`, `monto_pago`, `monto_total`, `fecha_credito`, `fecha_inicio_cobro`, `fecha_fin_cobro`, `fecha_ultimo_pago`, `fecha_siguiente_pago`, `pagos_total`, `pagos_pagados`, `pagos_adelantados`, `pagos_parciales`, `pagos_atrasados`, `id_estado_credito`, `id_estado`, `id_tipo_credito`, `fecha`) VALUES (9, 'admin', 'cliente9', 3, 1, 3000, 150, 3600, '2020/02/15', '2020/02/16', '2020/03/08', '2020/02/20', '2020/02/21', 24, 20, 0, 1, 0, 1, 1, 1, '2020/02/15');
+INSERT INTO `XRPrestamos`.`credito` (`id_credito`, `id_usuario`, `id_usuario_cliente`, `id_periodo`, `id_plazo`, `monto_credito`, `monto_pago`, `monto_total`, `fecha_credito`, `fecha_inicio_cobro`, `fecha_fin_cobro`, `fecha_ultimo_pago`, `fecha_siguiente_pago`, `pagos_total`, `pagos_pagados`, `pagos_adelantados`, `pagos_parciales`, `pagos_atrasados`, `id_estado_credito`, `id_estado`, `id_tipo_credito`, `fecha`) VALUES (10, 'admin', 'cliente10', 3, 1, 2000, 100, 2400, '2020/02/15', '2020/02/16', '2020/03/08', '2020/02/20', '2020/02/21', 24, 1, 0, 0, 0, 1, 1, 1, '2020/02/15');
 
 COMMIT;
 
@@ -657,6 +689,8 @@ COMMIT;
 START TRANSACTION;
 USE `XRPrestamos`;
 INSERT INTO `XRPrestamos`.`ruta` (`id_ruta`, `id_sucursal`, `descripcion`, `id_estado`) VALUES (1, 1, 'R2-Motorizada', 1);
+INSERT INTO `XRPrestamos`.`ruta` (`id_ruta`, `id_sucursal`, `descripcion`, `id_estado`) VALUES (2, 1, 'Mercado', 1);
+INSERT INTO `XRPrestamos`.`ruta` (`id_ruta`, `id_sucursal`, `descripcion`, `id_estado`) VALUES (3, 1, 'Oficina', 1);
 
 COMMIT;
 
@@ -720,7 +754,16 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `id_tipo_local`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (1, '1', 'Polleria Mercado', 1, 'Mercado', NULL, 4, 1, NULL, NULL, '8:00', '18:00', NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `id_tipo_local`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (1, 'cliente1', 'Taxi #294', 1, '2', NULL, 4, 1, 2, NULL, '8:00', '18:00', NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `id_tipo_local`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (2, 'cliente2', 'Tortilleria San Judas Tadeo', NULL, NULL, NULL, NULL, 1, 2, NULL, '8:00', '18:00', NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `id_tipo_local`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (3, 'cliente3', 'Uñas Arreglos', NULL, NULL, NULL, NULL, 1, 2, NULL, '8:00', '18:00', NULL, NULL, 1, 1);
+INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `id_tipo_local`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (4, 'cliente4', 'Vende Pollo', NULL, NULL, NULL, NULL, 1, 2, NULL, '8:00', '18:00', NULL, NULL, 2, 1);
+INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `id_tipo_local`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (5, 'cliente5', 'Raul Joyero', NULL, NULL, NULL, NULL, 1, 2, NULL, '8:00', '18:00', NULL, NULL, 2, 1);
+INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `id_tipo_local`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (6, 'cliente6', 'Peluqueria', NULL, NULL, NULL, NULL, 1, 2, NULL, '8:00', '18:00', NULL, NULL, 2, 1);
+INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `id_tipo_local`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (7, 'cliente7', 'Joel Pochi', NULL, NULL, NULL, NULL, 1, 2, NULL, '8:00', '18:00', NULL, NULL, 3, 1);
+INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `id_tipo_local`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (8, 'cliente8', 'Pochi Tomas Garrido', NULL, NULL, NULL, NULL, 1, 2, NULL, '8:00', '18:00', NULL, NULL, 3, 1);
+INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `id_tipo_local`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (9, 'cliente9', 'Ignacio Alfredo Pochi', NULL, NULL, NULL, NULL, 1, 2, NULL, '8:00', '18:00', NULL, NULL, 3, 1);
+INSERT INTO `XRPrestamos`.`usuario_establecimiento` (`id_usuario_establecimiento`, `id_usuario`, `nombre`, `id_calle`, `numero_ext`, `referencias`, `id_actividad_economica`, `id_tipo_inmueble`, `id_tipo_local`, `documento_adicional`, `disponibilidad_hr_inicio`, `disponibilidad_hr_fin`, `coordenadas`, `foto`, `id_ruta`, `id_estado`) VALUES (10, 'cliente10', 'Mateo Dominguez Pochi', NULL, NULL, NULL, NULL, 1, 2, NULL, '8:00', '18:00', NULL, NULL, 1, 1);
 
 COMMIT;
 
@@ -730,7 +773,19 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`usuario_ruta` (`id_usuario_ruta`, `id_ruta`, `id_usuario`) VALUES (1, 1, 'admin');
+INSERT INTO `XRPrestamos`.`usuario_ruta` (`id_usuario_ruta`, `id_ruta`, `id_usuario`) VALUES (1, 1, 'jc');
+INSERT INTO `XRPrestamos`.`usuario_ruta` (`id_usuario_ruta`, `id_ruta`, `id_usuario`) VALUES (2, 2, 'angel');
+INSERT INTO `XRPrestamos`.`usuario_ruta` (`id_usuario_ruta`, `id_ruta`, `id_usuario`) VALUES (3, 3, 'oficina');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `XRPrestamos`.`capital`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `XRPrestamos`;
+INSERT INTO `XRPrestamos`.`capital` (`id_capital`, `id_sucursal`, `id_periodo`, `id_usuario`, `tipo`, `emisor`, `concepto`, `empresa`, `monto`, `hora`, `folio_ticket`, `comprobante`, `fecha`, `fecha_reg`) VALUES (1, 1, 1, 'admin', 'Ingreso', 'admin', 'Capital', NULL, 50000, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 

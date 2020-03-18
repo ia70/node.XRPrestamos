@@ -33,6 +33,7 @@ class NuevoCliente extends Component {
 
         var data_text = {
             persona: {
+                ine_clave: document.getElementById('p_ine').value,
                 id_usuario: document.getElementById('p_ine').value,
                 id_usuario_referido: null,
                 alias: document.getElementById('p_alias').value,
@@ -47,7 +48,6 @@ class NuevoCliente extends Component {
                 telefono: document.getElementById('p_telefono').value,
                 correo: document.getElementById('p_email').value,
                 foto: null,
-                ine_clave: document.getElementById('p_ine').value,
                 ine_img: null,
                 id_tipo_inmueble: 1,
                 id_estado: 1
@@ -58,7 +58,7 @@ class NuevoCliente extends Component {
                 id_calle: null,
                 numero_ext: null,
                 referencias: document.getElementById('n_referencia').value,
-                id_actividad_economica: document.getElementById('n_tipoactividad').value,
+                id_actividad_economica: null,
                 id_tipo_inmueble: document.getElementById('n_tipo_inmueble').value,
                 id_tipo_local: document.getElementById('n_tipo_local').value,
                 documento_adicional: null,
@@ -95,7 +95,6 @@ class NuevoCliente extends Component {
                 console.log('Success:', response);
                 alert('¡Registro guardado!');
             });
-
     }
 
     render() {
@@ -132,7 +131,7 @@ class NuevoCliente extends Component {
                         <Title title="DATOS DEL NEGOCIO" />
 
                         <TextBox id="n_nombre" label="Nombre del Negocio" holder="Nombre del Negocio" help="" required={true} maxlength={100} />
-                        <TextBox id="n_tipoactividad" label="Tipo Negocio (Pozoleria...)" holder="Tipo Negocio (Pozoleria...)" help="" required={true} maxlength={3} />
+                       
                         <TextBox id="n_referencia" label="Referencia" holder="Referencia" help="" required={true} maxlength={250} />
 
                         <TextPhoneNumber id="n_telefono" label="Telefono" holder="Telefono" help="" required={false} />
