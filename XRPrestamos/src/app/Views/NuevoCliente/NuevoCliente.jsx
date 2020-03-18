@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import Navbar from '../../Components/Content/Navbar/Navbar.jsx';
 import { Title } from '../../Components/Content/Title/Title.jsx';
 import TextBox from '../../Components/Form/TextBox/TextBox.jsx';
@@ -100,19 +101,38 @@ class NuevoCliente extends Component {
                 console.error('Error:', error)
             })
             .then(response => {
-                if (response.response) {
-                    alert('¡Registro guardado!');
-                } else {
-                    if (response.session == false) {
-                        sessionStorage.clear;
-                        alert('¡Sesion bloqueada!');
+                if (response.session) {
+                    if (response.response) {
+                        alert('¡Registro guardado!');
                     } else
                         alert('¡Error al insertar!');
+                } else {
+                    sessionStorage.clear();
+                    alert('¡Sesion bloqueada!');
+                    this.setState({ login: false });
                 }
             });
     }
 
+    componentWillMount() {
+        if (!sessionStorage == 'true') {
+            sessionStorage.clear();
+            alert('¡Sesion bloqueada!');
+            this.setState({ login: false });
+        }
+    }
+
     render() {
+
+        if (this.state.login == false) {
+            var ruta = "/";
+            return (
+                <Redirect
+                    from="/"
+                    to={ruta} />
+            );
+        }
+
         return (
             <div>
                 <Navbar setLogo={Logo} setTitle="Nuevo Cliente" setButton={true} />
