@@ -35,25 +35,35 @@ router.post('/', async (req, res) => {
             id_estado: 5
         };
 
-        if (await !access(user.hash, user.user)) {
-            res.status(400).send("Sesión inválida!");
-        } else {
+        if (await access(user.hash, user.user)) {
+            let r_d_per = true;
 
             const d_per = await pool.query('INSERT INTO persona SET ?', [persona]);
-            const d_aval = await pool.query('INSERT INTO aval SET ?', [aval]);
-            const d_est = await pool.query('INSERT INTO usuario_establecimiento SET ?', [establecimiento]);
-            const d_user = await pool.query('INSERT INTO usuario SET ?', [data_user]);
+            if (d_per.affectedRows > 0) {
+                let d_aval = await pool.query('INSERT INTO aval SET ?', [aval]);
+                let d_est = await pool.query('INSERT INTO usuario_establecimiento SET ?', [establecimiento]);
+                let d_user = await pool.query('INSERT INTO usuario SET ?', [data_user]);
+            } else
+                r_d_per = false;
 
-            var respuesta = {
-                persona: [d_per],
-                aval: [d_aval],
-                establecimiento: [d_est]
+            let respuesta = {
+                response: r_d_per,
+                session: true
             };
 
             res.status(200).send(respuesta);
+
+        } else {
+            res.status(400).send({
+                session: false
+            });
         }
     } catch (e) {
-        res.status(400).send(e);
+        res.status(400).send({
+            response: false,
+            session: true,
+            error: e
+        });
     }
 });
 
