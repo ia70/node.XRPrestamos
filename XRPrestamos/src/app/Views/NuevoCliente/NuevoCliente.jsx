@@ -17,11 +17,12 @@ class NuevoCliente extends Component {
     constructor(props) {
         super(props);
 
-        sessionStorage.setItem('route','nuevocliente');
+        sessionStorage.setItem('route', 'nuevocliente');
 
         this.state = {
             login: sessionStorage.getItem('login'),
             user: sessionStorage.getItem('user'),
+            sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
         };
 
@@ -77,6 +78,11 @@ class NuevoCliente extends Component {
                 direccion: null,
                 telefono: document.getElementById('a_telefono').value,
                 parentesco: document.getElementById('a_parentesco').value
+            },
+            user: {
+                user: this.state.user,
+                sucursal: this.state.sucursal,
+                hash: this.state.hash
             }
         };
 
@@ -109,12 +115,12 @@ class NuevoCliente extends Component {
                         <TextBox id="p_alias" label="Alias" holder="Alias Cliente" help="" required={true} maxlength={60} />
                         <TextBox id="p_nombre" label="Nombre" holder="Nombre del cliente" help="" required={true} maxlength={50} />
                         <TextBox id="p_apaterno" label="A. Paterno" holder="Apellido paterno" help="" required={true} maxlength={20} />
-                        <TextBox id="p_amaterno" label="A. Materno" holder="Apellido materno" help="" required={true}  maxlength={20} />
+                        <TextBox id="p_amaterno" label="A. Materno" holder="Apellido materno" help="" required={true} maxlength={20} />
                         <TextBox id="p_no_casa" label="Número exterior" holder="Número exterior" help="" required={true} maxlength={10} />
                         <TextBox id="p_direccion" label="Dirección" holder="Dirección" help="" required={true} maxlength={250} />
 
 
-                        <TextBox id="p_referencia" label="Referencia" holder="Referencia" help="" required={true} maxlength={250}/>
+                        <TextBox id="p_referencia" label="Referencia" holder="Referencia" help="" required={true} maxlength={250} />
                         <TextPhoneNumber id="p_telefono" label="Telefono" holder="Telefono" help="" required={false} />
 
                         <FileInput id="p_foto_ine" label="Foto INE" holder="Foto INE"  ></FileInput>
@@ -131,14 +137,14 @@ class NuevoCliente extends Component {
                         <Title title="DATOS DEL NEGOCIO" />
 
                         <TextBox id="n_nombre" label="Nombre del Negocio" holder="Nombre del Negocio" help="" required={true} maxlength={100} />
-                       
+
                         <TextBox id="n_referencia" label="Referencia" holder="Referencia" help="" required={true} maxlength={250} />
 
                         <TextPhoneNumber id="n_telefono" label="Telefono" holder="Telefono" help="" required={false} />
                         <TextEmail id="n_email" label="Correo electrónico" holder="Correo electrónico" help="" required={false} />
                         <TextTime id="n_hora_inicio" label="Inicio de disponibilidad" holder="Inicio de disponibilidad" help="" required={false} />
                         <TextTime id="n_hora_fin" label="Fin disponibilidad" holder="Fin disponibilidad" help="" required={false} />
-                        <TextBox id="n_coordenadas" label="Coordenadas" holder="Coordenadas" help="" required={true} maxlength={100}/>
+                        <TextBox id="n_coordenadas" label="Coordenadas" holder="Coordenadas" help="" required={true} maxlength={100} />
                         <FileInput id="n_foto" label="Foto Negocio" holder=""  ></FileInput>
                         <ComboBox id="n_tipo_inmueble" label="Tipo Inmueble" tabla='tipo_inmueble' ></ComboBox>
                         <ComboBox id="n_tipo_local" label="Tipo Local" tabla='tipo_local' ></ComboBox>
