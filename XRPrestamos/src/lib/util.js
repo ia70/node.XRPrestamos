@@ -5,4 +5,9 @@ function getDateTime() {
     return moment().format('YYYY-MM-DD hh:mm:ss');
 }
 
-module.exports = { getDateTime };
+function getShortDate(){
+    var d = moment();
+    return moment().format('YYYY-MM-DD');
+}
+
+module.exports = { getDateTime, getShortDate };

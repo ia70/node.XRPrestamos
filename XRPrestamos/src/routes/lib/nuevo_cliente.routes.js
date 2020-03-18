@@ -1,6 +1,7 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
+const { getShortDate } = require('../../lib/util');
 
 const pool = require('../../database');
 const tabla = "persona";
@@ -27,7 +28,7 @@ router.post('/', async (req, res) => {
         var user = req.body.user;
         var data_user = {
             id_usuario: persona.id_usuario,
-            id_sucursal:user.sucursal,
+            id_sucursal: user.sucursal,
             password: '12345',
             id_rol: 3,
             usuario_padre: user.user,
