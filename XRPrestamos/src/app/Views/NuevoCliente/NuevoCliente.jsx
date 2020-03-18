@@ -9,6 +9,7 @@ import ComboBox from '../../Components/Form/ComboBox/ComboBox.jsx';
 import { FileInput } from '../../Components/Form/FileInput/FileInput.jsx';
 import { TextTime } from '../../Components/Form/TextTime/TextTime.jsx';
 import keys from '../../../keys';
+import { getShortDate } from '../../../lib/util';
 
 import Logo from '../../img/Logo.png';
 
@@ -51,7 +52,8 @@ class NuevoCliente extends Component {
                 foto: null,
                 ine_img: null,
                 id_tipo_inmueble: 1,
-                id_estado: 1
+                id_estado: 1,
+                fecha_reg: getShortDate()
             },
             establecimiento: {
                 id_usuario: document.getElementById('p_ine').value,
