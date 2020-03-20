@@ -114,7 +114,7 @@ class NuevoCliente extends Component {
     }
 
     componentWillMount() {
-        if (!sessionStorage == 'true') {
+        if (!sessionStorage.getItem('login') == 'true') {
             sessionStorage.clear();
             alert('¡Sesion bloqueada!');
             this.setState({ login: false });
