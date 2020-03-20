@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ComboBox from '../../../Components/Form/ComboBox/ComboBox.jsx';
 
 //CONMPONENTS --------------------------------------------------
 import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
@@ -51,6 +52,7 @@ class SolicitarDinero extends Component {
                         <TextSearch />
                         <TextMoney id="dinero" label="Cantidad" holder="Cantidad" help="" required={true} />
                         <TextNumber id="dias" label="Plazo en dias" holder="Plazo en dias" help="" required={true} />
+                        <ComboBox id="solicitar" label="Periodo de cobro" tabla='ruta' ></ComboBox>
                         <DateTimePicker id="fecha" label="Fecha requerida" holder="Plazo en dias" help="" required={true} />
                     </div>
                     <BtnSubmit label="Guardar" />

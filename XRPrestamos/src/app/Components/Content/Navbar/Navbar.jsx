@@ -17,7 +17,7 @@ class Navbar extends Component {
 
     render() {
         let Fecha = "";
-        let Boton = <Btn url={this.props.url || "/dashboard"} />;
+        let Boton = <Btn url={this.props.url || "/dashboard"} evento={this.props.evento} />;
 
         if (this.props.setButton == false || this.props.setButton == null) {
             Boton = "";

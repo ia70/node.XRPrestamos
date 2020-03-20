@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 //CONMPONENTS --------------------------------------------------
 import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
@@ -78,7 +79,6 @@ class CarteraClientes extends Component {
             this.setState({ login: false });
         }
     }
-
 
     render() {
 

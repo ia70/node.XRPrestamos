@@ -23,7 +23,7 @@ export function Btn(props) {
 
     return (
         <Link to={props.url || ""}>
-            <button id={props.id || "btn01"} type="button" className={"btn " + clasesI} >{props.label || "<"} </button>
+            <button onClick={props.evento} id={props.id || "btn01"} type="button" className={"btn " + clasesI} >{props.label || "<"} </button>
         </Link>
 
     );
