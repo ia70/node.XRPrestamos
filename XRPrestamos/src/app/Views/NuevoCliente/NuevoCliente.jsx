@@ -10,7 +10,7 @@ import ComboBox from '../../Components/Form/ComboBox/ComboBox.jsx';
 import { FileInput } from '../../Components/Form/FileInput/FileInput.jsx';
 import { TextTime } from '../../Components/Form/TextTime/TextTime.jsx';
 import keys from '../../../keys';
-import { getShortDate } from '../../../lib/util';
+import { getDateTime } from '../../../lib/util';
 
 import Logo from '../../img/Logo.png';
 
@@ -37,8 +37,7 @@ class NuevoCliente extends Component {
         var data_text = {
             persona: {
                 ine_clave: document.getElementById('p_ine').value,
-                id_usuario: document.getElementById('p_ine').value,
-                id_usuario_referido: null,
+                ine_ref: null,
                 alias: document.getElementById('p_alias').value,
                 nombre: document.getElementById('p_nombre').value,
                 apellido_paterno: document.getElementById('p_apaterno').value,
@@ -53,11 +52,11 @@ class NuevoCliente extends Component {
                 foto: null,
                 ine_img: null,
                 id_tipo_inmueble: 1,
-                id_estado: 1,
-                fecha_reg: getShortDate()
+                id_estado: 5,
+                fecha_reg: getDateTime()
             },
             establecimiento: {
-                id_usuario: document.getElementById('p_ine').value,
+                ine_clave: document.getElementById('p_ine').value,
                 nombre: document.getElementById('n_nombre').value,
                 id_calle: null,
                 numero_ext: null,
@@ -71,10 +70,10 @@ class NuevoCliente extends Component {
                 coordenadas: document.getElementById('n_coordenadas').value,
                 foto: null,
                 id_ruta: document.getElementById('c_ruta').value,
-                id_estado: 1
+                id_estado: 5
             },
             aval: {
-                id_usuario: document.getElementById('p_ine').value,
+                ine_clave: document.getElementById('p_ine').value,
                 nombre: document.getElementById('a_nombre').value,
                 apellido_paterno: document.getElementById('a_apaterno').value,
                 apellido_materno: document.getElementById('a_amaterno').value,
