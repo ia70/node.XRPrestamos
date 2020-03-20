@@ -4,9 +4,6 @@ const router = express.Router();
 
 const pool = require('../../database');
 const { access } = require('../../lib/security');
-const tabla = "persona";
-const primary_key = "id_usuario";
-
 
 //->>>>>    AGREGAR     --------------------------------------------------------------------
 router.post('/', async (req, res) => {
@@ -24,7 +21,7 @@ router.post('/', async (req, res) => {
             let respuesta = {
                 response: r_d_cartera,
                 session: true,
-                cartera: d_car
+                cartera: d_car[0]
             };
 
             res.status(200).send(respuesta);

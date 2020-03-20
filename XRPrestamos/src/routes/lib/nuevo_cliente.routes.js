@@ -4,8 +4,6 @@ const router = express.Router();
 const { access } = require('../../lib/security');
 
 const pool = require('../../database');
-const tabla = "persona";
-const primary_key = "ine_clave";
 
 //->>>>>    AGREGAR     --------------------------------------------------------------------
 router.post('/', async (req, res) => {
