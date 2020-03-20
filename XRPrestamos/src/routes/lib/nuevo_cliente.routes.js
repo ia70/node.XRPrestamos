@@ -5,7 +5,7 @@ const { access } = require('../../lib/security');
 
 const pool = require('../../database');
 const tabla = "persona";
-const primary_key = "id_usuario";
+const primary_key = "ine_clave";
 
 
 
@@ -27,8 +27,9 @@ router.post('/', async (req, res) => {
         var establecimiento = req.body.establecimiento;
         var user = req.body.user;
         var data_user = {
-            id_usuario: persona.id_usuario,
+            id_usuario: persona.ine_clave,
             id_sucursal: user.sucursal,
+            ine_clave: persona.ine_clave,
             password: '12345',
             id_rol: 3,
             usuario_padre: user.user,
