@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 
 //CONMPONENTS --------------------------------------------------
 import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
@@ -16,70 +15,58 @@ class CarteraClientes extends Component {
     constructor(props) {
         super(props);
 
-        sessionStorage.setItem('route', 'carteraclientes');
+        this._isMounted = false;
+        this._isUpdate = false;
+
+        sessionStorage.getItem('login');
+        sessionStorage.getItem('user');
+        sessionStorage.getItem('hash');
+        sessionStorage.setItem('route', "carteraclientes");
 
         this.state = {
-            login: sessionStorage.getItem('login'),
-            user: sessionStorage.getItem('user'),
-            sucursal: sessionStorage.getItem('sucursal'),
-            hash: sessionStorage.getItem('hash'),
-        };
-
-        this.enviar = this.enviar.bind(this);
-    }
-
-    enviar() {
-        var url = keys.api.url + 'cartera_clientes';
-
-        var data_text = {
-            usuario: this.state.user,
-            sucursal: this.state.sucursal,
-            hash: this.state.hash
-        };
-
-        fetch(url, {
-            method: 'POST', // or 'PUT'
-            body: JSON.stringify(data_text), // data can be `string` or {object}!
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
-            .catch(error => {
-                console.error('Error:', error)
-            })
-            .then(response => {
-                if (response.session) {
-                    if (response.response) {
-                        alert('¡Registro guardado!');
-                    } else
-                        alert('¡Error al insertar!');
-                } else {
-                    sessionStorage.clear();
-                    alert('¡Sesion bloqueada!');
-                    this.setState({ login: false });
-                }
-            });
-    }
-
-    componentWillMount() {
-        if (!sessionStorage.getItem('login') == 'true') {
-            sessionStorage.clear();
-            alert('¡Sesion bloqueada!');
-            this.setState({ login: false });
+            login: null,
+            user: null,
+            hash: null
         }
+    }
+
+    componentDidMount() {
+        this._isMounted = true;
+        try {
+            if (this._isUpdate == false) {
+                this._isUpdate = true;
+                var url = keys.api.url;
+                if (this.props.tabla != null) {
+                    url += this.props.tabla;
+                    fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(res => res.json())
+                        .catch(error => console.error(error))
+                        .then(response => {
+                            if (this._isMounted) {
+                                this.setState({ 'elementos': response[this.props.tabla] });
+                            }
+                        });
+                } else if (this.props.items != null) {
+                    url = this.props.items;
+                    if (this._isMounted) {
+                        this.setState({ 'elementos': url });
+                    }
+                }
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render() {
-
-        if (this.state.login == false) {
-            var ruta = "/";
-            return (
-                <Redirect
-                    from="/"
-                    to={ruta} />
-            );
-        }
-
         var indice = 0;
         const listItems = this.state.usuarios.map((i) =>
             <ItemList key={i.id_usuario} alias={i.id_usuario} number={++indice} name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Restante:" />

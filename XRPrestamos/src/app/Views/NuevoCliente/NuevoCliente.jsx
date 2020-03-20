@@ -88,9 +88,10 @@ class NuevoCliente extends Component {
             }
         };
 
+        console.log(data_text['persona']);
         fetch(url, {
-            method: 'POST', 
-            body: JSON.stringify(data_text), 
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(data_text), // data can be `string` or {object}!
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -113,7 +114,7 @@ class NuevoCliente extends Component {
     }
 
     componentWillMount() {
-        if (!sessionStorage.getItem('login') == 'true') {
+        if (!sessionStorage == 'true') {
             sessionStorage.clear();
             alert('¡Sesion bloqueada!');
             this.setState({ login: false });
