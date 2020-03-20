@@ -24,10 +24,17 @@ class CarteraClientes extends Component {
             user: sessionStorage.getItem('user'),
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
-            rol: sessionStorage.getItem('rol')
+            rol: sessionStorage.getItem('rol'),
+            cartera: []
         };
 
         this.enviar = this.enviar.bind(this);
+    }
+
+    componentDidMount() {
+        if (!this.isUpdate) {
+            this.enviar();
+        }
     }
 
     enviar() {
@@ -40,8 +47,8 @@ class CarteraClientes extends Component {
         };
 
         fetch(url, {
-            method: 'POST', 
-            body: JSON.stringify(data_text), 
+            method: 'POST',
+            body: JSON.stringify(data_text),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -51,10 +58,13 @@ class CarteraClientes extends Component {
             })
             .then(response => {
                 if (response.session) {
+
                     if (response.response) {
                         alert('¡Registro guardado!');
                     } else
                         alert('¡Error al insertar!');
+
+
                 } else {
                     sessionStorage.clear();
                     alert('¡Sesion bloqueada!');
@@ -84,7 +94,7 @@ class CarteraClientes extends Component {
         }
 
         var indice = 0;
-        const listItems = this.state.usuarios.map((i) =>
+        const listItems = this.state.cartera.map((i) =>
             <ItemList key={i.id_usuario} alias={i.id_usuario} number={++indice} name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Restante:" />
         );
 
