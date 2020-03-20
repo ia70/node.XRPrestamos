@@ -5,8 +5,7 @@ import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
 import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx';
 import { Title } from '../../../Components/Content/Title/Title.jsx';
 import { TextSearch } from '../../../Components/Form/TextSearch/TextSearch.jsx';
-const { database } = require('../../../../../src/keys');
-
+import keys from '../../../../keys';
 import Logo from '../../../img/Logo.png';
 import './CarteraClientes.css';
 
@@ -17,7 +16,8 @@ class CarteraClientes extends Component {
 
         sessionStorage.setItem('route', 'carteraclientes');
 
-        this.isUpdate = false;
+        this._isMounted = false;
+        this._isUpdate = false;
 
         this.state = {
             login: sessionStorage.getItem('login'),
@@ -27,50 +27,48 @@ class CarteraClientes extends Component {
             rol: sessionStorage.getItem('rol'),
             cartera: []
         };
-
-        this.enviar = this.enviar.bind(this);
     }
 
     componentDidMount() {
-        if (!this.isUpdate) {
-            this.enviar();
+        this._isMounted = true;
+        if (this._isMounted == true && this._isUpdate == false) {
+            var url = keys.api.url + 'cartera_clientes';
+
+            var data_text = {
+                user: this.state.user,
+                sucursal: this.state.sucursal,
+                hash: this.state.hash
+            };
+    
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(data_text),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+                .catch(error => {
+                    console.error('Error:', error)
+                })
+                .then(response => {
+                    if (response.session) {
+                        if (response.response) {
+                            if (this._isMounted == true && this._isUpdate == false) {
+                                this._isUpdate = true;
+                                this.setState({cartera: response.cartera});
+                            }
+                        }
+                    } else {
+                        sessionStorage.clear();
+                        alert('¡Sesion bloqueada!');
+                        this.setState({ login: false });
+                    }
+                });
         }
     }
 
-    enviar() {
-        var url = keys.api.url + 'cartera_clientes';
-
-        var data_text = {
-            user: this.state.user,
-            sucursal: this.state.sucursal,
-            hash: this.state.hash
-        };
-
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(data_text),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
-            .catch(error => {
-                console.error('Error:', error)
-            })
-            .then(response => {
-                if (response.session) {
-
-                    if (response.response) {
-                        alert('¡Registro guardado!');
-                    } else
-                        alert('¡Error al insertar!');
-
-
-                } else {
-                    sessionStorage.clear();
-                    alert('¡Sesion bloqueada!');
-                    this.setState({ login: false });
-                }
-            });
+    componentWillUnmount(){
+        this._isMounted = false;
     }
 
     componentWillMount() {
@@ -95,7 +93,7 @@ class CarteraClientes extends Component {
 
         var indice = 0;
         const listItems = this.state.cartera.map((i) =>
-            <ItemList key={i.id_usuario} alias={i.id_usuario} number={++indice} name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Restante:" />
+            <ItemList key={i.nombre + Math.random() * (max - min) + min } alias={i.alias} number={++indice} name={i.nombre + " " + i.apellido_paterno + " " + i.apellido_materno} amount={i.restante} amountDescription="Restante:" />
         );
 
         return (
