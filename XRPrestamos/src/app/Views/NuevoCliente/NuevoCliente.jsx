@@ -26,6 +26,7 @@ class NuevoCliente extends Component {
             user: sessionStorage.getItem('user'),
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
+            rol: sessionStorage.getItem('rol')
         };
 
         this.enviar = this.enviar.bind(this);
@@ -84,14 +85,14 @@ class NuevoCliente extends Component {
             user: {
                 user: this.state.user,
                 sucursal: this.state.sucursal,
-                hash: this.state.hash
+                hash: this.state.hash,
+                rol: this.state.rol
             }
         };
 
-        console.log(data_text['persona']);
         fetch(url, {
-            method: 'POST', // or 'PUT'
-            body: JSON.stringify(data_text), // data can be `string` or {object}!
+            method: 'POST',
+            body: JSON.stringify(data_text),
             headers: {
                 'Content-Type': 'application/json'
             }
