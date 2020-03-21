@@ -52,7 +52,7 @@ class SolicitarDinero extends Component {
                         <TextSearch />
                         <TextMoney id="dinero" label="Cantidad" holder="Cantidad" help="" required={true} />
                         <TextNumber id="dias" label="Plazo en dias" holder="Plazo en dias" help="" required={true} />
-                        <ComboBox id="solicitar" label="Periodo de cobro" tabla='ruta' ></ComboBox>
+                        <ComboBox id="solicitar" label="Periodo de cobro" tabla='tipo_cobro' ></ComboBox>
                         <DateTimePicker id="fecha" label="Fecha requerida" holder="Plazo en dias" help="" required={true} />
                     </div>
                     <BtnSubmit label="Guardar" />

@@ -26,8 +26,22 @@ class CarteraClientes extends Component {
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
-            cartera: []
+            cartera: [],
+            filtro: []
         };
+        this.filtrar = this.filtrar.bind(this);
+    }
+
+    filtrar(cadena) {
+        cadena = cadena.toLowerCase() ;
+        console.log(cadena);
+        if(cadena.length > 0){
+            let datos = this.state.cartera.filter((item) => (item.alias + " " + item.nombre + " " + item.apellido_paterno + " " + item.apellido_materno).toLowerCase().indexOf(cadena) >= 0);
+            console.log(datos);
+        }
+        
+        //this.setState({ filtro: datos });
+        
     }
 
     componentDidMount() {
@@ -40,7 +54,7 @@ class CarteraClientes extends Component {
                 sucursal: this.state.sucursal,
                 hash: this.state.hash
             };
-    
+
             fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(data_text),
@@ -56,7 +70,7 @@ class CarteraClientes extends Component {
                         if (response.response) {
                             if (this._isMounted == true && this._isUpdate == false) {
                                 this._isUpdate = true;
-                                this.setState({cartera: response.cartera});
+                                this.setState({ cartera: response.cartera });
                             }
                         }
                     } else {
@@ -68,7 +82,7 @@ class CarteraClientes extends Component {
         }
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this._isMounted = false;
     }
 
@@ -93,7 +107,7 @@ class CarteraClientes extends Component {
 
         var indice = 0;
         const listItems = this.state.cartera.map((i) =>
-            <ItemList key={i.nombre + Math.random() * (max - min) + min } alias={i.alias} number={++indice} name={i.nombre + " " + i.apellido_paterno + " " + i.apellido_materno} amount={i.restante} amountDescription="Restante:" />
+            <ItemList key={i.nombre + Math.random() * (max - min) + min} alias={i.alias} number={++indice} name={i.nombre + " " + i.apellido_paterno + " " + i.apellido_materno} amount={i.restante} amountDescription="Restante:" />
         );
 
         return (
@@ -102,7 +116,7 @@ class CarteraClientes extends Component {
                 <div className="container-fluid">
                     <div className="row Cobrar">
                         <Title />
-                        <TextSearch label="Buscar" id="search" />
+                        <TextSearch label="Buscar" id="search_cartera" evento={this.filtrar} />
                     </div>
                     <div className="row">
                         <Title />
