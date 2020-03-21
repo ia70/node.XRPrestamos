@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //PROPIEDADES -----------------------
 // required | id | label | holder | help
 
-class TextSearch extends Component  {
+class TextSearchExt extends Component  {
 
     constructor(props) {
         super(props);
@@ -40,4 +40,4 @@ class TextSearch extends Component  {
         }
 }
 
-export default TextSearch;
+export default TextSearchExt;

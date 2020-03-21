@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
 import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx';
 import { Title } from '../../../Components/Content/Title/Title.jsx';
-import { TextSearch } from '../../../Components/Form/TextSearch/TextSearch.jsx';
+import TextSearch from '../../../Components/Form/TextSearch/TextSearch.jsx';
 import keys from '../../../../keys';
 import Logo from '../../../img/Logo.png';
 import './CarteraClientes.css';
@@ -33,15 +33,17 @@ class CarteraClientes extends Component {
     }
 
     filtrar(cadena) {
-        cadena = cadena.toLowerCase() ;
-        console.log(cadena);
-        if(cadena.length > 0){
-            let datos = this.state.cartera.filter((item) => (item.alias + " " + item.nombre + " " + item.apellido_paterno + " " + item.apellido_materno).toLowerCase().indexOf(cadena) >= 0);
-            console.log(datos);
+        cadena = cadena.toLowerCase();
+        let datos = [];
+        if (cadena == "" || cadena == null) {
+            this.setState({ filtro: this.state.cartera });
+        } else {
+            if (cadena.length > 0) {
+                datos = this.state.cartera.filter((item) => (item.alias + " " + item.nombre + " " + item.apellido_paterno + " " + item.apellido_materno).toLowerCase().indexOf(cadena) >= 0);
+                this.setState({ filtro: datos });
+            }
         }
-        
-        //this.setState({ filtro: datos });
-        
+
     }
 
     componentDidMount() {
@@ -70,7 +72,10 @@ class CarteraClientes extends Component {
                         if (response.response) {
                             if (this._isMounted == true && this._isUpdate == false) {
                                 this._isUpdate = true;
-                                this.setState({ cartera: response.cartera });
+                                this.setState({
+                                    cartera: response.cartera,
+                                    filtro: response.cartera
+                                });
                             }
                         }
                     } else {
@@ -106,7 +111,7 @@ class CarteraClientes extends Component {
         }
 
         var indice = 0;
-        const listItems = this.state.cartera.map((i) =>
+        const listItems = this.state.filtro.map((i) =>
             <ItemList key={i.nombre + Math.random() * (max - min) + min} alias={i.alias} number={++indice} name={i.nombre + " " + i.apellido_paterno + " " + i.apellido_materno} amount={i.restante} amountDescription="Restante:" />
         );
 

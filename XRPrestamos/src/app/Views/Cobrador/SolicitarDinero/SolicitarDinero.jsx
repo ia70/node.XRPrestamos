@@ -3,7 +3,7 @@ import ComboBox from '../../../Components/Form/ComboBox/ComboBox.jsx';
 
 //CONMPONENTS --------------------------------------------------
 import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
-import { TextSearch } from '../../../Components/Form/TextSearch/TextSearch.jsx';
+import TextSearch from '../../../Components/Form/TextSearch/TextSearch.jsx';
 import { Title } from '../../../Components/Content/Title/Title.jsx';
 import { TextMoney } from '../../../Components/Form/TextMoney/TextMoney.jsx';
 import { TextNumber } from '../../../Components/Form/TextNumber/TextNumber.jsx';
@@ -17,6 +17,9 @@ import Logo from '../../../img/Logo.png';
 class SolicitarDinero extends Component {
     constructor(props) {
         super(props);
+
+        sessionStorage.setItem('route', 'solicitardinero');
+
         this.state = {
             personal: {
                 nombre: '',
@@ -40,6 +43,12 @@ class SolicitarDinero extends Component {
                 tipo_local: '',
             }
         };
+
+        this.filtrar = this.filtrar.bind(this);
+    }
+
+    filtrar(cadena){
+        return "";
     }
 
     render() {
@@ -49,7 +58,7 @@ class SolicitarDinero extends Component {
                 <div className="container-fluid">
                     <div className="row" >
                         <Title title="" />
-                        <TextSearch />
+                        <TextSearch label="Cliente" evento={this.filtrar}/>
                         <TextMoney id="dinero" label="Cantidad" holder="Cantidad" help="" required={true} />
                         <TextNumber id="dias" label="Plazo en dias" holder="Plazo en dias" help="" required={true} />
                         <ComboBox id="solicitar" label="Periodo de cobro" tabla='tipo_cobro' ></ComboBox>

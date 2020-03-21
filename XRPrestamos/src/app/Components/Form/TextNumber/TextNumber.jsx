@@ -7,7 +7,7 @@ export function TextNumber(props) {
         return (
             <div className="form-group col-xs-12 col-sm-4 col-lg-3">
                 <label htmlFor={props.id}>{props.label}</label>
-                <input type="number" className="form-control" id={props.id} aria-describedby="textHelp" placeholder={props.holder} required />
+                <input type="number" className="form-control" id={props.id} aria-describedby="textHelp" placeholder={props.holder} required min={0} />
                     <small id="textHelp" className="form-text text-muted">{props.help}</small>
             </div>
         );
@@ -15,7 +15,7 @@ export function TextNumber(props) {
         return (
             <div className="form-group col-xs-12 col-sm-4 col-lg-3">
                 <label htmlFor={props.id}>{props.label}</label>
-                <input type="number" className="form-control" id={props.id} aria-describedby="textHelp" placeholder={props.holder} />
+                <input type="number" className="form-control" id={props.id} aria-describedby="textHelp" placeholder={props.holder} min={0} />
                     <small id="textHelp" className="form-text text-muted">{props.help}</small>
             </div>
         );
