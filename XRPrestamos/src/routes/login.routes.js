@@ -12,8 +12,10 @@ const fecha = require('../lib/util').getDateTime;
 //->>>>>    LISTA         ------------------------------------------------------------------
 router.get('/', async (req, res) => {
 
-    var usr = cipher.decode(keys.security.client_password, decodeURI(req.query.usr));
-    var pwd = cipher.decode(keys.security.client_password, decodeURI(req.query.pwd));
+    var usr = cipher.decode(keys.security.client_password, decodeURIComponent(req.query.usr));
+    var pwd = cipher.decode(keys.security.client_password, decodeURIComponent(req.query.pwd));
+
+    console.log(usr);
 
     try {
         let data = await pool.query('SELECT * FROM ' + tabla + ' WHERE id_usuario="' + usr + '" AND password="' + pwd + '" AND id_estado=1');
@@ -28,7 +30,7 @@ router.get('/', async (req, res) => {
             });
         } else {
             var id = fecha() + '_' + usr;
-            var hash = encodeURI(cipher.encode(keys.security.main_password, id));
+            var hash = encodeURIComponent(cipher.encode(keys.security.main_password, id));
 
             try {
                 login(hash, usr);

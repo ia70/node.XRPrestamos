@@ -3,8 +3,8 @@ const express = require('express');
 const router = express.Router();
 
 const pool = require('../database');
-const tabla = "tipo_plazo";
-const primary_key = "id_tipo_plazo";
+const tabla = "tipo_cobro";
+const primary_key = "id_tipo_cobro";
 
 //->>>>>    LISTA         ------------------------------------------------------------------
 router.get('/', async (req, res) => {

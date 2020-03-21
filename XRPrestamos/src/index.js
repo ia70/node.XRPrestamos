@@ -41,7 +41,7 @@ app.use('/api/ruta', require('./routes/ruta.routes'));
 app.use('/api/sucursal', require('./routes/sucursal.routes'));
 app.use('/api/tipo_credito', require('./routes/tipo_credito.routes'));
 app.use('/api/tipo_inmueble', require('./routes/tipo_inmueble.routes'));
-app.use('/api/tipo_plazo', require('./routes/tipo_plazo.routes'));
+app.use('/api/tipo_cobro', require('./routes/tipo_cobro.routes'));
 app.use('/api/usuario_establecimiento', require('./routes/usuario_establecimiento.routes'));
 app.use('/api/usuario_ruta', require('./routes/usuario_ruta.routes'));
 app.use('/api/login', require('./routes/login.routes'));
