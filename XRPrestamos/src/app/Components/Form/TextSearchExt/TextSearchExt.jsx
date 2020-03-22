@@ -28,7 +28,7 @@ class TextSearchExt extends Component  {
                 
                 <div className="input-group">
                     <input id={this.props.id} type="text" className="form-control" placeholder="Buscar" aria-label="Recipient's username" 
-                    aria-describedby="button-addon2" onChange={(e) => this.props.evento(this.leer())} />
+                    aria-describedby="button-addon2" />
 
                     <div className="input-group-append">
                         <button className="btn btn-outline-secondary" type="button" id="button-addon2" 
