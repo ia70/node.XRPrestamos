@@ -27,6 +27,16 @@ router.post('/', async (req, res) => {
     }
 });
 
+//->>>>>    FILTRAR CLIENTES     -----------------------------------------------------------
+router.post('/filtrar_clientes', async (req, res) => {
+    try {
+        const data = await pool.query('CALL filtrar_clientes(?)', [req.body.filtro]);
+        res.status(200).send({ [tabla]: data[0] });
+    } catch (e) {
+        res.status(400).send(e);
+    }
+});
+
 //->>>>>    EDITAR      --------------------------------------------------------------------
 router.put('/', async (req, res) => {
     try {

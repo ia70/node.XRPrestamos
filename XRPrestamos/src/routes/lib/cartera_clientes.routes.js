@@ -8,8 +8,6 @@ const { access } = require('../../lib/security');
 //->>>>>    AGREGAR     --------------------------------------------------------------------
 router.post('/', async (req, res) => {
     try {
-
-        console.log(req.body);
         if (await access(req.body.hash, req.body.user)) {
             let r_d_cartera = false;
 
