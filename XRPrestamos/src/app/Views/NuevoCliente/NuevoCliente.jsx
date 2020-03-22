@@ -158,7 +158,7 @@ class NuevoCliente extends Component {
 
 
                         <TextEmail id="p_email" label="Correo electrónico" holder="Correo electrónico" help="" required={false} />
-                        <ComboBox id="p_tipo_inmueble" label="Tipo Inmueble" tabla='tipo_inmueble' ></ComboBox>
+                        <ComboBox id="p_tipo_inmueble" label="Tipo Inmueble" tabla='tipo_inmueble' value={"id_tipo_inmueble"} description={"descripcion"} ></ComboBox>
 
 
 
@@ -175,8 +175,8 @@ class NuevoCliente extends Component {
                         <TextTime id="n_hora_fin" label="Fin disponibilidad" holder="Fin disponibilidad" help="" required={false} />
                         <TextBox id="n_coordenadas" label="Coordenadas" holder="Coordenadas" help="" required={true} maxlength={100} />
                         <FileInput id="n_foto" label="Foto Negocio" holder=""  ></FileInput>
-                        <ComboBox id="n_tipo_inmueble" label="Tipo Inmueble" tabla='tipo_inmueble' ></ComboBox>
-                        <ComboBox id="n_tipo_local" label="Tipo Local" tabla='tipo_local' ></ComboBox>
+                        <ComboBox id="n_tipo_inmueble" label="Tipo Inmueble" tabla='tipo_inmueble' value={"id_tipo_inmueble"} description={"descripcion"} ></ComboBox>
+                        <ComboBox id="n_tipo_local" label="Tipo Local" tabla='tipo_local' value={"id_tipo_local"} description={"descripcion"} ></ComboBox>
 
 
 
@@ -191,7 +191,7 @@ class NuevoCliente extends Component {
                         <TextBox id="a_parentesco" label="Parentesco" holder="Parentesco" help="" required={true} maxlength={50} />
 
                         <Title title="COBRANZA" />
-                        <ComboBox id="c_ruta" label="Asignar a ruta" tabla='ruta' ></ComboBox>
+                        <ComboBox id="c_ruta" label="Asignar a ruta" tabla='ruta' value={"id_ruta"} description={"descripcion"} ></ComboBox>
 
                     </div>
                     <div className="row">

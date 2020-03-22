@@ -18,7 +18,7 @@ DROP PROCEDURE IF EXISTS filtrar_clientes;
  DELIMITER //
 CREATE PROCEDURE filtrar_clientes(IN filtro VARCHAR(100))
 	BEGIN
-		SELECT a.ine_clave, a.alias, concat_ws(' ', a.nombre, a.apellido_paterno, a.apellido_materno) AS "nombre" FROM persona a
+		SELECT a.ine_clave, concat_ws(' ',a.alias, " - ", a.nombre, a.apellido_paterno, a.apellido_materno) AS "nombre" FROM persona a
 		INNER JOIN usuario AS b ON b.ine_clave = a.ine_clave
 		WHERE b.id_rol = 3 AND concat_ws(' ', a.ine_clave, a.alias, a.nombre, a.apellido_paterno, a.apellido_materno) 
 		LIKE CONCAT('%',filtro,'%') ORDER BY nombre ASC LIMIT 10;

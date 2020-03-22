@@ -3,7 +3,7 @@ import ComboBox from '../../../Components/Form/ComboBox/ComboBox.jsx';
 
 //CONMPONENTS --------------------------------------------------
 import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
-import TextSearch from '../../../Components/Form/TextSearch/TextSearch.jsx';
+import TextSearchExt from '../../../Components/Form/TextSearchExt/TextSearchExt.jsx';
 import { Title } from '../../../Components/Content/Title/Title.jsx';
 import { TextMoney } from '../../../Components/Form/TextMoney/TextMoney.jsx';
 import { TextNumber } from '../../../Components/Form/TextNumber/TextNumber.jsx';
@@ -39,7 +39,6 @@ class SolicitarDinero extends Component {
     
 
     filtrar(cadena) {
-        console.log("AA" - cadena);
         cadena = cadena.toLowerCase();
         if (cadena == "" || cadena == null) {
             this.setState({filtro: []});
@@ -65,19 +64,9 @@ class SolicitarDinero extends Component {
                         console.error('Error:', error)
                     })
                     .then(response => {
-                        //if (response.session) {
-                        //if (response.response) {
-                        //if (this._isMounted == true) {
                         this.setState({
                             filtro: response.persona
                         });
-                        //}
-                        //}
-                        /* } else {
-                             sessionStorage.clear();
-                             alert('¡Sesion bloqueada!');
-                             this.setState({ login: false });**/
-                        //}
                     });
             }
         }
@@ -116,15 +105,14 @@ class SolicitarDinero extends Component {
                 <div className="container-fluid">
                     <div className="row m-0" >
                         <Title title="" />
-                        <TextSearch id="sol_search" label="Cliente" evento={this.filtrar}  />
-
-                        <ComboBox id="sol_listaclientes" label="Clientes" items={this.state.filtro} value={""} description={""} ></ComboBox>
+                        <TextSearchExt id="sol_search" label="Buscar" evento={this.filtrar}  />
                         <TextBox id="sol_ineclave" label="INE" holder="Clave de Credencial" readonly={true}></TextBox>
-                        <TextBox id="sol_nombre" label="Cliente" holder="Nombre Completo" readonly={true}></TextBox>
+                        <ComboBox id="sol_listaclientes" label="Cliente" items={this.state.filtro} value={"ine_clave"} description={"nombre"} ></ComboBox>
+                        
 
                         <TextMoney id="dinero" label="Cantidad" holder="Cantidad" help="" required={true} />
                         <TextNumber id="dias" label="Plazo en dias" holder="Plazo en dias" help="" required={true} />
-                        <ComboBox id="solicitar" label="Periodo de cobro" tabla='tipo_cobro' value={"id_tipo_cobro"} description={"descripcion"}></ComboBox>
+                        <ComboBox id="solicitar" label="Periodo de cobro" tabla='tipo_cobro' value={"id_tipo_cobro"} description={"descripcion"} ></ComboBox>
                         <DateTimePicker id="fecha" label="Fecha requerida" holder="Plazo en dias" help="" required={true} />
                     </div>
                     <BtnSubmit label="Guardar" />

@@ -5,11 +5,13 @@ import keys from '../../../../keys';
 const max = 178542, min = 413;
 class ComboBox extends Component {
 
-
     constructor(props) {
         super(props);
         this._isMounted = false;
         this._isUpdate = false;
+
+        this._elementos = ["e"];
+
         this.state = {
             elementos: []
         };
@@ -35,10 +37,9 @@ class ComboBox extends Component {
                                 this.setState({ 'elementos': response[this.props.tabla] });
                             }
                         });
-                } else if (this.props.items != null) {
-                    url = this.props.items;
+                } else {
                     if (this._isMounted) {
-                        this.setState({ 'elementos': url });
+                        this.setState({ 'elementos': this.props.items });
                     }
                 }
             }
@@ -49,14 +50,47 @@ class ComboBox extends Component {
 
     componentWillUnmount() {
         this._isMounted = false;
+        this._elementos = [""];
+    }
+
+    componentWillUpdate() {
+        this._isUpdate = true;
+        //this._elementos = this.props.items;
     }
 
     render() {
-        var lista = null;
-        if (this.state.elementos) {
-            lista = this.state.elementos.map(i => <option key={this.props.id + 'opt' + Math.random() * (max - min) + min} value={i.id_ruta} > {i.descripcion} </option>);
-        } else
-            lista = "";
+        try {
+            this._elementos = this.props.items;
+        } catch (error) {
+            this._elementos = [""];
+        }
+
+
+
+        let valu = "";
+        let des = "";
+        let lista = [];
+
+        try {
+            valu = this.props.value;
+            des = this.props.description;
+        } catch (error) {
+            it = null;
+        }
+
+        if (this.props.tabla != null) {
+            if (valu != null) {
+                lista = this.state.elementos.map(i => <option key={this.props.id + 'opt' + Math.random() * (max - min) + min} value={i[valu]} >{i[des]}</option>);
+            } else
+                lista = "";
+        }else{
+            try {
+                lista = this._elementos.map(i => <option key={this.props.id + 'opt' + Math.random() * (max - min) + min} value={i[valu]} >{i[des]}</option>);
+            } catch (e) {
+            }
+        }
+        
+
         return (
             <div className="form-group col-xs-12 col-sm-4 col-lg-4">
                 <label key={'lbl' + this.props.id + Math.random() * (max - min) + min} htmlFor={this.props.id}>{this.props.label || "Seleccione una opción."}</label>
