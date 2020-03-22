@@ -30,6 +30,7 @@ class SolicitarDinero extends Component {
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
+            tipo_cobro: [],
             filtro: []
         };
 
@@ -123,7 +124,7 @@ class SolicitarDinero extends Component {
 
                         <TextMoney id="dinero" label="Cantidad" holder="Cantidad" help="" required={true} />
                         <TextNumber id="dias" label="Plazo en dias" holder="Plazo en dias" help="" required={true} />
-                        <ComboBox id="solicitar" label="Periodo de cobro" tabla='tipo_cobro' value={""} description={""}></ComboBox>
+                        <ComboBox id="solicitar" label="Periodo de cobro" tabla='tipo_cobro' value={"id_tipo_cobro"} description={"descripcion"}></ComboBox>
                         <DateTimePicker id="fecha" label="Fecha requerida" holder="Plazo en dias" help="" required={true} />
                     </div>
                     <BtnSubmit label="Guardar" />
