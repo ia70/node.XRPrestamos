@@ -30,18 +30,29 @@ class SolicitarDinero extends Component {
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
+            ine: "",
             tipo_cobro: [],
             filtro: []
         };
 
         this.filtrar = this.filtrar.bind(this);
+        this.leer = this.leer.bind(this);
     }
-    
+
+    leer() {
+        try {
+            let valor1 = document.getElementById('sol_listaclientes').value;
+            document.getElementById('sol_ineclave').value = valor1;
+        } catch (e) {
+            console.log(e);
+        }
+
+    }
 
     filtrar(cadena) {
         cadena = cadena.toLowerCase();
         if (cadena == "" || cadena == null) {
-            this.setState({filtro: []});
+            this.setState({ filtro: [] });
         } else {
             if (this._isMounted == true) {
                 var url = keys.api.url + 'persona/filtrar_clientes';
@@ -105,10 +116,10 @@ class SolicitarDinero extends Component {
                 <div className="container-fluid">
                     <div className="row m-0" >
                         <Title title="" />
-                        <TextSearchExt id="sol_search" label="Buscar" evento={this.filtrar}  />
-                        <TextBox id="sol_ineclave" label="INE" holder="Clave de Credencial" readonly={true}></TextBox>
-                        <ComboBox id="sol_listaclientes" label="Cliente" items={this.state.filtro} value={"ine_clave"} description={"nombre"} ></ComboBox>
-                        
+                        <TextSearchExt id="sol_search" label="Buscar" evento={this.filtrar} />
+                        <TextBox id="sol_ineclave" label="INE" holder="Clave de Credencial" readonly={true} value={this.state.ine}></TextBox>
+                        <ComboBox id="sol_listaclientes" label="Cliente" items={this.state.filtro} value={"ine_clave"} description={"nombre"} evento={this.leer}></ComboBox>
+
 
                         <TextMoney id="dinero" label="Cantidad" holder="Cantidad" help="" required={true} />
                         <TextNumber id="dias" label="Plazo en dias" holder="Plazo en dias" help="" required={true} />

@@ -15,6 +15,7 @@ class ComboBox extends Component {
         this.state = {
             elementos: []
         };
+        this.evento = this.evento.bind(this);
     }
 
     componentDidMount() {
@@ -55,7 +56,19 @@ class ComboBox extends Component {
 
     componentWillUpdate() {
         this._isUpdate = true;
-        //this._elementos = this.props.items;
+    }
+
+    evento() {
+        try {
+            if (this.props.evento != null) {
+                this.props.evento((e) => this.props.evento(this.leer(e)))
+            }
+        } catch (error) {
+        }
+    }
+
+    componentDidUpdate(){
+        this.evento();
     }
 
     render() {
@@ -83,18 +96,17 @@ class ComboBox extends Component {
                 lista = this.state.elementos.map(i => <option key={this.props.id + 'opt' + Math.random() * (max - min) + min} value={i[valu]} >{i[des]}</option>);
             } else
                 lista = "";
-        }else{
+        } else {
             try {
                 lista = this._elementos.map(i => <option key={this.props.id + 'opt' + Math.random() * (max - min) + min} value={i[valu]} >{i[des]}</option>);
             } catch (e) {
             }
         }
-        
 
         return (
             <div className="form-group col-xs-12 col-sm-4 col-lg-4">
                 <label key={'lbl' + this.props.id + Math.random() * (max - min) + min} htmlFor={this.props.id}>{this.props.label || "Seleccione una opción."}</label>
-                <select key={'sel' + this.props.id + Math.random() * (max - min) + min} className="form-control" id={this.props.id}>
+                <select key={'sel' + this.props.id + Math.random() * (max - min) + min} className="form-control" id={this.props.id} onChange={this.evento} >
                     {lista}
                 </select>
             </div>
