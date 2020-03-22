@@ -118,7 +118,7 @@ class SolicitarDinero extends Component {
                         <Title title="" />
                         <TextSearchExt id="sol_search" label="Buscar" evento={this.filtrar} />
                         <TextBox id="sol_ineclave" label="INE" holder="Clave de Credencial" readonly={true} value={this.state.ine}></TextBox>
-                        <ComboBox id="sol_listaclientes" label="Cliente" items={this.state.filtro} value={"ine_clave"} description={"nombre"} evento={this.leer}></ComboBox>
+                        <ComboBox id="sol_listaclientes" label="Cliente" items={this.state.filtro} value={"ine"} description={"nombre"} evento={this.leer}></ComboBox>
 
 
                         <TextMoney id="dinero" label="Cantidad" holder="Cantidad" help="" required={true} />
