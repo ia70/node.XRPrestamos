@@ -37,7 +37,8 @@ class NuevoCliente extends Component {
 
         var data_text = {
             persona: {
-                ine_clave: document.getElementById('p_ine').value,
+                ine: document.getElementById('p_ine').value,
+                folio: null,
                 ine_ref: null,
                 alias: document.getElementById('p_alias').value,
                 nombre: document.getElementById('p_nombre').value,
@@ -57,7 +58,7 @@ class NuevoCliente extends Component {
                 fecha_reg: getDateTime()
             },
             establecimiento: {
-                ine_clave: document.getElementById('p_ine').value,
+                ine: document.getElementById('p_ine').value,
                 nombre: document.getElementById('n_nombre').value,
                 id_calle: null,
                 numero_ext: null,
@@ -74,7 +75,7 @@ class NuevoCliente extends Component {
                 id_estado: 5
             },
             aval: {
-                ine_clave: document.getElementById('p_ine').value,
+                ine: document.getElementById('p_ine').value,
                 nombre: document.getElementById('a_nombre').value,
                 apellido_paterno: document.getElementById('a_apaterno').value,
                 apellido_materno: document.getElementById('a_amaterno').value,
