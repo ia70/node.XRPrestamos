@@ -462,9 +462,19 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `XRPrestamos`.`solicitudes`
+-- Table `XRPrestamos`.`estado_solicitud`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `XRPrestamos`.`solicitudes` (
+CREATE TABLE IF NOT EXISTS `XRPrestamos`.`estado_solicitud` (
+  `id_estado_solicitud` INT NOT NULL AUTO_INCREMENT,
+  `descripcion` VARCHAR(50) NULL,
+  PRIMARY KEY (`id_estado_solicitud`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `XRPrestamos`.`solicitud`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `XRPrestamos`.`solicitud` (
   `id_solicitud` INT NOT NULL AUTO_INCREMENT,
   `id_sucursal` INT NOT NULL,
   `id_usuario` VARCHAR(30) NOT NULL,
@@ -473,34 +483,12 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`solicitudes` (
   `pagos` INT NULL COMMENT 'Número de pagos',
   `id_tipo_cobro` INT NULL COMMENT 'Tipo / perioricidad de pagos',
   `fecha_requerida` DATE NOT NULL COMMENT 'Fecha en que se requiere el prestamo.',
+  `id_estado_solicitud` INT NULL,
   `id_estado` INT NOT NULL,
   `fecha_reg` DATETIME NULL,
   PRIMARY KEY (`id_solicitud`))
 ENGINE = InnoDB;
 
-USE `XRPrestamos` ;
-
--- -----------------------------------------------------
--- procedure cartera_clientes
--- -----------------------------------------------------
-
-DELIMITER $$
-USE `XRPrestamos`$$
-CREATE PROCEDURE `cartera_clientes` (IN usuario varchar(30))
-BEGIN
-	SELECT e.alias, e.nombre, e.apellido_paterno, e.apellido_materno, f.monto_total, SUM(g.monto) AS pagado, (f.monto_total - SUM(g.monto)) AS restante FROM usuario a
-	INNER JOIN usuario_ruta AS b ON b.id_usuario = a.id_usuario
-	INNER JOIN ruta AS c ON c.id_ruta = b.id_ruta
-	INNER JOIN usuario_establecimiento AS d ON d.id_ruta = c.id_ruta
-	INNER JOIN persona AS e ON e.ine_clave = d.ine_clave
-	RIGHT JOIN credito AS f ON f.ine_clave = e.ine_clave
-	LEFT JOIN abono AS g ON g.id_credito = f.id_credito 
-
-	WHERE a.id_usuario = usuario GROUP BY f.id_credito;
-
-END$$
-
-DELIMITER ;
 
 -- -----------------------------------------------------
 -- Data for table `XRPrestamos`.`estado`
@@ -934,6 +922,18 @@ COMMIT;
 START TRANSACTION;
 USE `XRPrestamos`;
 INSERT INTO `XRPrestamos`.`capital` (`id_capital`, `id_sucursal`, `id_periodo`, `id_usuario`, `id_tipo_capital`, `id_tipo_concepto`, `emisor`, `concepto`, `empresa`, `monto`, `hora`, `folio_ticket`, `comprobante`, `fecha`, `id_estado`, `fecha_reg`) VALUES (1, 1, 1, 'admin', 1, 1, 'admin', 'Capital', NULL, 50000, NULL, NULL, NULL, NULL, 1, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `XRPrestamos`.`estado_solicitud`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `XRPrestamos`;
+INSERT INTO `XRPrestamos`.`estado_solicitud` (`id_estado_solicitud`, `descripcion`) VALUES (1, 'Aprobado');
+INSERT INTO `XRPrestamos`.`estado_solicitud` (`id_estado_solicitud`, `descripcion`) VALUES (2, 'En espera');
+INSERT INTO `XRPrestamos`.`estado_solicitud` (`id_estado_solicitud`, `descripcion`) VALUES (3, 'Rechazado');
 
 COMMIT;
 
