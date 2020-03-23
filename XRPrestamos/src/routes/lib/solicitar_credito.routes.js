@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
         if (await access(user.hash, user.user)) {
             
 
-            const query = await pool.query('INSERT INTO solicitudes SET ?', [solicitud]);
+            const query = await pool.query('INSERT INTO solicitud SET ?', [solicitud]);
             if (query.affectedRows > 0) {
                 db_res = true;
             } 
