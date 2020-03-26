@@ -15,8 +15,6 @@ router.get('/', async (req, res) => {
     var usr = cipher.decode(keys.security.client_password, decodeURIComponent(req.query.usr));
     var pwd = cipher.decode(keys.security.client_password, decodeURIComponent(req.query.pwd));
 
-    console.log(usr);
-
     try {
         let data = await pool.query('SELECT * FROM ' + tabla + ' WHERE id_usuario="' + usr + '" AND password="' + pwd + '" AND id_estado=1');
 
