@@ -35,13 +35,50 @@ export function ModalCollect(props) {
                         <div className="row modalcollect_name m-0 align-items-center">
                             <h4 className="tm2">{props.name}</h4>
                         </div>
-
-                        <ItemPagoTitulo />
-                        <ItemPago concepto="Prestamo 24.05.2019" monto="$4,815.00" />
-                        <ItemPago concepto="Prestamo 24.05.2019" monto="$4,815.00" />
-                        <ItemPago concepto="Prestamo 24.05.2019" monto="$4,815.00" />
-                        <ItemPago concepto="Prestamo 24.05.2019" monto="$4,815.00" />
-                        <ItemPago concepto="Prestamo 24.05.2019" monto="$4,815.00" />
+                        
+                        <div className="table-responsive">
+                            <table className="table">
+                                <thead className="thead-dark">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First</th>
+                                        <th scope="col">Last</th>
+                                        <th scope="col">Handle</th>
+                                        <th scope="col">Handle</th>
+                                        <th scope="col">Handle</th>
+                                        <th scope="col">Handle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Daniel Pérez Cortez</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr className="table-success">
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td colSpan="2">Larry the Bird</td>
+                                        <td>@twitter</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
                         <div className="row modalcollect_monto m-0 py-0 my-2">
                             Pago del día: ${props.amount}
@@ -52,7 +89,7 @@ export function ModalCollect(props) {
                             <div className="input-group bg-warning mx-3 my-1 p-1">
                                 <div className="input-group-prepend">
                                     <div className="input-group-text">
-                                        <input id={'txtabono2' + props.number} type="radio" name="exampleRadios" aria-label="Radio button for following text input"/>
+                                        <input id={'txtabono2' + props.number} type="radio" name="exampleRadios" aria-label="Radio button for following text input" />
                                     </div>
                                 </div>
                                 <input id={'txtabono' + props.number} type="number" className="form-control" min={0} placeholder="Abono" aria-label="Text input with radio button" />
