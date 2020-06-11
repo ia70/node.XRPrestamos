@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import keys from '../../../../keys';
 //PROPIEDADES -----------------------
-// items , label, id
+/*
+    - id            Identificador único para cada componente
+    - label         Etiqueta o texto que se mostrará
+    - tabla         Nombre de la tabla de la base de datos que será el origen de datos
+    - items         Arreglo de elementos del combobox
+    - value         Nombre del campo que se almacenará en propiedad value del selecoption
+    - description   Nombre del campo que contiene el texto que se mostrará en el combo box
+*/
+
 const max = 178542, min = 413;
 class ComboBox extends Component {
 
@@ -67,7 +75,7 @@ class ComboBox extends Component {
         }
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         this.evento();
     }
 
@@ -77,8 +85,6 @@ class ComboBox extends Component {
         } catch (error) {
             this._elementos = [""];
         }
-
-
 
         let valu = "";
         let des = "";

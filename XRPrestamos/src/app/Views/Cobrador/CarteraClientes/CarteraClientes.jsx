@@ -43,7 +43,6 @@ class CarteraClientes extends Component {
                 this.setState({ filtro: datos });
             }
         }
-
     }
 
     componentDidMount() {
