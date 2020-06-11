@@ -1,13 +1,13 @@
 'use strict';
 module.exports = {
     database: {
-        host: '192.168.2.50',
+        host: '192.168.184.55',
         user: 'xcoru',
         password: 'xcoru12345',
         database: 'xrprestamos'
     },
     server: {
-        host: '192.168.2.80',
+        host: '192.168.184.50',
         port: 80
     },
     security:{
@@ -16,6 +16,6 @@ module.exports = {
         iv_password: '@_aTfdh%Mkxd-k_Q'     //Exactamente 16 caracteres
     },
     api:{
-        url: 'http://192.168.2.50/api/'
+        url: 'http://192.168.184.55/api/'
     }
 };
