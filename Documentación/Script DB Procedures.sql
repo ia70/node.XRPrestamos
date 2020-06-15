@@ -8,9 +8,9 @@ CREATE PROCEDURE cartera_clientes(IN usuario VARCHAR(30))
 		INNER JOIN usuario_establecimiento AS d ON d.id_ruta = c.id_ruta
 		INNER JOIN persona AS e ON e.ine = d.ine
 		RIGHT JOIN credito AS f ON f.ine = e.ine
-		LEFT JOIN abono AS g ON g.id_credito = f.id_credito
+		LEFT JOIN abono AS g ON g.folio_credito = f.folio_credito
 
-		WHERE a.id_usuario = usuario GROUP BY f.id_credito;
+		WHERE a.id_usuario = usuario GROUP BY f.folio_credito;
    END //
 DELIMITER ;
 
