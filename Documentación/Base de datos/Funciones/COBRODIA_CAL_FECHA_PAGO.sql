@@ -7,7 +7,7 @@ BEGIN
 
 	CASE tipo_cobro
 		WHEN 1 THEN # AGREGAR UN DIA A LA FECHA
-			SET fecha = DATE_ADD(fecha_pago, INTERVAL 1 DAY);
+			SET fecha = NOW();
 			RETURN fecha;
 			-- --------------------------------------------------------------------------------------------------
 		WHEN 2 THEN #
@@ -27,6 +27,7 @@ BEGIN
 			RETURN fecha;
 			-- --------------------------------------------------------------------------------------------------
 		END CASE;
+		RETURN '2020-01-01';
 
 END//
 DELIMITER;
