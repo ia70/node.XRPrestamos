@@ -5,7 +5,7 @@ BEGIN
 
 	-- DECLARACION DE VARIABLES ---------------------------------------------------------------------------------------
 	DECLARE done INT DEFAULT FALSE;								-- Control de error de FOR(CURSOR)
-	DECLARE var_folio varchar(50) DEFAULT "";			-- Folio del credito
+	DECLARE var_folio VARCHAR(50) DEFAULT "";			-- Folio del credito
 	DECLARE var_id_tipo INT DEFAULT 0;						-- Tipo de cobro del credito
 	DECLARE var_fecha DATE;												-- Fecha del siguiente pago
 	DECLARE var_ruta INT DEFAULT 0;								-- Ruta
@@ -24,22 +24,26 @@ BEGIN
 
 	-- Se inicializa el cursor
 	OPEN curLista;
+	
+	-- Borrar datos anteriores de la tabla COBRO_DIA
+	TRUNCATE TABLE cobro_dia;
 
 	-- Se inicia ciclo repetitivo -------------------------------------------------------------------------------------
 	ciclo: LOOP
-		FETCH curLista INTO fol_credito, id_tipo, fecha;
+		FETCH curLista INTO var_folio, var_id_tipo, var_fecha, var_ruta, var_usuario;
+		
 		IF done THEN 
 			LEAVE ciclo;
 		END IF;
 		
-		IF fecha < CURDATE() THEN
-			SET fecha = COBRODIA_CAL_FECHA_PAGO(fecha,id_tipo);
-			UPDATE credito SET fecha_siguiente_pago = fecha WHERE folio_credito = fol_credito;
-		END IF
+		IF var_fecha < CURDATE() THEN
+			SET var_fecha = COBRODIA_CAL_FECHA_PAGO(var_fecha, var_id_tipo);
+			UPDATE credito SET fecha_siguiente_pago = var_fecha WHERE folio_credito = var_folio;
+		END IF;
 		
-		IF fecha = CURDATE() THEN
-			
-		END IF
+		IF var_fecha = CURDATE() THEN
+			INSERT INTO cobro_dia VALUES(NULL, var_ruta, var_usuario, var_folio);
+		END IF;
 		
 	END LOOP ciclo;
 	CLOSE curLista;
