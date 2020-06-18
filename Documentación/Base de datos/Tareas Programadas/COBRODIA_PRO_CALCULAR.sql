@@ -10,14 +10,15 @@ BEGIN
 	DECLARE var_fecha DATE;												-- Fecha del siguiente pago
 	DECLARE var_ruta INT DEFAULT 0;								-- Ruta
 	DECLARE var_usuario VARCHAR(30) DEFAULT ""; 	-- Usuario (cobrador)
+	DECLARE var_ine VARCHAR(100);
 
 	-- DECLARACION DEL CURSOR -----------------------------------------------------------------------------------------
 	DEClARE curLista 
 		CURSOR FOR 
-			SELECT a.folio_credito, a.id_tipo_cobro, a.fecha_siguiente_pago, b.id_ruta, c.id_usuario FROM credito a
+			SELECT a.folio_credito, a.id_tipo_cobro, a.fecha_siguiente_pago, b.id_ruta, c.id_usuario, b.ine FROM credito a
 				INNER JOIN usuario_establecimiento AS b ON b.id_usuario_establecimiento = a.id_usuario_establecimiento
 				INNER JOIN usuario_ruta AS c ON c.id_ruta = b.id_ruta
-				WHERE a.fecha_siguiente_pago <= CURDATE() ORDER BY a.folio_credito ASC;
+				WHERE a.fecha_siguiente_pago <= CURDATE() AND a.id_estado_credito = 1 ORDER BY a.folio_credito ASC;
 
 	-- DECLARACION DE ERROR PARA FOR(CURSOR) --------------------------------------------------------------------------
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
@@ -30,7 +31,7 @@ BEGIN
 
 	-- Se inicia ciclo repetitivo -------------------------------------------------------------------------------------
 	ciclo: LOOP
-		FETCH curLista INTO var_folio, var_id_tipo, var_fecha, var_ruta, var_usuario;
+		FETCH curLista INTO var_folio, var_id_tipo, var_fecha, var_ruta, var_usuario, var_ine;
 		
 		IF done THEN 
 			LEAVE ciclo;
@@ -42,7 +43,7 @@ BEGIN
 		END IF;
 		
 		IF var_fecha = CURDATE() THEN
-			INSERT INTO cobro_dia VALUES(NULL, var_ruta, var_usuario, var_folio);
+			INSERT INTO cobro_dia VALUES(var_folio, var_ine, var_ruta, var_usuario);
 		END IF;
 		
 	END LOOP ciclo;

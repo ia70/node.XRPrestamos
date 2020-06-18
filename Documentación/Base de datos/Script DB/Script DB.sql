@@ -534,11 +534,11 @@ ENGINE = InnoDB;
 -- Table `XRPrestamos`.`cobro_dia`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`cobro_dia` (
-  `id_cobro_dia` INT NOT NULL AUTO_INCREMENT,
+  `folio_credito` VARCHAR(50) NOT NULL,
+  `ine` VARCHAR(100) NULL,
   `id_ruta` INT NULL,
   `id_usuario` VARCHAR(30) NULL,
-  `folio_credito` VARCHAR(50) NULL,
-  PRIMARY KEY (`id_cobro_dia`))
+  PRIMARY KEY (`folio_credito`))
 ENGINE = InnoDB;
 
 
