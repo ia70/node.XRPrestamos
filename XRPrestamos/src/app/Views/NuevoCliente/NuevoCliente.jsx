@@ -38,7 +38,6 @@ class NuevoCliente extends Component {
         var data_text = {
             persona: {
                 ine: document.getElementById('p_ine').value,
-                folio: null,
                 ine_ref: null,
                 alias: document.getElementById('p_alias').value,
                 nombre: document.getElementById('p_nombre').value,
@@ -53,7 +52,7 @@ class NuevoCliente extends Component {
                 correo: document.getElementById('p_email').value,
                 foto: null,
                 ine_img: null,
-                id_tipo_inmueble: 1,
+                id_tipo_inmueble: document.getElementById('p_tipo_inmueble').value,
                 id_estado: 5,
                 fecha_reg: getDateTime()
             },
