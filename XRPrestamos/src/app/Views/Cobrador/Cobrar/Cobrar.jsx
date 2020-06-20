@@ -6,15 +6,16 @@ import NavbarExtends from '../../../Components/Content/NavbarExtends/NavbarExten
 import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx';
 import { Title } from '../../../Components/Content/Title/Title.jsx';
 import TextSearch from '../../../Components/Form/TextSearch/TextSearch.jsx';
-import { ComboBox } from '../../../Components/Form/ComboBox/ComboBox.jsx';
+import ComboBox from '../../../Components/Form/ComboBox/ComboBox.jsx';
 import keys from '../../../../keys';
 
 import './Cobrar.css';
 
+const max = 178542, min = 413;
 class Cobrar extends Component {
     constructor(props) {
         super(props);
-        
+
         sessionStorage.setItem('route', 'cobrar');
 
         this._isMounted = false;
@@ -26,11 +27,53 @@ class Cobrar extends Component {
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
-            solicitud: []
+            solicitud: [],
         };
+
+        this.leer = this.leer.bind(this);
     }
 
-        
+
+    componentDidMount() {
+        this._isMounted = true;
+        if (this._isMounted == true && this._isUpdate == false) {
+            var url = keys.api.url + 'cobrar';
+
+            var data_text = {
+                user: this.state.user,
+                sucursal: this.state.sucursal,
+                hash: this.state.hash
+            };
+
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(data_text),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+                .catch(error => {
+                    console.error('Error:', error)
+                })
+                .then(response => {
+                    if (response.session) {
+                        if (response.response) {
+                            if (this._isMounted == true && this._isUpdate == false) {
+                                this._isUpdate = true;
+                                this.setState({
+                                    solicitud: response.solicitud
+                                });
+                            }
+                        }
+                    } else {
+                        sessionStorage.clear();
+                        alert('¡Sesion bloqueada!');
+                        this.setState({ login: false });
+                    }
+                });
+        }
+    }
+
     componentWillUnmount() {
         this._isMounted = false;
     }
@@ -40,6 +83,16 @@ class Cobrar extends Component {
             sessionStorage.clear();
             alert('¡Sesion bloqueada!');
             this.setState({ login: false });
+        }
+    }
+
+
+    leer() {
+        try {
+            let valor1 = document.getElementById('filtro').value;
+            document.getElementById('sol_ine').value = valor1;
+        } catch (e) {
+            console.log(e);
         }
     }
 
@@ -53,13 +106,19 @@ class Cobrar extends Component {
             );
         }
 
+        var indice = 0;
+        const listItems = this.state.solicitud.map((i) =>
+            <ItemList key={i.ine + Math.random() * (max - min) + min} stateItem={i.id_estado_solicitud} alias={i.alias} number={++indice} name={i.nombre} amount={i.monto} amountDescription="Monto solicitado:" close={true} />
+        );
+
+
         return (
             <div>
                 <NavbarExtends title="Cobrar" label1="A recaudar" label2="$90,350" />
                 <div className="container-fluid">
                     <div className="row Cobrar">
                         <Title />
-
+                        <ComboBox id="filtro" label="Filtrar" items={JSON.stringify({ lista: ["opcion1", "opcion2"] })} />
                         <TextSearch label="Buscar" id="search_cartera" evento={this.filtrar} />
                     </div>
                     <div className="row">
@@ -67,19 +126,7 @@ class Cobrar extends Component {
                     </div>
                     <div className="row" >
 
-                        <ItemList modal={true} number="1" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Pago del día:" stateItem={1} stateDescription="Pagó completo" />
-                        <ItemList modal={true} number="2" alias="Fruteria El Eden" name="Marcos Jimenez Lopez" amount="1,500" amountDescription="Pago del día:" stateItem={2} stateDescription="Abonó" />
-                        <ItemList modal={true} number="3" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Pago del día:" stateItem={3} stateDescription="No pagó" />
-                        <ItemList modal={true} number="4" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Pago del día:" stateItem={4} stateDescription="Por visitar" />
-                        <ItemList modal={true} number="5" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Pago del día:" stateItem={1} stateDescription="Pagó completo" />
-                        <ItemList modal={true} number="6" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Pago del día:" stateItem={2} stateDescription="Abonó" />
-                        <ItemList modal={true} number="7" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="550.00" amountDescription="Pago del día:" stateItem={3} stateDescription="No pagó" />
-                        <ItemList modal={true} number="8" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Pago del día:" stateItem={4} stateDescription="Por visitar" />
-                        <ItemList modal={true} number="9" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Pago del día:" stateItem={1} stateDescription="Pagó completo" />
-                        <ItemList modal={true} number="4" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Pago del día:" stateItem={2} stateDescription="Abonó" />
-                        <ItemList modal={true} number="10" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Pago del día:" stateItem={3} stateDescription="No pagó" />
-                        <ItemList modal={true} number="120" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Pago del día:" stateItem={4} stateDescription="Por visitar" />
-                        <ItemList modal={true} number="120" alias="Pozolera" name="Alicia Ocaña Vazquez" amount="1,500" amountDescription="Pago del día:" stateItem={5} stateDescription="Por visitar" />
+                        {listItems}
 
                     </div>
                 </div>
