@@ -16,6 +16,6 @@ module.exports = {
         iv_password: '@_aTfdh%Mkxd-k_Q'     //Exactamente 16 caracteres
     },
     api: {
-        url: 'http://' + this.database.host + '/api/'
+        url: 'http://192.168.1.50/api/'
     }
 };
