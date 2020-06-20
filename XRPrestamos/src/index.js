@@ -53,6 +53,7 @@ app.use('/api/nuevo_cliente',           require('./routes/lib/nuevo_cliente.rout
 app.use('/api/cartera_clientes',        require('./routes/lib/cartera_clientes.routes'));
 app.use('/api/solicitar_credito',       require('./routes/lib/solicitar_credito.routes'));
 app.use('/api/estado_solicitud',        require('./routes/lib/estado_solicitud.routes'));
+app.use('/api/cobrar',                  require('./routes/lib/cobrar.routes'));
 
 // Static files --------------------------------------------------
 app.use(express.static(path.join(__dirname, 'public')));

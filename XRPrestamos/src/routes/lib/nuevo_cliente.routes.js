@@ -12,10 +12,11 @@ router.post('/', async (req, res) => {
         var aval = req.body.aval;
         var establecimiento = req.body.establecimiento;
         var user = req.body.user;
+        
         var data_user = {
-            id_usuario: persona.ine_clave,
+            id_usuario: persona.ine,
             id_sucursal: user.sucursal,
-            ine_clave: persona.ine_clave,
+            ine: persona.ine,
             password: '12345',
             id_rol: 3,
             usuario_padre: user.user,
