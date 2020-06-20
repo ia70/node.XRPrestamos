@@ -108,10 +108,31 @@ class Cobrar extends Component {
 
         var indice = 0;
         const listItems = this.state.solicitud.map((i) =>
-            <ItemList key={i.ine + Math.random() * (max - min) + min} stateItem={i.id_estado_solicitud} alias={i.alias} number={++indice} name={i.nombre} amount={i.monto} amountDescription="Monto solicitado:" close={true} />
+            <ItemList 
+                key=                {i.ine + Math.random() * (max - min) + min} 
+                number=             {++indice}
+                alias=              {i.alias}
+                name=               {i.nombre} 
+                amount=             {i.monto} 
+                amountDescription=  "Pago del día:"
+                stateItem=          {i.id_estado_solicitud} 
+                 
+                close=              {true} 
+                />
         );
 
+        /*<ItemList 
 
+            modal=              {true} 
+            -- number=             "1" 
+            -- alias=              "Pozolera" 
+            -- name=               "Alicia Ocaña Vazquez" 
+            -- amount=             "550.00" 
+            -- amountDescription=  "Pago del día:" 
+            stateItem=          {1} 
+            stateDescription=   "Pagó completo" 
+
+        />*/
         return (
             <div>
                 <NavbarExtends title="Cobrar" label1="A recaudar" label2="$90,350" />
