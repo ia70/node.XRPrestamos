@@ -44,6 +44,10 @@
 }
 
 .stateitem_state_3 {
+    background-color:   #1a7e01 ;
+}
+
+.stateitem_state_4 {
     background-color: rgb(201, 45, 45);
 }
 
@@ -51,10 +55,10 @@
     background-color:   #0082e6 ;
 }
 
-
-.stateitem_state_4 {
-    background-color:   #1a7e01 ;
+.stateitem_state_6 {
+    background-color:   #002ae6 ;
 }
+
 
 
 
