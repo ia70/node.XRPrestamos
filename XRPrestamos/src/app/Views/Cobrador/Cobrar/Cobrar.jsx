@@ -28,11 +28,25 @@ class Cobrar extends Component {
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
             solicitud: [],
+            filtro: []
         };
 
         this.leer = this.leer.bind(this);
+        this.filtrar = this.filtrar.bind(this);
     }
 
+    filtrar(cadena) {
+        cadena = cadena.toLowerCase();
+        let datos = [];
+        if (cadena == "" || cadena == null) {
+            this.setState({ filtro: this.state.solicitud });
+        } else {
+            if (cadena.length > 0) {
+                datos = this.state.solicitud.filter((item) => (item.alias + " " + item.nombre).toLowerCase().indexOf(cadena) >= 0);
+                this.setState({ filtro: datos });
+            }
+        }
+    }
 
     componentDidMount() {
         this._isMounted = true;
@@ -61,7 +75,8 @@ class Cobrar extends Component {
                             if (this._isMounted == true && this._isUpdate == false) {
                                 this._isUpdate = true;
                                 this.setState({
-                                    solicitud: response.solicitud
+                                    solicitud: response.solicitud,
+                                    filtro: response.solicitud
                                 });
                             }
                         }
@@ -107,32 +122,21 @@ class Cobrar extends Component {
         }
 
         var indice = 0;
-        const listItems = this.state.solicitud.map((i) =>
+        const listItems = this.state.filtro.map((i) =>
             <ItemList 
                 key=                {i.ine + Math.random() * (max - min) + min} 
                 number=             {++indice}
                 alias=              {i.alias}
                 name=               {i.nombre} 
-                amount=             {i.monto} 
+                amount=             {i.monto_pago} 
                 amountDescription=  "Pago del día:"
-                stateItem=          {i.id_estado_solicitud} 
-                 
+                stateItem=          {i.id_tipo_pago} 
+                stateDescription=   {i.descripcion}
+                modal=              {true}
                 close=              {true} 
                 />
         );
 
-        /*<ItemList 
-
-            modal=              {true} 
-            -- number=             "1" 
-            -- alias=              "Pozolera" 
-            -- name=               "Alicia Ocaña Vazquez" 
-            -- amount=             "550.00" 
-            -- amountDescription=  "Pago del día:" 
-            stateItem=          {1} 
-            stateDescription=   "Pagó completo" 
-
-        />*/
         return (
             <div>
                 <NavbarExtends title="Cobrar" label1="A recaudar" label2="$90,350" />
