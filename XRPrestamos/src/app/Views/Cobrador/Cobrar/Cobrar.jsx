@@ -27,6 +27,7 @@ class Cobrar extends Component {
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
+            total: 0,
             solicitud: [],
             filtro: []
         };
@@ -74,9 +75,15 @@ class Cobrar extends Component {
                         if (response.response) {
                             if (this._isMounted == true && this._isUpdate == false) {
                                 this._isUpdate = true;
+
+                                var total_ = 0;
+
+                                response.solicitud.forEach(i => total_ += i.monto_pago);
+
                                 this.setState({
                                     solicitud: response.solicitud,
-                                    filtro: response.solicitud
+                                    filtro: response.solicitud,
+                                    total: total_
                                 });
                             }
                         }
@@ -123,23 +130,41 @@ class Cobrar extends Component {
 
         var indice = 0;
         const listItems = this.state.filtro.map((i) =>
-            <ItemList 
-                key=                {i.ine + Math.random() * (max - min) + min} 
-                number=             {++indice}
-                alias=              {i.alias}
-                name=               {i.nombre} 
-                amount=             {i.monto_pago} 
-                amountDescription=  "Pago del día:"
-                stateItem=          {i.id_tipo_pago} 
-                stateDescription=   {i.descripcion}
-                modal=              {true}
-                close=              {true} 
-                />
+            <ItemList
+                key={i.ine + Math.random() * (max - min) + min}
+                number={++indice}
+                amount={i.monto_pago}
+                amountDescription="Pago del día:"
+                stateItem={i.id_tipo_pago}
+                stateDescription={i.descripcion}
+
+                folio_credito={i.folio_credito}
+                ine={i.ine}
+                nombre={i.nombre}
+                alias={i.alias}
+                telefono={i.telefono}
+                monto_credito={i.monto_credito}
+                monto_total={i.monto_total}
+                monto_pago={i.monto_pago}
+                pagado={i.pagado}
+                atrasos_no={i.atrasos_no}
+                atrasos_monto={i.atrasos_monto}
+                extra_no={i.extra_no}
+                extra_monto={i.extra_monto}
+                restante_no={i.restante_no}
+                restante_monto={i.restante_monto}
+                restante_total={i.restante_total}
+                abono_hoy={i.abono_hoy}
+
+
+                modal={true}
+                close={false}
+            />
         );
 
         return (
             <div>
-                <NavbarExtends title="Cobrar" label1="A recaudar" label2="$90,350" />
+                <NavbarExtends title="Cobrar" label1="A recaudar" label2={"$" + this.state.total} />
                 <div className="container-fluid">
                     <div className="row Cobrar">
                         <Title />
