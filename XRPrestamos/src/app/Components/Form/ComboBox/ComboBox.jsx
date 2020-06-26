@@ -18,7 +18,7 @@ class ComboBox extends Component {
         this._isMounted = false;
         this._isUpdate = false;
 
-        this._elementos = ["e"];
+        this._elementos = [];
 
         this.state = {
             elementos: []
@@ -27,6 +27,10 @@ class ComboBox extends Component {
     }
 
     componentDidMount() {
+
+    }
+
+    componentWillMount(){
         this._isMounted = true;
         try {
             if (this._isUpdate == false) {
@@ -49,6 +53,7 @@ class ComboBox extends Component {
                 } else {
                     if (this._isMounted) {
                         this.setState({ 'elementos': this.props.items });
+                        console.log("ENTRO -----");
                     }
                 }
             }
@@ -59,7 +64,7 @@ class ComboBox extends Component {
 
     componentWillUnmount() {
         this._isMounted = false;
-        this._elementos = [""];
+        this._elementos = [];
     }
 
     componentWillUpdate() {
@@ -83,7 +88,8 @@ class ComboBox extends Component {
         try {
             this._elementos = this.props.items;
         } catch (error) {
-            this._elementos = [""];
+            this._elementos = [];
+            console.log(e);
         }
 
         let valu = "";
@@ -94,7 +100,7 @@ class ComboBox extends Component {
             valu = this.props.value;
             des = this.props.description;
         } catch (error) {
-            it = null;
+            console.log(e);
         }
 
         if (this.props.tabla != null) {
@@ -106,6 +112,7 @@ class ComboBox extends Component {
             try {
                 lista = this._elementos.map(i => <option key={this.props.id + 'opt' + Math.random() * (max - min) + min} value={i[valu]} >{i[des]}</option>);
             } catch (e) {
+                console.log(e);
             }
         }
 
