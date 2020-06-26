@@ -4,15 +4,31 @@ import { ModalCollect } from '../ModalCollect/ModalCollect.jsx';
 
 import './ItemList.css';
 /*PROPIEDADES -----------------------------------------------------
-    1- numbre               Número de lista
-    2- stateItem            Estado (1 Aprobado, 2 En espera, 3 Rechazado )
-    3- stateDescription     Texto de descripcion
-    4- alias                Alias del cliente
-    5- name                 Nombre completo del cliente
-    6- amountDescription    Descripción del monto
-    7- amount               Monto $
-    8- close                Mostrar boton cerrar (true, false)
-    9- modal               (true | false) Especifica si debe mostrar ventana modal
+
+    	1 - folio_credito
+		2 - ine
+		3 - nombre (nombre completo)
+		4 - alias
+		5 - telefono
+		6 - monto_credito
+		7 - monto_total
+		8 - monto_pago
+		9 - pagado
+		10 - atrasos_no
+		11 - atrasos_monto
+		12 - extra_no
+		13 - extra_monto
+		14 - restante_no
+		15 - restante_monto
+		16 - restante_total
+        17 - abono_hoy
+        18 - stateItem            Estado (1 Aprobado, 2 En espera, 3 Rechazado )
+        19 - stateDescription     Texto de descripcion
+        20 - amountDescription    Descripción del monto
+        21 - amount               Monto $
+        22 - close                Mostrar boton cerrar (true, false)
+        23 - modal               (true | false) Especifica si debe mostrar ventana modal
+
 */
 export function ItemList(props) {
     let btncerrar = <BtnClose label="X" />;
@@ -73,7 +89,7 @@ export function ItemList(props) {
                                 {btncerrar}
                             </div>
                             <div className="row stateitem stateitem_name stateitem_center">
-                                {props.name}
+                                {props.nombre}
                             </div>
                             <div className={"row align-self-stretch stateitem_center " + class_br}>
                                 <div className="col col-xs-12 stateitem_state_amount_description">
@@ -91,7 +107,28 @@ export function ItemList(props) {
                 </div>
             </div>
 
-            <ModalCollect id={"item" + props.number} alias={props.alias} name={props.name} amount={props.amount} number={props.number}/>
+            <ModalCollect
+                id={"item" + props.number}
+                number={props.number}
+
+                folio_credito={props.folio_credito}
+                ine={props.ine}
+                nombre={props.nombre}
+                alias={props.alias}
+                telefono={props.telefono}
+                monto_credito={props.monto_credito}
+                monto_total={props.monto_total}
+                monto_pago={props.monto_pago}
+                pagado={props.pagado}
+                atrasos_no={props.atrasos_no}
+                atrasos_monto={props.atrasos_monto}
+                extra_no={props.extra_no}
+                extra_monto={props.extra_monto}
+                restante_no={props.restante_no}
+                restante_monto={props.restante_monto}
+                restante_total={props.restante_total}
+                abono_hoy={props.abono_hoy}
+            />
         </div>
     );
 }
