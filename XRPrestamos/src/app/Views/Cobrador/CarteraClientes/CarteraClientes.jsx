@@ -111,7 +111,7 @@ class CarteraClientes extends Component {
 
         var indice = 0;
         const listItems = this.state.filtro.map((i) =>
-            <ItemList key={i.nombre + Math.random() * (max - min) + min} alias={i.alias} number={++indice} name={i.nombre + " " + i.apellido_paterno + " " + i.apellido_materno} amount={i.restante} amountDescription="Restante:" />
+            <ItemList key={i.nombre + Math.random() * (max - min) + min} alias={i.alias} number={++indice} nombre={i.nombre + " " + i.apellido_paterno + " " + i.apellido_materno} amount={i.restante} amountDescription="Restante:" />
         );
 
         return (
