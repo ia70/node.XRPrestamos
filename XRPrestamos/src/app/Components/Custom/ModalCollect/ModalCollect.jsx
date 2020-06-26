@@ -13,6 +13,27 @@ import './ModalCollect.css';
     2- stateItem            Estado (1 Aprobado, 2 En espera, 3 Rechazado )
 */
 export function ModalCollect(props) {
+    let _atrasos = props.atrasos_monto;
+    let _extras = props.extra_monto;
+    let _extras_no = props.extra_no;
+
+    if (_extras > 0) {
+        if (_extras > _atrasos) {
+            _atrasos = 0;
+            _extras = _extras - _atrasos;
+            if (_extras_no > props.atrasos_no) {
+                _extras_no = _extras_no - props.atrasos_no;
+            } else {
+                _extras_no = 0;
+            }
+        } else {
+            _atrasos = _atrasos - _extras;
+            _extras = 0;
+            _extras_no = 0;
+        }
+    }
+
+
     return (
         <div className="modal fade" id={props.id} data-backdrop="static" tabIndex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
@@ -33,34 +54,52 @@ export function ModalCollect(props) {
                         </div>
 
                         <div className="row modalcollect_name m-0 align-items-center">
-                            <h4 className="tm2">{props.name}</h4>
+                            <h4 className="tm2">{props.nombre}</h4>
                         </div>
 
+                        <div className="row modalcollect_name m-0 align-items-center">
+                            <a className="h5 text-warning" href={"tel:" + props.telefono}>Tel. {props.telefono}</a>
+                        </div>
 
-                        <div className="table-responsive">
+                        <div className="table table-responsive table-hover">
                             <table className="table">
                                 <thead className="thead-dark">
                                     <tr>
-                                        <th scope="col">Conc.</th>
+                                        <th scope="col"></th>
                                         <th scope="col">Pagos</th>
                                         <th scope="col">$ Monto</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr className="table-success">
+                                        <th scope="row">Prestamo</th>
+                                        <td></td>
+                                        <td className="text-primary"><strong>{props.monto_credito}</strong></td>
+                                    </tr>
+                                    <tr className="table-warning">
+                                        <th scope="row">Pagado</th>
+                                        <td></td>
+                                        <td className="text-primary"><strong>{props.pagado}</strong></td>
+                                    </tr>
                                     <tr>
                                         <th scope="row">Atrasos</th>
-                                        <td>3</td>
-                                        <td>1500</td>
+                                        <td>{props.atrasos_no}</td>
+                                        <td className="text-danger">{_atrasos}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Adelantos</th>
-                                        <td>0</td>
-                                        <td>0</td>
+                                        <td>{_extras_no}</td>
+                                        <td className="text-success">{_extras}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Restante</th>
-                                        <td>7</td>
-                                        <td>3000</td>
+                                        <td>{props.restante_no}</td>
+                                        <td className="text-info">{props.restante_monto}</td>
+                                    </tr>
+                                    <tr className="table-info">
+                                        <th scope="row" >Restante total</th>
+                                        <td></td>
+                                        <td className="text-primary"><strong>{props.restante_total}</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -69,7 +108,7 @@ export function ModalCollect(props) {
 
 
                         <div className="row modalcollect_monto m-0 py-0 my-2">
-                            Pago del día: ${props.amount}
+                           <span className="h3"> Pago del día:        <strong className="text-primary">{"    $" + props.monto_pago}</strong> </span>
                         </div>
 
                         <div className="row modalcollect_body m-0 p-1">
