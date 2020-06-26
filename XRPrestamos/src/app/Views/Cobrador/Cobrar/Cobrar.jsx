@@ -50,50 +50,7 @@ class Cobrar extends Component {
     }
 
     componentDidMount() {
-        this._isMounted = true;
-        if (this._isMounted == true && this._isUpdate == false) {
-            var url = keys.api.url + 'cobrar';
 
-            var data_text = {
-                user: this.state.user,
-                sucursal: this.state.sucursal,
-                hash: this.state.hash
-            };
-
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(data_text),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => res.json())
-                .catch(error => {
-                    console.error('Error:', error)
-                })
-                .then(response => {
-                    if (response.session) {
-                        if (response.response) {
-                            if (this._isMounted == true && this._isUpdate == false) {
-                                this._isUpdate = true;
-
-                                var total_ = 0;
-
-                                response.solicitud.forEach(i => total_ += i.monto_pago);
-
-                                this.setState({
-                                    solicitud: response.solicitud,
-                                    filtro: response.solicitud,
-                                    total: total_
-                                });
-                            }
-                        }
-                    } else {
-                        sessionStorage.clear();
-                        alert('¡Sesion bloqueada!');
-                        this.setState({ login: false });
-                    }
-                });
-        }
     }
 
     componentWillUnmount() {
@@ -105,6 +62,51 @@ class Cobrar extends Component {
             sessionStorage.clear();
             alert('¡Sesion bloqueada!');
             this.setState({ login: false });
+        }else{
+            this._isMounted = true;
+            if (this._isMounted == true && this._isUpdate == false) {
+                var url = keys.api.url + 'cobrar';
+    
+                var data_text = {
+                    user: this.state.user,
+                    sucursal: this.state.sucursal,
+                    hash: this.state.hash
+                };
+    
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(data_text),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => res.json())
+                    .catch(error => {
+                        console.error('Error:', error)
+                    })
+                    .then(response => {
+                        if (response.session) {
+                            if (response.response) {
+                                if (this._isMounted == true && this._isUpdate == false) {
+                                    this._isUpdate = true;
+    
+                                    var total_ = 0;
+    
+                                    response.solicitud.forEach(i => total_ += i.monto_pago);
+    
+                                    this.setState({
+                                        solicitud: response.solicitud,
+                                        filtro: response.solicitud,
+                                        total: total_
+                                    });
+                                }
+                            }
+                        } else {
+                            sessionStorage.clear();
+                            alert('¡Sesion bloqueada!');
+                            this.setState({ login: false });
+                        }
+                    });
+            }
         }
     }
 
@@ -168,7 +170,7 @@ class Cobrar extends Component {
                 <div className="container-fluid">
                     <div className="row Cobrar">
                         <Title />
-                        <ComboBox id="filtro" label="Filtrar" items={JSON.stringify({ lista: ["opcion1", "opcion2"] })} />
+                        <ComboBox id="filtro" label="Filtrar" items={""} />
                         <TextSearch label="Buscar" id="search_cartera" evento={this.filtrar} />
                     </div>
                     <div className="row">
