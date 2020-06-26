@@ -164,13 +164,44 @@ class Cobrar extends Component {
             />
         );
 
+        let combo = [
+            {
+                "valor": 5,
+                "des" : "Por visitar"
+            },
+            {
+                "valor": 1,
+                "des" : "Pago completo"
+            },
+            {
+                "valor": 3,
+                "des" : "Pago extra"
+            },
+            {
+                "valor": 2,
+                "des" : "Abono"
+            },
+            {
+                "valor": 4,
+                "des" : "Sin pago"
+            },
+            {
+                "valor": 6,
+                "des" : "Fin de pagos"
+            },
+            {
+                "valor": 7,
+                "des" : "Ver todos"
+            }
+        ];
+
         return (
             <div>
                 <NavbarExtends title="Cobrar" label1="A recaudar" label2={"$" + this.state.total} />
                 <div className="container-fluid">
                     <div className="row Cobrar">
                         <Title />
-                        <ComboBox id="filtro" label="Filtrar" items={""} />
+                        <ComboBox id="filtro" label="Filtrar" items={combo} value={"valor"} description={"des"} evento={this.filtrar} />
                         <TextSearch label="Buscar" id="search_cartera" evento={this.filtrar} />
                     </div>
                     <div className="row">
