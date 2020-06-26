@@ -31,43 +31,7 @@ class EstadoSolicitud extends Component {
     }
 
     componentDidMount() {
-        this._isMounted = true;
-        if (this._isMounted == true && this._isUpdate == false) {
-            var url = keys.api.url + 'estado_solicitud';
 
-            var data_text = {
-                user: this.state.user,
-                sucursal: this.state.sucursal,
-                hash: this.state.hash
-            };
-
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(data_text),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => res.json())
-                .catch(error => {
-                    console.error('Error:', error)
-                })
-                .then(response => {
-                    if (response.session) {
-                        if (response.response) {
-                            if (this._isMounted == true && this._isUpdate == false) {
-                                this._isUpdate = true;
-                                this.setState({
-                                    solicitud: response.solicitud
-                                });
-                            }
-                        }
-                    } else {
-                        sessionStorage.clear();
-                        alert('¡Sesion bloqueada!');
-                        this.setState({ login: false });
-                    }
-                });
-        }
     }
 
     
@@ -80,6 +44,44 @@ class EstadoSolicitud extends Component {
             sessionStorage.clear();
             alert('¡Sesion bloqueada!');
             this.setState({ login: false });
+        }else{
+            this._isMounted = true;
+            if (this._isMounted == true && this._isUpdate == false) {
+                var url = keys.api.url + 'estado_solicitud';
+    
+                var data_text = {
+                    user: this.state.user,
+                    sucursal: this.state.sucursal,
+                    hash: this.state.hash
+                };
+    
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(data_text),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => res.json())
+                    .catch(error => {
+                        console.error('Error:', error)
+                    })
+                    .then(response => {
+                        if (response.session) {
+                            if (response.response) {
+                                if (this._isMounted == true && this._isUpdate == false) {
+                                    this._isUpdate = true;
+                                    this.setState({
+                                        solicitud: response.solicitud
+                                    });
+                                }
+                            }
+                        } else {
+                            sessionStorage.clear();
+                            alert('¡Sesion bloqueada!');
+                            this.setState({ login: false });
+                        }
+                    });
+            }
         }
     }
 
