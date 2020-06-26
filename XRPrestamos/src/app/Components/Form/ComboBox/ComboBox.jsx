@@ -18,7 +18,7 @@ class ComboBox extends Component {
         this._isMounted = false;
         this._isUpdate = false;
 
-        this._elementos = [];
+        this._elementos = ["e"];
 
         this.state = {
             elementos: []
@@ -47,7 +47,9 @@ class ComboBox extends Component {
                             }
                         });
                 } else {
-                        this.setState({ 'elementos': this.props.items.lista });
+                    if (this._isMounted) {
+                        this.setState({ 'elementos': this.props.items });
+                    }
                 }
             }
         } catch (e) {
@@ -57,7 +59,7 @@ class ComboBox extends Component {
 
     componentWillUnmount() {
         this._isMounted = false;
-        this._elementos = [];
+        this._elementos = [""];
     }
 
     componentWillUpdate() {
@@ -67,7 +69,7 @@ class ComboBox extends Component {
     evento() {
         try {
             if (this.props.evento != null) {
-                this.props.evento((e) => this.props.evento(e))
+                this.props.evento((e) => this.props.evento(this.leer(e)))
             }
         } catch (error) {
         }
@@ -79,20 +81,20 @@ class ComboBox extends Component {
 
     render() {
         try {
-            this._elementos = this.props.items.lista;
+            this._elementos = this.props.items;
         } catch (error) {
-            this._elementos = [];
+            this._elementos = [""];
         }
 
         let valu = "";
         let des = "";
-        let lista = [""];
+        let lista = [];
 
         try {
             valu = this.props.value;
             des = this.props.description;
         } catch (error) {
-            valu = null;
+            it = null;
         }
 
         if (this.props.tabla != null) {
@@ -102,9 +104,8 @@ class ComboBox extends Component {
                 lista = "";
         } else {
             try {
-                lista = this.state.elementos.map(i => <option key={this.props.id + 'opt' + Math.random() * (max - min) + min} value={i[valu]} >{i[des]}</option>);
+                lista = this._elementos.map(i => <option key={this.props.id + 'opt' + Math.random() * (max - min) + min} value={i[valu]} >{i[des]}</option>);
             } catch (e) {
-                lista = "";
             }
         }
 
