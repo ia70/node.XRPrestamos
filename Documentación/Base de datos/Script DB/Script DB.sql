@@ -344,7 +344,6 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`abono` (
   `monto` DECIMAL(10,2) NOT NULL,
   `no_pagos` DECIMAL(10,2) NULL COMMENT 'Cantidad de pagos (adelantado - atrasado)',
   `id_tipo_pago` INT NOT NULL COMMENT 'Tipo de pago:\n1- Pago normal completo\n2- Pago parcial\n3- Extra\n4- No pago\n5- Sin visitar',
-  `hora_abono` VARCHAR(20) NULL,
   `fecha_abono` DATE NOT NULL,
   `id_estado` INT NOT NULL,
   `fecha_reg` DATETIME NULL,
@@ -870,6 +869,7 @@ INSERT INTO `XRPrestamos`.`tipo_pago` (`id_tipo_pago`, `descripcion`) VALUES (2,
 INSERT INTO `XRPrestamos`.`tipo_pago` (`id_tipo_pago`, `descripcion`) VALUES (3, 'Extra');
 INSERT INTO `XRPrestamos`.`tipo_pago` (`id_tipo_pago`, `descripcion`) VALUES (4, 'No pagó');
 INSERT INTO `XRPrestamos`.`tipo_pago` (`id_tipo_pago`, `descripcion`) VALUES (5, 'Sin visitar');
+INSERT INTO `XRPrestamos`.`tipo_pago` (`id_tipo_pago`, `descripcion`) VALUES (6, 'Fin de Credito');
 
 COMMIT;
 
@@ -879,27 +879,27 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `XRPrestamos`;
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (1, '1', 250, 1, 1, NULL, '2020/03/18', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (2, '2', 150, 1, 1, NULL, '2020/03/18', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (3, '3', 100, 1, 1, NULL, '2020/03/18', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (4, '4', 50, 1, 1, NULL, '2020/03/18', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (5, '5', 150, 1, 1, NULL, '2020/03/18', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (6, '6', 100, 1, 1, NULL, '2020/03/18', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (7, '7', 50, 1, 1, NULL, '2020/03/18', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (8, '8', 100, 1, 1, NULL, '2020/03/18', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (9, '9', 150, 1, 1, NULL, '2020/03/18', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (10, '10', 100, 1, 1, NULL, '2020/03/18', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (11, '1', 500, 2, 3, NULL, '2020/03/19', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (12, '2', 250, 1, 3, NULL, '2020/03/19', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (13, '3', 50, 1, 2, NULL, '2020/03/19', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (14, '4', 300, 6, 3, NULL, '2020/03/19', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (15, '5', 100, 1, 2, NULL, '2020/03/19', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (16, '6', 200, 2, 3, NULL, '2020/03/19', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (17, '7', 50, 1, 1, NULL, '2020/03/19', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (18, '8', 120, 1, 3, NULL, '2020/03/19', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (19, '9', 400, 2, 3, NULL, '2020/03/19', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (20, '10', 90, 1, 2, NULL, '2020/03/19', 1, '2020/03/19');
-INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `hora_abono`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (21, '11', 800, 4, 3, NULL, '2020/03/19', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (1, '1', 250, 1, 1, '2020/03/18', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (2, '2', 150, 1, 1, '2020/03/18', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (3, '3', 100, 1, 1, '2020/03/18', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (4, '4', 50, 1, 1, '2020/03/18', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (5, '5', 150, 1, 1, '2020/03/18', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (6, '6', 100, 1, 1, '2020/03/18', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (7, '7', 50, 1, 1, '2020/03/18', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (8, '8', 100, 1, 1, '2020/03/18', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (9, '9', 150, 1, 1, '2020/03/18', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (10, '10', 100, 1, 1, '2020/03/18', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (11, '1', 500, 2, 3, '2020/03/19', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (12, '2', 250, 1, 3, '2020/03/19', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (13, '3', 50, 1, 2, '2020/03/19', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (14, '4', 300, 6, 3, '2020/03/19', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (15, '5', 100, 1, 2, '2020/03/19', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (16, '6', 200, 2, 3, '2020/03/19', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (17, '7', 50, 1, 1, '2020/03/19', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (18, '8', 120, 1, 3, '2020/03/19', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (19, '9', 400, 2, 3, '2020/03/19', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (20, '10', 90, 1, 2, '2020/03/19', 1, '2020/03/19');
+INSERT INTO `XRPrestamos`.`abono` (`id_abono`, `folio_credito`, `monto`, `no_pagos`, `id_tipo_pago`, `fecha_abono`, `id_estado`, `fecha_reg`) VALUES (21, '11', 800, 4, 3, '2020/03/19', 1, '2020/03/19');
 
 COMMIT;
 
