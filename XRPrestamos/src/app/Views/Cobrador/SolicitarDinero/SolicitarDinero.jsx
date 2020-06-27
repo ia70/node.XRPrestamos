@@ -86,6 +86,7 @@ class SolicitarDinero extends Component {
         }
 
     }
+
     componentDidMount() {
         this._isMounted = true;
     }
@@ -100,6 +101,10 @@ class SolicitarDinero extends Component {
             alert('¡Sesion bloqueada!');
             this.setState({ login: false });
         }
+    }
+
+    componentDidUpdate(){
+        this.leer();
     }
 
     enviar() {
