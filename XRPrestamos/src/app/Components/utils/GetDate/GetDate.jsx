@@ -1,5 +1,5 @@
-export function GetDate(){
-    
+export function GetDate() {
+
     let date = new Date();
 
     let day = date.getDate();
@@ -8,19 +8,19 @@ export function GetDate(){
 
     let fecha = "";
 
-    if(day < 10){
+    if (day < 10) {
         fecha = "0" + day + "\/";
-    }else{
+    } else {
         fecha = day + "\/";
     }
 
-    if(month <10){
+    if (month < 10) {
         fecha += "0" + month + "\/";
-    }else{
+    } else {
         fecha += month + "\/";
     }
 
-    fecha += year
-    
+    fecha += year;
+
     return fecha;
 }
