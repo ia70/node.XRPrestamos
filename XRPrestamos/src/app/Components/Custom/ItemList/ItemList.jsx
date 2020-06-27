@@ -1,6 +1,6 @@
 import React from 'react';
 import { BtnClose } from '../../Form/BtnClose/BtnClose.jsx';
-import { ModalCollect } from '../ModalCollect/ModalCollect.jsx';
+import ModalCollect from '../ModalCollect/ModalCollect.jsx';
 
 import './ItemList.css';
 /*PROPIEDADES -----------------------------------------------------
@@ -122,8 +122,8 @@ export function ItemList(props) {
                 pagado={props.pagado}
                 atrasos_no={props.atrasos_no}
                 atrasos_monto={props.atrasos_monto}
-                extra_no={props.extra_no}
-                extra_monto={props.extra_monto}
+                extras_no={props.extras_no}
+                extras_monto={props.extras_monto}
                 restante_no={props.restante_no}
                 restante_monto={props.restante_monto}
                 restante_total={props.restante_total}
