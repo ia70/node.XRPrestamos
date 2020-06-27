@@ -27,25 +27,40 @@ class Cobrar extends Component {
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
+            opcion: 5,
             total: 0,
             solicitud: [],
             filtro: []
         };
 
-        this.leer = this.leer.bind(this);
         this.filtrar = this.filtrar.bind(this);
+        this.filtrarCombo = this.filtrarCombo.bind(this);
     }
 
     filtrar(cadena) {
+        let op = document.getElementById("filtro").value;
+
         cadena = cadena.toLowerCase();
         let datos = [];
         if (cadena == "" || cadena == null) {
-            this.setState({ filtro: this.state.solicitud });
+            this.filtrarCombo(op);
         } else {
             if (cadena.length > 0) {
-                datos = this.state.solicitud.filter((item) => (item.alias + " " + item.nombre).toLowerCase().indexOf(cadena) >= 0);
-                this.setState({ filtro: datos });
+                datos = this.state.solicitud.filter((item) => (item.alias + " " + item.nombre).toLowerCase().indexOf(cadena) >= 0 && (item.id_tipo_pago == op || op == 7));
+                this.setState({ filtro: datos, opcion: op });
             }
+        }
+    }
+
+    filtrarCombo(cadena) {
+        let op = cadena;
+        let datos = [];
+
+        if (op == 7) {
+            this.setState({ filtro: this.state.solicitud, opcion: op });
+        } else {
+            datos = this.state.solicitud.filter((item) => (item.id_tipo_pago == cadena));
+            this.setState({ filtro: datos, opcion: op });
         }
     }
 
@@ -62,17 +77,17 @@ class Cobrar extends Component {
             sessionStorage.clear();
             alert('¡Sesion bloqueada!');
             this.setState({ login: false });
-        }else{
+        } else {
             this._isMounted = true;
             if (this._isMounted == true && this._isUpdate == false) {
                 var url = keys.api.url + 'cobrar';
-    
+
                 var data_text = {
                     user: this.state.user,
                     sucursal: this.state.sucursal,
                     hash: this.state.hash
                 };
-    
+
                 fetch(url, {
                     method: 'POST',
                     body: JSON.stringify(data_text),
@@ -88,11 +103,11 @@ class Cobrar extends Component {
                             if (response.response) {
                                 if (this._isMounted == true && this._isUpdate == false) {
                                     this._isUpdate = true;
-    
+
                                     var total_ = 0;
-    
+
                                     response.solicitud.forEach(i => total_ += i.monto_pago);
-    
+
                                     this.setState({
                                         solicitud: response.solicitud,
                                         filtro: response.solicitud,
@@ -110,14 +125,8 @@ class Cobrar extends Component {
         }
     }
 
-
-    leer() {
-        try {
-            let valor1 = document.getElementById('filtro').value;
-            document.getElementById('sol_ine').value = valor1;
-        } catch (e) {
-            console.log(e);
-        }
+    componentDidUpdate() {
+        document.getElementById("filtro").value = this.state.opcion;
     }
 
     render() {
@@ -167,31 +176,31 @@ class Cobrar extends Component {
         let combo = [
             {
                 "valor": 5,
-                "des" : "Por visitar"
+                "des": "Por visitar"
             },
             {
                 "valor": 1,
-                "des" : "Pago completo"
+                "des": "Pago completo"
             },
             {
                 "valor": 3,
-                "des" : "Pago extra"
+                "des": "Pago extra"
             },
             {
                 "valor": 2,
-                "des" : "Abono"
+                "des": "Abono"
             },
             {
                 "valor": 4,
-                "des" : "Sin pago"
+                "des": "Sin pago"
             },
             {
                 "valor": 6,
-                "des" : "Fin de pagos"
+                "des": "Fin de pagos"
             },
             {
                 "valor": 7,
-                "des" : "Ver todos"
+                "des": "Ver todos"
             }
         ];
 
@@ -201,7 +210,7 @@ class Cobrar extends Component {
                 <div className="container-fluid">
                     <div className="row Cobrar">
                         <Title />
-                        <ComboBox id="filtro" label="Filtrar" items={combo} value={"valor"} description={"des"} evento={this.filtrar} />
+                        <ComboBox id="filtro" label="Filtrar" items={combo} value={"valor"} description={"des"} evento={this.filtrarCombo} />
                         <TextSearch label="Buscar" id="search_cartera" evento={this.filtrar} />
                     </div>
                     <div className="row">
