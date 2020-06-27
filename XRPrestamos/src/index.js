@@ -54,6 +54,7 @@ app.use('/api/cartera_clientes',        require('./routes/lib/cartera_clientes.r
 app.use('/api/solicitar_credito',       require('./routes/lib/solicitar_credito.routes'));
 app.use('/api/estado_solicitud',        require('./routes/lib/estado_solicitud.routes'));
 app.use('/api/cobrar',                  require('./routes/lib/cobrar.routes'));
+app.use('/api/cobrar_pago',             require('./routes/lib/cobrar_pago.routes'));
 
 // Static files --------------------------------------------------
 app.use(express.static(path.join(__dirname, 'public')));
