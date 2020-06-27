@@ -10,4 +10,9 @@ function getShortDate(){
     return moment().format('YYYY-MM-DD');
 }
 
-module.exports = { getDateTime, getShortDate };
+function getShortDateMX(){
+    var d = moment();
+    return moment().format('DD-MM-YYYY');
+}
+
+module.exports = { getDateTime, getShortDate, getShortDateMX };
