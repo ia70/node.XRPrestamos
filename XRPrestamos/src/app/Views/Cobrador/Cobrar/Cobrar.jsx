@@ -160,8 +160,8 @@ class Cobrar extends Component {
                 pagado={i.pagado}
                 atrasos_no={i.atrasos_no}
                 atrasos_monto={i.atrasos_monto}
-                extra_no={i.extra_no}
-                extra_monto={i.extra_monto}
+                extras_no={i.extras_no}
+                extras_monto={i.extras_monto}
                 restante_no={i.restante_no}
                 restante_monto={i.restante_monto}
                 restante_total={i.restante_total}
