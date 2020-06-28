@@ -128,6 +128,8 @@ export function ItemList(props) {
                 restante_monto={props.restante_monto}
                 restante_total={props.restante_total}
                 abono_hoy={props.abono_hoy}
+
+                evento = {props.evento}
             />
         </div>
     );
