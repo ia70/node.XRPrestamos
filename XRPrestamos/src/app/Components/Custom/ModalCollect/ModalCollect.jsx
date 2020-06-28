@@ -74,8 +74,6 @@ class ModalCollect extends Component {
                 }
             };
 
-            console.log(data_text);
-
             fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(data_text),
@@ -90,6 +88,8 @@ class ModalCollect extends Component {
                     if (response.session) {
                         if (response.response) {
                             alert('¡Registro guardado!');
+                            $("#" +this.props.id).modal('hide');
+                            this.props.evento(response.data[0][0]);
                         } else
                             alert('¡Error al guardar!');
                     } else {
