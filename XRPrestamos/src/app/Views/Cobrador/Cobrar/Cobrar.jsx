@@ -35,19 +35,22 @@ class Cobrar extends Component {
 
         this.filtrar = this.filtrar.bind(this);
         this.filtrarCombo = this.filtrarCombo.bind(this);
+        this.modificarEstado = this.modificarEstado.bind(this);
     }
 
     filtrar(cadena) {
-        let op = document.getElementById("filtro").value;
+        if (this._isMounted) {
+            let op = document.getElementById("filtro").value;
 
-        cadena = cadena.toLowerCase();
-        let datos = [];
-        if (cadena == "" || cadena == null) {
-            this.filtrarCombo(op);
-        } else {
-            if (cadena.length > 0) {
-                datos = this.state.solicitud.filter((item) => (item.alias + " " + item.nombre).toLowerCase().indexOf(cadena) >= 0 && (item.id_tipo_pago == op || op == 7));
-                this.setState({ filtro: datos, opcion: op });
+            cadena = cadena.toLowerCase();
+            let datos = [];
+            if (cadena == "" || cadena == null) {
+                this.filtrarCombo(op);
+            } else {
+                if (cadena.length > 0) {
+                    datos = this.state.solicitud.filter((item) => (item.alias + " " + item.nombre).toLowerCase().indexOf(cadena) >= 0 && (item.id_tipo_pago == op || op == 7));
+                    this.setState({ filtro: datos, opcion: op });
+                }
             }
         }
     }
@@ -64,8 +67,24 @@ class Cobrar extends Component {
         }
     }
 
-    componentDidMount() {
+    modificarEstado(objeto) {
+        if (this._isMounted) {
+            if (objeto != null) {
+                var index = this.state.solicitud.findIndex(obj => obj.folio_credito == objeto.folio_credito);
+                if (index >= 0) {
+                    let data = this.state.solicitud;
+                    data[index] = objeto;
+                    this.setState({
+                        solicitud: data
+                    });
+                    this.filtrarCombo(this.state.opcion);
+                }
+            }
+        }
+    }
 
+    componentDidMount() {
+        this._isMounted = true;
     }
 
     componentWillUnmount() {
@@ -78,50 +97,49 @@ class Cobrar extends Component {
             alert('¡Sesion bloqueada!');
             this.setState({ login: false });
         } else {
-            this._isMounted = true;
-            if (this._isMounted == true && this._isUpdate == false) {
-                var url = keys.api.url + 'cobrar';
 
-                var data_text = {
-                    user: this.state.user,
-                    sucursal: this.state.sucursal,
-                    hash: this.state.hash
-                };
+            var url = keys.api.url + 'cobrar';
 
-                fetch(url, {
-                    method: 'POST',
-                    body: JSON.stringify(data_text),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(res => res.json())
-                    .catch(error => {
-                        console.error('Error:', error)
-                    })
-                    .then(response => {
-                        if (response.session) {
-                            if (response.response) {
-                                if (this._isMounted == true && this._isUpdate == false) {
-                                    this._isUpdate = true;
+            var data_text = {
+                user: this.state.user,
+                sucursal: this.state.sucursal,
+                hash: this.state.hash
+            };
 
-                                    var total_ = 0;
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(data_text),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+                .catch(error => {
+                    console.error('Error:', error)
+                })
+                .then(response => {
+                    if (response.session) {
+                        if (response.response) {
+                            if (this._isMounted == true && this._isUpdate == false) {
+                                this._isUpdate = true;
 
-                                    response.solicitud.forEach(i => total_ += i.monto_pago);
+                                var total_ = 0;
 
-                                    this.setState({
-                                        solicitud: response.solicitud,
-                                        filtro: response.solicitud,
-                                        total: total_
-                                    });
-                                }
+                                response.solicitud.forEach(i => total_ += i.monto_pago);
+
+                                this.setState({
+                                    solicitud: response.solicitud,
+                                    filtro: response.solicitud,
+                                    total: total_
+                                });
+                                this.filtrarCombo(5);
                             }
-                        } else {
-                            sessionStorage.clear();
-                            alert('¡Sesion bloqueada!');
-                            this.setState({ login: false });
                         }
-                    });
-            }
+                    } else {
+                        sessionStorage.clear();
+                        alert('¡Sesion bloqueada!');
+                        this.setState({ login: false });
+                    }
+                });
         }
     }
 
@@ -167,7 +185,7 @@ class Cobrar extends Component {
                 restante_total={i.restante_total}
                 abono_hoy={i.abono_hoy}
 
-
+                evento={this.modificarEstado}
                 modal={true}
                 close={false}
             />
