@@ -25,22 +25,7 @@ class ModalCollect extends Component {
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
-            info_credito: {
-                folio_credito: "",
-                ine: "",
-                monto_credito: 0,
-                monto_total: 0,
-                monto_pago: 0,
-                pagado: 0,
-                atrasos_no: 0,
-                atrasos_monto: 0,
-                extra_no: 0,
-                extra_monto: 0,
-                restante_no: 0,
-                restante_monto: 0,
-                restante_total: 0,
-                abono_hoy: 0
-            },
+            info: this.props.info,
             solicitud: [],
         };
 
@@ -57,7 +42,7 @@ class ModalCollect extends Component {
 
             var data_text = {
                 solicitud: {
-                    folio_credito: this.state.info_credito.folio_credito,
+                    folio_credito: this.state.info.folio_credito,
                     monto: _monto,
                     no_pagos: 0,
                     id_tipo_pago: 0,
@@ -65,7 +50,7 @@ class ModalCollect extends Component {
                     id_estado: 1,
                     fecha_reg: Fecha.getDateTime()
                 },
-                adicional: this.state.info_credito,
+                info: this.state.info,
                 user: {
                     user: this.state.user,
                     sucursal: this.state.sucursal,
@@ -115,16 +100,16 @@ class ModalCollect extends Component {
             alert('¡Sesion bloqueada!');
             this.setState({ login: false });
         } else {
-            let _atrasos = this.props.atrasos_monto;
-            let _extras = this.props.extras_monto;
-            let _extras_no = this.props.extras_no;
+            let _atrasos = this.state.info.atrasos_monto;
+            let _extras = this.state.info.extras_monto;
+            let _extras_no = this.state.info.extras_no;
 
             if (_extras > 0) {
                 if (_extras > _atrasos) {
                     _atrasos = 0;
                     _extras = _extras - _atrasos;
-                    if (_extras_no > this.props.atrasos_no) {
-                        _extras_no = _extras_no - this.props.atrasos_no;
+                    if (_extras_no > this.state.info.atrasos_no) {
+                        _extras_no = _extras_no - this.state.info.atrasos_no;
                     } else {
                         _extras_no = 0;
                     }
@@ -135,23 +120,14 @@ class ModalCollect extends Component {
                 }
             }
 
+            let data = this.state.info;
+
+            data.atrasos_monto = _atrasos;
+            data.extras_no = _extras_no;
+            data.extras_monto = _extras;
+
             this.setState({
-                info_credito: {
-                    folio_credito: this.props.folio_credito,
-                    ine: this.props.ine,
-                    monto_credito: this.props.monto_credito,
-                    monto_total: this.props.monto_total,
-                    monto_pago: this.props.monto_pago,
-                    pagado: this.props.pagado,
-                    atrasos_no: this.props.atrasos_no,
-                    atrasos_monto: _atrasos,
-                    extras_no: _extras_no,
-                    extras_monto: _extras,
-                    restante_no: this.props.restante_no,
-                    restante_monto: this.props.restante_monto,
-                    restante_total: this.props.restante_total,
-                    abono_hoy: this.props.abono_hoy
-                }
+                info : data 
             });
         }
     }
@@ -175,7 +151,7 @@ class ModalCollect extends Component {
 
                             <div className="d-flex row modalcollect_alias m-0">
                                 <div className="col">
-                                    <h2 className="tm1" >{this.props.alias || ""}</h2>
+                                    <h2 className="tm1" >{this.state.info.alias || ""}</h2>
                                 </div>
 
                                 <div className="col-auto">
@@ -186,11 +162,11 @@ class ModalCollect extends Component {
                             </div>
 
                             <div className="row modalcollect_name m-0 align-items-center">
-                                <h4 className="tm2">{this.props.nombre}</h4>
+                                <h4 className="tm2">{this.state.info.nombre}</h4>
                             </div>
 
                             <div className="row modalcollect_name m-0 align-items-center">
-                                <a className="h5 text-warning" href={"tel:" + this.props.telefono}>Tel. {this.props.telefono}</a>
+                                <a className="h5 text-warning" href={"tel:" + this.state.info.telefono}>Tel. {this.state.info.telefono}</a>
                             </div>
 
                             <div className="table table-responsive table-hover">
@@ -206,37 +182,37 @@ class ModalCollect extends Component {
                                         <tr className="table-success">
                                             <th scope="row">Prestamo</th>
                                             <td></td>
-                                            <td className="text-primary"><strong>{this.props.monto_credito}</strong></td>
+                                            <td className="text-primary"><strong>{this.state.info.monto_credito}</strong></td>
                                         </tr>
                                         <tr className="table-primary">
                                             <th scope="row">Total a pagar</th>
                                             <td></td>
-                                            <td className="text-primary"><strong>{this.props.monto_total}</strong></td>
+                                            <td className="text-primary"><strong>{this.state.info.monto_total}</strong></td>
                                         </tr>
                                         <tr className="table-secondary">
                                             <th scope="row">Pagado</th>
                                             <td></td>
-                                            <td className="text-primary"><strong>{this.props.pagado}</strong></td>
+                                            <td className="text-primary"><strong>{this.state.info.pagado}</strong></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Atrasos</th>
-                                            <td>{this.state.info_credito.atrasos_no}</td>
-                                            <td className="text-danger">{this.state.info_credito.atrasos_monto}</td>
+                                            <td>{this.state.info.atrasos_no}</td>
+                                            <td className="text-danger">{this.state.info.atrasos_monto}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Adelantos</th>
-                                            <td>{this.state.info_credito.extras_no}</td>
-                                            <td className="text-success">{this.state.info_credito.extras_monto}</td>
+                                            <td>{this.state.info.extras_no}</td>
+                                            <td className="text-success">{this.state.info.extras_monto}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Restante</th>
-                                            <td>{this.props.restante_no}</td>
-                                            <td className="text-info">{this.props.restante_monto}</td>
+                                            <td>{this.state.info.restante_no}</td>
+                                            <td className="text-info">{this.state.info.restante_monto}</td>
                                         </tr>
                                         <tr className="table-info">
                                             <th scope="row" >Restante total</th>
                                             <td></td>
-                                            <td className="text-primary"><strong>{this.props.restante_total}</strong></td>
+                                            <td className="text-primary"><strong>{this.state.info.restante_total}</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -245,7 +221,7 @@ class ModalCollect extends Component {
 
 
                             <div className="row modalcollect_monto m-0 py-0 my-2">
-                                <span className="h3"> Pago del día:        <strong className="text-primary">{"    $" + this.props.monto_pago}</strong> </span>
+                                <span className="h3"> Pago del día:        <strong className="text-primary">{"    $" + this.state.info.monto_pago}</strong> </span>
                             </div>
 
                             <div className="row modalcollect_body m-0 p-1">
