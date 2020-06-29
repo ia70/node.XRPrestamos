@@ -17,20 +17,21 @@ CREATE PROCEDURE COBRO_DIA_CONSULTA(IN _credito VARCHAR(50))
 		4 - alias
 		5 - telefono
 		6 - monto_credito
-		7 - monto_total
-		8 - monto_pago
-		9 - fecha_entrega
-		10 - pagado
-		11 - atrasos_no
-		12 - atrasos_monto
-		13 - extra_no
-		14 - extra_monto
-		15 - restante_no
-		16 - restante_monto
-		17 - restante_total
-		18 - abono_hoy
-		19 - id_tipo_pago
-		20 - descripcion
+		7 - pagos_total
+		8 - monto_total
+		9 - monto_pago
+		10 - fecha_entrega
+		11 - pagado
+		12 - atrasos_no
+		13 - atrasos_monto
+		14 - extra_no
+		15 - extra_monto
+		16 - restante_no
+		17 - restante_monto
+		18 - restante_total
+		19 - abono_hoy
+		20 - id_tipo_pago
+		21 - descripcion
 		
 		*/
 		
@@ -41,6 +42,7 @@ CREATE PROCEDURE COBRO_DIA_CONSULTA(IN _credito VARCHAR(50))
 					a.alias,
 					a.telefono,
 					b.monto_credito,
+					b.pagos_total,
 					b.monto_total,
 					b.monto_pago,
 					b.fecha_entrega,
