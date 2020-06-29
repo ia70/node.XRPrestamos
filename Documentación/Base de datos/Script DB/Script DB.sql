@@ -517,7 +517,7 @@ CREATE TABLE IF NOT EXISTS `XRPrestamos`.`estadistica_cliente` (
   `folio_credito` VARCHAR(50) NOT NULL,
   `ine` VARCHAR(100) NULL,
   `monto_credito` DECIMAL(10,2) NULL,
-  `fecha_entrega` DATE NULL,
+  `fecha_entrega` DATETIME NULL,
   `pagos_total` INT NULL,
   `no_pagos` DECIMAL(10,2) NULL,
   `no_abonos` INT NULL,
