@@ -84,12 +84,12 @@ export function ItemList(props) {
                         <div className="col col-xs-12">
                             <div className="row stateitem_alias stateitem_center stateitem_border_tr">
                                 <div className="col col-xs-12 stateitem_center">
-                                    {props.alias}
+                                    {props.info.alias}
                                 </div>
                                 {btncerrar}
                             </div>
                             <div className="row stateitem stateitem_name stateitem_center">
-                                {props.nombre}
+                                {props.info.nombre}
                             </div>
                             <div className={"row align-self-stretch stateitem_center " + class_br}>
                                 <div className="col col-xs-12 stateitem_state_amount_description">
@@ -111,23 +111,7 @@ export function ItemList(props) {
                 id={"item" + props.number}
                 number={props.number}
 
-                folio_credito={props.folio_credito}
-                ine={props.ine}
-                nombre={props.nombre}
-                alias={props.alias}
-                telefono={props.telefono}
-                monto_credito={props.monto_credito}
-                monto_total={props.monto_total}
-                monto_pago={props.monto_pago}
-                pagado={props.pagado}
-                atrasos_no={props.atrasos_no}
-                atrasos_monto={props.atrasos_monto}
-                extras_no={props.extras_no}
-                extras_monto={props.extras_monto}
-                restante_no={props.restante_no}
-                restante_monto={props.restante_monto}
-                restante_total={props.restante_total}
-                abono_hoy={props.abono_hoy}
+                info = {props.info}
 
                 evento = {props.evento}
             />
