@@ -213,7 +213,7 @@ class ModalCollect extends Component {
                                             <td></td>
                                             <td className="text-primary"><strong>{this.props.monto_total}</strong></td>
                                         </tr>
-                                        <tr className="table-warning">
+                                        <tr className="table-secondary">
                                             <th scope="row">Pagado</th>
                                             <td></td>
                                             <td className="text-primary"><strong>{this.props.pagado}</strong></td>
