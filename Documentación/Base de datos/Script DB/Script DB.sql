@@ -514,18 +514,16 @@ ENGINE = InnoDB;
 -- Table `XRPrestamos`.`estadistica_cliente`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `XRPrestamos`.`estadistica_cliente` (
-  `id_estadistica_cliente` INT NOT NULL AUTO_INCREMENT,
+  `folio_credito` VARCHAR(50) NOT NULL,
   `ine` VARCHAR(100) NULL,
-  `id_credito` INT NULL,
   `monto_credito` DECIMAL(10,2) NULL,
   `fecha_entrega` DATE NULL,
   `pagos_total` INT NULL,
-  `no_pagos` INT NULL,
+  `no_pagos` DECIMAL(10,2) NULL,
   `no_abonos` INT NULL,
-  `no_adelantados` INT NULL,
-  `no_adelantado_parcial` INT NULL,
-  `no_atrasados` INT NULL,
-  PRIMARY KEY (`id_estadistica_cliente`))
+  `no_adelantos` DECIMAL(10,2) NULL,
+  `no_atrasos` INT NULL,
+  PRIMARY KEY (`folio_credito`))
 ENGINE = InnoDB;
 
 
