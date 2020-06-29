@@ -161,29 +161,13 @@ class Cobrar extends Component {
         const listItems = this.state.filtro.map((i) =>
             <ItemList
                 key={i.ine + Math.random() * (max - min) + min}
-                number={++indice}
+                number={indice + 1}
                 amount={i.monto_pago}
                 amountDescription="Pago del día:"
                 stateItem={i.id_tipo_pago}
                 stateDescription={i.descripcion}
 
-                folio_credito={i.folio_credito}
-                ine={i.ine}
-                nombre={i.nombre}
-                alias={i.alias}
-                telefono={i.telefono}
-                monto_credito={i.monto_credito}
-                monto_total={i.monto_total}
-                monto_pago={i.monto_pago}
-                pagado={i.pagado}
-                atrasos_no={i.atrasos_no}
-                atrasos_monto={i.atrasos_monto}
-                extras_no={i.extras_no}
-                extras_monto={i.extras_monto}
-                restante_no={i.restante_no}
-                restante_monto={i.restante_monto}
-                restante_total={i.restante_total}
-                abono_hoy={i.abono_hoy}
+                info = {this.state.solicitud[indice++]}
 
                 evento={this.modificarEstado}
                 modal={true}
