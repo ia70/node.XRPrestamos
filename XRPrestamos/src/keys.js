@@ -7,7 +7,7 @@ module.exports = {
         database: 'xrprestamos'
     },
     server: {
-        host: '192.168.1.65',
+        host: '192.168.1.50',
         port: 80
     },
     security: {
