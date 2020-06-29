@@ -36,8 +36,6 @@ router.get('/', async (req, res) => {
                 console.log(e);
             }
 
-            console.log(data);
-
             res.status(200).send({
                 login: true,
                 user: usr,
