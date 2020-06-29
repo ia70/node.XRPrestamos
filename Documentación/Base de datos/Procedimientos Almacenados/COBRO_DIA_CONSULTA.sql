@@ -19,17 +19,18 @@ CREATE PROCEDURE COBRO_DIA_CONSULTA(IN _credito VARCHAR(50))
 		6 - monto_credito
 		7 - monto_total
 		8 - monto_pago
-		9 - pagado
-		10 - atrasos_no
-		11 - atrasos_monto
-		12 - extra_no
-		13 - extra_monto
-		14 - restante_no
-		15 - restante_monto
-		16 - restante_total
-		17 - abono_hoy
-		18 - id_tipo_pago
-		19 - descripcion
+		9 - fecha_entrega
+		10 - pagado
+		11 - atrasos_no
+		12 - atrasos_monto
+		13 - extra_no
+		14 - extra_monto
+		15 - restante_no
+		16 - restante_monto
+		17 - restante_total
+		18 - abono_hoy
+		19 - id_tipo_pago
+		20 - descripcion
 		
 		*/
 		
@@ -42,6 +43,7 @@ CREATE PROCEDURE COBRO_DIA_CONSULTA(IN _credito VARCHAR(50))
 					b.monto_credito,
 					b.monto_total,
 					b.monto_pago,
+					b.fecha_entrega,
 					SUM(c.monto) AS "pagado",
 					COUNT(IF(c.id_tipo_pago = 4,c.id_tipo_pago,NULL)) AS "atrasos_no",
 					SUM(IF(c.id_tipo_pago = 4, b.monto_pago,IF(c.id_tipo_pago = 2, b.monto_pago - c.monto, 0))) AS "atrasos_monto",
