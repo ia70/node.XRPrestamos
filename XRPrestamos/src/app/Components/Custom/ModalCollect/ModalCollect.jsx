@@ -74,6 +74,7 @@ class ModalCollect extends Component {
                         if (response.response) {
                             alert('¡Registro guardado!');
                             $("#" +this.props.id).modal('hide');
+                            console.log(response.data[0][0]);
                             this.props.evento(response.data[0][0]);
                         } else
                             alert('¡Error al guardar!');
