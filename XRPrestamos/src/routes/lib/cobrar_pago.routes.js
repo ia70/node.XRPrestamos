@@ -101,7 +101,7 @@ router.post('/', async (req, res) => {
 
             let respuesta = {
                 response: db_res,
-                data: queryDataAbono[0],
+                data: queryDataAbono,
                 session: true
             };
 
