@@ -99,7 +99,7 @@ class EstadoSolicitud extends Component {
 
         var indice = 0;
         const listItems = this.state.solicitud.map((i) =>
-            <ItemList key={i.ine + Math.random() * (max - min) + min} stateItem={i.id_estado_solicitud} alias={i.alias} number={++indice} nombre={i.nombre} amount={i.monto} amountDescription="Monto solicitado:" close={true} />
+            <ItemList key={i.ine + Math.random() * (max - min) + min} stateItem={i.id_estado_solicitud} number={indice + 1} info={this.state.solicitud[indice++]} amount={i.monto} amountDescription="Monto solicitado:" close={true} />
         );
 
         return (
