@@ -8,13 +8,13 @@ import {
 } from "react-router-dom";
 
 // COMPONENTS ---------------------------------------------------------
-import Dashboard from './Views/Cobrador/Dashboard/Dashboard.jsx';
-import CarteraClientes from './Views/Cobrador/CarteraClientes/CarteraClientes.jsx';
-import Cobrar from './Views/Cobrador/Cobrar/Cobrar.jsx';
-import EstadoSolicitud from './Views/Cobrador/EstadoSolicitud/EstadoSolicitud.jsx';
-import SolicitarDinero from './Views/Cobrador/SolicitarDinero/SolicitarDinero.jsx';
-import NuevoCliente from './Views/NuevoCliente/NuevoCliente.jsx';
-import Login from './Views/Login/Login.jsx';
+import Dashboard from './Views/Global/Dashboard/Dashboard.jsx';
+import CarteraClientes from './Views/Global/CarteraClientes/CarteraClientes.jsx';
+import Cobrar from './Views/Global/Cobrar/Cobrar.jsx';
+import EstadoSolicitud from './Views/Jobs/EstadoSolicitud/EstadoSolicitud.jsx';
+import SolicitarDinero from './Views/Jobs/SolicitarDinero/SolicitarDinero.jsx';
+import NuevoCliente from './Views/Global/NuevoCliente/NuevoCliente.jsx';
+import Login from './Views/Global/Login/Login.jsx';
 
 export default function App() {
     return (
