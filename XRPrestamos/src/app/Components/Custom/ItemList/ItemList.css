@@ -40,11 +40,11 @@
 }
 
 .stateitem_state_2 {
-    background-color:  #e39800 ;
+    background-color: #e39800;
 }
 
 .stateitem_state_3 {
-    background-color:   #1a7e01 ;
+    background-color: #7700ff;
 }
 
 .stateitem_state_4 {
@@ -52,16 +52,12 @@
 }
 
 .stateitem_state_5 {
-    background-color:   #0082e6 ;
+    background-color: #0082e6;
 }
 
 .stateitem_state_6 {
-    background-color:   #002ae6 ;
+    background-color: #002ae6;
 }
-
-
-
-
 
 .stateitem_state_amount_description {
     color: rgb(15, 57, 80);
@@ -88,7 +84,7 @@
     background-color: black;
 }
 
-.main:hover{
+.main:hover {
     border-color: rgb(0, 225, 255);
     border-style: groove;
 }
