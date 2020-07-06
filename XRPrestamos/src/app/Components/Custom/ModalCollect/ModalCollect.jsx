@@ -225,10 +225,10 @@ class ModalCollect extends Component {
                                             <td></td>
                                             <td className="text-primary"><strong>{this.state.info.restante_total}</strong></td>
                                         </tr>
-                                        <tr className="table-info">
+                                        <tr className="bg-success text-light">
                                             <th scope="row" >Pagado hoy</th>
                                             <td></td>
-                                            <td className="text-primary"><strong>{this.state.info.abono_hoy}</strong></td>
+                                            <td className="text-light"><strong>{this.state.info.abono_hoy}</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -236,7 +236,7 @@ class ModalCollect extends Component {
 
 
 
-                            <div className="row modalcollect_monto m-0 py-0 my-2">
+                            <div className="row modalcollect_monto m-0 py-0 my-0">
                                 <span className="h3"> Pago del día:        <strong className="text-primary">{"    $" + this.state.info.monto_pago}</strong> </span>
                             </div>
 
