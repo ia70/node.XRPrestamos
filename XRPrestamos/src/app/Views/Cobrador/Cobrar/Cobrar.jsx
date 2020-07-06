@@ -48,7 +48,7 @@ class Cobrar extends Component {
                 this.filtrarCombo(op);
             } else {
                 if (cadena.length > 0) {
-                    datos = this.state.solicitud.filter((item) => (item.alias + " " + item.nombre).toLowerCase().indexOf(cadena) >= 0 && (item.id_tipo_pago == op || op == 7));
+                    datos = this.state.solicitud.filter((item) => (item.alias + " " + item.nombre + " " + item.ine + " " + item.folio_credito).toLowerCase().indexOf(cadena) >= 0 && (item.id_tipo_pago == op || op == 7));
                     this.setState({ filtro: datos, opcion: op });
                 }
             }
