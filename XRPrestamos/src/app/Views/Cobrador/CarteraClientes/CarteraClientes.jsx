@@ -58,17 +58,17 @@ class CarteraClientes extends Component {
             sessionStorage.clear();
             alert('¡Sesion bloqueada!');
             this.setState({ login: false });
-        }else{
+        } else {
             this._isMounted = true;
             if (this._isMounted == true && this._isUpdate == false) {
                 var url = keys.api.url + 'cartera_clientes';
-    
+
                 var data_text = {
                     user: this.state.user,
                     sucursal: this.state.sucursal,
                     hash: this.state.hash
                 };
-    
+
                 fetch(url, {
                     method: 'POST',
                     body: JSON.stringify(data_text),
@@ -113,7 +113,7 @@ class CarteraClientes extends Component {
 
         var indice = 0;
         const listItems = this.state.filtro.map((i) =>
-            <ItemList key={i.nombre + Math.random() * (max - min) + min} alias={i.alias} number={++indice} nombre={i.nombre + " " + i.apellido_paterno + " " + i.apellido_materno} amount={i.restante} amountDescription="Restante:" />
+            <ItemList key={i.nombre + Math.random() * (max - min) + min} number={indice + 1} info={this.state.cartera[indice++]} amount={i.restante} amountDescription="Restante:" />
         );
 
         return (
