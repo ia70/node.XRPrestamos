@@ -45,7 +45,7 @@ BEGIN
 		SELECT d.folio_credito, a.ine, CONCAT_WS(' ', a.nombre, a.apellido_paterno, a.apellido_materno) AS "nombre", a.alias, a.telefono, b.monto_credito, b.pagos_total, (b.monto_pago * b.pagos_total) AS "monto_total", 
 		b.monto_pago, b.fecha_entrega, COUNT(IF(c.id_tipo_pago = 4,c.id_tipo_pago,NULL)) AS "atrasos_no", SUM(IF(c.id_tipo_pago = 4, b.monto_pago,IF(c.id_tipo_pago = 2, b.monto_pago - c.monto, 0))) AS "atrasos_monto",
 					COUNT(IF(c.id_tipo_pago = 3,c.id_tipo_pago,NULL)) AS "extras_no", SUM(IF(c.id_tipo_pago = 3, c.monto - b.monto_pago, 0)) AS "extras_monto" FROM credito b
-		INNER JOIN cobro_dia AS d ON d.folio_credito = b.folio_credito INNER JOIN persona AS a ON a.ine = d.ine LEFT JOIN abono AS c ON c.folio_credito = d.folio_credito WHERE d.id_usuario = _usuario 
+		INNER JOIN cobro_dia AS d ON d.folio_credito = b.folio_credito INNER JOIN persona AS a ON a.ine = d.ine LEFT JOIN abono AS c ON c.folio_credito = d.folio_credito WHERE d.id_usuario = usuario 
 		GROUP BY b.folio_credito ORDER BY a.alias;
 		-- FIN CURSOR -----------------------------------------------------------------------------------------------------------------------
 		
@@ -69,8 +69,8 @@ BEGIN
 		pagado 						DECIMAL(10,2) NOT NULL,
 		atrasos_no 				DECIMAL(10,2) NOT NULL,
 		atrasos_monto 		DECIMAL(10,2) NOT NULL,
-		extra_no 					DECIMAL(10,2) NOT NULL,
-		extra_monto 			DECIMAL(10,2) NOT NULL,
+		extras_no 					DECIMAL(10,2) NOT NULL,
+		extras_monto 			DECIMAL(10,2) NOT NULL,
 		restante_no 			DECIMAL(10,2) NOT NULL,
 		restante_monto 		DECIMAL(10,2) NOT NULL,
 		restante_total 		DECIMAL(10,2) NOT NULL,
