@@ -38,6 +38,12 @@ export function ItemList(props) {
     let mtarget = "";
     let mtoggle = "";
 
+    let _evento = [];
+
+    if (props.evento != null) {
+        _evento = props.evento;
+    }
+
     if (props.modal != null) {
         if (props.modal) {
             mtarget = "#item" + props.number;
@@ -110,10 +116,8 @@ export function ItemList(props) {
             <ModalCollect
                 id={"item" + props.number}
                 number={props.number}
-
-                info = {props.info}
-
-                evento = {props.evento}
+                info={props.info}
+                evento={_evento}
             />
         </div>
     );
