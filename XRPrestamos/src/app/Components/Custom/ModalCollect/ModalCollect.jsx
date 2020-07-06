@@ -36,54 +36,64 @@ class ModalCollect extends Component {
         if (this._isMounted) {
             var url = keys.api.url + 'cobrar_pago';
             let _monto = 0;
+            let _valor = true; // Si el valor ingresado es negativo
 
-            if (num == 1)
+            if (num == 1) {
                 _monto = document.getElementById('txtmonto' + this.props.number).value;
-
-            var data_text = {
-                solicitud: {
-                    folio_credito: this.state.info.folio_credito,
-                    monto: _monto,
-                    no_pagos: 0,
-                    id_tipo_pago: 0,
-                    fecha_abono: Fecha.getShortDate(),
-                    id_estado: 1,
-                    fecha_reg: Fecha.getDateTime()
-                },
-                info: this.state.info,
-                user: {
-                    user: this.state.user,
-                    sucursal: this.state.sucursal,
-                    hash: this.state.hash,
-                    rol: this.state.rol
+                if (_monto == 0) {
+                    _monto = this.state.info.monto_pago;
+                } else if (_monto < 0) {
+                    _valor = false;
+                    alert("El monto tiene que ser mayor a cero!");
                 }
-            };
+            }
 
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(data_text),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => res.json())
-                .catch(error => {
-                    console.error('Error:', error)
-                })
-                .then(response => {
-                    if (response.session) {
-                        if (response.response) {
-                            alert('¡Registro guardado!');
-                            $("#" +this.props.id).modal('hide');
-                            console.log(response.data[0][0]);
-                            this.props.evento(response.data[0][0]);
-                        } else
-                            alert('¡Error al guardar!');
-                    } else {
-                        sessionStorage.clear();
-                        alert('¡Sesion bloqueada!');
-                        this.setState({ login: false });
+            if (_valor) {
+                var data_text = {
+                    solicitud: {
+                        folio_credito: this.state.info.folio_credito,
+                        monto: _monto,
+                        no_pagos: 0,
+                        id_tipo_pago: 0,
+                        fecha_abono: Fecha.getShortDate(),
+                        id_estado: 1,
+                        fecha_reg: Fecha.getDateTime()
+                    },
+                    info: this.state.info,
+                    user: {
+                        user: this.state.user,
+                        sucursal: this.state.sucursal,
+                        hash: this.state.hash,
+                        rol: this.state.rol
                     }
-                });
+                };
+
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(data_text),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => res.json())
+                    .catch(error => {
+                        console.error('Error:', error)
+                    })
+                    .then(response => {
+                        if (response.session) {
+                            if (response.response) {
+                                alert('¡Registro guardado!');
+                                $("#" + this.props.id).modal('hide');
+                                console.log(response.data[0][0]);
+                                this.props.evento(response.data[0][0]);
+                            } else
+                                alert('¡Error al guardar!');
+                        } else {
+                            sessionStorage.clear();
+                            alert('¡Sesion bloqueada!');
+                            this.setState({ login: false });
+                        }
+                    });
+            }
         }
     }
 
@@ -128,7 +138,7 @@ class ModalCollect extends Component {
             data.extras_monto = _extras;
 
             this.setState({
-                info : data 
+                info: data
             });
         }
     }
@@ -174,7 +184,7 @@ class ModalCollect extends Component {
                                 <table className="table">
                                     <thead className="thead-dark">
                                         <tr>
-                                            <th scope="col"></th>
+                                            <th scope="col">{"FOLIO: " + this.state.info.folio_credito}</th>
                                             <th scope="col">Pagos</th>
                                             <th scope="col">$ Monto</th>
                                         </tr>
@@ -215,6 +225,11 @@ class ModalCollect extends Component {
                                             <td></td>
                                             <td className="text-primary"><strong>{this.state.info.restante_total}</strong></td>
                                         </tr>
+                                        <tr className="table-info">
+                                            <th scope="row" >Pagado hoy</th>
+                                            <td></td>
+                                            <td className="text-primary"><strong>{this.state.info.abono_hoy}</strong></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -228,7 +243,7 @@ class ModalCollect extends Component {
                             <div className="row modalcollect_body m-0 p-1">
 
                                 <div className="input-group bg-warning mx-3 my-1 p-1">
-                                    <input id={'txtmonto' + this.props.number} type="number" className="form-control" min={0} placeholder="Pago recibido:" aria-label="Text input with radio button" />
+                                    <input id={'txtmonto' + this.props.number} type="number" className="form-control" min={0} placeholder={this.state.info.monto_pago} aria-label="Text input with radio button" />
                                 </div>
 
                                 <div className="w-100"></div>
