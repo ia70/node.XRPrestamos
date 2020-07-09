@@ -1,12 +1,13 @@
 DROP PROCEDURE IF EXISTS COBRO_DIA;
 DELIMITER //
-CREATE PROCEDURE COBRO_DIA(IN usuario VARCHAR(100))
+CREATE PROCEDURE COBRO_DIA(IN var_usuario VARCHAR(100))
 BEGIN
 
 		-- DECLARACION DE VARIABLES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	DECLARE done 								INT DEFAULT FALSE;
 	
 	DECLARE var_folio_credito		VARCHAR(50) DEFAULT "";
+	DECLARE var_id_ruta 				INT DEFAULT 0;
 	DECLARE var_ine 						VARCHAR(100) DEFAULT "";
 	DECLARE var_nombre 					VARCHAR(100) DEFAULT "";
 	DECLARE var_alias 					VARCHAR(60) DEFAULT "";
@@ -31,6 +32,7 @@ BEGIN
 	
 	DECLARE var_abonos_no 			INT DEFAULT 0;
 	DECLARE var_id_tipo_pago_aux INT DEFAULT 0;
+
 	
 	-- DECLARACION DEL CURSOR ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		
@@ -42,12 +44,29 @@ BEGIN
 
 	DEClARE curLista 
 		CURSOR FOR 
-				SELECT d.folio_credito, a.ine, CONCAT_WS(' ', a.nombre, a.apellido_paterno, a.apellido_materno) AS "nombre", a.alias, a.telefono, b.monto_credito, b.pagos_total, (b.monto_pago * b.pagos_total) AS "monto_total", 
-		b.monto_pago, b.fecha_entrega, COUNT(IF(c.id_tipo_pago = 4,c.id_tipo_pago,NULL)) AS "atrasos_no", SUM(IF(c.id_tipo_pago = 4, b.monto_pago,IF(c.id_tipo_pago = 2, b.monto_pago - c.monto, 0))) AS "atrasos_monto",
-					COUNT(IF(c.id_tipo_pago = 3,c.id_tipo_pago,NULL)) AS "extras_no", SUM(IF(c.id_tipo_pago = 3, c.monto - b.monto_pago, 0)) AS "extras_monto" FROM credito b
-		INNER JOIN cobro_dia AS d ON d.folio_credito = b.folio_credito INNER JOIN persona AS a ON a.ine = d.ine LEFT JOIN abono AS c ON c.folio_credito = d.folio_credito 
-		WHERE b.id_estado_credito = 1 AND d.id_usuario = usuario 
-		GROUP BY b.folio_credito ORDER BY a.alias;
+				SELECT 
+					d.folio_credito,
+					d.id_ruta,
+					a.ine, 
+					CONCAT_WS(' ', a.nombre, a.apellido_paterno, a.apellido_materno) AS "nombre", 
+					a.alias, 
+					a.telefono, 
+					b.monto_credito, 
+					b.pagos_total, 
+					(b.monto_pago * b.pagos_total) AS "monto_total", 
+					b.monto_pago, 
+					b.fecha_entrega, 
+					COUNT(IF(c.id_tipo_pago = 4,c.id_tipo_pago,NULL)) AS "atrasos_no", 
+					SUM(IF(c.id_tipo_pago = 4, b.monto_pago,IF(c.id_tipo_pago = 2, b.monto_pago - c.monto, 0))) AS "atrasos_monto",
+					COUNT(IF(c.id_tipo_pago = 3,c.id_tipo_pago,NULL)) AS "extras_no", 
+					SUM(IF(c.id_tipo_pago = 3, c.monto - b.monto_pago, 0)) AS "extras_monto" 
+				FROM credito b
+				INNER JOIN cobro_dia AS d ON d.folio_credito = b.folio_credito 
+				INNER JOIN persona AS a ON a.ine = d.ine 
+				LEFT JOIN abono AS c ON c.folio_credito = d.folio_credito 
+				
+				WHERE b.id_estado_credito = 1 AND (d.id_usuario = var_usuario OR var_usuario = "0")
+				GROUP BY b.folio_credito ORDER BY a.alias;
 		-- FIN CURSOR -----------------------------------------------------------------------------------------------------------------------
 		
 
@@ -58,6 +77,7 @@ BEGIN
 		-- TABLA TEMPORAL ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	CREATE TEMPORARY TABLE IF NOT EXISTS ttcobrodia1 ( 
 		folio_credito 		VARCHAR(50) PRIMARY KEY,
+		id_ruta						INT,
 		ine								VARCHAR(100) NOT NULL,
 		nombre 						VARCHAR(100) NOT NULL,
 		alias 						VARCHAR(60) NOT NULL,
@@ -89,7 +109,22 @@ BEGIN
 
 	-- INICIO DE CICLO +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	ciclo: LOOP
-		FETCH curLista INTO var_folio_credito, var_ine, var_nombre, var_alias, var_telefono, var_monto_credito, var_pagos_total, var_monto_total, var_monto_pago, var_fecha_entrega, var_atrasos_no, var_atrasos_monto, var_extras_no, var_extras_monto;
+		FETCH curLista INTO 
+													var_folio_credito,
+													var_id_ruta,
+													var_ine, 
+													var_nombre, 
+													var_alias, 
+													var_telefono, 
+													var_monto_credito, 
+													var_pagos_total, 
+													var_monto_total, 
+													var_monto_pago, 
+													var_fecha_entrega, 
+													var_atrasos_no, 
+													var_atrasos_monto, 
+													var_extras_no, 
+													var_extras_monto;
 		
 		IF done THEN 
 			LEAVE ciclo;
@@ -125,9 +160,30 @@ BEGIN
 		SET var_descripcion = (SELECT descripcion FROM tipo_pago WHERE id_tipo_pago = var_id_tipo_pago);
 		
 		-- SE INSERTAN LOS DATOS EN LA TABLA TEMPORAL
-		INSERT INTO ttcobrodia1 VALUES(var_folio_credito, var_ine, var_nombre, var_alias, var_telefono, var_monto_credito, var_pagos_total, var_monto_total, 
-		var_monto_pago, var_fecha_entrega, var_pagado, var_atrasos_no, var_atrasos_monto, var_extras_no, var_extras_monto, var_restante_no, var_restante_monto, 
-		var_restante_total, var_abono_hoy, var_id_tipo_pago, var_descripcion);
+		INSERT INTO ttcobrodia1 VALUES(
+																			var_folio_credito,
+																			var_id_ruta,
+																			var_ine, 
+																			var_nombre, 
+																			var_alias, 
+																			var_telefono, 
+																			var_monto_credito, 
+																			var_pagos_total, 
+																			var_monto_total, 
+																			var_monto_pago, 
+																			var_fecha_entrega, 
+																			var_pagado, 
+																			var_atrasos_no, 
+																			var_atrasos_monto, 
+																			var_extras_no, 
+																			var_extras_monto, 
+																			var_restante_no, 
+																			var_restante_monto, 
+																			var_restante_total, 
+																			var_abono_hoy, 
+																			var_id_tipo_pago, 
+																			var_descripcion
+																		);
 		
 		# *************************************************************************************************************************************************************************
 		
