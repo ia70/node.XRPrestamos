@@ -18,7 +18,7 @@ export function TextMoney(props) {
                     <div className="input-group-prepend">
                         <span className="input-group-text">$</span>
                     </div>
-                    <input id={props.id} type="number" className="form-control" min={0} placeholder={props.holder || ""} aria-label="Amount (to the nearest dollar)" required />
+                    <input id={props.id} type="number" onChangeCapture={(props.evento != null ? (e) => props.evento(document.getElementById(props.id).value) : null)} className="form-control" min={0} placeholder={props.holder || ""} aria-label="Amount (to the nearest dollar)" required />
                 </div>
             </div>
         );
@@ -30,7 +30,7 @@ export function TextMoney(props) {
                     <div className="input-group-prepend">
                         <span className="input-group-text">$</span>
                     </div>
-                    <input id={props.id} type="number" className="form-control" min={0}  placeholder={props.holder || ""} aria-label="Amount (to the nearest dollar)" />
+                    <input id={props.id} type="number" onChangeCapture={(props.evento != null ? (e) => props.evento(document.getElementById(props.id).value) : null)} className="form-control" min={0}  placeholder={props.holder || ""} aria-label="Amount (to the nearest dollar)" />
                 </div>
             </div>
         );
