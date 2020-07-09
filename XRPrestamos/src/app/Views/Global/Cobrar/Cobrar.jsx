@@ -27,6 +27,7 @@ class Cobrar extends Component {
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
+            opcionCartera: 0,
             opcion: 5,
             total: 0,
             solicitud: [],
@@ -36,20 +37,46 @@ class Cobrar extends Component {
         this.filtrar = this.filtrar.bind(this);
         this.filtrarCombo = this.filtrarCombo.bind(this);
         this.modificarEstado = this.modificarEstado.bind(this);
+        this.filtrarCartera = this.filtrarCartera.bind(this);
+    }
+
+    filtrarCartera(cadena) {
+        let _total = 0;
+        if (this._isMounted) {
+            if (cadena == "0") {
+                this.state.solicitud.map((item) => _total += item.monto_pago);
+                this.setState({ opcionCartera: cadena, filtro: this.state.solicitud, opcion: 5, total: _total});
+            } else {
+                this.state.solicitud.map((item) => (item.id_ruta == cadena? _total += item.monto_pago : 0));
+                let datos = this.state.solicitud.filter((item) => (item.id_ruta == cadena));
+                this.setState({ opcionCartera: cadena, filtro: datos, opcion: 5, total: _total});
+            }
+        }
     }
 
     filtrar(cadena) {
         if (this._isMounted) {
+            let admin = false;
             let op = document.getElementById("filtro").value;
+            let datos = [];
 
             cadena = cadena.toLowerCase();
-            let datos = [];
+
+            if ((this.state.rol == 1 || this.state.rol == 4) && this.state.opcionCartera == 0) {
+                admin = true;
+            }
+
             if (cadena == "" || cadena == null) {
                 this.filtrarCombo(op);
             } else {
                 if (cadena.length > 0) {
-                    datos = this.state.solicitud.filter((item) => (item.alias + " " + item.nombre + " " + item.ine + " " + item.folio_credito).toLowerCase().indexOf(cadena) >= 0 && (item.id_tipo_pago == op || op == 7));
-                    this.setState({ filtro: datos, opcion: op });
+                    if (this.state.rol == 1 || this.state.rol == 4) {
+                        datos = this.state.solicitud.filter((item) => (item.alias + " " + item.nombre + " " + item.ine + " " + item.folio_credito).toLowerCase().indexOf(cadena) >= 0 && (item.id_tipo_pago == op || op == 7) && (item.id_ruta == this.state.opcionCartera || admin));
+                        this.setState({ filtro: datos, opcion: op });
+                    } else {
+                        datos = this.state.solicitud.filter((item) => (item.alias + " " + item.nombre + " " + item.ine + " " + item.folio_credito).toLowerCase().indexOf(cadena) >= 0 && (item.id_tipo_pago == op || op == 7));
+                        this.setState({ filtro: datos, opcion: op });
+                    }
                 }
             }
         }
@@ -58,11 +85,27 @@ class Cobrar extends Component {
     filtrarCombo(cadena) {
         let op = cadena;
         let datos = [];
+        let admin = false;
+
+        if ((this.state.rol == 1 || this.state.rol == 4) && this.state.opcionCartera == 0) {
+            admin = true;
+        }
 
         if (op == 7) {
-            this.setState({ filtro: this.state.solicitud, opcion: op });
+            if (this.state.rol == 2) {
+                datos = this.state.solicitud;
+            } else {
+                datos = this.state.solicitud.filter((item) => item.id_ruta == this.state.opcionCartera || admin);
+            }
+
+            this.setState({ filtro: datos, opcion: op });
         } else {
-            datos = this.state.solicitud.filter((item) => (item.id_tipo_pago == cadena));
+            if (this.state.rol == 2) {
+                datos = this.state.solicitud.filter((item) => item.id_tipo_pago == cadena);
+            } else {
+                datos = this.state.solicitud.filter((item) => (item.id_tipo_pago == cadena && (item.id_ruta == this.state.opcionCartera || admin)));
+            }
+
             this.setState({ filtro: datos, opcion: op });
         }
     }
@@ -103,7 +146,8 @@ class Cobrar extends Component {
             var data_text = {
                 user: this.state.user,
                 sucursal: this.state.sucursal,
-                hash: this.state.hash
+                hash: this.state.hash,
+                rol: this.state.rol
             };
 
             fetch(url, {
@@ -144,6 +188,9 @@ class Cobrar extends Component {
     }
 
     componentDidUpdate() {
+        if (this.state.rol == 1 || this.state.rol == 4) {
+            document.getElementById("filtroCartera").value = this.state.opcionCartera;
+        }
         document.getElementById("filtro").value = this.state.opcion;
     }
 
@@ -158,7 +205,7 @@ class Cobrar extends Component {
         }
 
         var indice = 0;
-        const listItems = this.state.filtro.map((i) =>
+        let listItems = this.state.filtro.map((i) =>
             <ItemList
                 key={i.ine + Math.random() * (max - min) + min}
                 number={indice + 1}
@@ -167,13 +214,18 @@ class Cobrar extends Component {
                 stateItem={i.id_tipo_pago}
                 stateDescription={i.descripcion}
 
-                info = {this.state.solicitud[indice++]}
+                info={this.state.filtro[indice++]}
 
                 evento={this.modificarEstado}
                 modal={true}
                 close={false}
             />
         );
+
+        let Combo1 = [];
+        if (this.state.rol == 1 || this.state.rol == 4) {
+            Combo1 = <ComboBox id="filtroCartera" label="Ruta" tabla='ruta' value={"id_ruta"} description={"descripcion"} evento={this.filtrarCartera} ></ComboBox>;
+        }
 
         let combo = [
             {
@@ -212,6 +264,7 @@ class Cobrar extends Component {
                 <div className="container-fluid">
                     <div className="row Cobrar">
                         <Title />
+                        {Combo1}
                         <ComboBox id="filtro" label="Filtrar" items={combo} value={"valor"} description={"des"} evento={this.filtrarCombo} />
                         <TextSearch label="Buscar" id="search_cartera" evento={this.filtrar} />
                     </div>
