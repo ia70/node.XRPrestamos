@@ -13,8 +13,13 @@ import './BtnSubmit.css';
 
 */
 export function BtnSubmit(props) {
+    let _clases = "col-xs-12 col-sm-4 col-lg-3 btn btn-success";
+    if (props.class != null) {
+        _clases = "btn " + props.class;
+    }
+
     return (
-        <div className="col-xs-12 col-sm-4 col-lg-3 btn btn-success" onClick={props.evento}>
+        <div className={_clases} onClick={props.evento}>
             <Link to={props.url || ""}>
                 <div className="text-white">{props.label || "Guardar"}</div>
             </Link>
