@@ -11,15 +11,23 @@ router.post('/', async (req, res) => {
         if (await access(req.body.hash, req.body.user)) {
             let r_d_solicitud = false;
 
-            const d_sol = await pool.query('CALL COBRO_DIA(?)', [req.body.user]);
+            let rol = [req.body.rol];
 
-            if (JSON.stringify(d_sol) != '[]') {
+            let datos = [];
+
+            if (rol == 1 || rol == 4) {
+                datos = await pool.query('CALL COBRO_DIA(?)', "0");
+            } else if (rol == 2) {
+                datos = await pool.query('CALL COBRO_DIA(?)', [req.body.user]);
+            }
+
+            if (JSON.stringify(datos) != '[]') {
                 r_d_solicitud = true;
             }
             let respuesta = {
                 response: r_d_solicitud,
                 session: true,
-                solicitud: d_sol[0]
+                solicitud: datos[0]
             };
 
             res.status(200).send(respuesta);
