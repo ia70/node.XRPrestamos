@@ -6,6 +6,7 @@ import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
 import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx';
 import { Title } from '../../../Components/Content/Title/Title.jsx';
 import TextSearch from '../../../Components/Form/TextSearch/TextSearch.jsx';
+import ComboBox from '../../../Components/Form/ComboBox/ComboBox.jsx';
 import keys from '../../../../keys';
 import Logo from '../../../img/Logo.png';
 import './CarteraClientes.css';
@@ -26,6 +27,7 @@ class CarteraClientes extends Component {
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
+            opcion: 0,
             cartera: [],
             filtro: []
         };
@@ -33,24 +35,58 @@ class CarteraClientes extends Component {
     }
 
     filtrar(cadena) {
-        cadena = cadena.toLowerCase();
-        let datos = [];
-        if (cadena == "" || cadena == null) {
-            this.setState({ filtro: this.state.cartera });
-        } else {
-            if (cadena.length > 0) {
-                datos = this.state.cartera.filter((item) => (item.alias + " " + item.nombre + " " + item.apellido_paterno + " " + item.apellido_materno).toLowerCase().indexOf(cadena) >= 0);
-                this.setState({ filtro: datos });
+        if (this._isMounted) {
+            cadena = cadena.toLowerCase();
+            let Combo = "";
+            let seleccionar = false;
+            let datos = [];
+            if (this.state.rol == 1 || this.state.rol == 4) {
+                Combo = document.getElementById("filtroCartera").value;
+                if(Combo == 0){
+                    seleccionar = true;
+                }
+                if (cadena == Combo) {
+                    cadena = "";
+                }
+            }
+
+            if (cadena == "" || cadena == null) {
+                if (this.state.rol == 1 || this.state.rol == 4) {
+                    datos = this.state.cartera.filter((item) => (item.id_ruta == Combo || seleccionar));
+                    this.setState({ opcion: Combo, filtro: datos });
+                } else if (this.state.rol == 2) {
+                    this.setState({ filtro: this.state.cartera });
+                }
+            } else {
+                if (cadena.length > 0) {
+                    if (this.state.rol == 1 || this.state.rol == 4) {
+                        datos = this.state.cartera.filter((item) => (item.alias + " " + item.nombre + " " + item.apellido_paterno + " " + item.apellido_materno).toLowerCase().indexOf(cadena) >= 0 && (item.id_ruta == Combo || seleccionar));
+                        this.setState({ opcion: Combo, filtro: datos });
+                    } else if (this.state.rol == 2) {
+                        datos = this.state.cartera.filter((item) => (item.alias + " " + item.nombre + " " + item.apellido_paterno + " " + item.apellido_materno).toLowerCase().indexOf(cadena) >= 0);
+                        this.setState({ filtro: datos });
+                    }
+                }
             }
         }
     }
 
     componentDidMount() {
-
+        if ((this.state.rol == 1 || this.state.rol == 4) && this._isMounted == false) {
+            document.getElementById("filtroCartera").value = this.state.opcion;
+        }
+        this._isMounted = true;
     }
 
     componentWillUnmount() {
         this._isMounted = false;
+    }
+
+    componentDidUpdate() {
+        this._isUpdate = true;
+        if (this.state.rol == 1 || this.state.rol == 4) {
+            document.getElementById("filtroCartera").value = this.state.opcion;
+        }
     }
 
     componentWillMount() {
@@ -59,14 +95,14 @@ class CarteraClientes extends Component {
             alert('¡Sesion bloqueada!');
             this.setState({ login: false });
         } else {
-            this._isMounted = true;
-            if (this._isMounted == true && this._isUpdate == false) {
+            if (this._isMounted == false && this._isUpdate == false) {
                 var url = keys.api.url + 'cartera_clientes';
 
                 var data_text = {
                     user: this.state.user,
                     sucursal: this.state.sucursal,
-                    hash: this.state.hash
+                    hash: this.state.hash,
+                    rol: this.state.rol
                 };
 
                 fetch(url, {
@@ -83,7 +119,6 @@ class CarteraClientes extends Component {
                         if (response.session) {
                             if (response.response) {
                                 if (this._isMounted == true && this._isUpdate == false) {
-                                    this._isUpdate = true;
                                     this.setState({
                                         cartera: response.cartera,
                                         filtro: response.cartera
@@ -101,7 +136,7 @@ class CarteraClientes extends Component {
     }
 
     render() {
-
+        let Combo = [];
         if (this.state.login == false) {
             var ruta = "/";
             return (
@@ -111,9 +146,13 @@ class CarteraClientes extends Component {
             );
         }
 
+        if (this.state.rol == 1 || this.state.rol == 4) {
+            Combo = <ComboBox id="filtroCartera" label="Ruta" tabla='ruta' value={"id_ruta"} description={"descripcion"} evento={this.filtrar} ></ComboBox>;
+        }
+
         var indice = 0;
-        const listItems = this.state.filtro.map((i) =>
-            <ItemList key={i.nombre + Math.random() * (max - min) + min} number={indice + 1} info={this.state.cartera[indice++]} amount={i.restante} amountDescription="Restante:" />
+        let listItems = this.state.filtro.map((i) =>
+            <ItemList key={i.nombre + Math.random() * (max - min) + min} number={indice + 1} info={this.state.filtro[indice++]} amount={i.restante} amountDescription="Restante:" />
         );
 
         return (
@@ -122,6 +161,7 @@ class CarteraClientes extends Component {
                 <div className="container-fluid">
                     <div className="row Cobrar">
                         <Title />
+                        {Combo}
                         <TextSearch label="Buscar" id="search_cartera" evento={this.filtrar} />
                     </div>
                     <div className="row">
