@@ -10,16 +10,24 @@ router.post('/', async (req, res) => {
     try {
         if (await access(req.body.hash, req.body.user)) {
             let r_d_cartera = false;
+            let rol = [req.body.rol];
 
-            const d_car = await pool.query('CALL cartera_clientes(?)', [req.body.user]);
+            let datos = [];
 
-            if (JSON.stringify(d_car) != '[]') {
+            if (rol == 1 || rol == 4) {
+                datos = await pool.query('CALL cartera_clientes(?)', "0");
+            } else if (rol == 2) {
+                datos = await pool.query('CALL cartera_clientes(?)', [req.body.user]);
+            }
+
+
+            if (JSON.stringify(datos) != '[]') {
                 r_d_cartera = true;
             }
             let respuesta = {
                 response: r_d_cartera,
                 session: true,
-                cartera: d_car[0]
+                cartera: datos[0]
             };
 
             res.status(200).send(respuesta);
