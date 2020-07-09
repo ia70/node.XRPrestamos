@@ -63,7 +63,7 @@ class Dashboard extends Component {
                     <Title title="ACCIONES RAPIDAS" />
                     <BtnRounded id='10' src={imgResumen} url="/carteraclientes" label="Resumen" />
                     <BtnRounded id='11' src={imgCobrar} url="/cobrar" label="Cobrar" />
-                    <BtnRounded id='12' src={imgNuevoCredito} url="/nuevocliente" label="Nuevo credito" />
+                    <BtnRounded id='12' src={imgNuevoCredito} url="/nuevocredito" label="Nuevo credito" />
                     <BtnRounded id='13' src={imgNuevoCliente} url="/nuevocliente" label="Nuevo cliente" />
                     <BtnRounded id='14' src={imgCarteraClientes} url="/carteraclientes" label="Cartera de clientes" />
                     <BtnRounded id='15' src={imgCorteDia} url="/nuevocliente" label="Corte del dia" />
