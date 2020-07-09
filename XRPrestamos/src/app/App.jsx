@@ -14,6 +14,7 @@ import Cobrar from './Views/Global/Cobrar/Cobrar.jsx';
 import EstadoSolicitud from './Views/Jobs/EstadoSolicitud/EstadoSolicitud.jsx';
 import SolicitarDinero from './Views/Jobs/SolicitarDinero/SolicitarDinero.jsx';
 import NuevoCliente from './Views/Global/NuevoCliente/NuevoCliente.jsx';
+import NuevoCredito from './Views/Private/NuevoCredito/NuevoCredito.jsx';
 import Login from './Views/Global/Login/Login.jsx';
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
                     <Route path="/solicitardinero" component={SolicitarDinero} />
                     <Route path="/nuevocliente" component={NuevoCliente} />
                     <Route path="/dashboard" component={Dashboard} />
+                    <Route path="/nuevocredito" component={NuevoCredito} />
                     <Route path="/" component={Login} />
                 </Switch>
         </Router>
