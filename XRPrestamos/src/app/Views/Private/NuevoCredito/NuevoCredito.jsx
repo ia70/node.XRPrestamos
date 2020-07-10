@@ -33,8 +33,14 @@ class SolicitarDinero extends Component {
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
+            cliente: {
+                ine: "",
+                nombre: "",
+                telefono: "",
+                no_creditos: "",
+                calificacion: 0
+            },
             pagos: [],
-            ine: "",
             tipo_cobro: [],
             filtro: []
         };
@@ -52,7 +58,7 @@ class SolicitarDinero extends Component {
 
     event_monto_credito(cadena) {
         if (this._isMounted) {
-            let total_pagos = document.getElementById("cre_total_pagos").value;
+            let total_pagos = document.getElementById("cre_pagos_total").value;
             let pago = 0;
             let monto_total = 0;
 
@@ -63,7 +69,7 @@ class SolicitarDinero extends Component {
             monto_total = cadena * 1.2;
             pago = monto_total / total_pagos;
 
-            document.getElementById("cre_total_pagos").value = total_pagos;
+            document.getElementById("cre_pagos_total").value = total_pagos;
             document.getElementById("cre_monto_pago").value = pago;
             document.getElementById("cre_monto_total").value = monto_total;
         }
@@ -71,7 +77,7 @@ class SolicitarDinero extends Component {
 
     event_monto_total(cadena) {
         if (this._isMounted) {
-            let total_pagos = document.getElementById("cre_total_pagos").value;
+            let total_pagos = document.getElementById("cre_pagos_total").value;
             let pago = 0;
             pago = cadena / total_pagos;
             document.getElementById("cre_monto_pago").value = pago;
@@ -80,13 +86,13 @@ class SolicitarDinero extends Component {
 
     event_monto_pago(cadena) {
         if (this._isMounted) {
-            let total_pagos = document.getElementById("cre_total_pagos").value;
+            let total_pagos = document.getElementById("cre_pagos_total").value;
             let total = 0;
             total = total_pagos * cadena;
             document.getElementById("cre_monto_total").value = total;
         }
     }
-
+    //   GUARDAR CREDITO EN LAS DIFERENTES TABLAS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     event_no_pagos(cadena) {
         if (this._isMounted) {
             let monto_total = document.getElementById("cre_monto_total").value;
@@ -160,10 +166,14 @@ class SolicitarDinero extends Component {
     }
 
     leer() {
+        console.log("LEER");
         if (this._isMounted) {
+            console.log("LEER");
             try {
                 let valor1 = document.getElementById('inf_listaclientes').value;
-                document.getElementById('inf_ine').value = valor1;
+                let indice = this.state.filtro.findIndex((item) => item.ine == valor1);
+                let dato = this.state.filtro[indice];
+                this.setState({ cliente: dato });
             } catch (e) {
                 console.log(e);
             }
@@ -171,38 +181,40 @@ class SolicitarDinero extends Component {
     }
 
     filtrar(cadena) {
-        cadena = cadena.toLowerCase();
-        if (cadena == "" || cadena == null) {
-            this.setState({ filtro: [] });
-        } else {
-            if (this._isMounted == true) {
-                var url = keys.api.url + 'persona/filtrar_clientes';
+        if (this._isMounted) {
+            cadena = cadena.toLowerCase();
+            if (cadena == "" || cadena == null) {
+                this.setState({ filtro: [] });
+            } else {
+                if (this._isMounted == true) {
+                    var url = keys.api.url + 'persona/filtrar_clientes';
 
-                var data_text = {
-                    user: this.state.user,
-                    sucursal: this.state.sucursal,
-                    hash: this.state.hash,
-                    filtro: cadena
-                };
+                    var data_text = {
+                        user: this.state.user,
+                        sucursal: this.state.sucursal,
+                        hash: this.state.hash,
+                        filtro: cadena
+                    };
 
-                fetch(url, {
-                    method: 'POST',
-                    body: JSON.stringify(data_text),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(res => res.json())
-                    .catch(error => {
-                        console.error('Error:', error)
-                    })
-                    .then(response => {
-                        this.setState({
-                            filtro: response.persona
+                    fetch(url, {
+                        method: 'POST',
+                        body: JSON.stringify(data_text),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(res => res.json())
+                        .catch(error => {
+                            console.error('Error:', error)
+                        })
+                        .then(response => {
+                            this.setState({
+                                filtro: response.persona,
+                                cliente: response.persona[0]
+                            });
                         });
-                    });
+                }
             }
         }
-
     }
 
     componentDidMount() {
@@ -222,24 +234,45 @@ class SolicitarDinero extends Component {
     }
 
     componentDidUpdate() {
-        this.leer();
+        //this.leer();
+        if (this._isMounted) {
+            let valor = document.getElementById("inf_ine").value;
+            let indice = 0;
+            if (valor != "") {
+                indice = this.state.filtro.findIndex((item) => item.ine == valor);
+                if (indice >= 0) {
+                    document.getElementById("inf_listaclientes").value = document.getElementById("inf_ine").value;
+                }
+            }
+        }
     }
 
     enviar() {
-        var url = keys.api.url + 'solicitar_credito';
+        var url = keys.api.url + 'nuevo_credito';
         console.log('ENTRO');
         var data_text = {
-            solicitud: {
-                id_sucursal: this.state.sucursal,
+            credito: {
+                folio_credito: document.getElementById("cre_folio_credito").value,
+                descripcion: "",
                 id_usuario: this.state.user,
-                ine: document.getElementById('sol_ine').value,
-                monto: document.getElementById('sol_monto').value,
-                pagos: document.getElementById('sol_dias').value,
-                id_tipo_cobro: document.getElementById('sol_periocidad').value,
-                fecha_requerida: document.getElementById('sol_fecha').value,
-                id_estado_solicitud: 2,
+                id_usuario_establesimiento: this.state.cliente.id_usuario_establesimiento,
+                id_periodo: "",
+                id_tipo_cobro: document.getElementById("cre_id_tipo_cobro").value,
+                monto_credito: document.getElementById("cre_monto_credito").value,
+                monto_pago: document.getElementById("cre_monto_pago").value,
+                monto_total: document.getElementById("cre_monto_total").value,
+                fecha_entrega: document.getElementById("cre_fecha_entrega").value,
+                fecha_inicio_cobro: document.getElementById("cre_fecha_inicio_cobro").value,
+                fecha_siguiente_pago: document.getElementById("cre_fecha_inicio_cobro").value,
+                pagos_total: document.getElementById("cre_pagos_total").value,
+                id_estado_credito: 1,
                 id_estado: 1,
+                id_tipo_credito: document.getElementById("cre_id-tipo_credito").value,
                 fecha_reg: getDateTime()
+            },
+            abonos: this.state.pagos,
+            persona: {
+                telefono: (this.state.cliente.telefono != document.getElementById("inf_telefono").value ? document.getElementById("inf_telefono").value : "")
             },
             user: {
                 user: this.state.user,
@@ -284,9 +317,31 @@ class SolicitarDinero extends Component {
             );
         }
 
+        let calificacion = 0;
+        if (this._isMounted)
+            calificacion = this.state.cliente.calificacion;
+
+        let colorCalificacion = "";
+
+        if (calificacion == 0 && this.state.cliente.ine == "") {
+            colorCalificacion = " bg-white text-dark ";
+        } else if (calificacion == 0) {
+            colorCalificacion = " bg-info text-white ";
+        } else if (calificacion < 68) {
+            colorCalificacion = " bg-danger text-white ";
+        } else if (calificacion < 78) {
+            colorCalificacion = " bg-warning text-dark ";
+        } else if (calificacion <= 80) {
+            colorCalificacion = " bg-success text-white ";
+        } else {
+            colorCalificacion = " bg-primary text-white ";
+        }
+        console.log("VALOR: " + calificacion);
+        console.log("COLOR: " + colorCalificacion);
+
         return (
             <React.Fragment>
-                <Navbar setLogo={Logo} setTitle="Solicitar Dinero" setButton={true} />
+                <Navbar setLogo={Logo} setTitle="Nuevo credito" setButton={true} />
                 <div className="container-fluid">
                     <div className="row m-0" >
 
@@ -294,7 +349,11 @@ class SolicitarDinero extends Component {
 
                         <TextSearchExt id="inf_search" label="Buscar" evento={this.filtrar} />
                         <ComboBox id="inf_listaclientes" label="Cliente" items={this.state.filtro} value={"ine"} description={"nombre"} evento={this.leer} />
-                        <TextBox id="inf_ine" label="INE" holder="Clave de Credencial" readonly={true} value={this.state.ine} />
+                        <TextBox id="inf_ine" label="INE" holder="Clave de Credencial" readonly={true} value={this.state.cliente.ine} />
+                        <TextBox id="inf_nombre" label="Alias / Nombre" size="col-xs-12 col-sm-8 col-lg-6" holder="Alias / Nombre" readonly={true} value={this.state.cliente.nombre} />
+                        <TextBox id="inf_telefono" label="Telefono" holder="Telefono" value={this.state.cliente.telefono} />
+                        <TextBox id="inf_total_creditos" label="No. creditos" class={colorCalificacion} holder="Número de creditos" readonly={true} value={this.state.cliente.no_creditos} />
+                        <TextBox id="inf_calificacion" class={colorCalificacion} label="Calificación" readonly={true} holder="Calificación" value={this.state.cliente.calificacion} />
 
 
                         <Title title="Información del credito" />
@@ -303,22 +362,22 @@ class SolicitarDinero extends Component {
                         <TextMoney id="cre_monto_credito" label="Monto del credito" holder="Monto del credito" help="" evento={this.event_monto_credito} required={true} />
                         <ComboBox id="cre_id_tipo_cobro" label="Periodo de cobro" tabla='tipo_cobro' value={"id_tipo_cobro"} description={"descripcion"} />
 
-                        <TextNumber id="cre_total_pagos" label="Número de pagos" holder="Número de pagos" help="" required={true} evento={this.event_no_pagos} />
+                        <TextNumber id="cre_pagos_total" label="Número de pagos" holder="Número de pagos" help="" required={true} evento={this.event_no_pagos} />
                         <TextMoney id="cre_monto_pago" label="Monto de pago" holder="Monto de pago" help="" evento={this.event_monto_pago} required={true} />
                         <TextMoney id="cre_monto_total" label="Total a pagar" holder="Total a pagar" help="" evento={this.event_monto_total} required={true} />
                         <DateTimePicker id="cre_fecha_entrega" label="Fecha de entrega" holder="Fecha de entrega" help="" required={true} />
                         <DateTimePicker id="cre_fecha_inicio_cobro" label="Fecha del primer cobro" holder="Fecha del primer cobro" help="" required={true} />
-                        <ComboBox id="cre_id_tipo_credito" label="Tipo de credito" tabla='tipo_credito' value={"id_tipo_credito"} description={"descripcion"} />
+                        <ComboBox id="cre_id_tipo_credito" label="Tipo de credito" tabla='tipo_credito' value={"id_tipo_credito"} description={"descripcion"} evento={null} />
 
                         <Title title="Agregar pagos" />
 
-                        <TextMoney id="cre_monto_abono" label="Monto del pago" holder="Monto del pago" help="" />
+                        <TextMoney id="cre_monto_abono" label="Monto pagado" holder="Monto pagado" help="" />
                         <DateTimePicker id="cre_fecha_pago" label="Fecha del pago" holder="Fecha del pago" help="" />
                         <BtnSubmit id="cre_btn_agregar_pago" class="btn-info col-sm-12 col-md-12 col-lg-8" url="#" label="Agregar pago" evento={this.agregarPago} />
                         <Title title="" />
                         <Table id="cre_tabla_pagos" items={this.state.pagos} evento={this.elimianrPago} />
 
-                        <Title title="..." />
+
                     </div>
                     <BtnSubmit id="cre_btnenviar" class={"btn-lg btn-block btn-success"} url="#" label="Registrar credito" evento={this.enviar} />
                 </div>
