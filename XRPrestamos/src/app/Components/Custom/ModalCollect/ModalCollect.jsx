@@ -59,7 +59,6 @@ class ModalCollect extends Component {
                         id_estado: 1,
                         fecha_reg: Fecha.getDateTime()
                     },
-                    info: this.state.info,
                     user: {
                         user: this.state.user,
                         sucursal: this.state.sucursal,
