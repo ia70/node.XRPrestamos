@@ -126,7 +126,7 @@ class SolicitarDinero extends Component {
                 console.log("FECHA: " + _fecha);
                 console.log("INDICE: " + _indice);
 
-                data[_indice] = { indice: _indice, monto: _monto, fecha: _fecha };
+                data[_indice] = { indice: _indice, monto: _monto, fecha_abono: _fecha };
 
                 try {
                     document.getElementById("cre_monto_abono").value = "";
@@ -249,14 +249,13 @@ class SolicitarDinero extends Component {
 
     enviar() {
         var url = keys.api.url + 'nuevo_credito';
-        console.log('ENTRO');
         var data_text = {
             credito: {
                 folio_credito: document.getElementById("cre_folio_credito").value,
                 descripcion: "",
                 id_usuario: this.state.user,
                 id_usuario_establesimiento: this.state.cliente.id_usuario_establesimiento,
-                id_periodo: "",
+                id_periodo: 0,
                 id_tipo_cobro: document.getElementById("cre_id_tipo_cobro").value,
                 monto_credito: document.getElementById("cre_monto_credito").value,
                 monto_pago: document.getElementById("cre_monto_pago").value,
@@ -272,6 +271,7 @@ class SolicitarDinero extends Component {
             },
             abonos: this.state.pagos,
             persona: {
+                ine: this.state.cliente.ine,
                 telefono: (this.state.cliente.telefono != document.getElementById("inf_telefono").value ? document.getElementById("inf_telefono").value : "")
             },
             user: {
