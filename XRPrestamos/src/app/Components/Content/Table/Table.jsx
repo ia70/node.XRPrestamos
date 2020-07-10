@@ -12,7 +12,7 @@ export function Table(props) {
             <tr key={props.id + 'tabla' + Math.random() * (max - min) + min} onClick={(e) => props.evento(item.indice)}>
                 <th scope="row">{++indice}</th>
                 <td>{item.monto}</td>
-                <td>{item.fecha}</td>
+                <td>{item.fecha_abono}</td>
             </tr>);
     }
 
