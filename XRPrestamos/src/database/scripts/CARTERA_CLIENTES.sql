@@ -20,9 +20,7 @@ CREATE PROCEDURE CARTERA_CLIENTES (
 			g.id_ruta,
 			a.alias,
 			CONCAT_WS( ' ', a.nombre, a.apellido_paterno, a.apellido_materno ) AS "nombre",
-			((
-					b.pagos_total * monto_pago 
-				) - SUM( c.monto )) AS "restante" 
+			IF((b.pagos_total * monto_pago ) - SUM( c.monto ) IS NULL, b.monto_total, (b.pagos_total * monto_pago ) - SUM( c.monto ) ) AS "restante" 
 		FROM
 			credito b
 			INNER JOIN usuario_establecimiento AS d ON d.id_usuario_establecimiento = b.id_usuario_establecimiento
@@ -42,9 +40,7 @@ CREATE PROCEDURE CARTERA_CLIENTES (
 			g.id_ruta,
 			a.alias,
 			CONCAT_WS( ' ', a.nombre, a.apellido_paterno, a.apellido_materno ) AS "nombre",
-			((
-					b.pagos_total * monto_pago 
-				) - SUM( c.monto )) AS "restante" 
+			IF((b.pagos_total * monto_pago ) - SUM( c.monto ) IS NULL, b.monto_total, (b.pagos_total * monto_pago ) - SUM( c.monto ) ) AS "restante" 
 		FROM
 			credito b
 			INNER JOIN usuario_establecimiento AS d ON d.id_usuario_establecimiento = b.id_usuario_establecimiento
