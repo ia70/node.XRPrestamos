@@ -26,6 +26,8 @@ class SolicitarDinero extends Component {
 
         this._isMounted = false;
         this._isUpdate = false;
+        this._id_tipo_credito = 1;
+        this._telefono = "";
 
         this.state = {
             login: sessionStorage.getItem('login'),
@@ -38,7 +40,7 @@ class SolicitarDinero extends Component {
                 nombre: "",
                 telefono: "",
                 no_creditos: "",
-                calificacion: 0
+                calificacion: ""
             },
             pagos: [],
             tipo_cobro: [],
@@ -54,6 +56,7 @@ class SolicitarDinero extends Component {
         this.event_monto_pago = this.event_monto_pago.bind(this);
         this.event_monto_total = this.event_monto_total.bind(this);
         this.event_monto_credito = this.event_monto_credito.bind(this);
+        this.tipo_credito = this.tipo_credito.bind(this);
     }
 
     event_monto_credito(cadena) {
@@ -166,9 +169,7 @@ class SolicitarDinero extends Component {
     }
 
     leer() {
-        console.log("LEER");
         if (this._isMounted) {
-            console.log("LEER");
             try {
                 let valor1 = document.getElementById('inf_listaclientes').value;
                 let indice = this.state.filtro.findIndex((item) => item.ine == valor1);
@@ -177,6 +178,12 @@ class SolicitarDinero extends Component {
             } catch (e) {
                 console.log(e);
             }
+        }
+    }
+
+    tipo_credito() {
+        if (this._isMounted) {
+            this._id_tipo_credito = document.getElementById("cre_id_tipo_credito").value;
         }
     }
 
@@ -207,10 +214,22 @@ class SolicitarDinero extends Component {
                             console.error('Error:', error)
                         })
                         .then(response => {
-                            this.setState({
-                                filtro: response.persona,
-                                cliente: response.persona[0]
-                            });
+                            if (response.persona.length == 0) {
+                                this.setState({
+                                    filtro: response.persona,
+                                    cliente: {
+                                        ine: "",
+                                        nombre: "",
+                                        telefono: "",
+                                        no_creditos: "",
+                                        calificacion: ""
+                                    }
+                                });
+                            } else
+                                this.setState({
+                                    filtro: response.persona,
+                                    cliente: response.persona[0]
+                                });
                         });
                 }
             }
@@ -242,68 +261,86 @@ class SolicitarDinero extends Component {
                 indice = this.state.filtro.findIndex((item) => item.ine == valor);
                 if (indice >= 0) {
                     document.getElementById("inf_listaclientes").value = document.getElementById("inf_ine").value;
+
+
                 }
             }
+            if (this._telefono != "") {
+                document.getElementById("inf_telefono").value = this._telefono;
+            } else {
+                document.getElementById("inf_telefono").value = this.state.cliente.telefono;
+            }
+            document.getElementById("inf_ine").value = this.state.cliente.ine;
+            document.getElementById("inf_nombre").value = this.state.cliente.nombre;
+
+            document.getElementById("inf_no_creditos").value = this.state.cliente.no_creditos;
+            document.getElementById("inf_calificacion").value = this.state.cliente.calificacion;
+            document.getElementById("cre_id_tipo_credito").value = this._id_tipo_credito;
+            this._telefono = "";
         }
     }
 
     enviar() {
-        var url = keys.api.url + 'nuevo_credito';
-        var data_text = {
-            credito: {
-                folio_credito: document.getElementById("cre_folio_credito").value,
-                descripcion: "",
-                id_usuario: this.state.user,
-                id_usuario_establesimiento: this.state.cliente.id_usuario_establesimiento,
-                id_periodo: 0,
-                id_tipo_cobro: document.getElementById("cre_id_tipo_cobro").value,
-                monto_credito: document.getElementById("cre_monto_credito").value,
-                monto_pago: document.getElementById("cre_monto_pago").value,
-                monto_total: document.getElementById("cre_monto_total").value,
-                fecha_entrega: document.getElementById("cre_fecha_entrega").value,
-                fecha_inicio_cobro: document.getElementById("cre_fecha_inicio_cobro").value,
-                fecha_siguiente_pago: document.getElementById("cre_fecha_inicio_cobro").value,
-                pagos_total: document.getElementById("cre_pagos_total").value,
-                id_estado_credito: 1,
-                id_estado: 1,
-                id_tipo_credito: document.getElementById("cre_id-tipo_credito").value,
-                fecha_reg: getDateTime()
-            },
-            abonos: this.state.pagos,
-            persona: {
-                ine: this.state.cliente.ine,
-                telefono: (this.state.cliente.telefono != document.getElementById("inf_telefono").value ? document.getElementById("inf_telefono").value : "")
-            },
-            user: {
-                user: this.state.user,
-                sucursal: this.state.sucursal,
-                hash: this.state.hash,
-                rol: this.state.rol
-            }
-        };
-
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(data_text),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
-            .catch(error => {
-                console.error('Error:', error)
-            })
-            .then(response => {
-                if (response.session) {
-                    if (response.response) {
-                        alert('¡Registro guardado!');
-                    } else
-                        alert('¡Error al guardar!');
-                } else {
-                    sessionStorage.clear();
-                    alert('¡Sesion bloqueada!');
-                    this.setState({ login: false });
+        if (this._isMounted) {
+            this._telefono = document.getElementById("inf_telefono").value;
+            var url = keys.api.url + 'nuevo_credito';
+            console.log(this.state.pagos);
+            var data_text = {
+                credito: {
+                    folio_credito: document.getElementById("cre_folio_credito").value,
+                    descripcion: "",
+                    id_usuario: this.state.user,
+                    id_usuario_establecimiento: this.state.cliente.id_usuario_establecimiento,
+                    id_periodo: 0,
+                    id_tipo_cobro: document.getElementById("cre_id_tipo_cobro").value,
+                    monto_credito: document.getElementById("cre_monto_credito").value,
+                    monto_pago: document.getElementById("cre_monto_pago").value,
+                    monto_total: document.getElementById("cre_monto_total").value,
+                    fecha_entrega: document.getElementById("cre_fecha_entrega").value,
+                    fecha_inicio_cobro: document.getElementById("cre_fecha_inicio_cobro").value,
+                    fecha_siguiente_pago: document.getElementById("cre_fecha_inicio_cobro").value,
+                    pagos_total: document.getElementById("cre_pagos_total").value,
+                    id_estado_credito: 1,
+                    id_estado: 1,
+                    id_tipo_credito: document.getElementById("cre_id_tipo_credito").value,
+                    fecha_reg: getDateTime()
+                },
+                abonos: this.state.pagos,
+                persona: {
+                    ine: this.state.cliente.ine,
+                    telefono: (this.state.cliente.telefono != document.getElementById("inf_telefono").value ? document.getElementById("inf_telefono").value : "")
+                },
+                user: {
+                    user: this.state.user,
+                    sucursal: this.state.sucursal,
+                    hash: this.state.hash,
+                    rol: this.state.rol
                 }
-            });
+            };
+
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(data_text),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+                .catch(error => {
+                    console.error('Error:', error)
+                })
+                .then(response => {
+                    if (response.session) {
+                        if (response.response) {
+                            alert('¡Registro guardado!');
+                        } else
+                            alert('¡Error al guardar!');
+                    } else {
+                        sessionStorage.clear();
+                        alert('¡Sesion bloqueada!');
+                        this.setState({ login: false });
+                    }
+                });
+        }
     }
 
     render() {
@@ -323,9 +360,9 @@ class SolicitarDinero extends Component {
 
         let colorCalificacion = "";
 
-        if (calificacion == 0 && this.state.cliente.ine == "") {
+        if (this.state.filtro.length == 0) {
             colorCalificacion = " bg-white text-dark ";
-        } else if (calificacion == 0) {
+        } else if (calificacion == 0 && this.state.cliente.no_creditos == 0) {
             colorCalificacion = " bg-info text-white ";
         } else if (calificacion < 68) {
             colorCalificacion = " bg-danger text-white ";
@@ -336,8 +373,6 @@ class SolicitarDinero extends Component {
         } else {
             colorCalificacion = " bg-primary text-white ";
         }
-        console.log("VALOR: " + calificacion);
-        console.log("COLOR: " + colorCalificacion);
 
         return (
             <React.Fragment>
@@ -350,10 +385,10 @@ class SolicitarDinero extends Component {
                         <TextSearchExt id="inf_search" label="Buscar" evento={this.filtrar} />
                         <ComboBox id="inf_listaclientes" label="Cliente" items={this.state.filtro} value={"ine"} description={"nombre"} evento={this.leer} />
                         <TextBox id="inf_ine" label="INE" holder="Clave de Credencial" readonly={true} value={this.state.cliente.ine} />
-                        <TextBox id="inf_nombre" label="Alias / Nombre" size="col-xs-12 col-sm-8 col-lg-6" holder="Alias / Nombre" readonly={true} value={this.state.cliente.nombre} />
-                        <TextBox id="inf_telefono" label="Telefono" holder="Telefono" value={this.state.cliente.telefono} />
-                        <TextBox id="inf_total_creditos" label="No. creditos" class={colorCalificacion} holder="Número de creditos" readonly={true} value={this.state.cliente.no_creditos} />
-                        <TextBox id="inf_calificacion" class={colorCalificacion} label="Calificación" readonly={true} holder="Calificación" value={this.state.cliente.calificacion} />
+                        <TextBox id="inf_nombre" label="Alias / Nombre" size="col-xs-12 col-sm-8 col-lg-6" holder="Alias / Nombre" readonly={true} />
+                        <TextBox id="inf_telefono" label="Telefono" holder="Telefono" />
+                        <TextBox id="inf_no_creditos" label="No. creditos" class={colorCalificacion} holder="Número de creditos" readonly={true} />
+                        <TextBox id="inf_calificacion" class={colorCalificacion} label="Calificación" readonly={true} holder="Calificación" />
 
 
                         <Title title="Información del credito" />
@@ -367,7 +402,7 @@ class SolicitarDinero extends Component {
                         <TextMoney id="cre_monto_total" label="Total a pagar" holder="Total a pagar" help="" evento={this.event_monto_total} required={true} />
                         <DateTimePicker id="cre_fecha_entrega" label="Fecha de entrega" holder="Fecha de entrega" help="" required={true} />
                         <DateTimePicker id="cre_fecha_inicio_cobro" label="Fecha del primer cobro" holder="Fecha del primer cobro" help="" required={true} />
-                        <ComboBox id="cre_id_tipo_credito" label="Tipo de credito" tabla='tipo_credito' value={"id_tipo_credito"} description={"descripcion"} evento={null} />
+                        <ComboBox id="cre_id_tipo_credito" label="Tipo de credito" tabla='tipo_credito' value={"id_tipo_credito"} description={"descripcion"} evento={this.tipo_credito} />
 
                         <Title title="Agregar pagos" />
 
