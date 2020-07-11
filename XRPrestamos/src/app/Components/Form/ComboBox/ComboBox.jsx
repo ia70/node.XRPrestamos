@@ -30,7 +30,7 @@ class ComboBox extends Component {
 
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this._isMounted = true;
         try {
             if (this._isUpdate == false) {
@@ -70,7 +70,7 @@ class ComboBox extends Component {
         this._isUpdate = true;
     }
 
-    leer(){
+    leer() {
         try {
             let cadena = document.getElementById(this.props.id).value;
             return cadena;
@@ -80,7 +80,7 @@ class ComboBox extends Component {
     }
 
     componentDidUpdate() {
-        
+
     }
 
     render() {
@@ -94,6 +94,11 @@ class ComboBox extends Component {
         let valu = "";
         let des = "";
         let lista = [];
+        let evento = null;
+
+        if (this.props.evento != null) {
+            evento = (e) => this.props.evento(this.leer())
+        }
 
         try {
             valu = this.props.value;
@@ -118,7 +123,7 @@ class ComboBox extends Component {
         return (
             <div className="form-group col-xs-12 col-sm-4 col-lg-4">
                 <label key={'lbl' + this.props.id + Math.random() * (max - min) + min} htmlFor={this.props.id}>{this.props.label || "Seleccione una opción."}</label>
-                <select key={'sel' + this.props.id + Math.random() * (max - min) + min} className="form-control" id={this.props.id} onChange={(e) => this.props.evento(this.leer())} >
+                <select key={'sel' + this.props.id + Math.random() * (max - min) + min} className="form-control" id={this.props.id} onChange={evento} >
                     {lista}
                 </select>
             </div>
