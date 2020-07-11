@@ -27,8 +27,8 @@ class TextBox extends Component {
     }
 
     handleChange(e) {
-        const name = e.target.name;
-        const value = e.target.value;
+        //let name = e.target.name;
+        //let value = e.target.value;
 
         //props.evento(e);
         /*
@@ -38,16 +38,16 @@ class TextBox extends Component {
     };
 
     render() {
-        let columna = " col-xs-12 col-sm-4 col-lg-3";
+        let size = " col-xs-12 col-sm-4 col-lg-3";
         let addclass = "";
         let lectura = false;
 
-        if (this.props.col != null) {
-            columna = " col-" + this.props.col;
+        if (this.props.size != null) {
+            size = " " + this.props.size + " ";
         }
 
-        if (this.props.cls != null) {
-            addclass = " " + this.props.cls;
+        if (this.props.class != null) {
+            addclass = " " + this.props.class;
         }
 
         try {
@@ -59,20 +59,20 @@ class TextBox extends Component {
 
         if (this.props.required) {
             return (
-                <div className={"form-group" + columna + addclass}>
+                <div className={"form-group" + size}>
                     <label htmlFor={this.props.id || "01"}>{this.props.label || ""}</label>
-                    <input type="text" className="form-control" id={this.props.id || "01"} aria-describedby="textHelp"
-                        onChange={this.handleChange} placeholder={this.props.holder || ""}  minLength={this.props.minlength || 1}
+                    <input type="text" className={"form-control " + addclass} id={this.props.id || "01"} aria-describedby="textHelp"
+                        onChange={this.handleChange} placeholder={this.props.holder || ""} minLength={this.props.minlength || 1}
                         maxLength={this.props.maxlength || 20} required readOnly={lectura} />
                     <small id="textHelp" className="form-text text-muted">{this.props.help || ""}</small>
                 </div>
             );
         } else {
             return (
-                <div className={"form-group" + columna + addclass}>
+                <div className={"form-group" + size}>
                     <label htmlFor={this.props.id || "01"}>{this.props.label || ""}</label>
-                    <input type="text" className="form-control" id={this.props.id || "01"} aria-describedby="textHelp"
-                        onChange={this.handleChange} placeholder={this.props.holder || ""}  minLength={this.props.minlength || 1}
+                    <input type="text" className={"form-control " + addclass} id={this.props.id || "01"} aria-describedby="textHelp"
+                        onChange={this.handleChange} placeholder={this.props.holder || ""} minLength={this.props.minlength || 1}
                         maxLength={this.props.maxlength || 20} readOnly={lectura} />
                     <small id="textHelp" className="form-text text-muted">{this.props.help || ""}</small>
                 </div>
