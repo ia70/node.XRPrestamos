@@ -26,6 +26,7 @@ BEGIN
 	DECLARE	total_clientes_abonaron					INT DEFAULT 0;
 	DECLARE	total_clientes_extra						INT DEFAULT 0;
 	DECLARE	total_clientes_no_vicitaron 		INT DEFAULT 0;
+	DECLARE monto_remanente						DECIMAL(10,2); -- ----------------------------   AGREGAR ESTE CAMPO
 
 	
 	-- DECLARACION DEL CURSOR ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
