@@ -4,9 +4,9 @@ async function calcular_abono(abono) {
     try {
         let info = await pool.query('CALL COBRO_DIA_CONSULTA(?)', abono.folio_credito);
 
-
-         // CALCULAR CAMPOS ABONO --------------------------------------------------------------------------------------------------------------
-         if (info.restante_total <= abono.monto) {
+        info = info[0][0];
+        // CALCULAR CAMPOS ABONO --------------------------------------------------------------------------------------------------------------
+        if (info.restante_total <= abono.monto) {
             abono.id_tipo_pago = 6;
             abono.no_pagos = abono.monto / info.monto_pago;
             // Modificar tabla credito
@@ -29,10 +29,11 @@ async function calcular_abono(abono) {
 
 
         // CALCULO DE ESTADISTICAS -------------------------------------------------------------------------------------------------------------
-        let estadistica = await pool.query('SELECT * FROM estadistica_cliente WHERE folio_credito = ?', [abono.folio_credito]);
+        let estadistica_ = await pool.query('SELECT * FROM estadistica_cliente WHERE folio_credito = ?', [abono.folio_credito]);
         let estadistica_existe = true;
-        
-        if (estadistica == "") {
+        let estadistica = [];
+
+        if (estadistica_ == "") {
             estadistica_existe = false;
             estadistica = {
                 folio_credito: info.folio_credito,
@@ -40,45 +41,46 @@ async function calcular_abono(abono) {
                 monto_credito: info.monto_credito,
                 fecha_entrega: info.fecha_entrega,
                 pagos_total: info.pagos_total,
-                no_pagos: info.pagos_total - (info.restante_no - 1),
+                no_pagos: abono.no_pagos,
                 no_abonos: (abono.id_tipo_pago == 2 ? 1 : 0),
-                no_adelantos: (abono.id_pago == 3 ? info.extras_no + 1 : info.extras_no),
-                no_atrasos: (abono.id_tipo_pago == 4 ? info.atrasos_no + 1 : (abono.id_tipo_pago == 2 ? abono.monto / info.monto_pago : 0))
+                no_adelantos: (abono.id_tipo_pago == 3 ? (abono.monto - info.monto_pago) / info.monto_pago : 0),
+                no_atrasos: (abono.id_tipo_pago == 4 ? 1 : 0)
             };
         } else {
+            estadistica = estadistica_[0];
+
             // NO_PAGOS
-            estadistica.no_pagos += info.pagos_total - (info.restante_no + 1);
+            if (abono.id_tipo_pago == 6) {
+                estadistica.no_pagos = info.pagos_total;
+            } else {
+                estadistica.no_pagos = estadistica.no_pagos + abono.no_pagos;
+            }
 
             // NO_ABONOS
             if (abono.id_tipo_pago == 2) {
-                estadistica.no_abonos += 1;
+                estadistica.no_abonos = estadistica.no_abonos + 1;
             }
 
             // NO_ATRASOS
             if (abono.id_tipo_pago == 4) {
-                estadistica.no_atrasos += 1;
-            } else if (abono.id_tipo_pago == 2) {
-                estadistica.no_atrasos += (abono.monto / info.monto_pago);
+                estadistica.no_atrasos = estadistica.no_atrasos + 1;
             }
 
             // NO_ADELANTOS
             if (abono.id_tipo_pago == 3) {
-                let cal_extra = info.monto_pago - abono.monto;
+                let cal_extra = (abono.monto - info.monto_pago);
                 if ((info.extras_monto + cal_extra) > info.atrasos_monto) {
                     estadistica.no_adelantos += cal_extra / info.monto_pago;
                 }
             }
         }
 
-
-
         // INSERTAR O ACTUALIZAR BASE DE DATOS DE ESTADISTICA
         if (estadistica_existe) {
-            let queryEstadistica = await pool.query('UPDATE estadistica_cliente SET ? WHERE folio_credito = ?', [estadistica[0], info.folio_credito]);
+            let queryEstadistica = await pool.query('UPDATE estadistica_cliente SET ? WHERE folio_credito = ?', [estadistica, abono.folio_credito]);
         } else {
             let queryEstadistica = await pool.query('INSERT INTO estadistica_cliente SET ?', [estadistica]);
         }
-
 
         // FIN CALCULO ESTADISTICA -------------------------------------------------------------------------------------------------------------
         if (queryAbono.affectedRows > 0) {
