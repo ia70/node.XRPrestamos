@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
 
         if (await access(user.hash, user.user)) {
 
-            db_res = calcular_abono(solicitud);
+            db_res = await calcular_abono(solicitud);
             
             let queryDataAbono = await pool.query('CALL COBRO_DIA_CONSULTA(?)', solicitud.folio_credito);
 
