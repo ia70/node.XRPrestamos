@@ -100,7 +100,7 @@ class Login extends Component {
                         <h3>Login</h3>
                     </div>
                     <div className="row justify-content-center m-0 my-3 login_body">
-                        <TextBox id="txtusuario" label="Usuario" holder="Nombre del usuario" required={true} col={12} />
+                        <TextBox id="txtusuario" label="Usuario" holder="Nombre del usuario" required={true} size={"col-12"} />
                         <TextPassword id="txtpassword" label="Contraseña" holder="Contraseña" required={true} col={12} />
 
                         <BtnSubmit id="btnenviar" url="#" label="Entrar" evento={this.enviar} />
