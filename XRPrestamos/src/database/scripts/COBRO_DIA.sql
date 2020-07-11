@@ -78,26 +78,26 @@ BEGIN
 	CREATE TEMPORARY TABLE IF NOT EXISTS ttcobrodia1 ( 
 		folio_credito 		VARCHAR(50) PRIMARY KEY,
 		id_ruta						INT,
-		ine								VARCHAR(100) NOT NULL,
-		nombre 						VARCHAR(100) NOT NULL,
-		alias 						VARCHAR(60) NOT NULL,
-		telefono 					VARCHAR(12) NOT NULL,
-		monto_credito 		DECIMAL(10,2) NOT NULL,
-		pagos_total 			INT(11) NOT NULL,
-		monto_total 			DECIMAL(10,2) NOT NULL,
-		monto_pago 				DECIMAL(10,2) NOT NULL,
+		ine								VARCHAR(100) NULL,
+		nombre 						VARCHAR(100) NULL,
+		alias 						VARCHAR(60) NULL,
+		telefono 					VARCHAR(12) NULL,
+		monto_credito 		DECIMAL(10,2) NULL,
+		pagos_total 			INT(11) NULL,
+		monto_total 			DECIMAL(10,2) NULL,
+		monto_pago 				DECIMAL(10,2) NULL,
 		fecha_entrega 		DATE NOT NULL,
-		pagado 						DECIMAL(10,2) NOT NULL,
-		atrasos_no 				DECIMAL(10,2) NOT NULL,
-		atrasos_monto 		DECIMAL(10,2) NOT NULL,
-		extras_no 					DECIMAL(10,2) NOT NULL,
-		extras_monto 			DECIMAL(10,2) NOT NULL,
-		restante_no 			DECIMAL(10,2) NOT NULL,
-		restante_monto 		DECIMAL(10,2) NOT NULL,
-		restante_total 		DECIMAL(10,2) NOT NULL,
-		abono_hoy 				DECIMAL(10,2) NOT NULL,
-		id_tipo_pago 			INT(11) NOT NULL,
-		descripcion 			VARCHAR(50) NOT NULL
+		pagado 						DECIMAL(10,2) NULL,
+		atrasos_no 				DECIMAL(10,2) NULL,
+		atrasos_monto 		DECIMAL(10,2) NULL,
+		extras_no 					DECIMAL(10,2) NULL,
+		extras_monto 			DECIMAL(10,2) NULL,
+		restante_no 			DECIMAL(10,2) NULL,
+		restante_monto 		DECIMAL(10,2) NULL,
+		restante_total 		DECIMAL(10,2) NULL,
+		abono_hoy 				DECIMAL(10,2) NULL,
+		id_tipo_pago 			INT(11) NULL,
+		descripcion 			VARCHAR(50) NULL
 	); 
 		-- FIN TABLA TEMPORAL ----------------------------------------------------------------------------------------------------------------
 		
@@ -133,15 +133,28 @@ BEGIN
 		# **************************************************************************************************************************************************************************
 		
 		SET var_pagado = (SELECT SUM(monto) FROM abono WHERE folio_credito = var_folio_credito);
+		IF var_pagado IS NULL THEN
+			SET var_pagado = 0;
+		END IF;
 		SET var_restante_no = (SELECT (var_pagos_total - COUNT(id_abono)) FROM abono WHERE folio_credito = var_folio_credito);
+		IF var_restante_no IS NULL THEN
+			SET var_restante_no = 0;
+		END IF;
 		SET var_restante_monto = var_restante_no * var_monto_pago;
+		IF var_restante_monto IS NULL THEN
+			SET var_restante_monto = 0;
+		END IF;
 		SET var_restante_total = var_monto_total - var_pagado;
+		IF var_restante_total IS NULL THEN
+			SET var_restante_total = 0;
+		END IF;
 		SET var_abono_hoy = (SELECT SUM(monto) FROM abono WHERE folio_credito= var_folio_credito AND fecha_abono = CURDATE());
-		SET var_id_tipo_pago_aux = (SELECT COUNT(id_tipo_pago) FROM abono WHERE folio_credito= var_folio_credito AND fecha_abono = CURDATE());
-		
 		IF var_abono_hoy IS NULL THEN
 			SET var_abono_hoy = 0;
 		END IF;
+		SET var_id_tipo_pago_aux = (SELECT COUNT(id_tipo_pago) FROM abono WHERE folio_credito= var_folio_credito AND fecha_abono = CURDATE());
+		
+		
 		
 		IF (var_pagos_total * var_monto_pago) <= var_pagado THEN
 			SET var_id_tipo_pago = 6;
