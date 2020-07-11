@@ -26,7 +26,10 @@ BEGIN
 	DECLARE	total_clientes_abonaron					INT DEFAULT 0;
 	DECLARE	total_clientes_extra						INT DEFAULT 0;
 	DECLARE	total_clientes_no_vicitaron 		INT DEFAULT 0;
-	DECLARE monto_remanente						DECIMAL(10,2); -- ----------------------------   AGREGAR ESTE CAMPO
+	DECLARE monto_remanente						DECIMAL(10,2); 
+	-- ----------------------------   
+	-- AGREGAR ESTE CAMPO, AGREGAR BOTON RENOVAR EN COBRO PARA REALIZAR ESTE CALCULO
+	-- AGREGAR ELEMENTO 6 - RENOVACION A ID_ESTADA_CREDITO
 
 	
 	-- DECLARACION DEL CURSOR ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
