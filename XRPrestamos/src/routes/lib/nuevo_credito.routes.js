@@ -5,39 +5,37 @@ const router = express.Router();
 const pool = require('../../database');
 const { access } = require('../../lib/security');
 const { calcular_abono } = require('../../routes/functions/calcular_abono');
+const { getDateTime } = require('../../lib/util');
 
 //->>>>>    AGREGAR     --------------------------------------------------------------------
 router.post('/', async (req, res) => {
     try {
-        if (await access(req.body.hash, req.body.user)) {
+        var user = req.body.user;
+        if (await access(user.hash, user.user)) {
             let r_d_solicitud = false;
 
             let persona = req.body.persona;
             let credito = req.body.credito;
-            let abonos = req.body.abonos;
+            let pagos = req.body.abonos;
 
             //--> PERSONA -----------------------------------------------------------------
-            console.log(persona[1]);
-            console.log(persona[0]);
-            if (telefono != "") {
-                let query = await pool.query('UPDATE persona SET ? WHERE ine = ?', [persona[1], persona[0]]);
+
+            if (persona.telefono != "") {
+                let query = await pool.query('UPDATE persona SET telefono=? WHERE ine = ?', [persona.telefono, persona.ine]);
             }
 
             //--> CREDITO ------------------------------------------------------------------ 
-            let periodo = await pool.query('SELECT GET_PERIODO(?)', [credito.fecha_entrega]);
+            let periodo = await pool.query('SELECT GET_PERIODO(?) AS "periodo"', [credito.fecha_entrega]);
 
-            credito.id_periodo = periodo;
+            credito.id_periodo = periodo[0].periodo;
             if (credito.folio_credito == "") {
-                credito.folio_credito = credito.fecha_entrega + await pool.query('SELECT COUNT(folio_credito) FROM credito WHERE fecha_entrega=?', [credito.fecha_entrega]);
+                let num = await pool.query('SELECT COUNT(folio_credito) AS "num" FROM credito WHERE fecha_entrega=?', [credito.fecha_entrega])
+                credito.folio_credito = credito.fecha_entrega + "#" + num[0].num;
             }
-
-            console.log("PERIODO: " + periodo);
-            console.log("FOLIO_CREDITO: " + credito.folio_credito);
 
             let datos = [];
 
             datos = await pool.query('INSERT INTO credito SET ?', [credito]);
-
 
             if (JSON.stringify(datos) != '[]') {
                 r_d_solicitud = true;
@@ -49,12 +47,22 @@ router.post('/', async (req, res) => {
             };
 
             //--> ABONOS ------------------------------------------------------------------
-            if (abonos.length > 0) {
-                let total = abonos.length;
+            if (pagos.length > 0) {
+                let total = pagos.length;
+                
+
                 let i = 0;
-                for (i; i < total; i++) {
-                    abonos[i].folio_credito = credito.folio_credito;
-                    calcular_abono(abonos[i]);
+                for (i=0; i < total; i++) {
+                    let abono = {
+                        folio_credito: credito.folio_credito,
+                        monto: pagos[i].monto,
+                        no_pagos: 0,
+                        id_tipo_pago: 0,
+                        fecha_abono: pagos[i].fecha_abono,
+                        id_estado: 1,
+                        fecha_reg: getDateTime()
+                    };
+                    await calcular_abono(abono);
                 }
             }
             // FIN ABONOS -----------------------------------------------------------------
@@ -68,6 +76,7 @@ router.post('/', async (req, res) => {
             });
         }
     } catch (e) {
+        console.log(e);
         res.status(400).send({
             response: false,
             session: true,
