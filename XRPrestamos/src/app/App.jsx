@@ -16,6 +16,8 @@ import SolicitarDinero from './Views/Jobs/SolicitarDinero/SolicitarDinero.jsx';
 import NuevoCliente from './Views/Global/NuevoCliente/NuevoCliente.jsx';
 import NuevoCredito from './Views/Private/NuevoCredito/NuevoCredito.jsx';
 import Login from './Views/Global/Login/Login.jsx';
+import CorteDia from './Views/Private/CorteDia/CorteDia.jsx';
+
 
 export default function App() {
     return (
@@ -28,6 +30,7 @@ export default function App() {
                     <Route path="/nuevocliente" component={NuevoCliente} />
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/nuevocredito" component={NuevoCredito} />
+                    <Route path="/cortedia" component={CorteDia} />
                     <Route path="/" component={Login} />
                 </Switch>
         </Router>
