@@ -388,7 +388,7 @@ class SolicitarDinero extends Component {
                         <TextBox id="inf_nombre" label="Alias / Nombre" size="col-xs-12 col-sm-8 col-lg-6" holder="Alias / Nombre" readonly={true} />
                         <TextBox id="inf_telefono" label="Telefono" holder="Telefono" />
                         <TextBox id="inf_no_creditos" label="No. creditos" class={colorCalificacion} holder="Número de creditos" readonly={true} />
-                        <TextBox id="inf_calificacion" class={colorCalificacion} label="Calificación" readonly={true} holder="Calificación" />
+                        <TextBox id="inf_calificacion" class={colorCalificacion} label="Score" readonly={true} holder="Score" />
 
 
                         <Title title="Información del credito" />
