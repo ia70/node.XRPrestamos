@@ -17,7 +17,6 @@ router.post('/', async (req, res) => {
 
             datos = await pool.query('CALL COBRO_DIA_CORTE()');
 
-
             if (JSON.stringify(datos) != '[]') {
                 r_d_solicitud = true;
             }
