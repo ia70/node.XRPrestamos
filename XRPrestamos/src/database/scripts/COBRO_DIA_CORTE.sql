@@ -3,7 +3,30 @@ DELIMITER //
 CREATE PROCEDURE COBRO_DIA_CORTE()
 BEGIN
 /*
-	Añadir registro tipo_pago: 7 - Renovacion
+
+	id_ruta
+	ruta_descripcion
+	id_usuario
+	total_recolectado
+	total_deberia_recolectar_dia
+	total_recolectado_sin_extras
+	monto_abonos
+	monto_extras
+	monto_normal
+	monto_no_pagos
+	monto_defici_abonos
+	monto_defici_total
+	monto_remanente
+	total_cli_visitar
+	total_cli_visitados
+	total_cli_no_pago
+	total_cli_pago
+	total_cli_abonaron
+	total_cli_extra
+	total_cli_no_vicitaron
+	no_creditos_terminados
+	no_renovaciones
+	
 */
 		SELECT 
 					b.id_ruta,
@@ -11,27 +34,29 @@ BEGIN
 					a.id_usuario,
 					SUM(c.monto) AS "total_recolectado",
 					SUM(d.monto_pago) AS "total_deberia_recolectar_dia",
-					SUM(IF(c.id_tipo_pago != 3, c.monto, d.monto_pago)) AS "total_recolectado_sin_extras",
+					SUM(IF(c.id_tipo_pago > 5, IF(c.monto < d.monto_pago, c.monto, d.monto_pago ), IF(c.id_tipo_pago != 3, c.monto, 0))) AS "total_recolectado_sin_extras",
 					SUM(IF(c.id_tipo_pago = 2, c.monto,0)) AS "monto_abonos",
 					SUM(IF(c.id_tipo_pago = 3, c.monto - d.monto_pago, 0)) AS "monto_extras",
 					SUM(IF(c.id_tipo_pago = 1, c.monto, 0)) AS "monto_normal",
-					SUM(IF(c.id_tipo_pago = 4, d.monto_pago, 0)) AS "monto_no_pagos",
+					SUM(IF(c.id_tipo_pago = 4, d.monto_pago, IF(c.id_tipo_pago IS NULL,d.monto_pago,0))) AS "monto_no_pagos",
 					SUM(IF(c.id_tipo_pago = 2, d.monto_pago - c.monto, 0)) AS "monto_defici_abonos",
-					SUM(IF(c.id_tipo_pago = 4, c.monto, IF(c.id_tipo_pago = 2, d.monto_pago - c.monto,0))) AS "monto_defici_total",
+					SUM(IF(c.id_tipo_pago = 4, c.monto, IF(c.id_tipo_pago = 2, d.monto_pago - c.monto,IF(c.id_tipo_pago IS NULL,d.monto_pago,0)))) AS "monto_defici_total",
 					SUM(IF(c.id_tipo_pago = 7,IF(c.monto >= d.monto_pago, c.monto - d.monto_pago,c.monto),0)) AS "monto_remanente",
-
 					COUNT(a.folio_credito) AS "total_cli_visitar",
 					COUNT(c.id_abono) AS "total_cli_visitados",
-					SUM(IF(c.id_tipo_pago = 4, 1, null)) AS "total_cli_no_pago",
-					SUM(IF(c.id_tipo_pago = 1, 1, null)) AS "total_cli_pago",
-					SUM(IF(c.id_tipo_pago = 2, 1, null)) AS "total_cli_abonaron",
-					SUM(IF(c.id_tipo_pago = 3, 1, null)) AS "total_cli_extra",
-					(COUNT(a.id_ruta) - COUNT(c.id_abono)) AS "total_cli_no_vicitaron"
+					SUM(IF(c.id_tipo_pago = 4, 1, IF(c.id_tipo_pago IS NULL,1,0))) AS "total_cli_no_pago",
+					SUM(IF(c.id_tipo_pago = 1, 1, 0)) AS "total_cli_pago",
+					SUM(IF(c.id_tipo_pago = 2, 1, 0)) AS "total_cli_abonaron",
+					SUM(IF(c.id_tipo_pago = 3, 1, 0)) AS "total_cli_extra",
+					(COUNT(a.id_ruta) - COUNT(c.id_abono)) AS "total_cli_no_vicitaron",
+					SUM(IF(c.id_tipo_pago > 5, 1,0)) AS "no_creditos_terminados",
+					SUM(IF(c.id_tipo_pago = 7, 1,0)) AS "no_renovaciones"
 
 					FROM ruta b
 					INNER JOIN cobro_dia AS a ON a.id_ruta = b.id_ruta
 					INNER JOIN credito AS d ON d.folio_credito = a.folio_credito
 					LEFT JOIN abono AS c ON c.folio_credito = a.folio_credito
 					GROUP BY a.id_ruta;
+					
 END // 
 DELIMITER;
