@@ -28,7 +28,9 @@ router.post('/', async (req, res) => {
 
             const d_per = await pool.query('INSERT INTO persona SET ?', [persona]);
             if (d_per.affectedRows > 0) {
-                let d_aval = await pool.query('INSERT INTO aval SET ?', [aval]);
+                if(aval.nombre != ""){
+                    let d_aval = await pool.query('INSERT INTO aval SET ?', [aval]);
+                }
                 let d_est = await pool.query('INSERT INTO usuario_establecimiento SET ?', [establecimiento]);
                 let d_user = await pool.query('INSERT INTO usuario SET ?', [data_user]);
             } else
