@@ -121,10 +121,10 @@ class ModalRuta extends Component {
                                             <td><strong>{this.state.info.total_cli_visitar}</strong></td>
                                             <td className="text-light bg-success"><strong>{this.state.info.total_deberia_recolectar_dia}</strong></td>
                                         </tr>
-                                        <tr className="table-primary">
+                                        <tr className="bg-primary text-light">
                                             <th scope="row">Recdo. sin extras</th>
                                             <td><strong>{this.state.info.total_cli_pago + this.state.info.total_cli_abonaron}</strong></td>
-                                            <td className="text-light bg-primary"><strong>{this.state.info.total_recolectado_sin_extras}</strong></td>
+                                            <td ><strong>{this.state.info.total_recolectado_sin_extras}</strong></td>
                                         </tr>
                                         <tr className="bg-secondary text-light">
                                             <th scope="row">Total recdo.</th>
@@ -152,17 +152,17 @@ class ModalRuta extends Component {
                                             <td className="table-info text-dark"><strong>{this.state.info.monto_remanente}</strong></td>
                                         </tr>
                                         <tr className="table-danger">
-                                            <th scope="row">Defici de abonos</th>
+                                            <th scope="row">Deficit de abonos</th>
                                             <td><strong>{this.state.info.total_cli_abonaron}</strong></td>
                                             <td ><strong>{this.state.info.monto_defici_abonos}</strong></td>
                                         </tr>
                                         <tr className="table-danger">
-                                            <th scope="row">Defici no pagos</th>
+                                            <th scope="row">Deficit no pagos</th>
                                             <td><strong>{this.state.info.total_cli_no_pago}</strong></td>
                                             <td ><strong>{this.state.info.monto_no_pagos}</strong></td>
                                         </tr>
                                         <tr className="bg-danger text-light">
-                                            <th scope="row">Defici total dia</th>
+                                            <th scope="row">Deficit total dia</th>
                                             <td><strong>{this.state.info.total_cli_abonaron + this.state.info.total_cli_no_pago}</strong></td>
                                             <td ><strong>{this.state.info.monto_defici_total}</strong></td>
                                         </tr>
