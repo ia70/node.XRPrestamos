@@ -29,71 +29,6 @@ class ModalRuta extends Component {
             solicitud: [],
         };
 
-        this.enviar = this.enviar.bind(this);
-    }
-
-    enviar(num) {
-        if (this._isMounted) {
-            var url = keys.api.url + 'cobrar_pago';
-            let _monto = 0;
-            let _valor = true; // Si el valor ingresado es negativo
-
-            if (num == 1) {
-                _monto = document.getElementById('txtmonto' + this.props.number).value;
-                if (_monto == 0) {
-                    _monto = this.state.info.monto_pago;
-                } else if (_monto < 0) {
-                    _valor = false;
-                    alert("El monto tiene que ser mayor a cero!");
-                }
-            }
-
-            if (_valor) {
-                var data_text = {
-                    solicitud: {
-                        folio_credito: this.state.info.folio_credito,
-                        monto: _monto,
-                        no_pagos: 0,
-                        id_tipo_pago: 0,
-                        fecha_abono: Fecha.getShortDate(),
-                        id_estado: 1,
-                        fecha_reg: Fecha.getDateTime()
-                    },
-                    user: {
-                        user: this.state.user,
-                        sucursal: this.state.sucursal,
-                        hash: this.state.hash,
-                        rol: this.state.rol
-                    }
-                };
-
-                fetch(url, {
-                    method: 'POST',
-                    body: JSON.stringify(data_text),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(res => res.json())
-                    .catch(error => {
-                        console.error('Error:', error)
-                    })
-                    .then(response => {
-                        if (response.session) {
-                            if (response.response) {
-                                alert('¡Registro guardado!');
-                                $("#" + this.props.id).modal('hide');
-                                console.log(response.data[0][0]);
-                                this.props.evento(response.data[0][0]);
-                            } else
-                                alert('¡Error al guardar!');
-                        } else {
-                            sessionStorage.clear();
-                            alert('¡Sesion bloqueada!');
-                            this.setState({ login: false });
-                        }
-                    });
-            }
-        }
     }
 
     componentDidMount() {
@@ -161,7 +96,7 @@ class ModalRuta extends Component {
 
                             <div className="d-flex row modalruta_alias m-0">
                                 <div className="col">
-                                    <h2 className="tm1" >{this.state.info.alias || ""}</h2>
+                                    <h2 className="tm1" >{this.state.info.ruta_descripcion || ""}</h2>
                                 </div>
 
                                 <div className="col-auto">
@@ -171,93 +106,78 @@ class ModalRuta extends Component {
                                 </div>
                             </div>
 
-                            <div className="row modalruta_name m-0 align-items-center">
-                                <h4 className="tm2">{this.state.info.nombre}</h4>
-                            </div>
-
-                            <div className="row modalruta_name m-0 align-items-center">
-                                <a className="h5 text-warning" href={"tel:" + this.state.info.telefono}>Tel. {this.state.info.telefono}</a>
-                            </div>
-
                             <div className="table table-responsive table-hover">
                                 <table className="table">
                                     <thead className="thead-dark">
                                         <tr>
-                                            <th scope="col">{"FOLIO: " + this.state.info.folio_credito}</th>
-                                            <th scope="col">Pagos</th>
+                                            <th scope="col"></th>
+                                            <th scope="col">Clientes</th>
                                             <th scope="col">$ Monto</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr className="table-success">
-                                            <th scope="row">Prestamo</th>
-                                            <td></td>
-                                            <td className="text-primary"><strong>{this.state.info.monto_credito}</strong></td>
+                                            <th scope="row">Deberia recolectar</th>
+                                            <td><strong>{this.state.info.total_cli_visitar}</strong></td>
+                                            <td className="text-light bg-success"><strong>{this.state.info.total_deberia_recolectar_dia}</strong></td>
                                         </tr>
                                         <tr className="table-primary">
-                                            <th scope="row">Total a pagar</th>
-                                            <td></td>
-                                            <td className="text-primary"><strong>{this.state.info.monto_total}</strong></td>
+                                            <th scope="row">Recdo. sin extras</th>
+                                            <td><strong>{this.state.info.total_cli_pago + this.state.info.total_cli_abonaron}</strong></td>
+                                            <td className="text-light bg-primary"><strong>{this.state.info.total_recolectado_sin_extras}</strong></td>
                                         </tr>
-                                        <tr className="table-secondary">
-                                            <th scope="row">Pagado</th>
-                                            <td></td>
-                                            <td className="text-primary"><strong>{this.state.info.pagado}</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Atrasos</th>
-                                            <td>{this.state.info.atrasos_no}</td>
-                                            <td className="text-danger">{this.state.info.atrasos_monto}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Adelantos</th>
-                                            <td>{this.state.info.extras_no}</td>
-                                            <td className="text-success">{this.state.info.extras_monto}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Restante</th>
-                                            <td>{this.state.info.restante_no}</td>
-                                            <td className="text-info">{this.state.info.restante_monto}</td>
-                                        </tr>
-                                        <tr className="table-info">
-                                            <th scope="row" >Restante total</th>
-                                            <td></td>
-                                            <td className="text-primary"><strong>{this.state.info.restante_total}</strong></td>
+                                        <tr className="bg-secondary text-light">
+                                            <th scope="row">Total recdo.</th>
+                                            <td><strong>{this.state.info.total_cli_visitados /*this.state.info.total_cli_pago + this.state.info.total_cli_abonaron + this.state.info.total_cli_extra*/}</strong></td>
+                                            <td ><strong>{this.state.info.total_recolectado}</strong></td>
                                         </tr>
                                         <tr className="bg-success text-light">
-                                            <th scope="row" >Pagado hoy</th>
-                                            <td></td>
-                                            <td className="text-light"><strong>{this.state.info.abono_hoy}</strong></td>
+                                            <th scope="row">M. pago normal</th>
+                                            <td><strong>{this.state.info.total_cli_pago}</strong></td>
+                                            <td className="table-success text-dark"><strong>{this.state.info.monto_normal}</strong></td>
+                                        </tr>
+                                        <tr className="bg-warning">
+                                            <th scope="row">M. abonos</th>
+                                            <td><strong>{this.state.info.total_cli_abonaron}</strong></td>
+                                            <td className="table-warning"><strong>{this.state.info.monto_abonos}</strong></td>
+                                        </tr>
+                                        <tr className="bg-primary text-light">
+                                            <th scope="row">M. extras</th>
+                                            <td><strong>{this.state.info.total_cli_extra}</strong></td>
+                                            <td className="table-primary  text-dark"><strong>{this.state.info.monto_extras}</strong></td>
+                                        </tr>
+                                        <tr className="bg-info text-light">
+                                            <th scope="row" >M. remanente de E.</th>
+                                            <td><strong>{this.state.info.no_renovaciones}</strong></td>
+                                            <td className="table-info text-dark"><strong>{this.state.info.monto_remanente}</strong></td>
+                                        </tr>
+                                        <tr className="table-danger">
+                                            <th scope="row">Defici de abonos</th>
+                                            <td><strong>{this.state.info.total_cli_abonaron}</strong></td>
+                                            <td ><strong>{this.state.info.monto_defici_abonos}</strong></td>
+                                        </tr>
+                                        <tr className="table-danger">
+                                            <th scope="row">Defici no pagos</th>
+                                            <td><strong>{this.state.info.total_cli_no_pago}</strong></td>
+                                            <td ><strong>{this.state.info.monto_no_pagos}</strong></td>
+                                        </tr>
+                                        <tr className="bg-danger text-light">
+                                            <th scope="row">Defici total dia</th>
+                                            <td><strong>{this.state.info.total_cli_abonaron + this.state.info.total_cli_no_pago}</strong></td>
+                                            <td ><strong>{this.state.info.monto_defici_total}</strong></td>
+                                        </tr>
+                                        <tr className="bg-secondary text-light">
+                                            <th scope="row" >Creditos terminados</th>
+                                            <td><strong>{this.state.info.no_creditos_terminados}</strong></td>
+                                            <td className="table-light"><strong></strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
 
-
-
-                            <div className="row modalruta_monto m-0 py-0 my-0">
-                                <span className="h3"> Pago del día:        <strong className="text-primary">{"    $" + this.state.info.monto_pago}</strong> </span>
-                            </div>
-
-                            <div className="row modalruta_body m-0 p-1">
-
-                                <div className="input-group bg-warning mx-3 my-1 p-1">
-                                    <input id={'txtmonto' + this.props.number} type="number" className="form-control" min={0} placeholder={this.state.info.monto_pago} aria-label="Text input with radio button" />
-                                </div>
-
-                                <div className="w-100"></div>
-                            </div>
                         </div>
                         <div className="modal-footer px-3 mx-0">
-                            <div className="col-2">
-                                <button type="button" className="btn btn-info col-12 text-white">Info.</button>
-                            </div>
-                            <div className="col">
-                                <button id={this.props.id + "btnNoPago"} type="button" className="btn btn-danger col-12 text-white" onClick={(e) => this.enviar(0)}>No pagó</button>
-                            </div>
-                            <div className="col">
-                                <button id={this.props.id + "btnGuardar"} type="button" className="btn btn-success col-12 text-white" onClick={(e) => this.enviar(1)}>Guardar pago</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
