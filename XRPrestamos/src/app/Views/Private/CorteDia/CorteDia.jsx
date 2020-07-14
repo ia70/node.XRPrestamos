@@ -12,6 +12,7 @@ import ComboBox from '../../../Components/Form/ComboBox/ComboBox.jsx';
 import keys from '../../../../keys';
 
 import Logo from '../../../img/Logo.png';
+import { ItemPago } from '../../../Components/Custom/ItemPago/ItemPago.jsx';
 
 
 const max = 178542, min = 413;
@@ -31,8 +32,7 @@ class CorteDia extends Component {
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
             opcion: 0,
-            cartera: [],
-            filtro: []
+            rutas: []
         };
     }
 
@@ -80,8 +80,7 @@ class CorteDia extends Component {
                             if (response.response) {
                                 if (this._isMounted == true && this._isUpdate == false) {
                                     this.setState({
-                                        cartera: response.cartera,
-                                        filtro: response.cartera
+                                        rutas: response.solicitud
                                     });
                                 }
                             }
@@ -106,39 +105,22 @@ class CorteDia extends Component {
             );
         }
 
-        
-/*
+
+
         var indice = 0;
-        let listItems = this.state.filtro.map((i) =>
-            <ItemList key={i.nombre + Math.random() * (max - min) + min} number={indice + 1} info={this.state.filtro[indice++]} amount={i.restante} amountDescription="Restante:" />
-        );*/
+        let listItems = this.state.rutas.map((i) =>
+            <ItemPago key={i.id_ruta + Math.random() * (max - min) + min} number={indice + 1} info={this.state.rutas[indice++]} modal={true} />
+        );
 
         return (
             <div>
                 <Navbar setTitle="Corte del dia" setLogo={Logo} setButton={true} />
                 <div className="container-fluid">
-                    <div className="row Cobrar">
-                        <Title />
-                        {/*<ItemRuta
-                            key={"ine" + Math.random() * (max - min) + min}
-                            number={1}
-                            amount={150}
-                            amountDescription="Pago del día:"
-                            stateItem={1}
-                            stateDescription={"JC"}
-
-                            info={}
-
-                            evento={null}
-                            modal={true}
-                            close={false}
-                        />*/}
-                    </div>
                     <div className="row">
                         <Title />
                     </div>
                     <div className="row" >
-                       
+                        {listItems}
                     </div>
                 </div>
             </div>
