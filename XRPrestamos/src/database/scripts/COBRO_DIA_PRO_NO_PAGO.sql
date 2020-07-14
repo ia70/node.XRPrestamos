@@ -49,7 +49,7 @@ BEGIN
 	END LOOP ciclo;
 	CLOSE curLista;
 	
-	-- TRUNCATE TABLE cobro_dia;
+	TRUNCATE TABLE cobro_dia;
 
 END //
 DELIMITER ;
