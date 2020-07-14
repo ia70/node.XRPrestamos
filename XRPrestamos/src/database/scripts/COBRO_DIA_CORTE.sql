@@ -40,7 +40,10 @@ BEGIN
 					SUM(IF(c.id_tipo_pago = 1, c.monto, 0)) AS "monto_normal",
 					SUM(IF(c.id_tipo_pago = 4, d.monto_pago, IF(c.id_tipo_pago IS NULL,d.monto_pago,0))) AS "monto_no_pagos",
 					SUM(IF(c.id_tipo_pago = 2, d.monto_pago - c.monto, 0)) AS "monto_defici_abonos",
-					SUM(IF(c.id_tipo_pago = 4, c.monto, IF(c.id_tipo_pago = 2, d.monto_pago - c.monto,IF(c.id_tipo_pago IS NULL,d.monto_pago,0)))) AS "monto_defici_total",
+					
+					SUM(IF(c.id_tipo_pago = 4, d.monto_pago, IF(c.id_tipo_pago = 2, d.monto_pago - c.monto,IF(c.id_tipo_pago IS NULL,d.monto_pago,0)))) AS "monto_defici_total",
+					
+					
 					SUM(IF(c.id_tipo_pago = 7,IF(c.monto >= d.monto_pago, c.monto - d.monto_pago,c.monto),0)) AS "monto_remanente",
 					COUNT(a.folio_credito) AS "total_cli_visitar",
 					COUNT(c.id_abono) AS "total_cli_visitados",
