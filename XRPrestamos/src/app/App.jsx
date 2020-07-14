@@ -17,6 +17,7 @@ import NuevoCliente from './Views/Global/NuevoCliente/NuevoCliente.jsx';
 import NuevoCredito from './Views/Private/NuevoCredito/NuevoCredito.jsx';
 import Login from './Views/Global/Login/Login.jsx';
 import CorteDia from './Views/Private/CorteDia/CorteDia.jsx';
+import SinPagoHoy from './Views/Private/SinPago/SinPagoHoy.jsx';
 
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/nuevocredito" component={NuevoCredito} />
                     <Route path="/cortedia" component={CorteDia} />
+                    <Route path="/sinpagohoy" component={SinPagoHoy} />
                     <Route path="/" component={Login} />
                 </Switch>
         </Router>
