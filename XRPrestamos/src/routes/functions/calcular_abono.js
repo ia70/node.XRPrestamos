@@ -6,7 +6,9 @@ async function calcular_abono(abono) {
 
         info = info[0][0];
         // CALCULAR CAMPOS ABONO --------------------------------------------------------------------------------------------------------------
-        if (info.restante_total <= abono.monto) {
+        if(abono.id_tipo_pago == 7){
+            abono.no_pagos = info.pagos_total - (abono.monto / info.monto_pago);
+        }else if (info.restante_total <= abono.monto) {
             abono.id_tipo_pago = 6;
             abono.no_pagos = abono.monto / info.monto_pago;
             // Modificar tabla credito
