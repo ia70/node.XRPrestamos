@@ -52,9 +52,9 @@ class ModalCollect extends Component {
                 var data_text = {
                     solicitud: {
                         folio_credito: this.state.info.folio_credito,
-                        monto: _monto,
+                        monto: (num == 2 ? this.state.info.restante_total : _monto),
                         no_pagos: 0,
-                        id_tipo_pago: 0,
+                        id_tipo_pago: (num == 2 ? 7 : 0),
                         fecha_abono: Fecha.getShortDate(),
                         id_estado: 1,
                         fecha_reg: Fecha.getDateTime()
@@ -249,8 +249,11 @@ class ModalCollect extends Component {
                             </div>
                         </div>
                         <div className="modal-footer px-3 mx-0">
-                            <div className="col-2">
+                            <div className="col">
                                 <button type="button" className="btn btn-info col-12 text-white">Info.</button>
+                            </div>
+                            <div className="col">
+                                <button id={this.props.id + "btnRenovacion"} type="button" className="btn btn-primary col-12 text-white" onClick={(e) => this.enviar(2)}>Renovar</button>
                             </div>
                             <div className="col">
                                 <button id={this.props.id + "btnNoPago"} type="button" className="btn btn-danger col-12 text-white" onClick={(e) => this.enviar(0)}>No pagó</button>
