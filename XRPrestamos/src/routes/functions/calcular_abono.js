@@ -6,7 +6,10 @@ async function calcular_abono(abono) {
 
         info = info[0][0];
         // CALCULAR CAMPOS ABONO --------------------------------------------------------------------------------------------------------------
+        console.log(abono);
+        
         if(abono.id_tipo_pago == 7){
+            console.log("ENTRO 7");
             abono.no_pagos = info.pagos_total - (abono.monto / info.monto_pago);
         }else if (info.restante_total <= abono.monto) {
             abono.id_tipo_pago = 6;
@@ -52,7 +55,7 @@ async function calcular_abono(abono) {
             estadistica = estadistica_[0];
 
             // NO_PAGOS
-            if (abono.id_tipo_pago == 6) {
+            if (abono.id_tipo_pago == 6 || abono.id_tipo_pago == 7) {
                 estadistica.no_pagos = info.pagos_total;
             } else {
                 estadistica.no_pagos = estadistica.no_pagos + abono.no_pagos;
