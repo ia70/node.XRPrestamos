@@ -9,7 +9,6 @@ async function calcular_abono(abono) {
         console.log(abono);
         
         if(abono.id_tipo_pago == 7){
-            console.log("ENTRO 7");
             abono.no_pagos = info.pagos_total - (abono.monto / info.monto_pago);
         }else if (info.restante_total <= abono.monto) {
             abono.id_tipo_pago = 6;
