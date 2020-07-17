@@ -56,7 +56,7 @@ router.post('/', async (req, res) => {
                     let abono = {
                         folio_credito: credito.folio_credito,
                         monto: pagos[i].monto,
-                        no_pagos: 0,
+                        no_pagos: parseFloat("0.0001"),
                         id_tipo_pago: 0,
                         fecha_abono: pagos[i].fecha_abono,
                         id_estado: 1,
