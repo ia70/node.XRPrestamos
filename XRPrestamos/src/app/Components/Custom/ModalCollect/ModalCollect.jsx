@@ -53,7 +53,7 @@ class ModalCollect extends Component {
                     solicitud: {
                         folio_credito: this.state.info.folio_credito,
                         monto: (num == 2 ? this.state.info.restante_total : _monto),
-                        no_pagos: 0,
+                        no_pagos: parseFloat("0.0001"),
                         id_tipo_pago: (num == 2 ? 7 : 0),
                         fecha_abono: Fecha.getShortDate(),
                         id_estado: 1,
