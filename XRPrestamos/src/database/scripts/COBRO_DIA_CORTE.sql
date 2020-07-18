@@ -34,7 +34,9 @@ BEGIN
 					a.id_usuario,
 					SUM(IF(c.monto IS NULL,0, c.monto)) AS "total_recolectado",
 					SUM(d.monto_pago) AS "total_deberia_recolectar_dia",
-					SUM(IF(c.monto IS NULL,0,IF(c.id_tipo_pago > 5, IF(c.monto < d.monto_pago, c.monto, d.monto_pago ), IF(c.id_tipo_pago != 3, c.monto, 0)))) AS "total_recolectado_sin_extras",
+				
+					SUM(IF(c.monto IS NULL, 0, IF(c.monto < d.monto_pago, c.monto, d.monto_pago ))) AS "total_recolectado_sin_extras",
+					
 					SUM(IF(c.monto IS NULL,0,IF(c.id_tipo_pago = 2, c.monto,0))) AS "monto_abonos",
 					SUM(IF(c.monto IS NULL,0,IF(c.id_tipo_pago = 3, c.monto - d.monto_pago, 0))) AS "monto_extras",
 					SUM(IF(c.monto IS NULL,0,IF(c.id_tipo_pago = 1, c.monto, 0))) AS "monto_normal",
