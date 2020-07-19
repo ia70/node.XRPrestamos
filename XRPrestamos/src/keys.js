@@ -1,13 +1,13 @@
 'use strict';
 module.exports = {
     database: {
-        host: '192.168.1.50',
+        host: 'cdjcop.ddns.net',
         user: 'xcoru',
         password: 'xcoru12345',
         database: 'xrprestamos'
     },
     server: {
-        host: '192.168.1.65',
+        host: 'cdjcop.ddns.net',
         port: 80
     },
     security: {
@@ -16,6 +16,6 @@ module.exports = {
         iv_password: '@_aTfdh%Mkxd-k_Q'     //Exactamente 16 caracteres
     },
     api: {
-        url: 'http://192.168.1.50/api/'
+        url: '/api/'
     }
 };
