@@ -6,7 +6,6 @@ async function calcular_abono(abono) {
 
         info = info[0][0];
         // CALCULAR CAMPOS ABONO --------------------------------------------------------------------------------------------------------------
-        console.log(abono);
         
         if(abono.id_tipo_pago == 7){
             abono.no_pagos = info.pagos_total - (abono.monto / info.monto_pago);
