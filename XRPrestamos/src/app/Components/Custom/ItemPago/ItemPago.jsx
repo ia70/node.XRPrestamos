@@ -57,7 +57,6 @@ export function ItemPago(props) {
 
     let porcentaje = (100 / props.info.total_deberia_recolectar_dia) * props.info.total_recolectado_sin_extras;
     let estado = 0;
-    console.log(porcentaje);
 
     if(porcentaje < 65) {
         estado = 4;
