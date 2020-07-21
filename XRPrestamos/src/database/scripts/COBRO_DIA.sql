@@ -137,7 +137,7 @@ BEGIN
 			SET var_pagado = 0;
 		END IF;
 		SET var_restante_no = (SELECT (var_pagos_total - COUNT(id_abono)) FROM abono WHERE folio_credito = var_folio_credito);
-		IF var_restante_no IS NULL THEN
+		IF var_restante_no IS NULL OR var_restante_no < 0 THEN
 			SET var_restante_no = 0;
 		END IF;
 		SET var_restante_monto = var_restante_no * var_monto_pago;
