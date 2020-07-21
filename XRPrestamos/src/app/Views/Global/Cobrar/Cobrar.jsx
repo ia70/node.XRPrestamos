@@ -141,7 +141,7 @@ class Cobrar extends Component {
             this.setState({ login: false });
         } else {
 
-            var url = keys.api.url + 'cobrar';
+            var url = "http://" + keys.database.host + keys.api.url + 'cobrar';
 
             var data_text = {
                 user: this.state.user,
