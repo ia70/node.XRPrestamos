@@ -35,7 +35,7 @@ class ComboBox extends Component {
         try {
             if (this._isUpdate == false) {
                 this._isUpdate = true;
-                var url = keys.api.url;
+                var url = "http://" + keys.database.host + keys.api.url;
                 if (this.props.tabla != null) {
                     url += this.props.tabla;
                     fetch(url, {
