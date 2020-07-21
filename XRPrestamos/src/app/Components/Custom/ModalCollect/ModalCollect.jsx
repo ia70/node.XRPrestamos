@@ -34,7 +34,7 @@ class ModalCollect extends Component {
 
     enviar(num) {
         if (this._isMounted) {
-            var url = keys.api.url + 'cobrar_pago';
+            var url = "http://" + keys.database.host + keys.api.url + 'cobrar_pago';
             let _monto = 0;
             let _valor = true; // Si el valor ingresado es negativo
 
