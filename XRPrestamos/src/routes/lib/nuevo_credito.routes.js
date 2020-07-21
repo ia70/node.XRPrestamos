@@ -67,6 +67,7 @@ router.post('/', async (req, res) => {
             }
             // FIN ABONOS -----------------------------------------------------------------
 
+            let corte = await pool.query('CALL COBRO_DIA_PROC_CALCULAR()');
 
             res.status(200).send(respuesta);
 
