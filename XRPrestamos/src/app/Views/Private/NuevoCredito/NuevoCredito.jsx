@@ -28,6 +28,7 @@ class SolicitarDinero extends Component {
         this._isUpdate = false;
         this._id_tipo_credito = 1;
         this._telefono = "";
+        this._recargar = false;
 
         this.state = {
             login: sessionStorage.getItem('login'),
@@ -331,6 +332,7 @@ class SolicitarDinero extends Component {
                 .then(response => {
                     if (response.session) {
                         if (response.response) {
+                            this._recargar = true;
                             alert('¡Registro guardado!');
                         } else
                             alert('¡Error al guardar!');
@@ -347,6 +349,13 @@ class SolicitarDinero extends Component {
 
         if (this.state.login == false) {
             var ruta = "/";
+            return (
+                <Redirect
+                    from="/"
+                    to={ruta} />
+            );
+        }else if(this._recargar){
+            var ruta = "nuevocredito";
             return (
                 <Redirect
                     from="/"
