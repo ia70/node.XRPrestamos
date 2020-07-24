@@ -121,15 +121,15 @@ class ModalRuta extends Component {
                                             <td><strong>{this.state.info.total_cli_visitar}</strong></td>
                                             <td className="text-light bg-success"><strong>{this.state.info.total_deberia_recolectar_dia}</strong></td>
                                         </tr>
-                                        <tr className="bg-primary text-light">
-                                            <th scope="row">Recdo. sin extras</th>
-                                            <td><strong>{this.state.info.total_cli_pago + this.state.info.total_cli_abonaron}</strong></td>
-                                            <td ><strong>{this.state.info.total_recolectado_sin_extras}</strong></td>
-                                        </tr>
                                         <tr className="bg-secondary text-light">
                                             <th scope="row">Total recdo.</th>
                                             <td><strong>{this.state.info.total_cli_visitados /*this.state.info.total_cli_pago + this.state.info.total_cli_abonaron + this.state.info.total_cli_extra*/}</strong></td>
                                             <td ><strong>{this.state.info.total_recolectado}</strong></td>
+                                        </tr>
+                                        <tr className="bg-primary text-light">
+                                            <th scope="row">Recdo. sin extras</th>
+                                            <td><strong>{this.state.info.total_cli_pago + this.state.info.total_cli_abonaron}</strong></td>
+                                            <td ><strong>{this.state.info.total_recolectado_sin_extras}</strong></td>
                                         </tr>
                                         <tr className="bg-success text-light">
                                             <th scope="row">M. pago normal</th>
