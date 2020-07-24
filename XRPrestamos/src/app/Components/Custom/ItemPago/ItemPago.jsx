@@ -61,7 +61,7 @@ export function ItemPago(props) {
     if(porcentaje < 65) {
         estado = 4;
         texto = "Mal";
-    }else if(porcentaje <= 78){
+    }else if(porcentaje <= 75){
         estado = 2;
         texto = "Regular";
     }else if(porcentaje <= 90){
