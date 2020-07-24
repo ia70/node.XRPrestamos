@@ -96,7 +96,7 @@ class CarteraClientes extends Component {
             this.setState({ login: false });
         } else {
             if (this._isMounted == false && this._isUpdate == false) {
-                var url = keys.api.url + 'cartera_clientes';
+                var url ="http://" + keys.database.host + keys.api.url + 'cartera_clientes';
 
                 var data_text = {
                     user: this.state.user,

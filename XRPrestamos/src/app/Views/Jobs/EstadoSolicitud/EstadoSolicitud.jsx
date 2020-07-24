@@ -47,7 +47,7 @@ class EstadoSolicitud extends Component {
         }else{
             this._isMounted = true;
             if (this._isMounted == true && this._isUpdate == false) {
-                var url = keys.api.url + 'estado_solicitud';
+                var url ="http://" + keys.database.host + keys.api.url + 'estado_solicitud';
     
                 var data_text = {
                     user: this.state.user,

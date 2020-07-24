@@ -33,7 +33,7 @@ class NuevoCliente extends Component {
     }
 
     enviar() {
-        var url = keys.api.url + 'nuevo_cliente';
+        var url ="http://" + keys.database.host + keys.api.url + 'nuevo_cliente';
 
         var data_text = {
             persona: {

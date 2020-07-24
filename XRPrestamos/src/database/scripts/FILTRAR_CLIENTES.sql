@@ -46,7 +46,7 @@ CREATE PROCEDURE FILTRAR_CLIENTES(IN filtro VARCHAR(100))
 						LEFT JOIN estadistica_cliente AS c ON c.ine = a.ine
 						
 						WHERE b.id_rol = 3 AND concat_ws(' ', a.ine, a.alias, a.nombre, a.apellido_paterno, a.apellido_materno) 
-						LIKE CONCAT('%',filtro,'%') GROUP BY b.ine ORDER BY a.nombre ASC LIMIT 20;
+						LIKE CONCAT('%',filtro,'%') GROUP BY a.ine ORDER BY a.nombre ASC LIMIT 20;
 		-- FIN CURSOR -----------------------------------------------------------------------------------------------------------------------
 		
 
