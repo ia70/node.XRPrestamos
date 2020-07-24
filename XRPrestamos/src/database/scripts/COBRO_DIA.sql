@@ -22,6 +22,8 @@ BEGIN
 	DECLARE var_atrasos_monto 	DECIMAL(10,2) DEFAULT 0;
 	DECLARE var_extras_no 				DECIMAL(10,2) DEFAULT 0;
 	DECLARE var_extras_monto 		DECIMAL(10,2) DEFAULT 0;
+	DECLARE var_id_estado 			INT DEFAULT 0;
+	DECLARE var_id_estado_credito INT DEFAULT 0;
 	
 	DECLARE var_restante_no 		INT DEFAULT 0;
 	DECLARE var_restante_monto 	DECIMAL(10,2) DEFAULT 0;
@@ -59,13 +61,15 @@ BEGIN
 					COUNT(IF(c.id_tipo_pago = 4,c.id_tipo_pago,NULL)) AS "atrasos_no", 
 					SUM(IF(c.id_tipo_pago = 4, b.monto_pago,IF(c.id_tipo_pago = 2, b.monto_pago - c.monto, 0))) AS "atrasos_monto",
 					COUNT(IF(c.id_tipo_pago = 3,c.id_tipo_pago,NULL)) AS "extras_no", 
-					SUM(IF(c.id_tipo_pago = 3, c.monto - b.monto_pago, 0)) AS "extras_monto" 
+					SUM(IF(c.id_tipo_pago = 3, c.monto - b.monto_pago, 0)) AS "extras_monto",
+					b.id_estado,
+					b.id_estado_credito
 				FROM credito b
 				INNER JOIN cobro_dia AS d ON d.folio_credito = b.folio_credito 
 				INNER JOIN persona AS a ON a.ine = d.ine 
 				LEFT JOIN abono AS c ON c.folio_credito = d.folio_credito 
 				
-				WHERE b.id_estado_credito = 1 AND (d.id_usuario = var_usuario OR var_usuario = "0")
+				WHERE d.id_usuario = var_usuario OR var_usuario = "0"
 				GROUP BY b.folio_credito ORDER BY a.alias;
 		-- FIN CURSOR -----------------------------------------------------------------------------------------------------------------------
 		
@@ -124,7 +128,9 @@ BEGIN
 													var_atrasos_no, 
 													var_atrasos_monto, 
 													var_extras_no, 
-													var_extras_monto;
+													var_extras_monto,
+													var_id_estado,
+													var_id_estado_credito;
 		
 		IF done THEN 
 			LEAVE ciclo;
@@ -148,15 +154,19 @@ BEGIN
 		IF var_restante_total IS NULL THEN
 			SET var_restante_total = 0;
 		END IF;
-		SET var_abono_hoy = (SELECT SUM(monto) FROM abono WHERE folio_credito= var_folio_credito AND fecha_abono = CURDATE());
+		SET var_abono_hoy = (SELECT SUM(monto) FROM abono WHERE folio_credito = var_folio_credito AND fecha_abono = CURDATE());
 		IF var_abono_hoy IS NULL THEN
 			SET var_abono_hoy = 0;
 		END IF;
+		
+		
 		SET var_id_tipo_pago_aux = (SELECT COUNT(id_tipo_pago) FROM abono WHERE folio_credito= var_folio_credito AND fecha_abono = CURDATE());
 		
 		
 		
-		IF (var_pagos_total * var_monto_pago) <= var_pagado THEN
+		IF var_id_estado_credito > 1 THEN
+			SET var_id_tipo_pago = var_id_estado_credito;
+		ELSEIF (var_pagos_total * var_monto_pago) <= var_pagado THEN
 			SET var_id_tipo_pago = 6;
 		ELSEIF var_id_tipo_pago_aux = 0 THEN
 			SET var_id_tipo_pago = 5;
