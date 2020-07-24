@@ -101,9 +101,18 @@ class Cobrar extends Component {
             this.setState({ filtro: datos, opcion: op });
         } else {
             if (this.state.rol == 2) {
-                datos = this.state.solicitud.filter((item) => item.id_tipo_pago == cadena);
+                if(op >= 6){
+                    datos = this.state.solicitud.filter((item) => item.id_tipo_pago >= 6);
+                }else{
+                    datos = this.state.solicitud.filter((item) => item.id_tipo_pago == cadena);
+                }
             } else {
-                datos = this.state.solicitud.filter((item) => (item.id_tipo_pago == cadena && (item.id_ruta == this.state.opcionCartera || admin)));
+                if(op >= 6){
+                    datos = this.state.solicitud.filter((item) => (item.id_tipo_pago >= 6 && (item.id_ruta == this.state.opcionCartera || admin)));
+                }else{
+                    datos = this.state.solicitud.filter((item) => (item.id_tipo_pago == cadena && (item.id_ruta == this.state.opcionCartera || admin)));
+                }
+                
             }
 
             this.setState({ filtro: datos, opcion: op });
