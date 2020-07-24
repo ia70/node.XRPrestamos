@@ -6,14 +6,24 @@ async function calcular_abono(abono) {
 
         info = info[0][0];
         // CALCULAR CAMPOS ABONO --------------------------------------------------------------------------------------------------------------
-        
-        if(abono.id_tipo_pago == 7){
+
+        if (abono.id_tipo_pago == 7) {
             abono.no_pagos = info.pagos_total - (abono.monto / info.monto_pago);
-        }else if (info.restante_total <= abono.monto) {
+            try {
+                let db_credito = await pool.query('UPDATE credito SET id_estado_credito=7, id_estado=2 WHERE folio_credito = ?', [abono.folio_credito]);
+            } catch (error) {
+                console.log(error);
+            }
+        } else if (info.restante_total <= abono.monto) {
             abono.id_tipo_pago = 6;
             abono.no_pagos = abono.monto / info.monto_pago;
             // Modificar tabla credito
-            let db_credito = await pool.query('UPDATE credito SET estado_credito=5, estado=2 WHERE folio_credito = ?', [info.folio_credito]);
+            try {
+                let db_credito = await pool.query('UPDATE credito SET id_estado_credito=6, id_estado=2 WHERE folio_credito = ?', [abono.folio_credito]);
+            } catch (error) {
+                console.log(error);
+            }
+            
         } else if (abono.monto > info.monto_pago) {
             abono.id_tipo_pago = 3;
             abono.no_pagos = abono.monto / info.monto_pago;
@@ -27,8 +37,13 @@ async function calcular_abono(abono) {
             abono.id_tipo_pago = 4;
             abono.no_pagos = 0;
         }
+        let queryAbono = [];
+        try {
+            queryAbono = await pool.query('INSERT INTO abono SET ?', [abono]);
+        } catch (error) {
+            console.log(error);
+        }
 
-        let queryAbono = await pool.query('INSERT INTO abono SET ?', [abono]);
 
 
         // CALCULO DE ESTADISTICAS -------------------------------------------------------------------------------------------------------------
