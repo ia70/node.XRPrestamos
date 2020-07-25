@@ -32,7 +32,7 @@ BEGIN
 					a.id_ruta,
 					b.descripcion AS "ruta_descripcion",
 					a.id_usuario,
-					SUM(IF(c.monto IS NULL,1, c.monto)) AS "total_recolectado",
+					SUM(IF(c.monto IS NULL,0, c.monto)) AS "total_recolectado",
 					SUM(d.monto_pago) AS "total_deberia_recolectar_dia",
 				
 					SUM(IF(c.monto IS NULL, 0, IF(c.monto < d.monto_pago, c.monto, d.monto_pago ))) AS "total_recolectado_sin_extras",
@@ -45,7 +45,7 @@ BEGIN
 					SUM(IF(c.monto IS NULL,d.monto_pago,IF(c.id_tipo_pago = 4, d.monto_pago, IF(c.id_tipo_pago = 2, d.monto_pago - c.monto,IF(c.id_tipo_pago IS NULL,d.monto_pago,0))))) AS "monto_defici_total",
 					SUM(IF(c.monto IS NULL,0,IF(c.id_tipo_pago = 7, IF(c.monto >= d.monto_pago, c.monto - d.monto_pago, c.monto), 0))) AS "monto_remanente",
 					COUNT(a.folio_credito) 	AS "total_cli_visitar",
-					COUNT(IF(c.id_abono IS NULL, 0,1)) 			AS "total_cli_visitados",
+					SUM(IF(c.id_abono IS NULL, 0,1)) 			AS "total_cli_visitados",
 					SUM(IF(c.monto IS NULL,1,IF(c.id_tipo_pago = 4, 1, IF(c.id_tipo_pago IS NULL,1,0)))) AS "total_cli_no_pago",
 					SUM(IF(c.monto IS NULL,0,IF(c.id_tipo_pago = 1, 1, 0))) AS "total_cli_pago",
 					SUM(IF(c.monto IS NULL,0,IF(c.id_tipo_pago = 2, 1, 0))) AS "total_cli_abonaron",
