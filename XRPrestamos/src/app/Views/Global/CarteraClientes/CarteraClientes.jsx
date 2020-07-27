@@ -157,7 +157,7 @@ class CarteraClientes extends Component {
 
         return (
             <div>
-                <Navbar setTitle="Cartera de clientes" setLogo={Logo} setButton={true} />
+                <Navbar title="Cartera de clientes" setLogo={Logo} setButton={true} />
                 <div className="container-fluid">
                     <div className="row Cobrar">
                         <Title />
