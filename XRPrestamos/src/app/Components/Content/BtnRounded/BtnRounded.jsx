@@ -16,7 +16,7 @@ class BtnRounded extends Component {
     render() {
         return (
 
-            <div className="col m-1 p-1 btn btn-outline-info">
+            <div className="col m-1  btn btn-outline-info">
                 <Link to={this.props.url || ""}>
                     <div className="row">
                         <div className="col-12">
