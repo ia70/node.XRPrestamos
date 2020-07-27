@@ -24,6 +24,7 @@
 
 .navbarextends_label2 {
     border-top-right-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
     font-size: 1.2em;
     font-weight: normal;
     color: rgb(0, 101, 141);
