@@ -135,7 +135,7 @@ class NuevoCliente extends Component {
 
         return (
             <div>
-                <Navbar setLogo={Logo} setTitle="Nuevo Cliente" setButton={true} />
+                <Navbar setLogo={Logo} title="Nuevo Cliente" setButton={true} />
                 <div className="container-fluid">
                     <div className="row" >
                         <Title title="DATOS PERSONALES" />
