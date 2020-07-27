@@ -385,7 +385,7 @@ class SolicitarDinero extends Component {
 
         return (
             <React.Fragment>
-                <Navbar setLogo={Logo} setTitle="Nuevo credito" setButton={true} />
+                <Navbar setLogo={Logo} title="Nuevo credito" setButton={true} />
                 <div className="container-fluid">
                     <div className="row m-0" >
 
