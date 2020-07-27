@@ -137,7 +137,7 @@ class Dashboard extends Component {
         //sessionStorage.
         return (
             <div>
-                <Navbar setLogo={Logo} setTitle={this.state.user} setDate={true} setButton={true} url={"/login"} evento={this.handleEvento} />
+                <Navbar setLogo={Logo} title={this.state.user} setDate={true} setButton={true} url={"/login"} evento={this.handleEvento} />
 
                 <div className="container-fluid">
                     {this._menu}
