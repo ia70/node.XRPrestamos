@@ -1,13 +1,13 @@
 'use strict';
 module.exports = {
     database: {
-        host: 'cdjcop.ddns.net',
+        host: '192.168.2.50', //cdjcop.ddns.net
         user: 'xcoru',
         password: 'xcoru12345',
         database: 'xrprestamos'
     },
     server: {
-        host: 'cdjcop.ddns.net',
+        host: '192.168.2.50', //cdjcop.ddns.net
         port: 80
     },
     security: {
