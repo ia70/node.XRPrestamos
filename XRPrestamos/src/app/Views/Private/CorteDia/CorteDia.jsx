@@ -114,7 +114,7 @@ class CorteDia extends Component {
 
         return (
             <div>
-                <Navbar setTitle="Corte del dia" setLogo={Logo} setButton={true} />
+                <Navbar title="Corte del dia" setLogo={Logo} setButton={true} />
                 <div className="container-fluid">
                     <div className="row">
                         <Title />
