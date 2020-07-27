@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
 //CONMPONENTS --------------------------------------------------
-import NavbarExtends from '../../../Components/Content/NavbarExtends/NavbarExtends.jsx';
+import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
 import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx';
 import { Title } from '../../../Components/Content/Title/Title.jsx';
 import TextSearch from '../../../Components/Form/TextSearch/TextSearch.jsx';
@@ -269,7 +269,7 @@ class Cobrar extends Component {
 
         return (
             <div>
-                <NavbarExtends title="Cobrar" label1="A recaudar" label2={"$" + this.state.total} />
+                <Navbar title="Cobrar" label1="A recaudar" label2={"$" + this.state.total} />
                 <div className="container-fluid">
                     <div className="row Cobrar">
                         <Title />
