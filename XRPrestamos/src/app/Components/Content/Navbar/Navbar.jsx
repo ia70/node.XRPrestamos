@@ -61,9 +61,8 @@ class Navbar extends Component {
                         </div>
                     </div>
                     <div className="col-auto p-0 m-1">
-                        <Btn url={this.props.url || "/dashboard"} />
+                        <Btn evento={this.props.evento} url={this.props.url || "/dashboard"} />
                     </div>
-
 
                 </div>
             </div>
