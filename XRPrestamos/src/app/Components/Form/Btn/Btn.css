@@ -1,5 +1,6 @@
 .btn{
     display: flex;
+    font-size: 1em;
     justify-content: center;
     align-items: center;
     font-weight: bold;
