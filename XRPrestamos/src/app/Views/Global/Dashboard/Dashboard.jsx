@@ -49,7 +49,12 @@ class Dashboard extends Component {
     }
 
     handleEvento() {
-        sessionStorage.clear();
+        var opcion = confirm("¿Desea cerrar sesión?");
+        if (opcion == true) {
+            sessionStorage.clear();
+            this.setState({ login: false });
+        }
+
     }
 
     componentWillMount() {
