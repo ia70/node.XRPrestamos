@@ -25,6 +25,8 @@ class CorteDia extends Component {
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
+            total: 0,
+            pagado: 0,
             opcion: 0,
             rutas: []
         };
@@ -73,8 +75,18 @@ class CorteDia extends Component {
                         if (response.session) {
                             if (response.response) {
                                 if (this._isMounted == true && this._isUpdate == false) {
+
+                                    var total_ = 0;
+                                    var pagado_ = 0;
+
+                                    response.solicitud.forEach(i => {
+                                        total_ += i.total_deberia_recolectar_dia;
+                                        pagado_ += i.total_recolectado_sin_extras;
+                                    });
                                     this.setState({
-                                        rutas: response.solicitud
+                                        rutas: response.solicitud,
+                                        total: total_,
+                                        pagado: pagado_
                                     });
                                 }
                             }
@@ -108,7 +120,7 @@ class CorteDia extends Component {
 
         return (
             <div>
-                <Navbar title="Corte del dia" setLogo={Logo} setButton={true} />
+                <Navbar title="Corte del dia" setLogo={Logo} setButton={true} meta={Math.round(100 / this.state.total * this.state.pagado || 0)} label1="Meta" label2={this.state.total}/>
                 <div className="container-fluid">
                     <div className="row pt-3" >
                         {listItems}
