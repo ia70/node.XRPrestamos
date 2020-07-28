@@ -4,8 +4,8 @@ import './Title.css';
 // title
 export function Title(props) {
     return (
-        <div className="col-12 title">
-            {props.title}
+        <div className={"col-12 title "} >
+            <h3>{props.title}</h3>
         </div>
     );
 }
