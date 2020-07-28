@@ -16,6 +16,27 @@ class Navbar extends Component {
     }
 
     render() {
+        let meta = "";
+        let color_ = "";
+
+        if (this.props.meta != null) {
+            if (this.props.meta < 40)
+                color_ = "meta_mal";
+            else if (this.props.meta < 70)
+                color_ = "meta_regular";
+            else
+                color_ = "meta_bien";
+            meta = <div className="col-auto mx-2 pb-1">
+                <div className="row align-items-center">
+                    <h4 className="navbarextends_label1 m-0 ">Avance</h4>
+                </div>
+
+                <div className="row align-items-center">
+                    <h4 className={"navbarextends_label2 m-0 col-auto " + color_}>{this.props.meta + "%"}</h4>
+                </div>
+            </div>
+        }
+
         return (
             <div className="container-fluid bg-dark text-white">
                 <div className="row align-items-center">
@@ -28,17 +49,18 @@ class Navbar extends Component {
                         </div>
                     </div>
 
-                    <div className="col-auto m-2">
+                    {meta}
+
+                    <div className="col-auto mx-2 pb-1">
                         <div className="row align-items-center">
-                            <h6 className="navbarextends_label1 m-0 ">{this.props.label1}</h6>
+                            <h4 className="navbarextends_label1 m-0 ">{this.props.label1}</h4>
                         </div>
 
                         <div className="row align-items-center">
-                            <h6 className="navbarextends_label2 m-0 col-auto">{this.props.label2}</h6>
+                            <h4 className="navbarextends_label2 m-0 col-auto">{this.props.label2}</h4>
                         </div>
-
                     </div>
-                    <div className="col-auto navbarextends_button p-0 m-1">
+                    <div className="col-auto p-0 m-1">
                         <Btn url={this.props.url || "/dashboard"} />
                     </div>
 
