@@ -120,7 +120,7 @@ class CorteDia extends Component {
 
         return (
             <div>
-                <Navbar title="Corte del dia" setLogo={Logo} setButton={true} meta={Math.round(100 / this.state.total * this.state.pagado || 0)} label1="Meta" label2={this.state.total}/>
+                <Navbar title="Corte del dia" setLogo={Logo} setButton={true} meta={Math.round(100 / this.state.total * this.state.pagado || 0)} label1="Meta" label2={this.state.total} regresar="1"/>
                 <div className="container-fluid">
                     <div className="row pt-3" >
                         {listItems}
