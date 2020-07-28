@@ -16,14 +16,19 @@ import './Btn.css';
 
 export function Btn(props) {
     let clasesI = "btn-warning";
+    let evento = ()=> null;
 
     if (props.clases != null) {
         clasesI = props.clases;
     }
 
+    if (props.evento != null) {
+        evento = (e) => props.evento();
+    }
+
     return (
         <Link to={props.url || ""}>
-            <button onClick={props.evento} id={props.id || "btn01"} type="button" className={"btn " + clasesI} >{props.label || "<"} </button>
+            <button onClick={evento} id={props.id || "btn01"} type="button" className={"btn imagen " + clasesI } >{props.label || ""} </button>
         </Link>
 
     );
