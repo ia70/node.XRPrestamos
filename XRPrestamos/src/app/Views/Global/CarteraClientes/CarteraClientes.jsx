@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 //CONMPONENTS --------------------------------------------------
 import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
 import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx';
-import { Title } from '../../../Components/Content/Title/Title.jsx';
 import TextSearch from '../../../Components/Form/TextSearch/TextSearch.jsx';
 import ComboBox from '../../../Components/Form/ComboBox/ComboBox.jsx';
 import keys from '../../../../keys';
@@ -159,13 +158,9 @@ class CarteraClientes extends Component {
             <div>
                 <Navbar title="Cartera de clientes" setLogo={Logo} setButton={true} />
                 <div className="container-fluid">
-                    <div className="row Cobrar">
-                        <Title />
+                    <div className="row mb-3 pt-3 Cobrar">
                         {Combo}
                         <TextSearch label="Buscar" id="search_cartera" evento={this.filtrar} />
-                    </div>
-                    <div className="row">
-                        <Title />
                     </div>
                     <div className="row" >
                         {listItems}
