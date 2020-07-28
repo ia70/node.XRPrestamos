@@ -3,12 +3,6 @@ import { Redirect } from 'react-router-dom';
 
 //CONMPONENTS --------------------------------------------------
 import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
-import { ItemRuta } from '../../../Components/Custom/ItemRuta/ItemRuta.jsx';
-import { Title } from '../../../Components/Content/Title/Title.jsx';
-
-
-import TextSearch from '../../../Components/Form/TextSearch/TextSearch.jsx';
-import ComboBox from '../../../Components/Form/ComboBox/ComboBox.jsx';
 import keys from '../../../../keys';
 
 import Logo from '../../../img/Logo.png';
@@ -116,10 +110,7 @@ class CorteDia extends Component {
             <div>
                 <Navbar title="Corte del dia" setLogo={Logo} setButton={true} />
                 <div className="container-fluid">
-                    <div className="row">
-                        <Title />
-                    </div>
-                    <div className="row" >
+                    <div className="row pt-3" >
                         {listItems}
                     </div>
                 </div>
