@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 //CONMPONENTS --------------------------------------------------
 import Navbar from '../../../Components/Content/Navbar/Navbar.jsx';
 import { ItemList } from '../../../Components/Custom/ItemList/ItemList.jsx';
-import { Title } from '../../../Components/Content/Title/Title.jsx';
 import TextSearch from '../../../Components/Form/TextSearch/TextSearch.jsx';
 import ComboBox from '../../../Components/Form/ComboBox/ComboBox.jsx';
 import keys from '../../../../keys';
@@ -27,6 +26,7 @@ class Cobrar extends Component {
             sucursal: sessionStorage.getItem('sucursal'),
             hash: sessionStorage.getItem('hash'),
             rol: sessionStorage.getItem('rol'),
+            pagado: 0,
             opcionCartera: 0,
             opcion: 5,
             total: 0,
@@ -45,11 +45,11 @@ class Cobrar extends Component {
         if (this._isMounted) {
             if (cadena == "0") {
                 this.state.solicitud.map((item) => _total += item.monto_pago);
-                this.setState({ opcionCartera: cadena, filtro: this.state.solicitud, opcion: 5, total: _total});
+                this.setState({ opcionCartera: cadena, filtro: this.state.solicitud, opcion: 5, total: _total });
             } else {
-                this.state.solicitud.map((item) => (item.id_ruta == cadena? _total += item.monto_pago : 0));
+                this.state.solicitud.map((item) => (item.id_ruta == cadena ? _total += item.monto_pago : 0));
                 let datos = this.state.solicitud.filter((item) => (item.id_ruta == cadena));
-                this.setState({ opcionCartera: cadena, filtro: datos, opcion: 5, total: _total});
+                this.setState({ opcionCartera: cadena, filtro: datos, opcion: 5, total: _total });
             }
         }
     }
@@ -101,18 +101,18 @@ class Cobrar extends Component {
             this.setState({ filtro: datos, opcion: op });
         } else {
             if (this.state.rol == 2) {
-                if(op >= 6){
+                if (op >= 6) {
                     datos = this.state.solicitud.filter((item) => item.id_tipo_pago >= 6);
-                }else{
+                } else {
                     datos = this.state.solicitud.filter((item) => item.id_tipo_pago == cadena);
                 }
             } else {
-                if(op >= 6){
+                if (op >= 6) {
                     datos = this.state.solicitud.filter((item) => (item.id_tipo_pago >= 6 && (item.id_ruta == this.state.opcionCartera || admin)));
-                }else{
+                } else {
                     datos = this.state.solicitud.filter((item) => (item.id_tipo_pago == cadena && (item.id_ruta == this.state.opcionCartera || admin)));
                 }
-                
+
             }
 
             this.setState({ filtro: datos, opcion: op });
@@ -150,49 +150,62 @@ class Cobrar extends Component {
             this.setState({ login: false });
         } else {
 
-            var url = "http://" + keys.database.host + keys.api.url + 'cobrar';
+            if (this._isMounted == false) {
+                var url = "http://" + keys.database.host + keys.api.url + 'cobrar';
 
-            var data_text = {
-                user: this.state.user,
-                sucursal: this.state.sucursal,
-                hash: this.state.hash,
-                rol: this.state.rol
-            };
+                var data_text = {
+                    user: this.state.user,
+                    sucursal: this.state.sucursal,
+                    hash: this.state.hash,
+                    rol: this.state.rol
+                };
 
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(data_text),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => res.json())
-                .catch(error => {
-                    console.error('Error:', error)
-                })
-                .then(response => {
-                    if (response.session) {
-                        if (response.response) {
-                            if (this._isMounted == true && this._isUpdate == false) {
-                                this._isUpdate = true;
-
-                                var total_ = 0;
-
-                                response.solicitud.forEach(i => total_ += i.monto_pago);
-
-                                this.setState({
-                                    solicitud: response.solicitud,
-                                    filtro: response.solicitud,
-                                    total: total_
-                                });
-                                this.filtrarCombo(5);
-                            }
-                        }
-                    } else {
-                        sessionStorage.clear();
-                        alert('¡Sesion bloqueada!');
-                        this.setState({ login: false });
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(data_text),
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
-                });
+                }).then(res => res.json())
+                    .catch(error => {
+                        console.error('Error:', error)
+                    })
+                    .then(response => {
+                        if (response.session) {
+                            if (response.response) {
+                                if (this._isMounted == true && this._isUpdate == false) {
+                                    this._isUpdate = true;
+
+                                    var total_ = 0;
+                                    var pagado_ = 0;
+
+                                    response.solicitud.forEach(i => {
+                                        total_ += i.monto_pago;
+                                        if (i.abono_hoy > 0) {
+                                            if (i.abono_hoy <= i.monto_pago) {
+                                                pagado_ += i.abono_hoy;
+                                            } else {
+                                                pagado_ += i.monto_pago;
+                                            }
+                                        }
+                                    });
+
+                                    this.setState({
+                                        solicitud: response.solicitud,
+                                        filtro: response.solicitud,
+                                        total: total_,
+                                        pagado: pagado_
+                                    });
+                                    this.filtrarCombo(5);
+                                }
+                            }
+                        } else {
+                            sessionStorage.clear();
+                            alert('¡Sesion bloqueada!');
+                            this.setState({ login: false });
+                        }
+                    });
+            }
         }
     }
 
@@ -269,18 +282,14 @@ class Cobrar extends Component {
 
         return (
             <div>
-                <Navbar title="Cobrar" label1="A recaudar" label2={"$" + this.state.total} />
+                <Navbar title="Cobrar" label1="Meta" label2={"$" + this.state.total} meta={Math.round(100 / this.state.total * this.state.pagado || 0)} />
                 <div className="container-fluid">
-                    <div className="row Cobrar">
-                        <Title />
+                    <div className="row Cobrar mb-3 pt-3">
                         {Combo1}
                         <ComboBox id="filtro" label="Filtrar" items={combo} value={"valor"} description={"des"} evento={this.filtrarCombo} />
                         <TextSearch label="Buscar" id="search_cartera" evento={this.filtrar} />
                     </div>
-                    <div className="row">
-                        <Title />
-                    </div>
-                    <div className="row" >
+                    <div className="row mb-4" >
 
                         {listItems}
 
