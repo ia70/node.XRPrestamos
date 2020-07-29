@@ -417,13 +417,13 @@ class SolicitarDinero extends Component {
 
                         <TextMoney id="cre_monto_abono" label="Monto pagado" holder="Monto pagado" help="" />
                         <DateTimePicker id="cre_fecha_pago" label="Fecha del pago" holder="Fecha del pago" help="" />
-                        <BtnSubmit id="cre_btn_agregar_pago" class="btn-info col-sm-12 col-md-12 col-lg-8" url="#" label="Agregar pago" evento={this.agregarPago} />
-                        <Title title="" />
+                        <BtnSubmit id="cre_btn_agregar_pago" class="btn-info col-sm-12 col-md-12 col-lg-8 mb-3" url="#" label="Agregar pago" evento={this.agregarPago} />
+                        <div className="w-100"></div>
                         <Table id="cre_tabla_pagos" items={this.state.pagos} evento={this.elimianrPago} />
 
 
                     </div>
-                    <BtnSubmit id="cre_btnenviar" class={"btn-lg btn-block btn-success"} url="#" label="Registrar credito" evento={this.enviar} />
+                    <BtnSubmit id="cre_btnenviar" class={"btn-lg btn-block btn-success mb-3"} url="#" label="Registrar credito" evento={this.enviar} />
                 </div>
             </React.Fragment>
         );
