@@ -18,6 +18,7 @@ class Navbar extends Component {
     render() {
         let meta = "";
         let color_ = "";
+        let fecha_ = "";
 
         if (this.props.meta != null) {
             if (this.props.meta < 40)
@@ -37,6 +38,14 @@ class Navbar extends Component {
             </div>
         }
 
+        if (this.props.fecha != null) {
+            fecha_ = <div className="col-auto mx-2 pb-1">
+                <div className="row align-items-center">
+                    <h4 className="navbarextends_fecha m-0 col-auto">{GetDate()}</h4>
+                </div>
+            </div>;
+        }
+
         return (
             <div className="container-fluid bg-dark text-white">
                 <div className="row align-items-center">
@@ -48,7 +57,7 @@ class Navbar extends Component {
                             </div>
                         </div>
                     </div>
-
+                    {fecha_}
                     {meta}
 
                     <div className="col-auto mx-2 pb-1">
