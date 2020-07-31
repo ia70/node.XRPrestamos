@@ -75,7 +75,7 @@ class Dashboard extends Component {
 
                     <Title title="SEGUIMIENTO" />
                     <BtnRounded id='20' src={imgSolicitudes} url="/nuevocliente" label="Solicitudes" />
-                    <BtnRounded id='21' src={imgSinPagoHoy} url="/sinpagohoy" label="Sin pago hoy" />
+                    <BtnRounded id='21' src={imgSinPagoHoy} url="/sinpagohoy" label="Adeudos" />
                     <BtnRounded id='22' src={imgClientesMorosos} url="/nuevocliente" label="Clientes Morosos" />
                     {//<BtnRounded id='23' src={imgRecuperacion} url="/nuevocliente" label="Recuperación" />
                     }
