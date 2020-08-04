@@ -60,16 +60,16 @@ export function ItemPago(props) {
 
     if(porcentaje < 65) {
         estado = 4;
-        texto = "Mal";
+        texto = Math.round(porcentaje) + "%   Mal";
     }else if(porcentaje <= 75){
         estado = 2;
-        texto = "Regular";
+        texto = Math.round(porcentaje) + "%   Regular";
     }else if(porcentaje <= 90){
         estado = 1;
-        texto = "Bien";
+        texto = Math.round(porcentaje) + "%   Bien";
     }else{
         estado = 5;
-        texto = "Muy bien";
+        texto = Math.round(porcentaje) + "%   Muy bien";
     }
 
 
