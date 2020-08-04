@@ -42,14 +42,31 @@ class Cobrar extends Component {
 
     filtrarCartera(cadena) {
         let _total = 0;
+        let _pagado = 0;
         if (this._isMounted) {
             if (cadena == "0") {
-                this.state.solicitud.map((item) => _total += item.monto_pago);
-                this.setState({ opcionCartera: cadena, filtro: this.state.solicitud, opcion: 5, total: _total });
+                this.state.solicitud.map((item) => {
+                    _total += item.monto_pago;
+                    if (item.abono_hoy > item.monto_pago) {
+                        _pagado += item.monto_pago;
+                    } else {
+                        _pagado += item.abono_hoy;
+                    }
+                });
+                this.setState({ opcionCartera: cadena, filtro: this.state.solicitud, opcion: 5, total: _total, pagado: _pagado });
             } else {
-                this.state.solicitud.map((item) => (item.id_ruta == cadena ? _total += item.monto_pago : 0));
+                this.state.solicitud.map((item) => {
+                    if (item.id_ruta == cadena) {
+                        _total += item.monto_pago;
+                        if (item.abono_hoy > item.monto_pago) {
+                            _pagado += item.monto_pago;
+                        } else {
+                            _pagado += item.abono_hoy;
+                        }
+                    }
+                });
                 let datos = this.state.solicitud.filter((item) => (item.id_ruta == cadena));
-                this.setState({ opcionCartera: cadena, filtro: datos, opcion: 5, total: _total });
+                this.setState({ opcionCartera: cadena, filtro: datos, opcion: 5, total: _total, pagado: _pagado });
             }
         }
     }
