@@ -29,7 +29,7 @@ class Navbar extends Component {
                 color_ = "meta_bien";
             meta = <div className="col-auto mx-2 pb-1">
                 <div className="row align-items-center">
-                    <h4 className="navbarextends_label1 m-0 ">Avance</h4>
+                    <h4 className="navbarextends_label1 m-0 ">Avance total</h4>
                 </div>
 
                 <div className="row align-items-center">
