@@ -34,11 +34,12 @@ BEGIN
 					a.id_usuario,
 					SUM(IF(c.monto IS NULL,0, c.monto)) AS "total_recolectado",
 					SUM(d.monto_pago) AS "total_deberia_recolectar_dia",
-				
 					SUM(IF(c.monto IS NULL, 0, IF(c.monto < d.monto_pago, c.monto, d.monto_pago ))) AS "total_recolectado_sin_extras",
-					
 					SUM(IF(c.monto IS NULL,0,IF(c.id_tipo_pago = 2, c.monto,0))) AS "monto_abonos",
-					SUM(IF(c.monto IS NULL,0,IF(c.id_tipo_pago = 3, c.monto - d.monto_pago, 0))) AS "monto_extras",
+					
+					SUM(IF(c.monto IS NULL,0,IF(c.id_tipo_pago = 3 OR c.id_tipo_pago = 6, c.monto - d.monto_pago, 0))) AS "monto_extras",
+					
+					
 					SUM(IF(c.monto IS NULL,0,IF(c.id_tipo_pago = 1, c.monto, 0))) AS "monto_normal",
 					SUM(IF(c.monto IS NULL,d.monto_pago,IF(c.id_tipo_pago = 4, d.monto_pago, IF(c.id_tipo_pago IS NULL,d.monto_pago,0)))) AS "monto_no_pagos",
 					SUM(IF(c.monto IS NULL,0,IF(c.id_tipo_pago = 2, d.monto_pago - c.monto, 0))) AS "monto_defici_abonos",
@@ -58,6 +59,7 @@ BEGIN
 					INNER JOIN ruta AS b ON a.id_ruta = b.id_ruta
 					INNER JOIN credito AS d ON d.folio_credito = a.folio_credito
 					LEFT JOIN abono AS c ON c.folio_credito = a.folio_credito AND c.fecha_abono = CURDATE()
+					WHERE d.fecha_siguiente_pago = CURDATE()
 					GROUP BY a.id_ruta;
 					
 END // 
