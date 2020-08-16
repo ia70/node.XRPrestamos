@@ -124,9 +124,8 @@ class Dashboard extends Component {
             } else if (this.state.rol == 2) {
                 this._menu = <div className="row">
                     <BtnRounded id='1' src={imgCarteraClientes} url="/carteraclientes" label="Cartera de clientes" />
+                    <BtnRounded id='12' src={imgNuevoCredito} url="/nuevocliente" label="Nueva venta" />
                     <BtnRounded id='2' src={imgCobrar} url="/cobrar" label="Cobrar" />
-                    <BtnRounded id='3' src={imgSolicitarDinero} url="/solicitardinero" label="Solicitar dinero" />
-                    <BtnRounded id='4' src={imgEstadoSolicitud} url="/estadosolicitud" label="Estado de solicitudes" />
                     <BtnRounded id='5' src={imgNuevoCliente} url="/nuevocliente" label="Nuevo cliente" />
                 </div>
             } else {
